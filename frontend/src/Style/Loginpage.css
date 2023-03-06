@@ -1,0 +1,79 @@
+.login {
+
+    height: 100vh;
+    background-color: white;
+    ;
+}
+
+.text1 {
+    position: absolute;
+    width: 107px;
+    height: 20px;
+
+    font-family: 'Rubik One';
+    font-style: bold;
+    font-weight: 900;
+    font-size: 20px;
+
+    /* or 26px */
+    color: #FFFFFF;
+
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+
+}
+
+
+
+.gambarlogin {
+    position: absolute;
+    width: 74.5px;
+    height: 93px;
+
+    left: 50%;
+    top: 25%;
+    transform: translate(-50%, -50%);
+}
+
+.text3 {
+    position: absolute;
+    width: 230px;
+    height: 16px;
+
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 135%;
+    /* or 16px */
+
+    letter-spacing: -0.01em;
+
+    color: black;
+
+    opacity: 0.5;
+
+    left: 50%;
+    top: 90%;
+    transform: translate(-50%, -50%);
+}
+
+.Logbutton {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+
+}
+
+.Loginput {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: grey;
+
+}
