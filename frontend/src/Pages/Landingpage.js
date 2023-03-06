@@ -2,8 +2,8 @@ import Landingcomp from "../Components/Landingcomp"
 import "../Style/Landingpage.css"
 
 const Landingpage = () => {
-    return (
-       <Landingcomp/>
+    return ( <
+        Landingcomp / >
     )
 }
 
