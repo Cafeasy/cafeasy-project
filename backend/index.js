@@ -1,13 +1,36 @@
-const express = require('express')
-const router = require('./routes/router.js')
-const app = express()
-const cors = require('cors')
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const passport = require("passport");
+const router = require("./routes/router");
+const cookieSession = require("cookie-session");
+
+const app = express();
 
 const port = process.env.PORT || 8888
 
-app.use(cors({ origin: 'null' }))
-app.use(express.json())
-app.use(router)
-app.listen(port, () => {
-    console.log("Server is up on port" + port)
-})
+
+app.use(
+    cookieSession({
+        name: "session",
+        keys: ["cyberwolve"],
+        maxAge: 24 * 60 * 60 * 100,
+
+    })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(
+    cors({
+        origin: "http://localhost:3000",
+        methods: "GET,POST,PUT,DELETE",
+        credentials: true,
+    })
+);
+
+app.use("/", router);
+
+
+app.listen(port, () => console.log(`Listenting on port ${port}...`));

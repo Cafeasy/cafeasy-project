@@ -1,6 +1,6 @@
 import Logoputih from '../Photo/Logoputih.png'
 import "../Style/Landingpage.css"
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import * as React from "react";
 
 

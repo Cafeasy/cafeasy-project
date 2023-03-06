@@ -1,14 +1,22 @@
-import { Button } from 'react-bootstrap'
 import Logohitam from '../Photo/Logohitam.png'
 import "../Style/Loginpage.css"
 
+
+
 const Logincomp = () => {
+    const googleAuth = () => {
+        window.open(
+            `${process.env.REACT_APP_API_URL}/auth/google/callback`,
+            "_self"
+        );
+    };
+
     return (
         <div>
 
             <div className="login">
                 <div className="gambarlogin">
-                    <img src={Logohitam} ></img>
+                    <img src={Logohitam} alt="logo-cafeasy"></img>
                 </div>
                 <div className="text1" >CAFEASY</div>
                 <div className="text3">© 2022-2023 CAFEASY All Rights Reserved.</div>
@@ -29,7 +37,7 @@ const Logincomp = () => {
                     <div class="d-grid gap-10 col-9 mx-auto mt-3">
                         <button class="btn btn-dark" type="button">Masuk</button>
                         <div className="Loginput text-center  ">atau</div>
-                        <button class="btn btn-light btn-rounded" type="button">Google</button>
+                        <button class="btn btn-light btn-rounded" type="button" onClick={googleAuth}>Google</button>
                     </div>
 
                 </div>
