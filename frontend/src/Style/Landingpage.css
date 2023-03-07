@@ -1,4 +1,5 @@
 .landing {
+
     height: 100vh;
     background-color: #1A1A27;
     ;
@@ -6,30 +7,39 @@
 
 .text1 {
     position: absolute;
+
     font-family: 'Rubik One';
+
     font-size: 26px;
+
     /* or 26px */
     color: #FFFFFF;
+
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+
 }
 
 .text2 {
     position: absolute;
     width: 71px;
     height: 28px;
+
     font-family: 'Lato';
     font-style: normal;
     font-weight: 400;
-    font-size: 12px;
+    font-size: 8px;
     line-height: 135%;
     /* or 11px */
+
     text-align: center;
     text-transform: uppercase;
+
     color: #FFFFFF;
+
     left: 50%;
-    top: 70%;
+    top: 80%;
     transform: translate(-50%, -50%);
 }
 
@@ -37,35 +47,30 @@
     position: absolute;
     width: 74.5px;
     height: 93px;
+
     left: 50%;
     top: 40%;
     transform: translate(-50%, -50%);
 }
 
-.text5 {
-    position: absolute;
-    font-family: 'Rubik One';
-    font-size: 13px;
-    /* or 26px */
-    color: #FFFFFF;
-    left: 50%;
-    top: 80%;
-    transform: translate(-50%, -50%);
-}
-
-.text4 {
+.text3 {
     position: absolute;
     width: 230px;
     height: 16px;
+
     font-family: 'Lato';
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
     line-height: 135%;
     /* or 16px */
+
     letter-spacing: -0.01em;
+
     color: #FFFFFF;
+
     opacity: 0.5;
+
     left: 50%;
     top: 90%;
     transform: translate(-50%, -50%);
