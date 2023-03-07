@@ -1,0 +1,365 @@
+.logo {
+    position: absolute;
+    width: 30px;
+    height: 26px;
+    left: 20px;
+    top: 20px;
+}
+
+.disable-button {
+    position:absolute;
+    left: 50%;
+    top: 15%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    background: #371f30;
+    padding: 1px 30px;
+
+    font-family: 'Montserrat';
+    font-size: 20px;
+    line-height: 50px;
+    border-radius: 10px;
+    color: #FFFFFF;
+
+}
+
+.textsatu {
+    position: absolute;
+    width: 36px;
+    height: 100px;
+    left: 600px;
+    top: 100px;
+    
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 90px;
+    font-size: 15px;
+    line-height: 16px;
+    
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+    
+    color: #252525;
+    opacity: 0.5;
+}
+
+.textdua {
+    position: absolute;
+    width: 200px;
+    height: 50px;
+    left: 50px;
+    top: 190px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 16px;
+
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+
+    color: #252525;
+}
+
+.texttiga {
+    position: absolute;
+    width: 12px;
+    height: 65px;
+    left: 270px;
+    top: 175px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 16px;
+
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+
+    color: #000000;
+}
+
+.textempat {
+    position: absolute;
+    width: 200px;
+    height: 65px;
+    left: 540px;
+    top: 175px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 16px;
+
+    display: flex;
+    align-items: flex-end;
+    text-align: right;
+
+    color: #252525;
+}
+
+.textlima {
+    position: absolute;
+    width: 200px;
+    height: 65px;
+    left: 50px;
+    top: 230px;
+    
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 16px;
+    
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+    
+    color: #252525;
+}
+
+.textenam {
+    position: absolute;
+    width: 12px;
+    height: 65px;
+    left: 270px;
+    top: 230px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 16px;
+
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+
+    color: #252525;
+}
+
+.texttujuh {
+    position: absolute;
+    width: 200px;
+    height: 65px;
+    left: 540px;
+    top: 230px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 16px;
+
+    display: flex;
+    align-items: flex-end;
+    text-align: right;
+
+    color: #252525;
+}
+
+.textdelapan {
+    position: absolute;
+    width: 200px;
+    height: 65px;
+    left: 50px;
+    top: 285px;
+    
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 16px;
+    
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+    
+    color: #252525;
+}
+
+.textsembilan {
+    position: absolute;
+    width: 200px;
+    height: 65px;
+    left: 540px;
+    top: 285px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 16px;
+
+    display: flex;
+    align-items: flex-end;
+    text-align: right;
+
+    color: #252525;
+}
+
+.textsepuluh {
+    position: absolute;
+    width: 200px;
+    height: 65px;
+    left: 50px;
+    top: 340px;
+    
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 16px;
+    
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+    
+    color: #252525;
+}
+
+.textsebelas {
+    position: absolute;
+    width: 200px;
+    height: 65px;
+    left: 50px;
+    top: 390px;
+    
+    font-family: 'Montserrat-thin';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+    
+    color: #252525;
+}
+
+.textduabelas {
+    position: absolute;
+    width: 200px;
+    height: 65px;
+    left: 540px;
+    top: 390px;
+    
+    font-family: 'Montserrat-thin';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+    
+    color: #252525;
+}
+
+.texttigabelas {
+    position: absolute;
+    width: 200px;
+    height: 65px;
+    left: 50px;
+    top: 420px;
+    
+    font-family: 'Montserrat-thin';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+    
+    color: #252525;
+}
+
+.textempatbelas {
+    position: absolute;
+    width: 200px;
+    height: 65px;
+    left: 540px;
+    top: 340px;
+    
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 16px;
+    
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+    
+    color: #252525;
+}
+
+.textlimabelas {
+    position: absolute;
+    width: 200px;
+    height: 65px;
+    left: 540px;
+    top: 420px;
+    
+    font-family: 'Montserrat-thin';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+    
+    color: #252525;
+}
+
+.textenambelas {
+    position: absolute;
+    width: 200px;
+    height: 65px;
+    left: 50px;
+    top: 470px;
+    
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 16px;
+    
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+    
+    color: #252525;
+}
+
+.texttujuhbelas {
+    position: absolute;
+    width: 200px;
+    height: 65px;
+    left: 540px;
+    top: 470px;
+    
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 16px;
+    
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+    
+    color: #252525;
+}
