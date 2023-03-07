@@ -22,7 +22,7 @@ function App() {
         <Route path='/Navbarpage' element={<Navbarpage />} />
         <Route path='/Berandapage' element={<Berandapage />} />
         <Route path='/ListMenu' element={<ListMenupage />} />
-        <Route path='/KonfimasiPemesanan' element={<Confirmpage />} />      
+        <Route path='/KonfimasiPesanan' element={<Confirmpage />} />      
       </Routes>
     </Router>
   )

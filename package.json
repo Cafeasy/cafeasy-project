@@ -1,6 +1,8 @@
 {
   "dependencies": {
+    "@react-icons/all-files": "^4.1.0",
     "mongoose": "^7.0.0",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "react-icons": "^4.8.0"
   }
 }

@@ -1,13 +1,12 @@
-import "../Style/Metodepembayaranpage.css"
+import "../Style/Confirmpage.css"
 import { IoChevronBackCircleOutline } from "react-icons/io5";
 import React from 'react'; 
 
 
-const confirmcomp = () => {
-
+const Confirmcomp = () => {
 
     return(
-        <div className="konfirmasi-pemesanan">
+        <div className="konfirmasi-pesanan">
             <div className="logo">
                 <h1><IoChevronBackCircleOutline/></h1>
             </div>
@@ -33,11 +32,14 @@ const confirmcomp = () => {
             <div className="textlimabelas">Rp 2.000,00</div>
             <div className="textenambelas">Total</div>
             <div className="texttujuhbelas">Rp 29.000,00</div>        
-        
+
+            <div>
+                <button className="enable-button" disabled="true">Proses Pembayaran</button>
+            </div>
         
         </div>
 
     )
 }
 
-export default Metodepembayarancomp
+export default Confirmcomp

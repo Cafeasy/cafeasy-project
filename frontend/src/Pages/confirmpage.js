@@ -1,9 +1,9 @@
-import confirmcomp from "../Components/confirmcomp"
+import Confirmcomp from "../Components/Confirmcomp"
 
-const confirmpage = () => {
+const Confirmpage = () => {
     return (
-        <confirmcomp />
+        <Confirmcomp />
     )
 }
 
-export default confirmpage
+export default Confirmpage

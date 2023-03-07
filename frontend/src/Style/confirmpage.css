@@ -20,7 +20,6 @@
     line-height: 50px;
     border-radius: 10px;
     color: #FFFFFF;
-
 }
 
 .textsatu {
@@ -362,4 +361,19 @@
     text-align: center;
     
     color: #252525;
+}
+
+.enable-button {
+    position:absolute;
+    width: 500px;
+    left: 50%;
+    top: 90%;
+    transform: translate(-50%, -50%);
+    background: #371f30;
+
+    font-family: 'Montserrat';
+    font-size: 20px;
+    line-height: 40px;
+    border-radius: 10px;
+    color: #FFFFFF;
 }
