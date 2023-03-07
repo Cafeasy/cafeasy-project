@@ -6,6 +6,7 @@ import "./Style/Landingpage.css"
 import "./Style/Loginpage.css"
 import Navbarpage from './Pages/Navbarpage';
 import Berandapage from './Pages/Berandapage';
+import ListMenupage from './Pages/ListMenupage';
 import "./Style/ListMenupage.css"
 
 
