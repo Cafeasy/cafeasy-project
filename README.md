@@ -1,3 +1,6 @@
+REMEMBER:
+LAKUKAN PULL TERLEBIH DAHULU SEBELUM PUSH
+
 REQUIRED SYSTEM:
 1. INSTALL NODE JS
 2. buka terminal => npm -v => jika menunjukkan versi npm, berarti instalasi berhasil
@@ -20,3 +23,7 @@ cafeasy-project/backend configure:
 3. folder node_modules akan tergenerate otomatis
 4. cek apakah node_modules sudah tergenerate dengan benar pada folder backend, dengan cara => nodemon index (nodemon sudah terinstall pada project sehingga tidak perlu install lagi)
 5. jika nodemon starting, buka browser => buka localhost:8888 (8888 adalah port yang sudah ditentukan pada file index.js difolder backend)
+
+AKSES LANDINGPAGE:
+1. start backend
+2. start frontend
