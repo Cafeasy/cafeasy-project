@@ -2,6 +2,7 @@ import "../Style/Methodpage.css"
 import { IoChevronBackCircleOutline } from "react-icons/io5";
 import { IoSearch } from "react-icons/io5";
 import React from 'react'; 
+import Dropdownpage from "./Dropdowncomp";
 
 const Methodcomp = () => {
     return (
@@ -21,31 +22,15 @@ const Methodcomp = () => {
                     </button>
                 </div>
             </div>
+
+            <div>
+                <div className="dropdown-box">
+                    <Dropdownpage placeHolder="Cash/Tunai" />
+                </div>
+            </div>
         </div>
     )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 export default Methodcomp

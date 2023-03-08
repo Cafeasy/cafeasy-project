@@ -1,5 +1,5 @@
 import "../Style/Confirmpage.css"
-import { IoChevronBackCircleOutline } from "react-icons/io5";
+import { IoChevronBackCircleOutline, IoSearch } from "react-icons/io5";
 import React from 'react'; 
 
 const Confirmcomp = () => {
@@ -34,6 +34,7 @@ const Confirmcomp = () => {
 
             <div>
                 <button className="enable-button" disabled="true">Proses Pembayaran</button>
+                <i>IoSearch/</i>
             </div>
         
         </div>
