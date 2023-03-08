@@ -12,6 +12,14 @@ const Methodcomp = () => {
             <div>
                 <button className="disable-button" disabled="true">PILIH METODE PEMBAYARAN</button>
             </div>
+                <div class="wrap">
+                <div class="search">
+                    <input type="text-search" class="searchTerm" placeholder="Search...."></input>
+                    <button type="submit" class="searchButton">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
         </div>
     )
 }
