@@ -18,7 +18,7 @@ const Methodcomp = () => {
                 <div class="search">
                     <input type="text-search" class="searchTerm" placeholder="Search...."></input>
                     <button type="submit" class="searchButton">
-                        <i>IoSearch/</i>
+                        <i></i>
                     </button>
                 </div>
             </div>
