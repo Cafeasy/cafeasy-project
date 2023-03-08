@@ -1,8 +1,8 @@
 import Berandacomp from "../Components/Berandacomp"
 
-const Berandapage = () => {
+function Berandapage(props) {
     return (
-        <Berandacomp />
+        <Berandacomp user={props.user} />
     )
 }
 

@@ -1,8 +1,8 @@
 import Navbarcomp from "../Components/Navbarcomp"
 
-const Navbarpage = () => {
+function Navbarpage(props){
     return (
-        <Navbarcomp />
+        <Navbarcomp user={props.user}/>
     )
 }
 

@@ -8,10 +8,10 @@ import Slidercomp from "./Slidercomp"
 import Navbarmenu from "../Pages/Navbarmenu"
 
 
-const Berandacomp = () => {
+function Berandacomp(props){
     return (
         <div>
-            <Navbarpage />
+            <Navbarpage user={props.user} />
             <Sliderpage />
             <Navbarmenu />
             <Maincoursepage />

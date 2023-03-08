@@ -29,7 +29,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 
-function OffcanvasExample() {
+function Navbarcomp(props) {
     return (
         <>
             <div className='keren'>
@@ -50,6 +50,9 @@ function OffcanvasExample() {
                                 </Offcanvas.Header>
                                 <Offcanvas.Body>
                                     <Nav className="justify-content-end flex-grow-1 pe-3">
+                                        <NavDropdown title={`Welcome, ${props.user.name}`}> 
+                                        <NavDropdown.Item href="">Logout</NavDropdown.Item>
+                                        </NavDropdown>
                                         <Nav.Link href="#action1">Home</Nav.Link>
                                         <Nav.Link href="#action2">Link</Nav.Link>
                                         <NavDropdown
@@ -110,4 +113,4 @@ function OffcanvasExample() {
     );
 }
 
-export default OffcanvasExample;
+export default Navbarcomp;
