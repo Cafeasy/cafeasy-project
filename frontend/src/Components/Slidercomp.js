@@ -7,27 +7,26 @@ import "../Style/Slidergambar.css"
 
 const Slidercomp = () => {
     return (
-        <div className="adjie">
-            <Carousel>
+            <Carousel>   
                 <Carousel.Item>
                     <img
-                        className="d-block w-100"
+                        className="Gambarslider"
                         src={Gambarburger}
-                        alt="First slide"
-                        height="250"
-
+                        alt="First slide"                 
                     />
                     <Carousel.Caption>
                         <h3>Burger Besar Enak</h3>
                         <p>120k Only.</p>
                     </Carousel.Caption>
+                
                 </Carousel.Item>
+               
                 <Carousel.Item>
                     <img
-                        className="d-block w-100"
+                        className="Gambarslider"
                         src={Gambarpizza}
                         alt="Second slide"
-                        height="250"
+                     
 
                     />
 
@@ -38,10 +37,10 @@ const Slidercomp = () => {
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
-                        className="d-block w-100"
+                        className="Gambarslider"
                         src={Gambarwaffels}
                         alt="Third slide"
-                        height="250"
+                       
                     />
 
                     <Carousel.Caption>
@@ -52,7 +51,7 @@ const Slidercomp = () => {
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
-        </div>
+
     )
 
 }
