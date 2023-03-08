@@ -2,7 +2,7 @@
     position: absolute;
     width: 36px;
     height: 100px;
-    left: 600px;
+    left: 60%;
     top: 100px;
     
     font-family: 'Montserrat';
@@ -23,7 +23,7 @@
     position: absolute;
     width: 200px;
     height: 50px;
-    left: 50px;
+    left: 35%;
     top: 190px;
 
     font-family: 'Montserrat';
@@ -43,7 +43,7 @@
     position: absolute;
     width: 12px;
     height: 65px;
-    left: 270px;
+    left: 48%;
     top: 175px;
 
     font-family: 'Montserrat';
@@ -63,7 +63,7 @@
     position: absolute;
     width: 200px;
     height: 65px;
-    left: 540px;
+    left: 60%;
     top: 175px;
 
     font-family: 'Montserrat';
@@ -83,7 +83,7 @@
     position: absolute;
     width: 200px;
     height: 65px;
-    left: 50px;
+    left: 35%;
     top: 230px;
     
     font-family: 'Montserrat';
@@ -103,7 +103,7 @@
     position: absolute;
     width: 12px;
     height: 65px;
-    left: 270px;
+    left: 48%;
     top: 230px;
 
     font-family: 'Montserrat';
@@ -123,7 +123,7 @@
     position: absolute;
     width: 200px;
     height: 65px;
-    left: 540px;
+    left: 60%;
     top: 230px;
 
     font-family: 'Montserrat';
@@ -143,7 +143,7 @@
     position: absolute;
     width: 200px;
     height: 65px;
-    left: 50px;
+    left: 35%;
     top: 285px;
     
     font-family: 'Montserrat';
@@ -163,7 +163,7 @@
     position: absolute;
     width: 200px;
     height: 65px;
-    left: 540px;
+    left: 60%;
     top: 285px;
 
     font-family: 'Montserrat';
@@ -183,7 +183,7 @@
     position: absolute;
     width: 200px;
     height: 65px;
-    left: 50px;
+    left: 35%;
     top: 340px;
     
     font-family: 'Montserrat';
@@ -203,7 +203,7 @@
     position: absolute;
     width: 200px;
     height: 65px;
-    left: 50px;
+    left: 35%;
     top: 390px;
     
     font-family: 'Montserrat-thin';
@@ -223,7 +223,7 @@
     position: absolute;
     width: 200px;
     height: 65px;
-    left: 540px;
+    left: 60%;
     top: 390px;
     
     font-family: 'Montserrat-thin';
@@ -243,7 +243,7 @@
     position: absolute;
     width: 200px;
     height: 65px;
-    left: 50px;
+    left: 35%;
     top: 420px;
     
     font-family: 'Montserrat-thin';
@@ -263,7 +263,7 @@
     position: absolute;
     width: 200px;
     height: 65px;
-    left: 540px;
+    left: 60%;
     top: 340px;
     
     font-family: 'Montserrat';
@@ -283,7 +283,7 @@
     position: absolute;
     width: 200px;
     height: 65px;
-    left: 540px;
+    left: 60%;
     top: 420px;
     
     font-family: 'Montserrat-thin';
@@ -303,7 +303,7 @@
     position: absolute;
     width: 200px;
     height: 65px;
-    left: 50px;
+    left: 35%;
     top: 470px;
     
     font-family: 'Montserrat';
@@ -323,7 +323,7 @@
     position: absolute;
     width: 200px;
     height: 65px;
-    left: 540px;
+    left: 60%;
     top: 470px;
     
     font-family: 'Montserrat';
