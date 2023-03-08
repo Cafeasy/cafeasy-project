@@ -7,7 +7,7 @@ const Confirmcomp = () => {
 
     return(
         <div className="konfirmasi-pesanan">
-            <div className="logo">
+            <div className="logo-back">
                 <h1><IoChevronBackCircleOutline/></h1>
             </div>
 

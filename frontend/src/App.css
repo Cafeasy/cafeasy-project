@@ -28,6 +28,45 @@
   color: #61dafb;
 }
 
+.logo-back {
+  position: absolute;
+  width: 30px;
+  height: 26px;
+  left: 40px;
+  top: 20px;
+}
+
+.disable-button {
+  position:absolute;
+  left: 50%;
+  top: 15%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  background: #1F2937;
+  padding: 1px 30px;
+
+  font-family: 'Montserrat';
+  font-size: 20px;
+  line-height: 50px;
+  border-radius: 10px;
+  color: #FFFFFF;
+}
+
+.enable-button {
+  position:absolute;
+  width: 500px;
+  left: 50%;
+  top: 90%;
+  transform: translate(-50%, -50%);
+  background: #1F2937;
+
+  font-family: 'Montserrat';
+  font-size: 20px;
+  line-height: 40px;
+  border-radius: 10px;
+  color: #FFFFFF;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

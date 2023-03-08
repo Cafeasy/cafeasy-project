@@ -10,9 +10,10 @@ import Navbarpage from './Pages/Navbarpage';
 import Berandapage from './Pages/Berandapage';
 import ListMenupage from './Pages/ListMenupage';
 import Confirmpage from './Pages/Confirmpage';
+import Methodpage from './Pages/Methodpage';
 import "./Style/ListMenupage.css"
 import "./Style/Confirmpage.css"
-
+import "./Style/Methodpage.css"
 
 
 function App() {
@@ -37,9 +38,10 @@ function App() {
         <Route exact path='/' element={user ? <Navigate to="/Berandapage" /> : <Landingpage />} />
         <Route exact path='/Loginpage' element={user ? <Navigate to="/Berandapage" /> : <Loginpage />} />
         <Route exact path='/Navbarpage' element={user ? <Navigate to="/Berandapage" /> : <Navbarpage />} />
-        <Route  exact path='/Berandapage' element={user ? <Berandapage user={user} /> : <Navigate to="/Loginpage" />} />
+        <Route exact path='/Berandapage' element={user ? <Berandapage user={user} /> : <Navigate to="/Loginpage" />} />
         <Route exact path='/ListMenu' element={user ? <Navigate to="/Berandapage" /> : <ListMenupage />} />
         <Route exact path='/KonfimasiPesanan' element={user ? <Navigate to="/Berandapage" /> : <Confirmpage />} />
+        <Route exact path='/MetodePembayaran' element={user ? <Navigate to="/KonfirmasiPesanan" /> : <Methodpage />} />
       </Routes>
     </Router>
   )

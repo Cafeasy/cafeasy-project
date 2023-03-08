@@ -1,27 +1,3 @@
-.logo {
-    position: absolute;
-    width: 30px;
-    height: 26px;
-    left: 20px;
-    top: 20px;
-}
-
-.disable-button {
-    position:absolute;
-    left: 50%;
-    top: 15%;
-    transform: translate(-50%, -50%);
-    font-size: 20px;
-    background: #371f30;
-    padding: 1px 30px;
-
-    font-family: 'Montserrat';
-    font-size: 20px;
-    line-height: 50px;
-    border-radius: 10px;
-    color: #FFFFFF;
-}
-
 .textsatu {
     position: absolute;
     width: 36px;
@@ -361,19 +337,4 @@
     text-align: center;
     
     color: #252525;
-}
-
-.enable-button {
-    position:absolute;
-    width: 500px;
-    left: 50%;
-    top: 90%;
-    transform: translate(-50%, -50%);
-    background: #371f30;
-
-    font-family: 'Montserrat';
-    font-size: 20px;
-    line-height: 40px;
-    border-radius: 10px;
-    color: #FFFFFF;
 }
