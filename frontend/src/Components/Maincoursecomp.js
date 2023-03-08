@@ -5,8 +5,8 @@ import Gambarburger from '../Photo/Burger.jpeg'
 import Gambarpizza from '../Photo/Pizza.jpeg'
 import Gambarwaffels from '../Photo/Waffles.jpeg'
 import "../Style/Maincourse.css";
-
-
+import { BsPlusCircle } from "react-icons/bs";
+import { BsStarFill } from "react-icons/bs";
 function GridExample() {
   return (
     <Row xs={2} md={4} className="g-4">
@@ -20,7 +20,15 @@ function GridExample() {
               <h6 class="text-muted">
                 This is a longer card with supporting text below 
               </h6>
-              <div class="text text-end text-warning">********</div>
+              <div class="text text-end text-warning">
+                <BsStarFill></BsStarFill>
+                <BsStarFill></BsStarFill>
+                <BsStarFill></BsStarFill>
+                <BsStarFill></BsStarFill>
+                <BsStarFill></BsStarFill>
+              </div>
+              <div  class="text text-end text-dark">
+              <BsPlusCircle></BsPlusCircle></div>
             </Card.Body>
           </Card>   
         </Col>
