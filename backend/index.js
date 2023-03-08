@@ -4,10 +4,14 @@ const cors = require("cors");
 const passport = require("passport");
 const router = require("./routes/router");
 const cookieSession = require("cookie-session");
-
-const app = express();
-
 const port = process.env.PORT || 8888
+const app = express();
+// const mongoose = require('mongoose');
+
+//connect ke db
+require('./config/database');
+
+
 
 
 app.use(
@@ -30,7 +34,6 @@ app.use(
     })
 );
 
+app.listen(port, () => console.log(`Listenting on port ${port}..., server up n running`));
+// app.listen(4000);
 app.use("/", router);
-
-
-app.listen(port, () => console.log(`Listenting on port ${port}...`));

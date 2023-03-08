@@ -9,9 +9,9 @@ import "./Style/Loginpage.css"
 import Navbarpage from './Pages/Navbarpage';
 import Berandapage from './Pages/Berandapage';
 import ListMenupage from './Pages/ListMenupage';
-import Confirmpage from './Pages/Confirmpage';
+import Confirmpage from './Pages/confirmpage';
 import "./Style/ListMenupage.css"
-import "./Style/Confirmpage.css"
+import "./Style/confirmpage.css";
 
 
 

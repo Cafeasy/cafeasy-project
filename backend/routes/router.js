@@ -1,7 +1,11 @@
 require("dotenv").config();
 const router = require("express").Router();
 const passport = require("passport");
-require('../service/passport.js')
+require('../service/passport.js');
+const express = require('express');
+const ListMenuController = require("../controllers/ListMenucontroller");
+const app = express();
+// require('../config/database');
 
 router.get("/auth/login/success", (req, res) => {
     if (req.user) {
@@ -38,5 +42,16 @@ router.get("/auth/logout", (req, res) => {
     req.logout();
     res.redirect(process.env.CLIENT_URL);
 });
+
+router.use('/testing', (req, res, next) => {
+    res.json({name: "tes", tes: "yes"});
+    next();
+});
+
+
+
+router.get('/ListMenu', ListMenuController.getListMenu);
+// router.get('/ListMenuCustomer:id', getMenu.getListMenuById);
+// router.get('/ListMenuCustomer:meja', ListMenu.(getListMenuByMeja));
 
 module.exports = router;

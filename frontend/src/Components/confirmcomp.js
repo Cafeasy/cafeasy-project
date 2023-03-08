@@ -1,9 +1,9 @@
-import "../Style/Confirmpage.css"
+import "../Style/confirmpage.css"
 import { IoChevronBackCircleOutline } from "react-icons/io5";
 import React from 'react'; 
 
 
-const Confirmcomp = () => {
+const confirmcomp = () => {
 
     return(
         <div className="konfirmasi-pesanan">
@@ -42,4 +42,4 @@ const Confirmcomp = () => {
     )
 }
 
-export default Confirmcomp
+export default confirmcomp
