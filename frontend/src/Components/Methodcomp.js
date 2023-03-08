@@ -1,5 +1,6 @@
 import "../Style/Methodpage.css"
 import { IoChevronBackCircleOutline } from "react-icons/io5";
+import { IoSearch } from "react-icons/io5";
 import React from 'react'; 
 
 const Methodcomp = () => {
@@ -16,7 +17,7 @@ const Methodcomp = () => {
                 <div class="search">
                     <input type="text-search" class="searchTerm" placeholder="Search...."></input>
                     <button type="submit" class="searchButton">
-                        <i class="fa fa-search"></i>
+                        <i>IoSearch/</i>
                     </button>
                 </div>
             </div>

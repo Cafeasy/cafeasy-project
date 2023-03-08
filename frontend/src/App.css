@@ -73,7 +73,7 @@
   position: absolute;
   width: 400px;
   height: 40px;
-  left: 579px;
+  left: 583px;
   top: 220px;
   
   background: #FFFFFF;
@@ -87,7 +87,9 @@
   border: 1px solid #EBEBEB;
   color: #1F2937;
   border-radius: 15px;
+  
   font-family: 'Poppins';
+  font-size: 15px;
   font-style: normal;
   padding: 20px;
 }

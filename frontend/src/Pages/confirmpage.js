@@ -1,8 +1,8 @@
-import confirmcomp from "../Components/confirmcomp"
+import Confirmcomp from "../Components/Confirmcomp"
 
 const Confirmpage = () => {
     return (
-        <confirmcomp />
+        <Confirmcomp />
     )
 }
 
