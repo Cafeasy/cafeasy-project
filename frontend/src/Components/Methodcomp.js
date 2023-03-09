@@ -28,9 +28,15 @@ const Methodcomp = () => {
                     <Dropdownpage placeHolder="Cash/Tunai" />
                 </div>
             </div>
+            
+            <div>
+                <div className="dropdown-box">
+                    <Dropdownpage placeHolder="Cash/Tunai" />
+                </div>
+            </div>
         </div>
     )
-}
+};
 
 
 export default Methodcomp

@@ -34,7 +34,7 @@ const Confirmcomp = () => {
 
             <div>
                 <button className="enable-button" disabled="true">Proses Pembayaran</button>
-                <i>IoSearch/</i>
+                <i></i>
             </div>
         
         </div>

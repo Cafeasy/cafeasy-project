@@ -16,13 +16,13 @@ const Dropdownpage = ({ placeHolder }) => {
   return (
     <div className="dropdown-container">
        <div className="dropdown-text">
-        <div className="dropdown-selected-value">{getDisplay()}</div>
-        <div className="dropdown-tools">
-          <div className="dropdown-tool">
+            <div className="dropdown-selected-value">{getDisplay()}</div>
+            <div className="dropdown-tools">
+              <div className="dropdown-tool">
             <Icon />
           </div>
+            </div>
           </div>
-      </div>
     </div>
   );
 };
