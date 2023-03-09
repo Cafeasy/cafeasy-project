@@ -1,17 +1,20 @@
 import Logohitam from '../Photo/Logohitam.png'
 import { Link } from 'react-router-dom';
 import "../Style/Loginpage.css"
+import { useState } from "react";
+import Berandapage from '../Pages/Berandapage';
 
-
-
-const Logincomp = () => {
+function Logincomp() {
+    const [inputText, setInputText] = useState("");
     const googleAuth = () => {
         window.open(
             `${process.env.REACT_APP_API_URL}/auth/google/callback`,
             "_self"
         );
     };
-
+    const submitUser = () => {
+        <Berandapage user={inputText}></Berandapage>
+    }
     return (
         <div>
 
@@ -25,7 +28,7 @@ const Logincomp = () => {
                 <div className="Loginput">
                     <div class="d-grid gap-10 col-9 mx-auto">
                         <label for="usr">Nama</label>
-                        <input type="text" class="form-control" id="usr" />
+                        <input type="text" class="form-control" id="usr" onChange={e => setInputText(e.target.value)} value={inputText} />
 
                         <div class="form-check form-switch ">
                             <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
@@ -36,7 +39,9 @@ const Logincomp = () => {
                 </div>
                 <div className="Logbutton">
                     <div class="d-grid gap-10 col-9 mx-auto mt-3">
-                        <Link to="/Berandapage" button class="btn btn-dark" type="button">Masuk</Link>
+                        <Link to="/Berandapage" type='button' button class='btn btn-dark' onClick={submitUser}>
+Masuk
+                        </Link>
                         <div className="Loginput text-center  ">atau</div>
                         <button class="btn btn-light btn-rounded" type="button" onClick={googleAuth}>Google</button>
                     </div>
@@ -47,7 +52,8 @@ const Logincomp = () => {
             </div>
 
         </div>
-    )
+    );
+
 }
 
 export default Logincomp

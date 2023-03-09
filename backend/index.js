@@ -11,9 +11,6 @@ const app = express();
 //connect ke db
 require('./config/database');
 
-
-
-
 app.use(
     cookieSession({
         name: "session",

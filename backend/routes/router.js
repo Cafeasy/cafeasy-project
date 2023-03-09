@@ -40,11 +40,11 @@ router.get(
 
 router.get("/auth/logout", (req, res) => {
     req.logout();
-    res.redirect(process.env.CLIENT_URL);
+    res.redirect(process.env.CLIENT_URL + "Loginpage");
 });
 
 router.use('/testing', (req, res, next) => {
-    res.json({name: "tes", tes: "yes"});
+    res.json({ name: "tes", tes: "yes" });
     next();
 });
 
