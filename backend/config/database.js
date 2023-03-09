@@ -2,23 +2,8 @@ const express = require("express");
 const app = express();
 const mongoose = require('mongoose');
 
-// var mongoose = require('mongoose');
-// mongoose.connect('mongodb+srv://hallodeck:hallodeck5@tacapstone.i4jusgn.mongodb.net/?retryWrites=true&w=majority', {useNewUrlParser: true});
-// var conn = mongoose.connection;
-// conn.on('connected', function() {
-//     app.listen(port, () => console.log(`Listenting on port ${port}..., server up n running`));
-// });
-// conn.on('disconnected', function(){
-//     console.log('database is disconnected successfully');
-// })
-// conn.on('error', console.error.bind(console, 'connection error:'));
-// module.exports = conn;
 
-//lokal db
-// mongodb://localhost/cafeasy
-
-
-mongoose.connect('mongodb+srv://hallodeck:hallodeck5@tacapstone.i4jusgn.mongodb.net/cafeasy?retryWrites=true&w=majority',{
+mongoose.connect('mongodb://hallodeck:hallodeck5@ac-fyxbv6h-shard-00-00.i4jusgn.mongodb.net:27017,ac-fyxbv6h-shard-00-01.i4jusgn.mongodb.net:27017,ac-fyxbv6h-shard-00-02.i4jusgn.mongodb.net:27017/cafeasy?ssl=true&replicaSet=atlas-9r1c1k-shard-0&authSource=admin&retryWrites=true&w=majority',{
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
