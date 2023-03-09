@@ -30,6 +30,7 @@ function App() {
       console.log(err);
     }
   };
+  
 
   useEffect(() => {
     getUser();
@@ -37,10 +38,10 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route exact path='/' element={user ? <Navigate to="/Berandapage" /> : <Landingpage />} />
-        <Route exact path='/Loginpage' element={  <Loginpage />} />
+      <Route exact path='/' element={user ? <Navigate to="/Berandapage" /> : <Landingpage />} />
+        <Route exact path='/Loginpage' element={user ? <Navigate to="/Berandapage" /> : <Loginpage />} />
         <Route exact path='/Navbarpage' element={user ? <Navigate to="/Berandapage" /> : <Navbarpage />} />
-        <Route  exact path='/Berandapage' element={ <Berandapage user={user} ></Berandapage>} /> 
+        <Route  exact path='/Berandapage' element={user ? <Berandapage user={user} /> : <Navigate to="/Loginpage" />} />
         <Route exact path='/ListMenu' element={user ? <Navigate to="/Berandapage" /> : <ListMenupage />} />
         <Route exact path='/KonfimasiPesanan' element={ <Confirmpage />} />
         <Route exact path='/MetodePembayaran' element={<Methodpage />} />

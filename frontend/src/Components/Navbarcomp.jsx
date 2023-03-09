@@ -9,13 +9,23 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 
 function Navbarcomp(props) {
+    const user = props.user;
+
+    const logout = () => {
+        window.open(
+            `${process.env.REACT_APP_API_URL}/auth/logout`,
+            "_self"
+        );
+    };
+
+
     return (
         <>
             <div className='keren'>
                 {['sm',].map((expand) => (
                     <Navbar key={expand} expand={expand} className="mb-4">
                         <Container fluid>
-                            <Navbar.Brand href="#"></Navbar.Brand>   
+                            <Navbar.Brand href="#"></Navbar.Brand>
                             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
                             <Navbar.Offcanvas
                                 id={`offcanvasNavbar-expand-${expand}`}
@@ -29,8 +39,8 @@ function Navbarcomp(props) {
                                 </Offcanvas.Header>
                                 <Offcanvas.Body>
                                     <Nav className="justify-content-end flex-grow-1 pe-3">
-                                        <NavDropdown title={`Welcome, ${props.user.name}`}> 
-                                        <NavDropdown.Item href="">Logout</NavDropdown.Item>
+                                        <NavDropdown title={`Welcome, ${user.name}`} id="basic-nav-dropdown">
+                                            <NavDropdown.Item>       <button class="btn btn-light btn-rounded" type="button" onClick={logout}>Logout</button></NavDropdown.Item>
                                         </NavDropdown>
                                         <Nav.Link href="#action1">Home</Nav.Link>
                                         <Nav.Link href="#action2">Profile</Nav.Link>
@@ -44,8 +54,8 @@ function Navbarcomp(props) {
                         </Container>
 
 
-                     
-                  
+
+
                         <Form className="d-flex mx-auto">
 
                             <Form.Control
