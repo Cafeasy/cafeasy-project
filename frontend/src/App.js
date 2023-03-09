@@ -42,8 +42,8 @@ function App() {
         <Route exact path='/Navbarpage' element={user ? <Navigate to="/Berandapage" /> : <Navbarpage />} />
         <Route  exact path='/Berandapage' element={ <Berandapage user={user} ></Berandapage>} /> 
         <Route exact path='/ListMenu' element={user ? <Navigate to="/Berandapage" /> : <ListMenupage />} />
-        <Route exact path='/KonfimasiPesanan' element={user ? <Navigate to="/Berandapage" /> : <Confirmpage />} />
-        <Route exact path='/MetodePembayaran' element={user ? <Navigate to="/Berandapage" /> : <Methodpage />} />
+        <Route exact path='/KonfimasiPesanan' element={ <Confirmpage />} />
+        <Route exact path='/MetodePembayaran' element={<Methodpage />} />
       </Routes>
     </Router>
   )
