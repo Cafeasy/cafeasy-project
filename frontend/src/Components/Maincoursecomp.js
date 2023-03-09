@@ -7,18 +7,35 @@ import Gambarwaffels from '../Photo/Waffles.jpeg'
 import "../Style/Maincourse.css";
 import { BsPlusCircle } from "react-icons/bs";
 import { BsStarFill } from "react-icons/bs";
-function GridExample() {
+import axios from "axios";
+import React, {useState, useEffect} from "react";
+import { Link } from "react-router-dom";
+function GridExample () {
+  const [menus, setMenus] = useState([]);
+  useEffect(() => {
+    axios.get('http://localhost:8888/ListMenu')
+        .then(result => {
+            console.log('data API ada', result.data);
+            const responseAPI = result.data;
+
+            setMenus(responseAPI.data);
+        })
+        .catch(err => {
+            console.log('error: data tidak terambil - ', err);
+        })
+  })
+
   return (
     <Row xs={2} md={4} className="g-4">
-      {Array.from({ length: 8 }).map((_, idx) => (
+      {menus.map((menu, index) => (
         <Col>
-          <Card className='mx-1'>
+          <Card className='mx-1' key={menu._id}>
             <Card.Img variant="top" src={Gambarburger} />
             <Card.Body>
-              <Card.Title>Burger</Card.Title>  
+              <Card.Title>{menu.namaMenu}</Card.Title>  
               
               <h6 class="text-muted">
-                This is a longer card with supporting text below 
+                {menu.deskripsiMenu} 
               </h6>
               <div class="text text-end text-warning">
                 <BsStarFill></BsStarFill>
