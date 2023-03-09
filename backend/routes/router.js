@@ -3,7 +3,7 @@ const router = require("express").Router();
 const passport = require("passport");
 require('../service/passport.js');
 const express = require('express');
-const ListMenuController = require("../controllers/ListMenucontroller");
+const BerandaMenuController = require("../controllers/BerandaMenucontroller");
 const app = express();
 // require('../config/database');
 
@@ -50,7 +50,7 @@ router.use('/testing', (req, res, next) => {
 
 
 
-router.get('/ListMenu', ListMenuController.getListMenu);
+router.get('/ListMenu', BerandaMenuController.getListMenu);
 // router.get('/ListMenuCustomer:id', getMenu.getListMenuById);
 // router.get('/ListMenuCustomer:meja', ListMenu.(getListMenuByMeja));
 
