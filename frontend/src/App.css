@@ -32,37 +32,40 @@
   position: absolute;
   width: 30px;
   height: 26px;
-  left: 40px;
+  left: 30px;
   top: 20px;
 }
 
 .disable-button {
   position:absolute;
   left: 50%;
-  top: 15%;
+  top: 13%;
   transform: translate(-50%, -50%);
-  font-size: 20px;
   background: #1F2937;
   padding: 1px 30px;
 
+  white-space: nowrap;
+
   font-family: 'Montserrat';
-  font-size: 20px;
-  line-height: 50px;
+  font-size: 15px;
+  line-height: 40px;
   border-radius: 10px;
   color: #FFFFFF;
 }
 
 .enable-button {
   position:absolute;
-  width: 500px;
+  width: 80%;
   left: 50%;
   top: 90%;
   transform: translate(-50%, -50%);
   background: #1F2937;
 
+  white-space: nowrap;
+
   font-family: 'Montserrat';
-  font-size: 20px;
-  line-height: 40px;
+  font-size: 15px;
+  line-height: 30px;
   border-radius: 10px;
   color: #FFFFFF;
 }
@@ -73,8 +76,8 @@
   position: absolute;
   width: 400px;
   height: 40px;
-  left: 585px;
-  top: 220px;
+  left: 10px;
+  top: 10%;
   
   background: #FFFFFF;
   border: 1px solid #EBEBEB;
@@ -83,7 +86,8 @@
 
 .searchTerm {
   width: 100%;
-  height: 18px;
+  height: 50%;
+    top:11000%;
   border: 1px solid #EBEBEB;
   color: #1F2937;
   border-radius: 15px;
@@ -91,7 +95,7 @@
   font-family: 'Poppins';
   font-size: 15px;
   font-style: normal;
-  padding: 20px;
+  padding: 20px;  
 }
 
 .searchButton {
