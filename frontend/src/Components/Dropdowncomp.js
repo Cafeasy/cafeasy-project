@@ -1,31 +1,38 @@
-import "../Style/Dropdownpage.css"
-import React from 'react'; 
+import Accordion from 'react-bootstrap/Accordion';
 
-const Icon = () => {
+function Dropdowncomp() {
   return (
-    <svg height="20" width="20%" viewBox="0 0 20 20">
-    </svg>
-  );
-};
-
-const Dropdownpage = ({ placeHolder }) => {
-  const getDisplay = () => {
-    return placeHolder;
-  };
-
-  return (
-    <div className="dropdown-container">
-       <div className="dropdown-text">
-            <div className="dropdown-selected-value">{getDisplay()}</div>
-            <div className="dropdown-tools">
-              <div className="dropdown-tool">
-            <Icon />
-          </div>
-          <div className="dropdown-container"></div>
-            </div>
-          </div>
+    <div className='container-dropdown'>
+    <div class="d-grid gap-10 col-9 mx-auto">
+    <Accordion defaultActiveKey="0">
+      <Accordion.Item eventKey="0">
+        <Accordion.Header>Accordion Item #1</Accordion.Header>
+        <Accordion.Body>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </Accordion.Body>
+      </Accordion.Item>
+      <Accordion.Item eventKey="1">
+        <Accordion.Header>Accordion Item #2</Accordion.Header>
+        <Accordion.Body>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </Accordion.Body>
+      </Accordion.Item>
+    </Accordion>
+    </div>
     </div>
   );
-};
+}
 
-export default Dropdownpage;
+export default Dropdowncomp;

@@ -1,8 +1,6 @@
-import "../Style/Methodpage.css"
-import { IoChevronBackCircleOutline } from "react-icons/io5";
-import { IoSearch } from "react-icons/io5";
-import React from 'react'; 
+import { IoChevronBackCircleOutline, IoSearch } from "react-icons/io5";
 import Dropdownpage from "./Dropdowncomp";
+import React from 'react'; 
 
 const Methodcomp = () => {
     return (
@@ -15,26 +13,19 @@ const Methodcomp = () => {
                 <button className="disable-button" disabled="true">PILIH METODE PEMBAYARAN</button>
             </div>
             
-                <div class="wrap">
+            <div class="wrap">
                 <div class="search">
                     <input type="text-search" class="searchTerm" placeholder="Search...."></input>
                     <button type="submit" class="searchButton">
-                        <i></i>
+                        <i><IoSearch/></i>
                     </button>
                 </div>
             </div>
 
             <div>
-                <div className="dropdown-box">
-                    <Dropdownpage placeHolder="Cash/Tunai" />
-                </div>
+                <Dropdownpage />
             </div>
-            
-            <div>
-                <div className="dropdown-box">
-                    <Dropdownpage placeHolder="Cash/Tunai" />
-                </div>
-            </div>
+
         </div>
     )
 };

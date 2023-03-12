@@ -54,7 +54,7 @@
 }
 
 .enable-button {
-  position:absolute;
+  position: absolute;
   width: 80%;
   left: 50%;
   top: 90%;
@@ -72,11 +72,11 @@
 
 .search {
   box-sizing: border-box;
-
+  
   position: absolute;
   width: 400px;
   height: 40px;
-  left: 10px;
+  transform: translate(138%, 90px);
   top: 10%;
   
   background: #FFFFFF;
@@ -87,7 +87,6 @@
 .searchTerm {
   width: 100%;
   height: 50%;
-    top:11000%;
   border: 1px solid #EBEBEB;
   color: #1F2937;
   border-radius: 15px;
@@ -113,7 +112,6 @@
   position: flex;
   top: 200%;
   left: 100%;
-  transform: translate(-50%, -50%);
 }
 
 @keyframes App-logo-spin {
