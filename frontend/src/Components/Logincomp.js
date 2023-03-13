@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import "../Style/Loginpage.css"
 import { useState } from "react";
 import Berandapage from '../Pages/Berandapage';
+import Berandacomp from './Berandacomp';
 
 function Logincomp() {
     const [inputText, setInputText] = useState("");
@@ -13,7 +14,8 @@ function Logincomp() {
         );
     };
     const submitUser = () => {
-        <Berandapage user={inputText}></Berandapage>
+        <Berandacomp user={inputText}></Berandacomp>
+        console.log(inputText)
     }
     return (
         <div>
@@ -40,7 +42,7 @@ function Logincomp() {
                 <div className="Logbutton">
                     <div class="d-grid gap-10 col-9 mx-auto mt-3">
                         <Link to="/Berandapage" type='button' button class='btn btn-dark' onClick={submitUser}>
-Masuk
+                            Masuk
                         </Link>
                         <div className="Loginput text-center  ">atau</div>
                         <button class="btn btn-light btn-rounded" type="button" onClick={googleAuth}>Google</button>
