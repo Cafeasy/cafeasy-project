@@ -9,7 +9,10 @@ import { BsPlusCircle } from "react-icons/bs";
 import { BsStarFill } from "react-icons/bs";
 import axios from "axios";
 import React, {useState, useEffect} from "react";
+import Button from 'react-bootstrap/esm/Button';
 import { Link } from "react-router-dom";
+
+
 function GridExample () {
   const [menus, setMenus] = useState([]);
   useEffect(() => {
@@ -24,6 +27,8 @@ function GridExample () {
             console.log('error: data tidak terambil - ', err);
         })
   })
+
+
 
   return (
     <Row xs={2} md={4} className="g-4">
@@ -42,10 +47,15 @@ function GridExample () {
                 <BsStarFill></BsStarFill>
                 <BsStarFill></BsStarFill>
                 <BsStarFill></BsStarFill>
-                <BsStarFill></BsStarFill>
+     
+
               </div>
+              
               <div  class="text text-end text-dark">
-              <BsPlusCircle></BsPlusCircle></div>
+              <Button variant="text" >
+                <BsPlusCircle></BsPlusCircle></Button></div>
+             
+
             </Card.Body>
           </Card>   
         </Col>
