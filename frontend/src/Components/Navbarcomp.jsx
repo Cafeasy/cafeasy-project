@@ -39,7 +39,11 @@ function Navbarcomp(props) {
                                 </Offcanvas.Header>
                                 <Offcanvas.Body>
                                     <Nav className="justify-content-end flex-grow-1 pe-3">
-                                        <NavDropdown title={`Welcome, ${user?.name}`} id="basic-nav-dropdown">
+                                        <img
+                                            src={`${user?.picture}`}
+                                            alt="profile" class="rounded" width={40}
+                                        />
+                                        <NavDropdown title={`${user?.name}`} id="basic-nav-dropdown">
                                             <NavDropdown.Item>       <button class="btn btn-light btn-rounded" type="button" onClick={logout}>Logout</button></NavDropdown.Item>
                                         </NavDropdown>
                                         <Nav.Link href="#action1">Home</Nav.Link>

@@ -1,6 +1,7 @@
 import Berandacomp from "../Components/Berandacomp"
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { redirect } from "react-router-dom";
 
 function Berandapage() {
     const [user, setUser] = useState(null);
@@ -12,6 +13,8 @@ function Berandapage() {
             setUser(data.user._json);
             console.log(data)
         } catch (err) {
+            const url = `${process.env.REACT_APP_API_URL}/Loginpage`;
+            redirect(url);
             console.log(err);
         }
     };

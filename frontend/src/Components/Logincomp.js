@@ -1,12 +1,12 @@
 import Logohitam from '../Photo/Logohitam.png'
-import { Link } from 'react-router-dom';
 import "../Style/Loginpage.css"
 import { useState } from "react";
-import Berandapage from '../Pages/Berandapage';
+import { useNavigate } from 'react-router-dom';
 import Berandacomp from './Berandacomp';
 
 function Logincomp() {
     const [inputText, setInputText] = useState("");
+    const navigate = useNavigate();
     const googleAuth = () => {
         window.open(
             `${process.env.REACT_APP_API_URL}/auth/google/callback`,
@@ -14,8 +14,16 @@ function Logincomp() {
         );
     };
     const submitUser = () => {
-        <Berandacomp user={inputText}></Berandacomp>
-        console.log(inputText)
+        var inputan = inputText.toString();
+        var user = {
+            "user": {
+                "name": inputan
+            }
+        }
+        var object = JSON.parse(user);
+        <Berandacomp user={object}></Berandacomp>
+        navigate('/Berandapage', { replace: true });
+        console.log("tes nama: " + inputText)
     }
     return (
         <div>
@@ -41,9 +49,9 @@ function Logincomp() {
                 </div>
                 <div className="Logbutton">
                     <div class="d-grid gap-10 col-9 mx-auto mt-3">
-                        <Link to="/Berandapage" type='button' button class='btn btn-dark' onClick={submitUser}>
+                        <button type='submit' button class='btn btn-dark' onClick={submitUser}>
                             Masuk
-                        </Link>
+                        </button>
                         <div className="Loginput text-center  ">atau</div>
                         <button class="btn btn-light btn-rounded" type="button" onClick={googleAuth}>Google</button>
                     </div>
