@@ -4,8 +4,10 @@ const name = "usr";
 
 
 exports.custLogReg = (req, res, next) => {
-    res.json ({
-        message: "berhasil membuat unique id",
-        data: [name+"-"+id]
-    })
+
+    res.redirect(process.env.CLIENT_URL + "Berandapage"); res.status(200).json({
+        error: false,
+        message: "Successfully Loged In",
+        user: [name + "-" + id],
+    });
 };
