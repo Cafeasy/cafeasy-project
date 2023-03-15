@@ -2,18 +2,19 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
-function ColorSchemesExample() {
+function Navbarmenucomp() {
   return (
     <>
 
-      <Navbar bg="light" variant="light">
+      <Navbar  bg="light" variant="light">
         <Container>
-          <Navbar.Brand href="#home">Menu</Navbar.Brand>
+          <Navbar.Brand href="#home"></Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Waffles</Nav.Link>
-            <Nav.Link href="#features">Desert</Nav.Link>
-            <Nav.Link href="#pricing">Main Course</Nav.Link>
-            <Nav.Link href="#pricing">Drink</Nav.Link>
+            <Nav.Link href="#Waffles">Waffles</Nav.Link>
+            <Nav.Link href="#Desert">Desert</Nav.Link>
+            <Nav.Link href="#Main Course">Main </Nav.Link>
+            <Nav.Link href="#Drink">Drink</Nav.Link>
+            <Nav.Link href="#Others">Others</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
@@ -21,4 +22,4 @@ function ColorSchemesExample() {
   );
 }
 
-export default ColorSchemesExample;
+export default Navbarmenucomp;

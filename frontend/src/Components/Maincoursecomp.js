@@ -34,15 +34,16 @@ function GridExample () {
     <Row xs={2} md={4} className="g-4">
       {menus.map((menu, index) => (
         <Col>
-          <Card className='mx-1' key={menu._id}>
+          <Card className='mx-1  border-0' key={menu._id}>
             <Card.Img variant="top" src={Gambarburger} />
             <Card.Body>
-              <Card.Title>{menu.namaMenu}</Card.Title>  
-              
-              <h6 class="text-muted">
+              <Card.Title className='menu-tittle'>{menu.namaMenu}</Card.Title>  
+              <Card.Title className='menu-harga'>52K</Card.Title>  
+              <Card.Text className='menu-deskripsi'>
                 {menu.deskripsiMenu} 
-              </h6>
+              </Card.Text>
               <div class="text text-end text-warning">
+                <BsStarFill></BsStarFill>
                 <BsStarFill></BsStarFill>
                 <BsStarFill></BsStarFill>
                 <BsStarFill></BsStarFill>
@@ -52,7 +53,7 @@ function GridExample () {
               </div>
               
               <div  class="text text-end text-dark">
-              <Button variant="text" >
+              <Button className='buttonplus' variant="text" >
                 <BsPlusCircle></BsPlusCircle></Button></div>
              
 

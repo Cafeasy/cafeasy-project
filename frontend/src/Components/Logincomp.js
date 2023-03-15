@@ -3,6 +3,7 @@ import "../Style/Loginpage.css"
 import Button from 'react-bootstrap/Button';
 
 
+import {  FcGoogle} from 'react-icons/fc';
 
 function Logincomp() {
 
@@ -28,25 +29,24 @@ function Logincomp() {
                 <div className="text1" >CAFEASY</div>
                 <div className="text3">© 2022-2023 CAFEASY All Rights Reserved.</div>
 
-                <div className="Loginput">
+                <div className="Logbutton">
                     <div class="d-grid gap-10 col-9 mx-auto">
                         <label for="usr">Nama</label>
                         <input type="text" class="form-control" id="usr" />
 
-                        <div class="form-check form-switch ">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                            <label class="form-check-label" for="flexSwitchCheckDefault">ingat saya</label>
-                        </div>
+                      <br></br>
                     </div>
 
                 </div>
+            
                 <div className="Logbutton">
-                    <div class="d-grid gap-10 col-9 mx-auto mt-3">
+                    <div class="d-grid  col-9 mx-auto mt-6">
                         <Button type='button' onClick={submit} button class='btn btn-dark'>
                             Masuk
                         </Button>
                         <div className="Loginput text-center  ">atau</div>
-                        <button class="btn btn-light btn-rounded" type="button" onClick={googleAuth}>Google</button>
+                        <button class="shadow-sm btn btn-light rounded-pill" type="button" onClick={googleAuth}><FcGoogle>Google</FcGoogle></button>
+                        
                     </div>
 
                 </div>
