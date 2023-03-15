@@ -1,34 +1,58 @@
-.harga { 
 
-width: 31px;
-height: 18px;
+.buttonplus {
+  position: relative;
+  left: 12px;
 
 
+} 
+
+.menu-tittle{
+ 
+  width: 80%;
+  height: 5%;
+
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: bold;
+
+  font-size: 17px;
+  
+
+  
+  color: #252525;
+}
+
+.menu-harga {
+
+left: 88%;
 
 font-family: 'Montserrat';
-font-style: normal;
 font-weight: 700;
-font-size: 15px;
-line-height: 18px;
-display: flex;
-align-items: flex-end;
-text-align: center;
+font-size: 20px;
+
 
 color: #DB1C1C;
+
 }
-.harga {
-   
-   
+.menu-deskripsi {
+  position: relative;
 
+font-family: 'Montserrat';
 
-  }
-.buttonplus {
-    position: relative;
-    left: 12px;
+font-size: 12px;
 
+color: #252525;
+}
+.brand-color {
+  position: fixed;
+width: 80%;
+height: 7%;
+top: 1%;
+right: 16.5%;
 
-  }
+background: #1A1A27;
+backdrop-filter: blur(2px);
+/* Note: backdrop-filter has minimal browser support */
 
-.konfir {
-
+border-radius:  15px 50px 30px 5px;
 }
