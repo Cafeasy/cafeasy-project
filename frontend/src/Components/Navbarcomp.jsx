@@ -1,6 +1,6 @@
 
 import "../Style/Navbar.css"
-
+import Logoputih from '../Photo/LogoOnly.png'
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
@@ -37,12 +37,19 @@ function Navbarcomp(props) {
                                     </Offcanvas.Title>
                                 </Offcanvas.Header>
                                 <Offcanvas.Body >
+                                    
                                     <div className="brand-color2">
+                                   
                                     <Nav className="justify-content-end flex-grow-1 pe-3" >
-
+                                    
+                               
                                         <NavDropdown title={`Welcome, ${user?.name}`} id="basic-nav-dropdown">
-                                            <NavDropdown.Item>       <button class="btn btn-light btn-rounded" type="button" onClick={logout}>Logout</button></NavDropdown.Item>
+                                       
+                                                   <NavDropdown.Item>       <button class="btn btn-light btn-rounded" type="button" onClick={logout}>Logout</button></NavDropdown.Item>
                                         </NavDropdown>
+                                      
+                    <img className="logonav" src={Logoputih}></img>
+              <h1 className="logotext">CAFEASY</h1>
                                         <Nav.Link href="#action1">Home</Nav.Link>
                                         <Nav.Link href="#action2">Profile</Nav.Link>
                                         <Nav.Link href="#action3">Kontak</Nav.Link>
