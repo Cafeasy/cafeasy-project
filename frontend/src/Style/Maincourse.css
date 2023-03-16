@@ -42,17 +42,4 @@ font-size: 12px;
 
 color: #252525;
 }
-.brand-color {
- 
-  position: fixed;
-width: 90%;
-height: 7%;
-top: 1%;
-right: 16.5%;
 
-background: #1A1A27;
-backdrop-filter: blur(2px);
-/* Note: backdrop-filter has minimal browser support */
-
-border-radius:  15px 50px 30px 5px;
-}
