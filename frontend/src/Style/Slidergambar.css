@@ -4,3 +4,27 @@
     object-fit: cover;
    
 }
+.caption {
+    position:relative;
+right: 30%;
+    font-family: 'Montserrat';
+    font-style: bold;
+    
+    font-size: 7vw;
+
+    /* identical to box height */
+    
+    color: #FFFFFF;
+}
+.caption2 {
+    position:relative;
+right: 43%;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 100%;
+    font-size: 6vw;
+
+    /* identical to box height */
+    
+    color: #FFFFFF;
+}
