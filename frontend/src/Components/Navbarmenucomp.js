@@ -1,15 +1,16 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import "../Style/Navbar.css"
 
 function Navbarmenucomp() {
   return (
     <>
-
+  
       <Navbar  bg="light" variant="light">
-        <Container>
+        <Container className='navmenu'>
           <Navbar.Brand href="#home"></Navbar.Brand>
-          <Nav className="me-auto">
+          <Nav className="mx-auto ">
             <Nav.Link href="#Waffles">Waffles</Nav.Link>
             <Nav.Link href="#Desert">Desert</Nav.Link>
             <Nav.Link href="#Main Course">Main </Nav.Link>

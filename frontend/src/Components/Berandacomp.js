@@ -13,7 +13,7 @@ function Berandacomp(props){
         <div>
             <Navbarpage user={props.user} />
             <Sliderpage />
-            <Navbarmenu />
+            <Navbarmenu/>
             <Maincoursepage />
 
         </div>

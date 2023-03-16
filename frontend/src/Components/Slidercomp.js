@@ -14,9 +14,9 @@ const Slidercomp = () => {
                         src={Gambarburger}
                         alt="First slide"                 
                     />
-                    <Carousel.Caption>
-                        <h3>Burger Besar Enak</h3>
-                        <p>120k Only.</p>
+                    <Carousel.Caption >
+                        <h3 className="caption">Burger Besar Enak</h3>
+                        <p className="caption2">120k Only.</p>
                     </Carousel.Caption>
                 
                 </Carousel.Item>
@@ -31,8 +31,8 @@ const Slidercomp = () => {
                     />
 
                     <Carousel.Caption>
-                        <h3>Pizza Domino</h3>
-                        <p>90K</p>
+                        <h3 className="caption">Pizza Domino</h3>
+                        <p className="caption2">90K</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
@@ -44,8 +44,8 @@ const Slidercomp = () => {
                     />
 
                     <Carousel.Caption>
-                        <h3>Waffles</h3>
-                        <p>
+                        <h3 className="caption">Waffles Murah</h3>
+                        <p className="caption2">
                             40k
                         </p>
                     </Carousel.Caption>
