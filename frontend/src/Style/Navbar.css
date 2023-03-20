@@ -1,12 +1,43 @@
+.navmenu {
+    margin-top: 1%;
+
+
+}
+
+.Nav-Link {
+    transition: all 0.2s;
+    background: black;
+}
+
+.NavLink:hover {
+    background: black;
+}
+
+.Nav.Link:hover::after {
+    height: 2px;
+    background-color: greenyellow;
+    background: black;
+}
+
+.listmenu {
+    margin-top: 1%;
+}
+
+nav Nav.Link {
+    margin: 0 20px;
+    color: white;
+    background-color: blac;
+}
 
 
 
-.searchbar{
+.searchbar {
     box-sizing: border-box;
     background: #FFFFFF;
     border: 1px solid #EBEBEB;
     border-radius: 15px;
 }
+
 .daftarmenu {
     display: flex;
     flex-direction: row;
@@ -14,16 +45,17 @@
     align-items: center;
     padding: 3px 25px;
     gap: 10px;
-    
+
     position: center;
     width: 149px;
     height: 30px;
     left: 122px;
     top: 77px;
-    
+
     background: #1F2937;
     border-radius: 5px;
 }
+
 .logonav {
     position: absolute;
     bottom: 93%;
@@ -31,6 +63,7 @@
     height: 5%;
 
 }
+
 .logotext {
     position: absolute;
     bottom: 92%;
@@ -38,20 +71,21 @@
     left: 15%;
 
 
-color: #DADADA;
+    color: #DADADA;
 
 }
+
 .brand-color {
- 
+
     position: absolute;
-  width: 83%;
-  height: 7%;
-  top: 1%;
-  right: 16.5%;
-  
-  background: #1A1A27;
-  backdrop-filter: blur(2px);
-  /* Note: backdrop-filter has minimal browser support */
-  
-  border-radius:  0px 30px 30px 0px;
-  }
+    width: 83%;
+    height: 7%;
+    top: 1%;
+    right: 16.5%;
+
+    background: #1A1A27;
+    backdrop-filter: blur(2px);
+    /* Note: backdrop-filter has minimal browser support */
+
+    border-radius: 0px 30px 30px 0px;
+}
