@@ -1,14 +1,13 @@
-
 .buttonplus {
   position: relative;
   left: 12px;
 
 
-} 
+}
 
-.menu-tittle{
- 
-  width: 80%;
+.menu-tittle {
+
+  width: 90%;
   height: 5%;
 
   font-family: 'Montserrat';
@@ -16,30 +15,30 @@
   font-weight: bold;
 
   font-size: 17px;
-  
 
-  
+
+
   color: #252525;
 }
 
 .menu-harga {
   position: relative;
 
-font-family: 'Montserrat';
-font-weight: 700;
-font-size: 20px;
+  font-family: 'Montserrat';
+  font-weight: 700;
+  font-size: 20px;
 
 
-color: #DB1C1C;
+  color: #DB1C1C;
 
 }
+
 .menu-deskripsi {
   position: relative;
   text-align: justify;
-font-family: 'Montserrat';
+  font-family: 'Montserrat';
 
-font-size: 12px;
+  font-size: 12px;
 
-color: #252525;
+  color: #252525;
 }
-
