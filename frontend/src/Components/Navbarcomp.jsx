@@ -69,7 +69,9 @@ function Navbarcomp(props) {
                                 id={`offcanvasNavbar-expand-${expand}`}
                                 aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
                                 placement="end"
+
                             >
+
                                 <Offcanvas.Header closeButton>
                                     <Offcanvas.Title id={`offcanvasDarkLabel-expand-${expand}`}>
                                         <div className="brand-color" ></div>
@@ -77,24 +79,23 @@ function Navbarcomp(props) {
                                 </Offcanvas.Header>
                                 <Offcanvas.Body >
 
-                                    <div className="brand-color2">
 
-                                        <Nav className="justify-content-end flex-grow-1 pe-3" >
+                                    <Nav className="justify-content-end flex-grow-1 pe-3" >
 
 
-                                            <NavDropdown title={`Welcome, ${user?.name}`} id="basic-nav-dropdown">
+                                        <NavDropdown title={`Welcome, ${user?.name}`} id="basic-nav-dropdown">
 
-                                                <NavDropdown.Item>       <button class="btn btn-light btn-rounded" type="button" onClick={logout}>Logout</button></NavDropdown.Item>
-                                            </NavDropdown>
+                                            <NavDropdown.Item>       <button class="btn btn-light btn-rounded" type="button" onClick={logout}>Logout</button></NavDropdown.Item>
+                                        </NavDropdown>
 
-                                            <img className="logonav" alt="logo putih" src={Logoputih}></img>
-                                            <h1 className="logotext">CAFEASY</h1>
-                                            <Nav.Link href="#action1">Home</Nav.Link>
-                                            <Nav.Link href="#action2">Profile</Nav.Link>
-                                            <Nav.Link href="#action3">Kontak</Nav.Link>
-                                            <Nav.Link href="#action4">Bantuan</Nav.Link>
-                                        </Nav>
-                                    </div>
+                                        <img className="logonav" alt="logo putih" src={Logoputih}></img>
+                                        <h1 className="logotext">CAFEASY</h1>
+                                        <Nav.Link href="#action1">Home</Nav.Link>
+                                        <Nav.Link href="#action2">Profile</Nav.Link>
+                                        <Nav.Link href="#action3">Kontak</Nav.Link>
+                                        <Nav.Link href="#action4">Bantuan</Nav.Link>
+                                    </Nav>
+
                                 </Offcanvas.Body>
                             </Navbar.Offcanvas>
                         </Container>
@@ -108,11 +109,13 @@ function Navbarcomp(props) {
                                 onChange={searchText.bind(this)}
                             />
                         </Form>
+
                     </Navbar>
+
 
                 ))}
             </div>
-            <div> <Carousel>
+            <div className="bestmenu"> <Carousel>
                 <Carousel.Item>
                     <img
                         className="Gambarslider"
@@ -120,8 +123,8 @@ function Navbarcomp(props) {
                         alt="First slide"
                     />
                     <Carousel.Caption >
-                        <h3 className="caption">Burger Besar Enak</h3>
-                        <p className="caption2">120k Only.</p>
+                        <h3 className="caption">Burger Besar</h3>
+                        <p className="caption2">120k.</p>
                     </Carousel.Caption>
 
                 </Carousel.Item>
@@ -159,23 +162,27 @@ function Navbarcomp(props) {
             </div>
 
             <div>
-
-
-                <Nav justify="tabs" defaultActiveKey="/home" className="navmenu">
-                    <Nav.Item>
-                        <Nav.Link onClick={() => setActive("firstcard")} eventKey="link-1" >Waffels</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link onClick={() => setActive("secondcard")} eventKey="link-2">Desert</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link onClick={() => setActive("thirdcard")} eventKey="link-3">Main Course</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link onClick={() => setActive("fourthcard")} eventKey="link-4">Drink</Nav.Link>
-                    </Nav.Item>
-
-                </Nav>
+                <div class="navbar-container">
+                    <ul>
+                        <li fill class="nav-link active-link">
+                            <a href="#" onClick={() => setActive("firstcard")}>Waffels
+                            </a>
+                            <div class="underline"></div>
+                        </li>
+                        <li class="nav-link">
+                            <a href="#" onClick={() => setActive("secondcard")}>Desert</a>
+                            <div class="underline"></div>
+                        </li>
+                        <li class="nav-link">
+                            <a href="#" onClick={() => setActive("thirdcard")}>Main Course</a>
+                            <div class="underline"></div>
+                        </li>
+                        <li class="nav-link">
+                            <a href="#" onClick={() => setActive("fourthcard")}>Drink</a>
+                            <div class="underline"></div>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <div className="listmenu">
@@ -237,6 +244,10 @@ function Navbarcomp(props) {
                         </Col>
                     ))}
                 </Row>}
+            </div>
+            <div>
+                <ul class="fw-bold">Total.</ul>
+                <button className="button-konfir" >Konfirmasi Pemesanan</button>
             </div>
         </>
 
