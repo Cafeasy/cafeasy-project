@@ -3,7 +3,9 @@ const router = require("express").Router();
 const passport = require("passport");
 require('../service/passport.js');
 const express = require('express');
-const BerandaMenuController = require("../controllers/BerandaMenucontroller");
+const BerandaMenuController = require("../controllers/Menucontroller");
+const KategoriMenuController = require("../controllers/Menucontroller");
+const DetailMenuController = require("../controllers/Menucontroller");
 const CustomerController = require("../controllers/Customercontroller");
 const KeranjangController = require("../controllers/Keranjangcontroller");
 const app = express();
@@ -53,6 +55,8 @@ router.use('/testing', (req, res, next) => {
 
 
 router.get('/ListMenu', BerandaMenuController.getListMenu);
+router.get('/ListMenuByCategory/:kategoriMenu', KategoriMenuController.getMenuByCategory);
+router.get('/DetailMenu/:idMenu', DetailMenuController.getMenuDetail);
 router.get('/custLogReg', CustomerController.custLogReg);
 
 router.get('/cartPelanggan/:idPelanggan', KeranjangController.getListCart);
