@@ -12,6 +12,7 @@ import Methodpage from './Pages/Methodpage';
 import "./Style/ListMenupage.css"
 import "./Style/Confirmpage.css";
 import "./Style/Methodpage.css";
+import Detailmenupage from './Pages/Detailmenupage';
 
 
 
@@ -28,6 +29,7 @@ function App() {
         <Route exact path='/ListMenu' element={<ListMenupage />} />
         <Route exact path='/KonfimasiPesanan' element={ <Confirmpage />} />
         <Route exact path='/MetodePembayaran' element={<Methodpage />} />
+        <Route exact path='/Detailmenu' element={<Detailmenupage />} />
       </Routes>
     </Router>
   )

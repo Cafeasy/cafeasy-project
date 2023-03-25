@@ -245,13 +245,69 @@ function Navbarcomp(props) {
                                     <Card.Text className='menu-deskripsi'>
                                         {menu.deskripsiMenu}
                                     </Card.Text>
-
-
                                 </Card.Body>
                             </Card>
                         </Col>
                     ))}
                 </Row>}
+                {active === "thirdcard" && <Row xs={2} md={4} className="g-0">
+                    {dataSearch.map((menu, index) => (
+                        <Col>
+                            <Card className='mx-1  mb-5 border-0 ' key={menu._id}>
+                                <Card.Img variant="top" src={Gambarburger} />
+                                <Card.Body>
+                                    <Card.Title className='menu-harga'>70K</Card.Title>
+                                    <Card.Title className='menu-tittle'>{menu.namaMenu}</Card.Title>
+                                    <div className='rate'>
+                                        <div class="text text-end text-warning">
+                                            <BsStarFill size='10px' ></BsStarFill>
+                                            <BsStarFill size='10px'></BsStarFill>
+                                            <BsStarFill size='10px'></BsStarFill>
+                                            <BsStarFill size='10px'></BsStarFill>
+                                            <BsStarFill size='10px'></BsStarFill>
+                                        </div>
+
+                                        <div class="text text-end text-dark">
+                                            <Button className='buttonplus' variant="text" >
+                                                <BsPlusCircle></BsPlusCircle></Button></div>
+                                    </div>
+                                    <Card.Text className='menu-deskripsi'>
+                                        {menu.deskripsiMenu}
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    ))}
+            </Row>}
+            {active === "fourthcard" && <Row xs={2} md={4} className="g-0">
+                    {dataSearch.map((menu, index) => (
+                        <Col>
+                            <Card className='mx-1  mb-5 border-0 ' key={menu._id}>
+                                <Card.Img variant="top" src={Gambarburger} />
+                                <Card.Body>
+                                    <Card.Title className='menu-harga'>25K</Card.Title>
+                                    <Card.Title className='menu-tittle'>{menu.namaMenu}</Card.Title>
+                                    <div className='rate'>
+                                        <div class="text text-end text-warning">
+                                            <BsStarFill size='10px' ></BsStarFill>
+                                            <BsStarFill size='10px'></BsStarFill>
+                                            <BsStarFill size='10px'></BsStarFill>
+                                            <BsStarFill size='10px'></BsStarFill>
+                                            <BsStarFill size='10px'></BsStarFill>
+                                        </div>
+
+                                        <div class="text text-end text-dark">
+                                            <Button className='buttonplus' variant="text" >
+                                                <BsPlusCircle></BsPlusCircle></Button></div>
+                                    </div>
+                                    <Card.Text className='menu-deskripsi'>
+                                        {menu.deskripsiMenu}
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    ))}
+            </Row>}
             </div>
             <div>
                 <ul class="fw-bold">Total.</ul>
