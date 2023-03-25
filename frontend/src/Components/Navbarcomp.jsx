@@ -25,6 +25,7 @@ import "../Style/Navbar.css"
 
 
 function Navbarcomp(props) {
+
     const user = props.user;
     const [menus, setMenus] = useState([]);
     useEffect(() => {
@@ -32,7 +33,6 @@ function Navbarcomp(props) {
             .then(result => {
                 console.log('data API ada', result.data);
                 const responseAPI = result.data;
-
                 setMenus(responseAPI.data);
             })
             .catch(err => {
@@ -68,7 +68,7 @@ function Navbarcomp(props) {
                             <Navbar.Offcanvas
                                 id={`offcanvasNavbar-expand-${expand}`}
                                 aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
-                                placement="end"
+
 
                             >
 
@@ -186,58 +186,66 @@ function Navbarcomp(props) {
             </div>
 
             <div className="listmenu">
-                {active === "firstcard" && <Row xs={2} md={4} className="g-4">
+
+                {active === "firstcard" && <Row xs={2} md={4} className="g-0">
                     {dataSearch.map((menu, index) => (
                         <Col>
-                            <Card className='mx-3  border-0 ' key={menu._id}>
+                            <Card className='mx-1  mb-5 border-0 ' key={menu._id}>
                                 <Card.Img variant="top" src={Gambarburger} />
                                 <Card.Body>
-                                    <Card.Title className='menu-tittle'>{menu.namaMenu}</Card.Title>
                                     <Card.Title className='menu-harga'>52K</Card.Title>
+                                    <Card.Title className='menu-tittle'>{menu.namaMenu}</Card.Title>
+                                    <div className='rate'>
+                                        <div class="text text-end text-warning">
+                                            <BsStarFill size='10px' ></BsStarFill>
+                                            <BsStarFill size='10px'></BsStarFill>
+                                            <BsStarFill size='10px'></BsStarFill>
+                                            <BsStarFill size='10px'></BsStarFill>
+                                            <BsStarFill size='10px'></BsStarFill>
+                                        </div>
+
+                                        <div class="text text-end text-dark">
+                                            <Button className='buttonplus' variant="text" >
+                                                <BsPlusCircle></BsPlusCircle></Button></div>
+                                    </div>
                                     <Card.Text className='menu-deskripsi'>
                                         {menu.deskripsiMenu}
                                     </Card.Text>
-                                    <div class="text text-end text-warning">
-                                        <BsStarFill></BsStarFill>
-                                        <BsStarFill></BsStarFill>
-                                        <BsStarFill></BsStarFill>
-                                        <BsStarFill></BsStarFill>
-                                        <BsStarFill></BsStarFill>
-
-
-                                    </div>
-
-                                    <div class="text text-end text-dark">
-                                        <Button className='buttonplus' variant="text" >
-                                            <BsPlusCircle></BsPlusCircle></Button></div>
-
-
                                 </Card.Body>
                             </Card>
                         </Col>
                     ))}
                 </Row>}
-                {active === "secondcard" && <Row xs={2} md={4} className="g-4">
+                {active === "secondcard" && <Row xs={2} md={4} className="g-0">
                     {dataSearch.map((menu, index) => (
                         <Col>
-                            <Card className='mx-3  border-0 ' key={menu._id}>
+                            <Card className='mx-1 mb-5 border-0 ' key={menu._id}>
                                 <Card.Img variant="top" src={Gambarburger} />
                                 <Card.Body>
-                                    <Card.Title className='menu-tittle'>{menu.namaMenu}</Card.Title>
+
                                     <Card.Title className='menu-harga'>62K</Card.Title>
+                                    <Card.Title className='menu-tittle'>{menu.namaMenu}</Card.Title>
+                                    <div className='rate'>
+                                        <div class="text text-end text-warning">
+                                            <BsStarFill size='10px' ></BsStarFill>
+                                            <BsStarFill size='10px'></BsStarFill>
+                                            <BsStarFill size='10px'></BsStarFill>
+                                            <BsStarFill size='10px'></BsStarFill>
+                                            <BsStarFill size='10px'></BsStarFill>
+
+                                        </div>
+
+
+                                        <div class="text text-end text-dark">
+                                            <Button className='buttonplus' variant="text" >
+                                                <BsPlusCircle></BsPlusCircle>
+                                            </Button>
+                                        </div>
+                                    </div>
                                     <Card.Text className='menu-deskripsi'>
                                         {menu.deskripsiMenu}
                                     </Card.Text>
-                                    <div class="text text-end text-warning">
-                                        <BsStarFill></BsStarFill>
-                                        <BsStarFill></BsStarFill>
-                                        <BsStarFill></BsStarFill>
-                                        <BsStarFill></BsStarFill>
-                                        <BsStarFill></BsStarFill>
-                                    </div>
-                                    <div class="text text-end text-dark">
-                                        <Button className='buttonplus' variant="text" >
-                                            <BsPlusCircle></BsPlusCircle></Button></div>
+
 
                                 </Card.Body>
                             </Card>
