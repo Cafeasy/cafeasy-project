@@ -1,4 +1,3 @@
-
 import "../Style/Navbar.css"
 import Logoputih from '../Photo/LogoOnly.png'
 import Container from 'react-bootstrap/Container';
@@ -211,6 +210,9 @@ function Navbarcomp(props) {
                                     <Card.Text className='menu-deskripsi'>
                                         {menu.deskripsiMenu}
                                     </Card.Text>
+                                    <div>
+                                        <link to="/Detailmenucomp">Detailmenucomp</link>
+                                    </div>
                                 </Card.Body>
                             </Card>
                         </Col>

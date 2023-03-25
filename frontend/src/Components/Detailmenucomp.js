@@ -26,10 +26,18 @@ export default function App() {
           alt="test"
           className="parallax"
         />
-        <div className="text-wrapper">
-          <h1 className="headline">Parallax</h1>
-          <h2 className="sub-headline">Scrolling effect</h2>
+        <div class='content'>
+          <h1 class="pagetitle">American Waffle</h1>
+          <h4 class="headline">Deskripsi</h4>
+          <p class="sub-headline">Wafel Amerika renyah di luar dan ringan serta lembut di dalam. Mereka biasanya dibesarkan dengan baking powder atau bahan pengembang kimia, tidak seperti wafel Belgia (kadang-kadang disebut gauffres) yang secara tradisional menggunakan ragi untuk ragi.
+
+Menurut pengalaman saya, wafel Amerika juga biasanya berbentuk bulat, sedangkan wafel Belgia biasanya berbentuk persegi panjang.
+
+Wafel Amerika sering kali lebih manis daripada beberapa jenis wafel lainnya. Mereka juga dapat menambahkan rasa tambahan pada adonannya, seperti blueberry atau keping cokelat mini.</p>
         </div>
+        <div>
+                <button className="button-konfir" >Konfirmasi Pemesanan</button>
+            </div>
       </section>
     </div>
   )
