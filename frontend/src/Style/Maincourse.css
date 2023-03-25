@@ -14,7 +14,7 @@
   font-style: normal;
   font-weight: bold;
 
-  font-size: 17px;
+  font-size: 15px;
 
 
 
@@ -22,23 +22,38 @@
 }
 
 .menu-harga {
-  position: relative;
+  position: absolute;
+  right: 0;
 
-  font-family: 'Montserrat';
-  font-weight: 700;
-  font-size: 20px;
+
 
 
   color: #DB1C1C;
 
 }
 
+.rate {
+
+  position: absolute;
+  right: 0;
+
+  font-family: 'Montserrat';
+  font-weight: 700;
+  font-size: 18px;
+
+
+  color: #DB1C1C;
+
+}
+
+
 .menu-deskripsi {
   position: relative;
   text-align: justify;
   font-family: 'Montserrat';
-
+  width: 74%;
   font-size: 12px;
-
+  padding-top: 2%;
+  opacity: 70%;
   color: #252525;
 }
