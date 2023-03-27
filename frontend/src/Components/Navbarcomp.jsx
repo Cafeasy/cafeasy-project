@@ -342,6 +342,7 @@ const ModalCustom = ({ menuList }) => {
             <div className="textmodal">{menuList.namaMenu}<p></p></div>
             <div className="textmodal_deskripsi">{menuList.deskripsiMenu}</div>
             <div className="textmodal_harga">{"50K"}</div>
+            <p></p>
             <Form>
               <Form.Group
                 className="mb-3"
