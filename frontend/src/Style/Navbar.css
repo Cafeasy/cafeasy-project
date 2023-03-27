@@ -6,7 +6,7 @@
 
 .button-konfir {
     position: relative;
-    left: 45%;
+    left: 50%;
 
     transform: translate(-50%, -50%);
     background: #1F2937;
@@ -140,4 +140,56 @@ a {
     /* Note: backdrop-filter has minimal browser support */
 
     border-radius: 0px 30px 30px 0px;
+}
+.modal_tengah {
+    text-align: center;
+    font-weight: bold;
+    
+    font-family: 'Montserrat';
+font-style: normal;
+}
+.gambarmodal {
+    float: left;
+    height: 130px;
+    width: 130px; 
+    margin-right: 10px;
+    
+}
+.textmodal{
+
+
+    text-align: justify;
+    font-weight: bold;
+    font-family: 'Montserrat';
+}
+.textmodal_deskripsi{
+    font-family: 'Montserrat';
+    font-size: small;
+
+    text-align: justify;
+    margin-bottom: 2%;
+}
+.textmodal_harga{
+    font-family: 'Montserrat';
+    font-weight: bolder;
+    color: red;
+
+    text-align: justify;
+    font-size: 23px;
+}
+
+.button-konfir_modal {
+    position: relative;
+    
+    text-align: center;
+    background: #1F2937;
+    margin-bottom: 5%;
+
+    padding: 1px 25%;
+    font-weight: bold;
+    font-family: 'Montserrat';
+    font-size: 15px;
+  
+    border-radius: 8px;
+    color: #FFFFFF;
 }
