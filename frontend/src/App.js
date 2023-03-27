@@ -19,15 +19,16 @@ import Detailmenupage from './Pages/Detailmenupage';
 
 function App() {
 
+
   return (
     <Router>
       <Routes>
-      <Route exact path='/' element={ <Landingpage />} />
-        <Route exact path='/Loginpage' element={ <Loginpage />} />
+        <Route exact path='/' element={<Landingpage />} />
+        <Route exact path='/Loginpage' element={<Loginpage />} />
         <Route exact path='/Navbarpage' element={<Navbarpage />} />
-        <Route  exact path='/Berandapage' element={ <Berandapage /> } />
+        <Route exact path='/Berandapage' element={<Berandapage />} />
         <Route exact path='/ListMenu' element={<ListMenupage />} />
-        <Route exact path='/KonfimasiPesanan' element={ <Confirmpage />} />
+        <Route exact path='/KonfimasiPesanan' element={<Confirmpage />} />
         <Route exact path='/MetodePembayaran' element={<Methodpage />} />
         <Route exact path='/Detailmenu' element={<Detailmenupage />} />
       </Routes>
