@@ -2,8 +2,9 @@ import "../Style/Detailmenupage.css";
 import * as React from "react"
 import Gambarburger from '../Photo/Burger.jpeg'
 import { useEffect, useState } from "react"
+import axios from "axios";
 
-export default function App() {
+const Detailmenucomp = () => {
   const [, setOffset] = useState(0)
 
   useEffect(() => {
@@ -18,6 +19,20 @@ export default function App() {
     }
   }, [])
 
+  const [menus, setMenus] = useState([]);
+  useEffect(() => {
+      axios.get('http://localhost:8888/DetailMenu/idMenu')
+      .then(result => {
+          console.log('data API ada', result.data);
+          const responseAPI = result.data;
+
+          setMenus(responseAPI.data);
+      })
+      .catch(err => {
+          console.log('error: data tidak terambil - ', err);
+      })
+  })
+
   return (
     <div className="App">
       <section className="hero">
@@ -27,7 +42,7 @@ export default function App() {
           className="parallax"
         />
         <div class='content'>
-          <h1 class="pagetitle">American Waffle</h1>
+          <h1 class="pagetitle">{}</h1>
           <h4 class="headline">Deskripsi</h4>
           <p class="sub-headline">Wafel Amerika renyah di luar dan ringan serta lembut di dalam. Mereka biasanya dibesarkan dengan baking powder atau bahan pengembang kimia, tidak seperti wafel Belgia (kadang-kadang disebut gauffres) yang secara tradisional menggunakan ragi untuk ragi.
 
@@ -42,3 +57,5 @@ export default function App() {
     </div>
   )
 }
+
+export default Detailmenucomp;

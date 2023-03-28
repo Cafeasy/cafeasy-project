@@ -21,7 +21,6 @@ function Logincomp() {
 
     return (
         <div>
-
             <div className="login">
                 <div className="gambarlogin">
                     <img src={Logohitam} alt="logo-cafeasy"></img>
