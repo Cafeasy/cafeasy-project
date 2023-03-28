@@ -206,6 +206,7 @@ function Navbarcomp(props) {
       </div>
 
       <div className="listmenu">
+      <Link to={'/menu/${id}'}>
         {active === "firstcard" && (
           <Row xs={2} md={4} className="g-0">
             {dataSearch.map((menu, index) => {
@@ -290,6 +291,7 @@ function Navbarcomp(props) {
             ))}
           </Row>
         )}
+        </Link>
       </div>
 
       <div>
