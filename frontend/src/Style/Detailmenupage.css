@@ -1,0 +1,12 @@
+.parallax {
+    display: flex;
+    position: relative;
+    width: 100%;
+}
+
+.content {
+    width: 100%;
+    padding: 10%;
+    position: relative;
+    z-index: 50;
+  }

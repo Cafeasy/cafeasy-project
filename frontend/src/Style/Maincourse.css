@@ -1,0 +1,59 @@
+.buttonplus {
+  position: relative;
+  left: 12px;
+
+
+}
+
+.menu-tittle {
+
+  width: 90%;
+  height: 5%;
+
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: bold;
+
+  font-size: 15px;
+
+
+
+  color: #252525;
+}
+
+.menu-harga {
+  position: absolute;
+  right: 0;
+
+
+
+
+  color: #DB1C1C;
+
+}
+
+.rate {
+
+  position: absolute;
+  right: 0;
+
+  font-family: 'Montserrat';
+  font-weight: 700;
+  font-size: 18px;
+
+
+  color: #DB1C1C;
+
+}
+
+
+.menu-deskripsi {
+  position: relative;
+  text-align: justify;
+  font-family: 'Montserrat';
+  width: 74%;
+  font-size: 12px;
+  padding-top: 2%;
+  opacity: 70%;
+  color: #252525;
+}

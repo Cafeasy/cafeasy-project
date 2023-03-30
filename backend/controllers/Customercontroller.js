@@ -1,4 +1,3 @@
-
 const Customer = require("../model/Customermodel")
 
 exports.createCustomer = (req, res) => {
@@ -14,9 +13,6 @@ exports.createCustomer = (req, res) => {
     } catch {
         res.status(400).json({ message: "gagal input" })
     }
-
-
-};
 
 exports.getCustomer = (req, res) => {
     const id = req.params.id

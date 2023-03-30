@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const CustomerModel = new Schema({
+
     id: {
         type: String, required: true
     },
@@ -13,10 +14,4 @@ const CustomerModel = new Schema({
 },{versionKey : false,})
 
 
-// const CustomerModel = mongoose.Schema({
-//     namaCust: {
-//         type: String,
-//         required: true
-//     },
-//     idCust: 
-// })
+module.exports = mongoose.model('Pelanggan', CustomerModel, 'pelanggan');

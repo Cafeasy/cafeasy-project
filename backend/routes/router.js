@@ -7,6 +7,7 @@ const BerandaMenuController = require("../controllers/Menucontroller");
 const KategoriMenuController = require("../controllers/Menucontroller");
 const DetailMenuController = require("../controllers/Menucontroller");
 const CustomerController = require("../controllers/Customercontroller");
+const KeranjangController = require("../controllers/Keranjangcontroller");
 const app = express();
 const Customer = require("../model/Customermodel")
 

@@ -37,9 +37,6 @@ const Detailmenucomp = (props) => {
       </section>
     </div>
   )
-
-
-
 }
 
 export default Detailmenucomp;

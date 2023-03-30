@@ -24,6 +24,7 @@ import "../Style/Slidergambar.css";
 import "../Style/Navbar.css";
 import { useNavigate } from "react-router-dom";
 
+
 import { Link } from "react-router-dom";
 import { CgAdd } from "react-icons/cg";
 import { CgRemove } from "react-icons/cg";
@@ -34,6 +35,7 @@ function Navbarcomp(props) {
 
   const params = useParams();
   const urlParams = params.idUser
+
   const user = props.user;
   const [menus, setMenus] = useState([]);
   useEffect(() => {
@@ -216,8 +218,8 @@ function Navbarcomp(props) {
                     key={menu.idMenu}
                     data-example={menu.namaMenu}
                   >
-
                     <Link to={`/Detailmenu/${menu.idMenu}`} state={{ url: urlParams }} >
+
                       <Card.Img variant="top" src={Gambarburger} />
                     </Link>
                     <Card.Body>
@@ -261,6 +263,7 @@ function Navbarcomp(props) {
             {dataSearch.map((menu, index) => (
               <Col>
                 <Card className="mx-1 mb-5 border-0 " key={menu._id}>
+
                   <Link to={`/Detailmenu/${menu.idMenu}`} state={{ url: urlParams }} >
                     <Card.Img variant="top" src={Gambarburger} />
                   </Link>

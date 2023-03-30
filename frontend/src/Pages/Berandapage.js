@@ -2,6 +2,7 @@ import Berandacomp from "../Components/Berandacomp"
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { redirect } from "react-router-dom";
+
 import { useParams } from 'react-router-dom';
 
 
@@ -49,8 +50,9 @@ function Berandapage() {
         getUser();
     }, []);
 
+
     return (
-        <Berandacomp user={props.user} />
+        <Berandacomp user={user} />
     )
 }
 

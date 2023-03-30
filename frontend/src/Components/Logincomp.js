@@ -1,5 +1,4 @@
 import Logohitam from '../Photo/Logohitam.png'
-import { Link } from 'react-router-dom';
 import "../Style/Loginpage.css"
 import { useState } from 'react'
 import axios from 'axios'
@@ -27,30 +26,33 @@ function Logincomp() {
         });
         beranda('/Berandapage/' + idPelanggan);
     }
+
     return (
         <div>
+            <form onSubmit={submitUser}>
 
-            <div className="login">
-                <div className="gambarlogin">
-                    <img src={Logohitam} alt="logo-cafeasy"></img>
-                </div>
-                <div className="text1" >CAFEASY</div>
-                <div className="text3">© 2022-2023 CAFEASY All Rights Reserved.</div>
+                <div className="login">
+                    <div className="gambarlogin">
+                        <img src={Logohitam} alt="logo-cafeasy"></img>
+                    </div>
+                    <div className="text1" >CAFEASY</div>
+                    <div className="text3">© 2022-2023 CAFEASY All Rights Reserved.</div>
 
                     <div className="Logbutton">
                         <div class="d-grid gap-10 col-9 mx-auto">
                             <label for="usr">Nama</label>
                             <input value={name} onChange={(e) => setUser(e.target.value)} type="text" id="name" name="name" className="form-control" />
 
-                        <div class="form-check form-switch ">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                            <label class="form-check-label" for="flexSwitchCheckDefault">ingat saya</label>
+
+                            <br></br>
                         </div>
+
                     </div>
 
                     <div className="Logbutton">
                         <div class="d-grid  col-9 mx-auto mt-6">
                             <button type='submit' class='btn btn-dark' onClick={submitUser} >
+
                                 Masuk
                             </button>
                             <div className="Loginput text-center  ">atau</div>
@@ -60,10 +62,10 @@ function Logincomp() {
 
                     </div>
 
+
                 </div>
 
-
-            </div>
+            </form>
 
         </div>
     );

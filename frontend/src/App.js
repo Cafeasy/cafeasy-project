@@ -1,6 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css';
 import Landingpage from './Pages/Landingpage';
 import Loginpage from './Pages/Loginpage';
@@ -14,12 +12,12 @@ import Methodpage from './Pages/Methodpage';
 import "./Style/ListMenupage.css"
 import "./Style/Confirmpage.css";
 import "./Style/Methodpage.css";
+import Detailmenupage from './Pages/Detailmenupage';
 
 
 
 
 function App() {
-  const [user, setUser] = useState(null);
 
   return (
     <Router>
@@ -31,6 +29,7 @@ function App() {
         <Route exact path='/ListMenu' element={<ListMenupage />} />
         <Route exact path='/KonfimasiPesanan' element={<Confirmpage />} />
         <Route exact path='/MetodePembayaran' element={<Methodpage />} />
+        <Route exact path='/Detailmenu/:idMenu' element={<Detailmenupage />} />
       </Routes>
     </Router>
   )
