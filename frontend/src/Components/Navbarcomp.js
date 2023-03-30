@@ -24,14 +24,17 @@ import "../Style/Slidergambar.css";
 import "../Style/Navbar.css";
 import { useNavigate } from "react-router-dom";
 
-import { Link, useParams } from "react-router-dom";
+
+import { Link } from "react-router-dom";
 import { CgAdd } from "react-icons/cg";
 import { CgRemove } from "react-icons/cg";
-
+import { useParams } from "react-router-dom";
 
 
 function Navbarcomp(props) {
-  const [show, setShow] = useState(false);
+
+  const params = useParams();
+  const urlParams = params.idUser
 
   const user = props.user;
   const [menus, setMenus] = useState([]);
@@ -215,8 +218,8 @@ function Navbarcomp(props) {
                     key={menu.idMenu}
                     data-example={menu.namaMenu}
                   >
+                    <Link to={`/Detailmenu/${menu.idMenu}`} state={{ url: urlParams }} >
 
-                    <Link to={`/Detailmenu/${menu.idMenu}`} >
                       <Card.Img variant="top" src={Gambarburger} />
                     </Link>
                     <Card.Body>
@@ -260,9 +263,10 @@ function Navbarcomp(props) {
             {dataSearch.map((menu, index) => (
               <Col>
                 <Card className="mx-1 mb-5 border-0 " key={menu._id}>
-                <Link to={`/Detailmenu/${menu.idMenu}`} >
-                      <Card.Img variant="top" src={Gambarburger} />
-                    </Link>
+
+                  <Link to={`/Detailmenu/${menu.idMenu}`} state={{ url: urlParams }} >
+                    <Card.Img variant="top" src={Gambarburger} />
+                  </Link>
                   <Card.Body>
                     <Card.Title className="menu-harga">62K</Card.Title>
                     <Card.Title className="menu-tittle">

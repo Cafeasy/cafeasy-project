@@ -1,28 +1,30 @@
 import Logohitam from '../Photo/Logohitam.png'
 import "../Style/Loginpage.css"
-import Button from 'react-bootstrap/Button';
 import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
-
+import crypto from 'crypto-js/sha256';
 import { FcGoogle } from 'react-icons/fc';
 
 function Logincomp() {
+    const id = (Math.random()).toString(10).substring(2)
+    const idPelanggan = "nusr" + id;
     const beranda = useNavigate();
     const [name, setUser] = useState('');
+
     const googleAuth = () => {
         window.open(
             `${process.env.REACT_APP_API_URL}/auth/google/callback`,
             "_self"
         );
     };
-
     const submitUser = async (e) => {
         e.preventDefault();
-        await axios.post(`${process.env.REACT_APP_API_URL}/custLogReg`, {
-            name: name
+        await axios.post(`${process.env.REACT_APP_API_URL}/customer`, {
+            id: idPelanggan.toString(),
+            name: name.toString()
         });
-        beranda('/Berandapage');
+        beranda('/Berandapage/' + idPelanggan);
     }
 
     return (
@@ -39,7 +41,8 @@ function Logincomp() {
                     <div className="Logbutton">
                         <div class="d-grid gap-10 col-9 mx-auto">
                             <label for="usr">Nama</label>
-                            <input value={name} onChange={(e) => setUser(e.target.value)} type="text" name="name" className="form-control" />
+                            <input value={name} onChange={(e) => setUser(e.target.value)} type="text" id="name" name="name" className="form-control" />
+
 
                             <br></br>
                         </div>
@@ -48,7 +51,8 @@ function Logincomp() {
 
                     <div className="Logbutton">
                         <div class="d-grid  col-9 mx-auto mt-6">
-                            <button type='submit' class='btn btn-dark' >
+                            <button type='submit' class='btn btn-dark' onClick={submitUser} >
+
                                 Masuk
                             </button>
                             <div className="Loginput text-center  ">atau</div>

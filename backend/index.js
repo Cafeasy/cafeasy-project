@@ -6,6 +6,7 @@ const router = require("./routes/router");
 const cookieSession = require("cookie-session");
 const port = process.env.PORT || 8888
 const app = express();
+const bodyParser = require('body-parser');
 // const mongoose = require('mongoose');
 
 //connect ke db
@@ -22,7 +23,8 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 app.use(
     cors({
         origin: "http://localhost:3000",

@@ -9,16 +9,33 @@ const DetailMenuController = require("../controllers/Menucontroller");
 const CustomerController = require("../controllers/Customercontroller");
 const KeranjangController = require("../controllers/Keranjangcontroller");
 const app = express();
-// require('../config/database');
+const Customer = require("../model/Customermodel")
 
 router.get("/auth/login/success", (req, res) => {
     if (req.user) {
 
-        res.status(200).json({
+        res.status(201).json({
             error: false,
             message: "Successfully Loged In",
             user: req.user,
         });
+
+    } else {
+        res.status(403).json({ error: true, message: "Not Authorized" });
+    }
+});
+router.get("/login/success", (req, res) => {
+    if (req.user) {
+        const data = req.user;
+        const user = data
+
+        const inputUser = {
+            id: "gusr"+user.id,
+            name: user.name.givenName + " " + user.name.familyName
+        }
+        Customer.create(inputUser)
+        res.redirect(process.env.CLIENT_URL + "Berandapage/" + "gusr"+user.id)
+
 
     } else {
         res.status(403).json({ error: true, message: "Not Authorized" });
@@ -37,9 +54,9 @@ router.get("/google", passport.authenticate("google", ["profile", "email"]));
 router.get(
     "/auth/google/callback",
     passport.authenticate("google", {
-        successRedirect: process.env.CLIENT_URL + "Berandapage",
+        successRedirect: "/login/success",
         failureRedirect: "/login/failed",
-    })
+    }),
 );
 
 router.get("/auth/logout", (req, res) => {
@@ -57,8 +74,8 @@ router.use('/testing', (req, res, next) => {
 router.get('/ListMenu', BerandaMenuController.getListMenu);
 router.get('/ListMenuByCategory/:kategoriMenu', KategoriMenuController.getMenuByCategory);
 router.get('/DetailMenu/:idMenu', DetailMenuController.getMenuDetail);
-router.post('/custLogReg', CustomerController.custLogReg);
-router.get('/getCustomer', CustomerController.getCustomer);
+router.post('/customer', CustomerController.createCustomer);
+router.get('/customer/:id', CustomerController.getCustomer);
 router.get('/cartPelanggan/:idPelanggan', KeranjangController.getListCart);
 // router.get('/ListMenuCustomer:id', getMenu.getListMenuById);
 // router.get('/ListMenuCustomer:meja', ListMenu.(getListMenuByMeja));
