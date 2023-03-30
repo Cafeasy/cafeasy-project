@@ -23,8 +23,7 @@ import Carousel from "react-bootstrap/Carousel";
 import "../Style/Slidergambar.css";
 import "../Style/Navbar.css";
 import { useNavigate } from "react-router-dom";
-import { faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { Link } from "react-router-dom";
 import { CgAdd } from "react-icons/cg";
 import { CgRemove } from "react-icons/cg";
