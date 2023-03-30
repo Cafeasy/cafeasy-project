@@ -12,9 +12,6 @@ const Detailmenucomp = (props) => {
 
 
     <div className="App">
-      <Link to={`/Berandapage/${url}`}>
-        <button className="btn btn-dark">Back</button>
-      </Link>
       <section className="hero">
         <img
           src={Gambarburger}
@@ -31,9 +28,9 @@ const Detailmenucomp = (props) => {
           <h4 class="headline">Stok Menu</h4>
           <p class="sub-headline"> {menus.stokMenu}</p>
         </div>
-        <div>
-          <button className="button-konfir" >Konfirmasi Pemesanan</button>
-        </div>
+        <Link to={`/Berandapage/${url}`}>
+        <button className="button-konfir">Back</button>
+      </Link>
       </section>
     </div>
   )

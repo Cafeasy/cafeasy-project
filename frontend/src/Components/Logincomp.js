@@ -3,7 +3,6 @@ import "../Style/Loginpage.css"
 import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
-import crypto from 'crypto-js/sha256';
 import { FcGoogle } from 'react-icons/fc';
 
 function Logincomp() {

@@ -54,20 +54,20 @@
 }
 
 .enable-button {
-  position: absolute;
-  width: 80%;
-  left: 50%;
-  top: 90%;
-  transform: translate(-50%, -50%);
-  background: #1F2937;
+    position: absolute;
+    width: 80%;
+    left: 50%;
+    top: 90%;
+    transform: translate(-50%, -50%);
+    background: #1F2937;
 
-  white-space: nowrap;
+    white-space: nowrap;
 
-  font-family: 'Montserrat';
-  font-size: 15px;
-  line-height: 30px;
-  border-radius: 10px;
-  color: #FFFFFF;
+    font-family: 'Montserrat';
+    font-size: 15px;
+    line-height: 30px;
+    border-radius: 10px;
+    color: #FFFFFF;
 }
 
 .search {
