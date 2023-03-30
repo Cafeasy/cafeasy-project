@@ -22,7 +22,6 @@ import Button from "react-bootstrap/esm/Button";
 import Carousel from "react-bootstrap/Carousel";
 import "../Style/Slidergambar.css";
 import "../Style/Navbar.css";
-import ModalKeranjang from "./Modalkeranjang";
 import { useNavigate } from "react-router-dom";
 import { faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
