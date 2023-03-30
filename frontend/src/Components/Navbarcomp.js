@@ -24,7 +24,7 @@ import "../Style/Slidergambar.css";
 import "../Style/Navbar.css";
 import { useNavigate } from "react-router-dom";
 
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { CgAdd } from "react-icons/cg";
 import { CgRemove } from "react-icons/cg";
 
@@ -32,7 +32,7 @@ import { CgRemove } from "react-icons/cg";
 
 function Navbarcomp(props) {
   const [show, setShow] = useState(false);
- 
+
   const user = props.user;
   const [menus, setMenus] = useState([]);
   useEffect(() => {
@@ -212,12 +212,13 @@ function Navbarcomp(props) {
                 <Col>
                   <Card
                     className="mx-1  mb-5 border-0 "
-                    key={menu._id}
+                    key={menu.idMenu}
                     data-example={menu.namaMenu}
                   >
-                          <Link to={`/Detailmenu/${menu.idMenu}}`}>
-                    <Card.Img variant="top" src={Gambarburger} />
-                  </Link>
+
+                    <Link to={`/Detailmenu/${menu.idMenu}`} >
+                      <Card.Img variant="top" src={Gambarburger} />
+                    </Link>
                     <Card.Body>
                       <Card.Title className="menu-harga">52K</Card.Title>
                       <Card.Title className="menu-tittle">
@@ -259,9 +260,9 @@ function Navbarcomp(props) {
             {dataSearch.map((menu, index) => (
               <Col>
                 <Card className="mx-1 mb-5 border-0 " key={menu._id}>
-                <Link to={`/Detailmenu/${menu.idMenu}}`}>
-                  <Card.Img variant="top" src={Gambarburger} />
-                  </Link>
+                <Link to={`/Detailmenu/${menu.idMenu}`} >
+                      <Card.Img variant="top" src={Gambarburger} />
+                    </Link>
                   <Card.Body>
                     <Card.Title className="menu-harga">62K</Card.Title>
                     <Card.Title className="menu-tittle">
@@ -339,7 +340,7 @@ const ModalCustom = ({ menuList }) => {
             <Modal.Title>Modal heading</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-          <img src={Gambarburger} alt="gambarpizza" className="gambarmodal"/>
+            <img src={Gambarburger} alt="gambarpizza" className="gambarmodal" />
             <div className="textmodal">{menuList.namaMenu}<p></p></div>
             <div className="textmodal_deskripsi">{menuList.deskripsiMenu}</div>
             <div className="textmodal_harga">{"50K"}</div>
@@ -363,7 +364,7 @@ const ModalCustom = ({ menuList }) => {
                       className="mx-4"
                       onClick={decrementCount}
                     >
-         <CgRemove size={25}></CgRemove>
+                      <CgRemove size={25}></CgRemove>
                     </Button>
 
                     <strong>{count}</strong>
@@ -374,7 +375,7 @@ const ModalCustom = ({ menuList }) => {
                       className="mx-4"
                       onClick={incrementCount}
                     >
-                       <CgAdd size={25}></CgAdd>
+                      <CgAdd size={25}></CgAdd>
                     </Button>
                   </Form.Group>
 
@@ -386,10 +387,10 @@ const ModalCustom = ({ menuList }) => {
           </Modal.Body>
           <Modal.Footer>
             <div class="col text-center">
-          <button className="button-konfir_modal" onClick={handleClick}>
-          Tambah Pesanan
-        </button>
-        </div>
+              <button className="button-konfir_modal" onClick={handleClick}>
+                Tambah Pesanan
+              </button>
+            </div>
           </Modal.Footer>
         </Modal>
 
