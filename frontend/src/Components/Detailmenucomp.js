@@ -40,7 +40,7 @@ const Detailmenucomp = (props) => {
           className="parallax"
         />
         <div class='content'>
-          <h1 class="pagetitle">{ }</h1>
+          <h1 class="pagetitle">{menus.namaMenu}</h1>
           <h4 class="headline">Deskripsi</h4>
           <p class="sub-headline"> {menus.deskripsiMenu}</p>
         </div>
