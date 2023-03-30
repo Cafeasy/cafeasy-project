@@ -57,8 +57,8 @@ router.use('/testing', (req, res, next) => {
 router.get('/ListMenu', BerandaMenuController.getListMenu);
 router.get('/ListMenuByCategory/:kategoriMenu', KategoriMenuController.getMenuByCategory);
 router.get('/DetailMenu/:idMenu', DetailMenuController.getMenuDetail);
-router.get('/custLogReg', CustomerController.custLogReg);
-
+router.post('/custLogReg', CustomerController.custLogReg);
+router.get('/getCustomer', CustomerController.getCustomer);
 router.get('/cartPelanggan/:idPelanggan', KeranjangController.getListCart);
 // router.get('/ListMenuCustomer:id', getMenu.getListMenuById);
 // router.get('/ListMenuCustomer:meja', ListMenu.(getListMenuByMeja));

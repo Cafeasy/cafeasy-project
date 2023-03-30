@@ -10,12 +10,13 @@ function Berandapage(props) {
         try {
             const url = `${process.env.REACT_APP_API_URL}/auth/login/success`;
             const { data } = await axios.get(url, { withCredentials: true });
+
             if (data != null) {
                 setUser(data.user._json);
                 console.log(data)
             } else {
-                setUser(props.user);
-                console.log(props.user.name);
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/getCustomer`)
+                setUser(response.data);
             }
 
         } catch (err) {

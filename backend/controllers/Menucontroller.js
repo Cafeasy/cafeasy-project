@@ -35,6 +35,7 @@ exports.getMenuDetail = (req, res, next) => {
             message: 'Data menu berdasarkan kategori berhasil dipanggil',
             data: result
         })
+    
     })
     .catch(err => {
         next(err);

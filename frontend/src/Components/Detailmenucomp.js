@@ -4,10 +4,21 @@ import Gambarburger from '../Photo/Burger.jpeg'
 import { useEffect, useState } from "react"
 import axios from "axios";
 
-const Detailmenucomp = () => {
+const Detailmenucomp = (props) => {
+  const idMenu = props.idMenu;
   const [, setOffset] = useState(0)
-
+  const [menus, setMenus] = useState([]);
   useEffect(() => {
+    axios.get(`${process.env.REACT_APP_API_URL}/DetailMenu/${idMenu}`)
+    .then(result => {
+      console.log('data API ada', result.data);
+      const responseAPI = result.data;
+
+      setMenus(responseAPI.data);
+    })
+    .catch(err => {
+      console.log('error: data tidak terambil - ', err);
+    })
     function handleScroll() {
       setOffset(window.pageYOffset)
     }
@@ -19,19 +30,6 @@ const Detailmenucomp = () => {
     }
   }, [])
 
-  const [menus, setMenus] = useState([]);
-  useEffect(() => {
-      axios.get('http://localhost:8888/DetailMenu/idMenu')
-      .then(result => {
-          console.log('data API ada', result.data);
-          const responseAPI = result.data;
-
-          setMenus(responseAPI.data);
-      })
-      .catch(err => {
-          console.log('error: data tidak terambil - ', err);
-      })
-  })
 
   return (
     <div className="App">
@@ -42,13 +40,9 @@ const Detailmenucomp = () => {
           className="parallax"
         />
         <div class='content'>
-          <h1 class="pagetitle">{}</h1>
+          <h1 class="pagetitle">{ }</h1>
           <h4 class="headline">Deskripsi</h4>
-          <p class="sub-headline">Wafel Amerika renyah di luar dan ringan serta lembut di dalam. Mereka biasanya dibesarkan dengan baking powder atau bahan pengembang kimia, tidak seperti wafel Belgia (kadang-kadang disebut gauffres) yang secara tradisional menggunakan ragi untuk ragi.
-
-            Menurut pengalaman saya, wafel Amerika juga biasanya berbentuk bulat, sedangkan wafel Belgia biasanya berbentuk persegi panjang.
-
-            Wafel Amerika sering kali lebih manis daripada beberapa jenis wafel lainnya. Mereka juga dapat menambahkan rasa tambahan pada adonannya, seperti blueberry atau keping cokelat mini.</p>
+          <p class="sub-headline"> {menus.deskripsiMenu}</p>
         </div>
         <div>
           <button className="button-konfir" >Konfirmasi Pemesanan</button>
