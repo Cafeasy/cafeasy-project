@@ -29,6 +29,6 @@ const ListCartCust = new Schema({
         required: true
     },
 
-});
+}, {versionKey : false, timestamps: true});
 
 module.exports = mongoose.model('KeranjangPelanggan', ListCartCust, 'keranjangPelanggan');
