@@ -23,9 +23,6 @@ import Carousel from "react-bootstrap/Carousel";
 import "../Style/Slidergambar.css";
 import "../Style/Navbar.css";
 import { useNavigate } from "react-router-dom";
-import ShowMore from 'react-show-more-button';
-
-
 
 import { Link } from "react-router-dom";
 import { CgAdd } from "react-icons/cg";
