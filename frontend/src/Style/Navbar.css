@@ -149,10 +149,12 @@ a {
 font-style: normal;
 }
 .gambarmodal {
+    
     float: left;
-    height: 130px;
-    width: 130px; 
-    margin-right: 10px;
+    height: 100px;
+    width: 100px; 
+    margin-right: 15px;
+    margin-left: 30px;
     
 }
 .textmodal{
@@ -192,4 +194,10 @@ font-style: normal;
   
     border-radius: 8px;
     color: #FFFFFF;
+}
+
+.button-hide {
+    font-size: small;
+    opacity: 50%;
+    text-align: center;
 }
