@@ -18,12 +18,15 @@ function Logincomp() {
         );
     };
     const submitUser = async (e) => {
-        e.preventDefault();
-        await axios.post(`${process.env.REACT_APP_API_URL}/customer`, {
-            id: idPelanggan.toString(),
-            name: name.toString()
-        });
-        beranda('/Berandapage/' + idPelanggan);
+        if (name != "") {
+            e.preventDefault();
+            await axios.post(`${process.env.REACT_APP_API_URL}/customer`, {
+                id: idPelanggan.toString(),
+                name: name.toString()
+            });
+            beranda('/Berandapage/' + idPelanggan);
+        }
+
     }
 
     return (
@@ -40,7 +43,7 @@ function Logincomp() {
                     <div className="Logbutton">
                         <div class="d-grid gap-10 col-9 mx-auto">
                             <label for="usr">Nama</label>
-                            <input value={name} onChange={(e) => setUser(e.target.value)} type="text" id="name" name="name" className="form-control" />
+                            <input value={name} onChange={(e) => setUser(e.target.value)} type="text" id="name" name="name" className="form-control" required />
                             <br></br>
                         </div>
 
