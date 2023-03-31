@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 
 
 const ListCartCust = new Schema({
+    idKeranjang: {
+        type: String,
+        required: true
+    },
     idPelanggan: {
         type: String,
         required: true
@@ -28,6 +32,10 @@ const ListCartCust = new Schema({
         type: Number,
         required: true
     },
+    catatanPelanggan: {
+        type: String,
+        required: true
+    }
 
 }, {versionKey : false, timestamps: true});
 
