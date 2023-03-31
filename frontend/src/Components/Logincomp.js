@@ -41,8 +41,6 @@ function Logincomp() {
                         <div class="d-grid gap-10 col-9 mx-auto">
                             <label for="usr">Nama</label>
                             <input value={name} onChange={(e) => setUser(e.target.value)} type="text" id="name" name="name" className="form-control" />
-
-
                             <br></br>
                         </div>
 

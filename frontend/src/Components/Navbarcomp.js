@@ -23,10 +23,14 @@ import Carousel from "react-bootstrap/Carousel";
 import "../Style/Slidergambar.css";
 import "../Style/Navbar.css";
 import { useNavigate } from "react-router-dom";
+import ShowMore from 'react-show-more-button';
+
 
 
 import { Link } from "react-router-dom";
 import { CgAdd } from "react-icons/cg";
+
+import { CgArrowLeftO } from "react-icons/cg";
 import { CgRemove } from "react-icons/cg";
 import { useParams } from "react-router-dom";
 
@@ -50,9 +54,16 @@ function Navbarcomp(props) {
         // console.log("error: data tidak terambil - ", err);
       });
   });
-
+  const [show, toggleShow] = useState(false);
   const [active, setActive] = useState("firstcard");
   const [filter, setFilter] = useState("");
+  const [visible, setVisible] = useState(2);
+  const showmoritem  = () => {
+    setVisible((prevValue) => prevValue + 12)
+  }
+  const showmoritems  = () => {
+    setVisible((prevValue) => prevValue - 12)
+  }
   const searchText = (event) => {
     setFilter(event.target.value);
   };
@@ -209,8 +220,7 @@ function Navbarcomp(props) {
       <div className="listmenu">
         {active === "firstcard" && (
           <Row xs={2} md={4} className="g-0">
-            {dataSearch.map((menu, index) => {
-              console.log({ menu });
+            {dataSearch.slice(0, visible).map((menu, index) => {
               return (
                 <Col>
                   <Card
@@ -237,14 +247,6 @@ function Navbarcomp(props) {
                         </div>
 
                         <div class="text text-end text-dark">
-                          {/* <Button
-                            className="buttonplus"
-                            variant="text"
-                            data-example={menu.namaMenu}
-                            onClick={handleClick}
-                          >
-                            <BsPlusCircle></BsPlusCircle>
-                          </Button> */}
                           <ModalCustom menuList={menu} />
                         </div>
                       </div>
@@ -261,9 +263,10 @@ function Navbarcomp(props) {
         {active === "secondcard" && (
           <Row xs={2} md={4} className="g-0">
             {dataSearch.map((menu, index) => (
+              
               <Col>
                 <Card className="mx-1 mb-5 border-0 " key={menu._id}>
-
+            
                   <Link to={`/Detailmenu/${menu.idMenu}`} state={{ url: urlParams }} >
                     <Card.Img variant="top" src={Gambarburger} />
                   </Link>
@@ -295,29 +298,40 @@ function Navbarcomp(props) {
               </Col>
             ))}
           </Row>
-        )}
+
+        )}   
+        <div className="button-hide">
+        <p onClick={showmoritem}>
+         <text onClick={()=> toggleShow(!show)}>{show ? "" : "More Menu" }</text></p>
+         <p onClick={showmoritems}>
+         <text onClick={()=> toggleShow(!show)}>{show ? "Less Menu " : "" }</text></p>
+         </div>
       </div>
 
       <div>
+       
         <ul class="fw-bold">Total.</ul>
         <button className="button-konfir" onClick={""}>
           Konfirmasi Pemesanan
         </button>
       </div>
+    
     </>
   );
 }
 const ModalCustom = ({ menuList }) => {
   const [show, setShow] = useState(false);
   let [count, setCount] = useState(0);
-
+ 
   function incrementCount() {
-    count = count + 1;
-    setCount(count);
+    if (count < 10) {
+      setCount(count + 1);
+    } 
   }
   function decrementCount() {
-    count = count - 1;
-    setCount(count);
+    if (count > 0) {
+      setCount(count - 1);
+    } 
   }
   const handleClick = () => {
     setShow(!show);
@@ -340,15 +354,14 @@ const ModalCustom = ({ menuList }) => {
           aria-labelledby="contained-modal-title-vcenter"
           centered
         >
-          <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
-          </Modal.Header>
+          <br></br>
+       <CgArrowLeftO class="mx-4" size={35} onClick={handleClick}/>
           <Modal.Body>
             <img src={Gambarburger} alt="gambarpizza" className="gambarmodal" />
             <div className="textmodal">{menuList.namaMenu}<p></p></div>
-            <div className="textmodal_deskripsi">{menuList.deskripsiMenu}</div>
+         {/* <div className="textmodal_deskripsi">{menuList.deskripsiMenu}</div> */}
             <div className="textmodal_harga">{"50K"}</div>
-            <p></p>
+            <br></br>
             <Form>
               <Form.Group
                 className="mb-3"
@@ -358,6 +371,7 @@ const ModalCustom = ({ menuList }) => {
                 className="mb-3"
                 controlId="exampleForm.ControlTextarea1"
               >
+                
                 <div className="modal_tengah">
                   <Form.Group controlId="exampleForm.ControlInput1">
                     <Form.Label>Kuantitas :</Form.Label>
@@ -398,62 +412,7 @@ const ModalCustom = ({ menuList }) => {
           </Modal.Footer>
         </Modal>
 
-        //     <Modal show={show} onHide={handleClick}>
-        //     <Modal.Header closeButton>
-        //       <Modal.Title>
-        //       <Modal.Title>Modal heading</Modal.Title>
-        //         <strong>
-        //           (Rp.50.0000)
-        //         </strong>
-        //       </Modal.Title>
-        //     </Modal.Header>
-        //     <Modal.Body>
-        //       <Form onSubmit={handleClick}>
-        //         <Form.Group controlId="exampleForm.ControlInput1">
-        //           <Form.Label>Total Harga :</Form.Label>
-        //           <p>
-        //             <strong>
-        //             (Rp.50.0000)
-        //             </strong>
-        //           </p>
-        //         </Form.Group>
 
-        //         <Form.Group controlId="exampleForm.ControlInput1">
-        //           <Form.Label>Jumlah :</Form.Label>
-        //           <br />
-        //           <Button variant="primary" size="sm" className="mr-2" onClick={ () => handleClick()}>
-        //             <FontAwesomeIcon icon={faMinus} />
-        //           </Button>
-
-        //           <strong>50</strong>
-
-        //           <Button variant="primary" size="sm" className="ml-2" onClick={ () => handleClick()}>
-        //             <FontAwesomeIcon icon={faPlus} />
-        //           </Button>
-        //         </Form.Group>
-
-        //         <Form.Group controlId="exampleForm.ControlTextarea1">
-        //           <Form.Label>Keterangan :</Form.Label>
-        //           <Form.Control
-        //             as="textarea"
-        //             rows="3"
-        //             name="keterangan"
-        //             placeholder="Contoh : Pedes, Nasi Setengah"
-        //             value={"50"}
-        //             onChange={(event) => handleClick(event)}
-        //           />
-        //         </Form.Group>
-        //         <Button variant="primary" type="submit">
-        //             Simpan
-        //         </Button>
-        //       </Form>
-        //     </Modal.Body>
-        //     <Modal.Footer>
-        //       <Button variant="danger" onClick={() => handleClick()}>
-        //         <FontAwesomeIcon icon={faTrash} /> Hapus Pesanan
-        //       </Button>
-        //     </Modal.Footer>
-        //   </Modal>
       )}
     </>
   );
