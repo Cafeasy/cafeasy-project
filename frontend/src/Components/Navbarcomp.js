@@ -31,11 +31,9 @@ import { CgArrowLeftO } from "react-icons/cg";
 import { CgRemove } from "react-icons/cg";
 import { useParams } from "react-router-dom";
 
-
 function Navbarcomp(props) {
-
   const params = useParams();
-  const urlParams = params.idUser
+  const urlParams = params.idUser;
 
   const user = props.user;
   const [menus, setMenus] = useState([]);
@@ -55,12 +53,12 @@ function Navbarcomp(props) {
   const [active, setActive] = useState("firstcard");
   const [filter, setFilter] = useState("");
   const [visible, setVisible] = useState(2);
-  const showmoritem  = () => {
-    setVisible((prevValue) => prevValue + 12)
-  }
-  const showmoritems  = () => {
-    setVisible((prevValue) => prevValue - 12)
-  }
+  const showmoritem = () => {
+    setVisible((prevValue) => prevValue + 12);
+  };
+  const showmoritems = () => {
+    setVisible((prevValue) => prevValue - 12);
+  };
   const searchText = (event) => {
     setFilter(event.target.value);
   };
@@ -225,8 +223,10 @@ function Navbarcomp(props) {
                     key={menu.idMenu}
                     data-example={menu.namaMenu}
                   >
-                    <Link to={`/Detailmenu/${menu.idMenu}`} state={{ url: urlParams }} >
-
+                    <Link
+                      to={`/Detailmenu/${menu.idMenu}`}
+                      state={{ url: urlParams }}
+                    >
                       <Card.Img variant="top" src={Gambarburger} />
                     </Link>
                     <Card.Body>
@@ -247,6 +247,7 @@ function Navbarcomp(props) {
                           <ModalCustom menuList={menu} />
                         </div>
                       </div>
+
                       <Card.Text className="menu-deskripsi">
                         {menu.deskripsiMenu}
                       </Card.Text>
@@ -260,11 +261,12 @@ function Navbarcomp(props) {
         {active === "secondcard" && (
           <Row xs={2} md={4} className="g-0">
             {dataSearch.map((menu, index) => (
-              
               <Col>
                 <Card className="mx-1 mb-5 border-0 " key={menu._id}>
-            
-                  <Link to={`/Detailmenu/${menu.idMenu}`} state={{ url: urlParams }} >
+                  <Link
+                    to={`/Detailmenu/${menu.idMenu}`}
+                    state={{ url: urlParams }}
+                  >
                     <Card.Img variant="top" src={Gambarburger} />
                   </Link>
                   <Card.Body>
@@ -287,6 +289,7 @@ function Navbarcomp(props) {
                         </Button>
                       </div>
                     </div>
+
                     <Card.Text className="menu-deskripsi">
                       {menu.deskripsiMenu}
                     </Card.Text>
@@ -295,40 +298,48 @@ function Navbarcomp(props) {
               </Col>
             ))}
           </Row>
-
-        )}   
+        )}
         <div className="button-hide">
-        <p onClick={showmoritem}>
-         <text onClick={()=> toggleShow(!show)}>{show ? "" : "More Menu" }</text></p>
-         <p onClick={showmoritems}>
-         <text onClick={()=> toggleShow(!show)}>{show ? "Less Menu " : "" }</text></p>
-         </div>
+          <p onClick={showmoritem}>
+            <text onClick={() => toggleShow(!show)}>
+              {show ? "" : "More Menu"}
+            </text>
+          </p>
+          <p onClick={showmoritems}>
+            <text onClick={() => toggleShow(!show)}>
+              {show ? "Less Menu " : ""}
+            </text>
+          </p>
+        </div>
       </div>
 
       <div>
-       
         <ul class="fw-bold">Total.</ul>
-        <button className="button-konfir" onClick={""}>
-          Konfirmasi Pemesanan
-        </button>
+        <Link
+          to={`/KonfirmasiPesanan/${menus.idMenu}`}
+          state={{ url: urlParams }}
+        >
+          <button className="button-konfir" onClick={""}>
+            Konfirmasi Pemesanan
+          </button>
+        </Link>
       </div>
-    
     </>
   );
 }
 const ModalCustom = ({ menuList }) => {
   const [show, setShow] = useState(false);
   let [count, setCount] = useState(0);
- 
+
   function incrementCount() {
     if (count < 10) {
       setCount(count + 1);
-    } 
+    }
   }
   function decrementCount() {
     if (count > 0) {
       setCount(count - 1);
-    } 
+    }
   }
   const handleClick = () => {
     setShow(!show);
@@ -352,11 +363,14 @@ const ModalCustom = ({ menuList }) => {
           centered
         >
           <br></br>
-       <CgArrowLeftO class="mx-4" size={35} onClick={handleClick}/>
+          <CgArrowLeftO class="mx-4" size={35} onClick={handleClick} />
           <Modal.Body>
             <img src={Gambarburger} alt="gambarpizza" className="gambarmodal" />
-            <div className="textmodal">{menuList.namaMenu}<p></p></div>
-         {/* <div className="textmodal_deskripsi">{menuList.deskripsiMenu}</div> */}
+            <div className="textmodal">
+              {menuList.namaMenu}
+              <p></p>
+            </div>
+            {/* <div className="textmodal_deskripsi">{menuList.deskripsiMenu}</div> */}
             <div className="textmodal_harga">{"50K"}</div>
             <br></br>
             <Form>
@@ -368,7 +382,6 @@ const ModalCustom = ({ menuList }) => {
                 className="mb-3"
                 controlId="exampleForm.ControlTextarea1"
               >
-                
                 <div className="modal_tengah">
                   <Form.Group controlId="exampleForm.ControlInput1">
                     <Form.Label>Kuantitas :</Form.Label>
@@ -408,8 +421,6 @@ const ModalCustom = ({ menuList }) => {
             </div>
           </Modal.Footer>
         </Modal>
-
-
       )}
     </>
   );
