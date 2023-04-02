@@ -27,7 +27,7 @@ function App() {
         <Route exact path='/Navbarpage' element={<Navbarpage />} />
         <Route exact path='/Berandapage/:idUser' element={<Berandapage />} />
         <Route exact path='/ListMenu' element={<ListMenupage />} />
-        <Route exact path='/KonfimasiPesanan' element={<Confirmpage />} />
+        <Route exact path='/KonfirmasiPesanan/:idUser' element={<Confirmpage />} />
         <Route exact path='/MetodePembayaran' element={<Methodpage />} />
         <Route exact path='/Detailmenu/:idMenu' element={<Detailmenupage />} />
       </Routes>
