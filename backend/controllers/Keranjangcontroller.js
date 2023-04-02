@@ -1,8 +1,11 @@
 const KeranjangPelanggan = require("../model/Keranjangmodel");
+const Menu = require("../model/Menumodel");
+const Customer = require("../model/Customermodel");
 
 
-exports.getListCart = (req, res, next) => {
+exports.getListCart = async (req, res, next) => {
     const idPelanggan = req.params.idPelanggan;
+    
     KeranjangPelanggan.find({idPelanggan: `${idPelanggan}`})
     .then(result => {
         res.status(200).json({
@@ -15,15 +18,36 @@ exports.getListCart = (req, res, next) => {
     })
 }
 
-exports.postCart = (req, res, next) => {
+exports.postCart = async (req, res, next) => {
     const uniqueid = (Math.random()).toString(32).slice(3)
 
+    //check data berdasarkan request idMenu parameter
+    const idMenuCheck = req.params.idMenu;
+    const idPelangganCheck = req.params.idPelanggan;
+
+    //query cari menu berdasarkan id yang direquest pada parameter dan menjadikan object
+    let checkMenuByParams = await Menu.findOne({idMenu: `${idMenuCheck}`});
+    let obyekMenu = checkMenuByParams.toObject();
+
+    let checkNamaPelangganById = await Customer.findOne({id: `${idPelangganCheck}`});
+    let obyekPelanggan = checkNamaPelangganById.toObject();
+
+    //sign data ke variable yang akan dijadikan data insert keranjang
+    let idPelangganSign = obyekPelanggan.id;
+    let namaPelangganSign = obyekPelanggan.name;
+
+
+    let idMenuSign = obyekMenu.idMenu;
+    let namaMenuSign = obyekMenu.namaMenu;
+    let hargaMenuSign = obyekMenu.hargaMenu;
+    
+    //proses insert keranjang
     const idKeranjang = "cart-" + uniqueid;
-    const idPelanggan = req.params.idPelanggan;
-    const namaPelanggan = req.body.namaPelanggan;
-    const idMenu = req.params.idMenu;
-    const namaMenu = req.body.namaMenu;
-    const hargaMenu = req.body.hargaMenu;
+    const idPelanggan = idPelangganSign;
+    const namaPelanggan = namaPelangganSign;
+    const idMenu =  idMenuSign;
+    const namaMenu = namaMenuSign;
+    const hargaMenu = hargaMenuSign;
     const qty = req.body.qty;
     const catatanPelanggan = req.body.catatanPelanggan;
 
@@ -50,23 +74,10 @@ exports.postCart = (req, res, next) => {
 }
 
 exports.deleteCart = async (req, res) => {
-    // try {
-    //     await KeranjangPelanggan.destroy({
-    //         where:{
-    //             idPelanggan: req.params.idPelanggan,
-    //             idMenu: req.params.idMenu,
-    //             idKeranjang: req.params.idKeranjang
-    //         }
-    //     });
-    //     res.json({message: "keranjang berhasil dihapus"});
-    // } catch (error) {
-    //     res.json({message: error.message})
-    // }
     const idPelanggan= req.params.idPelanggan;
-    const idMenu= req.params.idMenu;
     const idKeranjang= req.params.idKeranjang;
 
-    KeranjangPelanggan.deleteOne(({idPelanggan: `${idPelanggan}`, idMenu: `${idMenu}`, idKeranjang: `${idKeranjang}`}))
+    KeranjangPelanggan.deleteOne(({idPelanggan: `${idPelanggan}`, idKeranjang: `${idKeranjang}`}))
     .then(result => {
         res.status(200).json({
             message: 'Data keranjang berhasil dihapus',
