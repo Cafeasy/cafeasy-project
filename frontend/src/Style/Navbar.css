@@ -13,10 +13,10 @@
     margin-top: 2%;
 
     padding: 1px 25%;
-    font-weight: bolder;
+    font-weight: medium;
     font-family: 'Montserrat';
     font-size: 15px;
-    line-height: 3vmax;
+
     border-radius: 8px;
     color: #FFFFFF;
 }
@@ -201,3 +201,4 @@ font-style: normal;
     opacity: 50%;
     text-align: center;
 }
+
