@@ -119,8 +119,16 @@ function Navbarcomp(props) {
                     ></img>
                     <h1 className="logotext">CAFEASY</h1>
                     <Nav.Link href="#action1">Home</Nav.Link>
-                    <Nav.Link href="#action2">Profile</Nav.Link>
+
+                    <Nav.Link
+                      as={Link}
+                      to={`/RiwayatPesanan/${menus.idMenu}`}
+                      state={{ url: urlParams }}
+                    >
+                      Riwayat Pesanan
+                    </Nav.Link>
                     <Nav.Link href="#action3">Kontak</Nav.Link>
+
                     <Nav.Link href="#action4">Bantuan</Nav.Link>
                   </Nav>
                 </Offcanvas.Body>
