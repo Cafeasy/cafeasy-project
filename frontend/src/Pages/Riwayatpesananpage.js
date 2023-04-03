@@ -1,14 +1,14 @@
-import Detailmenucomp from "../Components/Detailmenucomp";
+import Riwayatpesanancomp from "../Components/RiwayatPesanancomp";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
 import { useParams } from "react-router-dom";
-function Detailmenupage(props) {
+function Riwayatpesananpage(props) {
   const [menu, setMenu] = useState([]);
   const idUser = props.idUser;
 
   const idMenu = useParams();
-  const url = `${process.env.REACT_APP_API_URL}/DetailMenu/${idMenu.idMenu}`;
+  const url = `${process.env.REACT_APP_API_URL}/RiwayatPesanan/${idMenu.idMenu}`;
 
   useEffect(() => {
     axios
@@ -27,7 +27,7 @@ function Detailmenupage(props) {
       });
   }, []);
 
-  return <Detailmenucomp menu={menu} idUser={idUser} />;
+  return <Riwayatpesanancomp menu={menu} idUser={idUser} />;
 }
 
-export default Detailmenupage;
+export default Riwayatpesananpage;
