@@ -289,61 +289,49 @@
 } */
 
 table {
-    
-    
-
-   
-    box-shadow: 0px 0px 0px 1px ;    
-
-
-  }
-  table td { 
-
-        width: 35%; 
-  
+  box-shadow: 0px 0px 0px 1px;
+}
+table td {
+  width: 35%;
 }
 table tr {
-
 }
 
-  .isi-pesanan{ 
-text-align: justify;
-    margin-left: 5%;
-    margin-right: 5%;
+.isi-pesanan {
+  text-align: justify;
+  margin-left: 5%;
+  margin-right: 5%;
+  position: relative;
+  left: 50%;
+  width: 80%;
+  transform: translate(-50%, -50%);
+}
 
-  }
+.button-konfir-pesanan {
+  position: relative;
+  left: 50%;
+  width: 80%;
+  transform: translate(-50%, -50%);
+  background: #1f2937;
+  margin-top: 2%;
 
-  .button-konfir-pesanan {
-        position: relative;
-    left: 50%;
-width: 80%;
-    transform: translate(-50%, -50%);
-    background: #1F2937;
-    margin-top: 2%;
+  font-family: "Montserrat";
+  font-size: 15px;
 
-    
+  color: #ffffff;
+}
 
-    font-family: 'Montserrat';
-    font-size: 15px;
+.button-proses-pembayaran {
+  background: #1f2937;
+  padding: 1px 25%;
+  font-weight: bolder;
+  font-family: "Montserrat";
+  font-size: 15px;
 
-    color: #FFFFFF;
-  
+  border-radius: 8px;
+  color: #ffffff;
+}
 
-  }
-
-  .button-proses-pembayaran {
-    background: #1F2937;
-    padding: 1px 25%;
-    font-weight: bolder;
-    font-family: 'Montserrat';
-    font-size: 15px;
-
-    border-radius: 8px;
-    color: #FFFFFF;
-  }
-
-  .text-title {
-
-    font-weight: bolder;
-  }
-  
+.text-title {
+  font-weight: bolder;
+}
