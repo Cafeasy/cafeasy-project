@@ -23,7 +23,7 @@ import Carousel from "react-bootstrap/Carousel";
 import "../Style/Slidergambar.css";
 import "../Style/Navbar.css";
 import { useNavigate } from "react-router-dom";
-
+import CartList from "./Cartlist";
 import { Link } from "react-router-dom";
 import { CgAdd } from "react-icons/cg";
 
@@ -32,6 +32,15 @@ import { CgRemove } from "react-icons/cg";
 import { useParams } from "react-router-dom";
 
 function Navbarcomp(props) {
+  // class App extends Component {
+  //   constructor(props) {
+  //     super(props);
+  //     this.state = {
+  //       keranjangs: [],
+  //     };
+  //   }
+  // }
+
   const params = useParams();
   const urlParams = params.idUser;
 
@@ -49,6 +58,11 @@ function Navbarcomp(props) {
         // console.log("error: data tidak terambil - ", err);
       });
   });
+  const [cart, setCart] = useState([]);
+  console.log(cart);
+  const addToCart = (data) => {
+    setCart([...cart, { ...data, quantity: 1 }]);
+  };
   const [show, toggleShow] = useState(false);
   const [active, setActive] = useState("firstcard");
   const [filter, setFilter] = useState("");
@@ -73,6 +87,10 @@ function Navbarcomp(props) {
 
   const logout = () => {
     window.open(`${process.env.REACT_APP_API_URL}/auth/logout`, "_self");
+  };
+
+  const masukKeranjang = (value) => {
+    console.log("menu: ", value);
   };
 
   return (
@@ -122,7 +140,7 @@ function Navbarcomp(props) {
 
                     <Nav.Link
                       as={Link}
-                      to={`/RiwayatPesanan/${menus.idMenu}`}
+                      to={`/KonfirmasiPesanan/${menus.idMenu}`}
                       state={{ url: urlParams }}
                     >
                       Riwayat Pesanan
@@ -230,6 +248,7 @@ function Navbarcomp(props) {
                     className="mx-1  mb-5 border-0 "
                     key={menu.idMenu}
                     data-example={menu.namaMenu}
+                    masukKeranjang={menu.masukKeranjang}
                   >
                     <Link
                       to={`/Detailmenu/${menu.idMenu}`}
@@ -238,7 +257,9 @@ function Navbarcomp(props) {
                       <Card.Img variant="top" src={Gambarburger} />
                     </Link>
                     <Card.Body>
-                      <Card.Title className="menu-harga">52K</Card.Title>
+                      <Card.Title className="menu-harga">
+                        {menu.hargaMenu}
+                      </Card.Title>
                       <Card.Title className="menu-tittle">
                         {menu.namaMenu}
                       </Card.Title>
@@ -256,6 +277,10 @@ function Navbarcomp(props) {
                         </div>
                       </div>
 
+                      <button onClick={() => addToCart(menu)}>
+                        add to cart
+                      </button>
+
                       <Card.Text className="menu-deskripsi">
                         {menu.deskripsiMenu}
                       </Card.Text>
@@ -268,7 +293,7 @@ function Navbarcomp(props) {
         )}
         {active === "secondcard" && (
           <Row xs={2} md={4} className="g-0">
-            {dataSearch.map((menu, index) => (
+            {dataSearch.map((menu, masukKeranjang) => (
               <Col>
                 <Card className="mx-1 mb-5 border-0 " key={menu._id}>
                   <Link
@@ -322,6 +347,7 @@ function Navbarcomp(props) {
       </div>
 
       <div>
+        <CartList cart={cart}></CartList>
         <ul class="fw-bold">Total.</ul>
         <Link
           to={`/KonfirmasiPesanan/${menus.idMenu}`}
@@ -331,6 +357,8 @@ function Navbarcomp(props) {
             Konfirmasi Pemesanan
           </button>
         </Link>
+
+        <div></div>
       </div>
     </>
   );
@@ -379,7 +407,7 @@ const ModalCustom = ({ menuList }) => {
               <p></p>
             </div>
             {/* <div className="textmodal_deskripsi">{menuList.deskripsiMenu}</div> */}
-            <div className="textmodal_harga">{"50K"}</div>
+            <div className="textmodal_harga">{menuList.hargaMenu}</div>
             <br></br>
             <Form>
               <Form.Group
