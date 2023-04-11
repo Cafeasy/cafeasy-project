@@ -1,7 +1,19 @@
 .tittle {
-  margin-left: 20px;
   font-family: "Montserrat";
   font-weight: 500;
   font-size: 15px;
   line-height: 13px;
+  position: relative;
+}
+
+.tittle-harga {
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 13px;
+  position: relative;
+}
+
+.delete_button {
+  position: absolute;
 }
