@@ -298,10 +298,13 @@ table tr {
 }
 
 .table2 {
-  margin-left: 10%;
+  font-size: 13px;
+  margin-left: 50px;
   margin-right: 5%;
-  width: 450px;
   box-shadow: 0px 0px 0px 0px;
+  margin-bottom: 10px;
+  clear: both;
+  width: 90%;
 }
 .isi-pesanan {
   text-align: center;
