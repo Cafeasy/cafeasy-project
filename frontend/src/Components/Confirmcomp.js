@@ -30,8 +30,8 @@ const Confirmcomp = (props) => {
           </button>
         </div>
       </div>
-      <div class="d-grid  col-9 mx-auto mt-6" className="isi-pesanan">
-        <table style={{ maxHeight: "20vw" }}>
+      <div className="">
+        <table style={{ maxHeight: "20vw" }} className="isi-pesanan">
           <tr className="text-title">
             <td>Paket yang dipilih</td>
           </tr>

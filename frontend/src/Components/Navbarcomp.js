@@ -1,4 +1,5 @@
 import "../Style/Navbar.css";
+import Swal from "sweetalert2";
 import Logoputih from "../Photo/LogoOnly.png";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -63,8 +64,10 @@ function Navbarcomp(props) {
   const addToCart = (data) => {
     setCart([...cart, { ...data, quantity: 1 }]);
   };
+
   const [show, toggleShow] = useState(false);
   const [active, setActive] = useState("firstcard");
+
   const [filter, setFilter] = useState("");
   const [visible, setVisible] = useState(2);
   const showmoritem = () => {
@@ -92,7 +95,15 @@ function Navbarcomp(props) {
   const masukKeranjang = (value) => {
     console.log("menu: ", value);
   };
-
+  const notifsukses = (menu) => {
+    Swal.fire({
+      title: "Sukses ",
+      text: "Sukses Menambah Keranjang " + menu.namaMenu,
+      icon: "success",
+      button: false,
+      timer: 1000,
+    });
+  };
   return (
     <>
       <div className="">
@@ -140,7 +151,7 @@ function Navbarcomp(props) {
 
                     <Nav.Link
                       as={Link}
-                      to={`/KonfirmasiPesanan/${menus.idMenu}`}
+                      to={`/RiwayatPesanan/${menus.idMenu}`}
                       state={{ url: urlParams }}
                     >
                       Riwayat Pesanan
@@ -273,13 +284,19 @@ function Navbarcomp(props) {
                         </div>
 
                         <div class="text text-end text-dark">
-                          <ModalCustom menuList={menu} />
+                          <Button
+                            className="buttonplus"
+                            variant="text"
+                            onClick={() => {
+                              addToCart(menu);
+                              notifsukses(menu);
+                            }}
+                            // onClick={() => addToCart(menu)}
+                          >
+                            <BsPlusCircle></BsPlusCircle>
+                          </Button>
                         </div>
                       </div>
-
-                      <button onClick={() => addToCart(menu)}>
-                        add to cart
-                      </button>
 
                       <Card.Text className="menu-deskripsi">
                         {menu.deskripsiMenu}
@@ -343,12 +360,15 @@ function Navbarcomp(props) {
               {show ? "Less Menu " : ""}
             </text>
           </p>
+          <p onClick={showmoritems}>
+            <text onClick={() => toggleShow(!show)}></text>
+          </p>
         </div>
       </div>
 
       <div>
         <CartList cart={cart}></CartList>
-        <ul class="fw-bold">Total.</ul>
+
         <Link
           to={`/KonfirmasiPesanan/${menus.idMenu}`}
           state={{ url: urlParams }}
@@ -363,103 +383,103 @@ function Navbarcomp(props) {
     </>
   );
 }
-const ModalCustom = ({ menuList }) => {
-  const [show, setShow] = useState(false);
-  let [count, setCount] = useState(0);
+// const ModalCustom = ({ menuList }) => {
+//   const [show, setShow] = useState(false);
+//   let [count, setCount] = useState(0);
 
-  function incrementCount() {
-    if (count < 10) {
-      setCount(count + 1);
-    }
-  }
-  function decrementCount() {
-    if (count > 0) {
-      setCount(count - 1);
-    }
-  }
-  const handleClick = () => {
-    setShow(!show);
-  };
+//   function incrementCount() {
+//     if (count < 10) {
+//       setCount(count + 1);
+//     }
+//   }
+//   function decrementCount() {
+//     if (count > 0) {
+//       setCount(count - 1);
+//     }
+//   }
+//   const handleClick = () => {
+//     setShow(!show);
+//   };
 
-  return (
-    <>
-      <div class="text text-end text-dark">
-        {
-          <Button className="buttonplus" variant="text" onClick={handleClick}>
-            <BsPlusCircle></BsPlusCircle>
-          </Button>
-        }
-      </div>
+//   return (
+//     <>
+//       <div class="text text-end text-dark">
+//         {
+//           <Button className="buttonplus" variant="text" onClick={handleClick}>
+//             <BsPlusCircle></BsPlusCircle>
+//           </Button>
+//         }
+//       </div>
 
-      {show && (
-        <Modal
-          show={show}
-          onHide={handleClick}
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-        >
-          <br></br>
-          <CgArrowLeftO class="mx-4" size={35} onClick={handleClick} />
-          <Modal.Body>
-            <img src={Gambarburger} alt="gambarpizza" className="gambarmodal" />
-            <div className="textmodal">
-              {menuList.namaMenu}
-              <p></p>
-            </div>
-            {/* <div className="textmodal_deskripsi">{menuList.deskripsiMenu}</div> */}
-            <div className="textmodal_harga">{menuList.hargaMenu}</div>
-            <br></br>
-            <Form>
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlInput1"
-              ></Form.Group>
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlTextarea1"
-              >
-                <div className="modal_tengah">
-                  <Form.Group controlId="exampleForm.ControlInput1">
-                    <Form.Label>Kuantitas :</Form.Label>
-                    <br />
-                    <Button
-                      variant="text"
-                      size="sm"
-                      className="mx-4"
-                      onClick={decrementCount}
-                    >
-                      <CgRemove size={25}></CgRemove>
-                    </Button>
+//       {show && (
+//         <Modal
+//           show={show}
+//           onHide={handleClick}
+//           aria-labelledby="contained-modal-title-vcenter"
+//           centered
+//         >
+//           <br></br>
+//           <CgArrowLeftO class="mx-4" size={35} onClick={handleClick} />
+//           <Modal.Body>
+//             <img src={Gambarburger} alt="gambarpizza" className="gambarmodal" />
+//             <div className="textmodal">
+//               {menuList.namaMenu}
+//               <p></p>
+//             </div>
+//             {/* <div className="textmodal_deskripsi">{menuList.deskripsiMenu}</div> */}
+//             <div className="textmodal_harga">{menuList.hargaMenu}</div>
+//             <br></br>
+//             <Form>
+//               <Form.Group
+//                 className="mb-3"
+//                 controlId="exampleForm.ControlInput1"
+//               ></Form.Group>
+//               <Form.Group
+//                 className="mb-3"
+//                 controlId="exampleForm.ControlTextarea1"
+//               >
+//                 <div className="modal_tengah">
+//                   <Form.Group controlId="exampleForm.ControlInput1">
+//                     <Form.Label>Kuantitas :</Form.Label>
+//                     <br />
+//                     <Button
+//                       variant="text"
+//                       size="sm"
+//                       className="mx-4"
+//                       onClick={decrementCount}
+//                     >
+//                       <CgRemove size={25}></CgRemove>
+//                     </Button>
 
-                    <strong>{count}</strong>
+//                     <strong>{count}</strong>
 
-                    <Button
-                      variant="text"
-                      size="sm"
-                      className="mx-4"
-                      onClick={incrementCount}
-                    >
-                      <CgAdd size={25}></CgAdd>
-                    </Button>
-                  </Form.Group>
+//                     <Button
+//                       variant="text"
+//                       size="sm"
+//                       className="mx-4"
+//                       onClick={incrementCount}
+//                     >
+//                       <CgAdd size={25}></CgAdd>
+//                     </Button>
+//                   </Form.Group>
 
-                  <Form.Label>Tambahkan Catatan : </Form.Label>
-                  <Form.Control as="textarea" rows={3} />
-                </div>
-              </Form.Group>
-            </Form>
-          </Modal.Body>
-          <Modal.Footer>
-            <div class="col text-center">
-              <button className="button-konfir_modal" onClick={handleClick}>
-                Tambah Pesanan
-              </button>
-            </div>
-          </Modal.Footer>
-        </Modal>
-      )}
-    </>
-  );
-};
+//                   <Form.Label>Tambahkan Catatan : </Form.Label>
+//                   <Form.Control as="textarea" rows={3} />
+//                 </div>
+//               </Form.Group>
+//             </Form>
+//           </Modal.Body>
+//           <Modal.Footer>
+//             <div class="col text-center">
+//               <button className="button-konfir_modal" onClick={handleClick}>
+//                 Tambah Pesanan
+//               </button>
+//             </div>
+//           </Modal.Footer>
+//         </Modal>
+//       )}
+//     </>
+//   );
+// };
 
 export default Navbarcomp;
