@@ -12,8 +12,10 @@ import Methodpage from "./Pages/Methodpage";
 import "./Style/ListMenupage.css";
 import "./Style/Confirmpage.css";
 import "./Style/Methodpage.css";
+import "./Style/Bantuanpage.css";
 import Detailmenupage from "./Pages/Detailmenupage";
 import Riwayatpesananpage from "./Pages/Riwayatpesananpage";
+import BantuanPage from "./Pages/Bantuanpage";
 
 function App() {
   return (
@@ -35,6 +37,11 @@ function App() {
           exact
           path="/RiwayatPesanan/:idMenu"
           element={<Riwayatpesananpage />}
+        />
+        <Route
+          exact
+          path="/Bantuanpage/:idMenu"
+          element={<BantuanPage />}
         />
       </Routes>
     </Router>

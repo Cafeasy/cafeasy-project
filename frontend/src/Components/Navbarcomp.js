@@ -158,7 +158,13 @@ function Navbarcomp(props) {
                     </Nav.Link>
                     <Nav.Link href="#action3">Kontak</Nav.Link>
 
-                    <Nav.Link href="#action4">Bantuan</Nav.Link>
+                    <Nav.Link
+                      as={Link}
+                      to={`/Bantuanpage/${menus.idMenu}`}
+                      state={{ url: urlParams }}
+                    >
+                      Bantuan
+                    </Nav.Link>
                   </Nav>
                 </Offcanvas.Body>
               </Navbar.Offcanvas>
