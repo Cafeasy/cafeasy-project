@@ -6,6 +6,7 @@
     "mongoose": "^7.0.0",
     "nodemon": "^2.0.20",
     "react-icons": "^4.8.0",
-    "react-redux": "^8.0.5"
+    "react-redux": "^8.0.5",
+    "sweetalert2-react": "^0.8.3"
   }
 }

@@ -154,7 +154,7 @@ function Navbarcomp(props) {
                       to={`/RiwayatPesanan/${menus.idMenu}`}
                       state={{ url: urlParams }}
                     >
-                      Riwayat Pesanan
+                      Riwayat Transaksi
                     </Nav.Link>
                     <Nav.Link href="#action3">Kontak</Nav.Link>
 
