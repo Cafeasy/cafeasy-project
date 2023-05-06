@@ -79,6 +79,7 @@ router.get('/customer/:id', CustomerController.getCustomer);
 router.get('/cartPelanggan/:idPelanggan', KeranjangController.getListCart);
 router.post('/postCart/:idPelanggan/:idMenu', KeranjangController.postCart);
 router.delete('/delCart/:idPelanggan/:idKeranjang', KeranjangController.deleteCart);
+router.put('/cartPelanggan/:idKeranjang', KeranjangController.updateCart);
 // router.get('/ListMenuCustomer:id', getMenu.getListMenuById);
 // router.get('/ListMenuCustomer:meja', ListMenu.(getListMenuByMeja));
 

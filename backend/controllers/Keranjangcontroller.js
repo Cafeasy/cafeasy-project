@@ -88,3 +88,42 @@ exports.deleteCart = async (req, res) => {
         next(err);
     })
 }
+
+exports.updateCart = (req, res, next) => {
+    const qty = req.body.qty;
+    const catatanPelanggan = req.body.catatanPelanggan;
+    const idKeranjang = req.params.idKeranjang;
+
+    // KeranjangPelanggan.find({idKeranjang: `${idKeranjang}`})
+    // .then(post => {
+    //     if(!post) {
+    //         const err = new Error('keranjang tidak ditemukan');
+    //         err.errorStatus = 404;
+    //         throw err;
+    //     }
+
+    //     post.qty = qty;
+    //     post.catatanPelanggan = catatanPelanggan;
+
+    //     post.save();
+    // })
+    // .then(result => {
+    //     res.status(200).json({
+    //         message: 'update keranjang sukses',
+    //         data: result
+    //     })
+    // })
+    // .catch(err => {
+    //     next(err);
+    // })
+    KeranjangPelanggan.findOneAndUpdate({idKeranjang: `${idKeranjang}`}, {$set:{qty: `${qty}`, catatanPelanggan: `${catatanPelanggan}`}}, {new: true})
+    .then(result => {
+        res.status(200).json({
+            message: 'Data keranjang berhasil diupdate',
+            data: result
+        })
+    })
+    .catch(err => {
+        next(err);
+    })
+}
