@@ -156,7 +156,14 @@ function Navbarcomp(props) {
                     >
                       Riwayat Transaksi
                     </Nav.Link>
-                    <Nav.Link href="#action3">Kontak</Nav.Link>
+
+                    <Nav.Link
+                      as={Link}
+                      to={`/Kontakpage/${menus.idMenu}`}
+                      state={{ url: urlParams }}
+                    >
+                      Kontak
+                    </Nav.Link>
 
                     <Nav.Link
                       as={Link}
