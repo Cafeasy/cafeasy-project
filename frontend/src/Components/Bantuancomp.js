@@ -7,6 +7,9 @@ import { Accordion, AccordionItem as Item } from '@szhsin/react-accordion';
 import chevronDown from "../Photo/chevron-down.svg";
 
 const Bantuancomp = (props) => {
+    const menus = props.menu;
+    const location = useLocation();
+    const { url } = location.state;
     const AccordionItem = ({ header, ...rest }) => (
         <Item
           {...rest}
@@ -25,9 +28,6 @@ const Bantuancomp = (props) => {
           panelProps={{ className: styles.itemPanel }}
         />
       );
-    const menus = props.menu;
-    const location = useLocation();
-    const { url } = location.state;
   return (
     <div className="App">
     <br></br>
@@ -44,7 +44,7 @@ const Bantuancomp = (props) => {
         </button>
       </div>
     </div>
-    <div className={styles.app}>
+   <div className={styles.app}>
       <Accordion transition transitionTimeout={250}>
         <AccordionItem header="Saya tidak dapat menggunakan Cafeasy" initialEntered>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
