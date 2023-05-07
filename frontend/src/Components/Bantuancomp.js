@@ -2,7 +2,7 @@ import "../Style/Confirmpage.css";
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { MDBCol, MDBIcon } from "mdbreact";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import Accordion from 'react-bootstrap/Accordion';
 
 const Bantuancomp = (props) => {
@@ -20,21 +20,25 @@ const Bantuancomp = (props) => {
       </div>
     </div>
 
-    <MDBCol md="6">
-      <div className="input-group md-form form-sm form-1 pl-0">
-        <div className="input-group-prepend">
-          <span className="input-group-text purple lighten-3" id="basic-text1">
-            <MDBIcon className="text-white" icon="search" />
-          </span>
-        </div>
-        <input
-          className="form-control my-0 py-1"
-          type="text"
-          placeholder="Search"
-          aria-label="Search"
-        />
-      </div>
-    </MDBCol>
+    <div className="search-barbantuan">
+      <Container className="mt-4">
+        <Row>
+          <Col sm={4}>
+            <Form className="d-flex">
+              <Form.Control
+                type="search"
+                placeholder="Search"
+                className="me-2 rounded-pill"
+                aria-label="Search"
+              />
+              <Button className="rounded-pill" variant="outline-primary">
+                Search
+              </Button>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
+    </div>
     <br></br>
 
     <div class="d-grid gap-20 col-10 mx-auto">
