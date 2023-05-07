@@ -1,33 +1,13 @@
 import "../Style/Confirmpage.css";
-import styles from "../Style/Bantuanpage.css";
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { Accordion, AccordionItem as Item } from '@szhsin/react-accordion';
-import chevronDown from "../Photo/chevron-down.svg";
+import Accordion from 'react-bootstrap/Accordion';
 
 const Bantuancomp = (props) => {
     const menus = props.menu;
     const location = useLocation();
     const { url } = location.state;
-    const AccordionItem = ({ header, ...rest }) => (
-        <Item
-          {...rest}
-          header={
-            <>
-              {header}
-              <img className={styles.chevron} src={chevronDown} alt="Chevron Down" />
-            </>
-          }
-          className={styles.item}
-          buttonProps={{
-            className: ({ isEnter }) =>
-              `${styles.itemBtn} ${isEnter && styles.itemBtnExpanded}`
-          }}
-          contentProps={{ className: styles.itemContent }}
-          panelProps={{ className: styles.itemPanel }}
-        />
-      );
   return (
     <div className="App">
     <br></br>
@@ -39,31 +19,36 @@ const Bantuancomp = (props) => {
           type="submit"
           className="button-konfir-pesanan"
           disabled="true"
-        >
-          BANTUAN
-        </button>
+        >BANTUAN</button>
       </div>
     </div>
-   <div className={styles.app}>
-      <Accordion transition transitionTimeout={250}>
-        <AccordionItem header="Saya tidak dapat menggunakan Cafeasy" initialEntered>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </AccordionItem>
-    <br></br>
 
-        <AccordionItem header="Terjadi kendala ketika konfirmasi pembayaran">
-          Quisque eget luctus mi, vehicula mollis lorem. Proin fringilla vel
-          erat quis sodales. Nam ex enim, eleifend venenatis lectus vitae.
-        </AccordionItem>
+    <div class="d-grid gap-20 col-10 mx-auto">
+        <Accordion defaultActiveKey="0">
+          <Accordion.Item eventKey="0">
+            <Accordion.Header>Saya tidak dapat menggunakan aplikasi Cafeasy</Accordion.Header>
+            <Accordion.Body>
+              Itu disebabkan karena anda belum mempunyai akun yang terkait.
+            </Accordion.Body>
+          </Accordion.Item>
+          <br></br>
 
+          <Accordion.Item eventKey="1">
+            <Accordion.Header>Terjadi kendala ketika konfirmasi pembayaran</Accordion.Header>
+            <Accordion.Body>
+              Pastikan anda melakukan pembayaran dengan benar, cek terlebih dahulu pesenan yang diinginkan.
+            </Accordion.Body>
+          </Accordion.Item>
         <br></br>
-        <AccordionItem header="Saya tidak dapat menggunakan Cafeasy">
-          Suspendisse massa risus, pretium id interdum in, dictum sit amet ante.
-          Fusce vulputate purus sed tempus feugiat.
-        </AccordionItem>
-      </Accordion>
-    </div>
+
+          <Accordion.Item eventKey="2">
+            <Accordion.Header>Metode pembayaran tidak tersedia pada halaman</Accordion.Header>
+            <Accordion.Body>
+              Pastikan anda melakukan pembayaran yang anda mau, bisa menggunakan e-payment ataupun bayar langsung.
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
+        </div>
 
     <div>
         <br></br>

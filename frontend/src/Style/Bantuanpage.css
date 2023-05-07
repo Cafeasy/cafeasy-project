@@ -1,49 +1,7 @@
-.app {
-    font-family: sans-serif;
-    margin-top: 1rem;
-    border-top: 1px solid #ccc;
-  }
-  
-  .item {
-    border-bottom: 1px solid #ccc;
-  }
-  
-  .itemBtn {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    margin: 0;
-    padding: 1rem;
-    font-size: 1rem;
-    text-align: left;
-    color: #0066d3;
-    background-color: transparent;
-    border: none;
-  }
-  
-  .itemBtn:hover {
-    background-color: #f3f3f3;
-  }
-  
-  .itemBtnExpanded {
-    background-color: #e7e7e7;
-  }
-  
-  .itemContent {
-    transition: height 0.25s cubic-bezier(0, 0, 0, 1);
-  }
-  
-  .itemPanel {
-    padding: 1rem;
-  }
-  
-  .chevron {
-    margin-left: auto;
-    transition: transform 0.25s cubic-bezier(0, 0, 0, 1);
-  }
-  
-  .itemBtnExpanded .chevron {
-    transform: rotate(180deg);
-  }
-  
+.accordi-butt {
+  position: relative;
+  width: 300px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
