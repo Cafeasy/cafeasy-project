@@ -29,7 +29,7 @@ const Kontakcomp = (props) => {
         <br></br>
 
         <div className="Logbutton">
-          <div class="d-grid gap-20 col-10 mx-auto">
+          <div class="d-grid gap-20 col-10 sm-6 mx-auto mt-6">
           <label></label>
           <input
             type="text"
@@ -52,7 +52,7 @@ const Kontakcomp = (props) => {
         <div class="d-grid gap-20 col-10 mx-auto">
           <label></label>
           <input
-            type="email"
+            type="text"
             className="form-control"
             placeholder="Perusahaan (Opsional)"
           />
@@ -64,7 +64,7 @@ const Kontakcomp = (props) => {
           <div class="d-grid gap-20 col-10 mx-auto">
             <label></label>
             <input
-              type="password"
+              type="text"
               className="form-control"
               placeholder="Pesan"
             />
@@ -75,7 +75,7 @@ const Kontakcomp = (props) => {
     <div>
         <br></br>
         <Link to={`/Berandapage/${url}`}>
-        <button className="button-proses-pembayaran">Kembali</button>
+        <button className="button-proses-pembayaran">Kirim</button>
         </Link>
       </div>
     </div>
