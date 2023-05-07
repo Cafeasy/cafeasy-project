@@ -13,6 +13,7 @@ import "./Style/ListMenupage.css";
 import "./Style/Confirmpage.css";
 import "./Style/Methodpage.css";
 import "./Style/Bantuanpage.css";
+import "./Style/Kontakpage.css";
 import Detailmenupage from "./Pages/Detailmenupage";
 import Riwayatpesananpage from "./Pages/Riwayatpesananpage";
 import BantuanPage from "./Pages/Bantuanpage";
@@ -42,7 +43,7 @@ function App() {
         <Route
           exact
           path="/Kontakpage/:idMenu"
-          element={<Riwayatpesananpage />}
+          element={<Kontakpage />}
         />
         <Route
           exact
