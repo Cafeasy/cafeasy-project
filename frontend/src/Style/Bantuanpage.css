@@ -5,3 +5,10 @@
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
+.input-group.md-form.form-sm.form-1 input {
+  position: relative;
+  border: 1px solid #000000;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
