@@ -8,6 +8,7 @@ const KategoriMenuController = require("../controllers/Menucontroller");
 const DetailMenuController = require("../controllers/Menucontroller");
 const CustomerController = require("../controllers/Customercontroller");
 const KeranjangController = require("../controllers/Keranjangcontroller");
+const RiwayatpesananController = require("../controllers/Riwayatpesanancontroller");
 const app = express();
 const Customer = require("../model/Customermodel")
 
@@ -76,10 +77,16 @@ router.get('/ListMenuByCategory/:kategoriMenu', KategoriMenuController.getMenuBy
 router.get('/DetailMenu/:idMenu', DetailMenuController.getMenuDetail);
 router.post('/customer', CustomerController.createCustomer);
 router.get('/customer/:id', CustomerController.getCustomer);
+
+//routes crud keranjang
 router.get('/cartPelanggan/:idPelanggan', KeranjangController.getListCart);
 router.post('/postCart/:idPelanggan/:idMenu', KeranjangController.postCart);
 router.delete('/delCart/:idPelanggan/:idKeranjang', KeranjangController.deleteCart);
 router.put('/cartPelanggan/:idKeranjang', KeranjangController.updateCart);
+
+//routes crud riwayat pesanan
+router.get('historyPesananPelanggan/:idPelanggan', RiwayatpesananController.getListHistory);
+// router.delete('delHistoryPesananPelanggan/:idPelanggan', RiwayatpesananController.deleteHistory);
 // router.get('/ListMenuCustomer:id', getMenu.getListMenuById);
 // router.get('/ListMenuCustomer:meja', ListMenu.(getListMenuByMeja));
 
