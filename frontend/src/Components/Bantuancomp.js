@@ -20,24 +20,18 @@ const Bantuancomp = (props) => {
       </div>
     </div>
 
-    <div className="search-barbantuan">
-      <Container className="mt-4">
-        <Row>
-          <Col sm={4}>
+    <div class= "d-grid gap-20 col-10 mx-auto">
             <Form className="d-flex">
               <Form.Control
                 type="search"
                 placeholder="Search"
-                className="me-2 rounded-pill"
+                className="me-5 rounded-pill"
                 aria-label="Search"
               />
               <Button className="rounded-pill" variant="outline-primary">
                 Search
               </Button>
             </Form>
-          </Col>
-        </Row>
-      </Container>
     </div>
     <br></br>
 

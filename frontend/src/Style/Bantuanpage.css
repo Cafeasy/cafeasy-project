@@ -8,5 +8,6 @@
 
 .search-barbantuan {
   position: relative;
+  width: 300px;
   transform: translate(31%, -50%);
 }
