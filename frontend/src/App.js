@@ -18,6 +18,7 @@ import Detailmenupage from "./Pages/Detailmenupage";
 import Riwayatpesananpage from "./Pages/Riwayatpesananpage";
 import BantuanPage from "./Pages/Bantuanpage";
 import Kontakpage from "./Pages/Kontakpage";
+import Statuspage from "./Pages/Statuspage";
 
 function App() {
   return (
@@ -49,6 +50,11 @@ function App() {
           exact
           path="/Bantuanpage/:idMenu"
           element={<BantuanPage />}
+        />
+        <Route
+          exact
+          path="/Statuspage/:idMenu"
+          element={<Statuspage />}
         />
       </Routes>
     </Router>

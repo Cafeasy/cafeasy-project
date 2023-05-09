@@ -8,7 +8,7 @@ function Statuspage(props) {
   const idUser = props.idUser;
 
   const idMenu = useParams();
-  const url = `${process.env.REACT_APP_API_URL}/Bantuanpage/${idMenu.idMenu}`;
+  const url = `${process.env.REACT_APP_API_URL}/Statuspage/${idMenu.idMenu}`;
 
   useEffect(() => {
     axios
