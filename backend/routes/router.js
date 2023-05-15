@@ -71,10 +71,11 @@ router.use('/testing', (req, res, next) => {
 });
 
 
-
+//routes crud daftar menu
 router.get('/ListMenu', BerandaMenuController.getListMenu);
 router.get('/ListMenuByCategory/:kategoriMenu', KategoriMenuController.getMenuByCategory);
 router.get('/DetailMenu/:idMenu', DetailMenuController.getMenuDetail);
+
 router.post('/customer', CustomerController.createCustomer);
 router.get('/customer/:id', CustomerController.getCustomer);
 
