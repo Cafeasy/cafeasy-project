@@ -3,9 +3,7 @@ const router = require("express").Router();
 const passport = require("passport");
 require('../service/passport.js');
 const express = require('express');
-const BerandaMenuController = require("../controllers/Menucontroller");
-const KategoriMenuController = require("../controllers/Menucontroller");
-const DetailMenuController = require("../controllers/Menucontroller");
+const MenuController = require("../controllers/Menucontroller");
 const CustomerController = require("../controllers/Customercontroller");
 const KeranjangController = require("../controllers/Keranjangcontroller");
 const RiwayatpesananController = require("../controllers/Riwayatpesanancontroller");
@@ -72,9 +70,10 @@ router.use('/testing', (req, res, next) => {
 
 
 //routes crud daftar menu
-router.get('/ListMenu', BerandaMenuController.getListMenu);
-router.get('/ListMenuByCategory/:kategoriMenu', KategoriMenuController.getMenuByCategory);
-router.get('/DetailMenu/:idMenu', DetailMenuController.getMenuDetail);
+router.get('/ListMenu', MenuController.getListMenu);
+router.get('/ListMenuByCategory/:kategoriMenu', MenuController.getMenuByCategory);
+router.get('/DetailMenu/:idMenu', MenuController.getMenuDetail);
+router.get('/NotAvailableMenu', MenuController.getNotAvailableMenu)
 
 router.post('/customer', CustomerController.createCustomer);
 router.get('/customer/:id', CustomerController.getCustomer);

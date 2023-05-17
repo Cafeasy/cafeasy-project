@@ -2,31 +2,20 @@
 const Menu = require("../model/Menumodel");
 
 exports.getListMenu = (req, res, next) => {
-    // Menu.find({})
-    //     .then(result => {
-    //         res.status(200).json({
-    //             message: 'Data menu berhasil dipanggil',
-    //             data: result
-    //         })
-    //     }).catch(err => {
-    //         next(err);
-    //     }).exec(function(err) {
-    //         if(err) {
-    //             console.log(err);
-    //         } else {
-    //             const checkStok = Menu.find({ stokMenu: {$lt: 0} });
-            
-    //             if(checkStok) {
-    //                 const StatusMenu = "Menu Tersedia";
-    //                 return StatusMenu;
-    //             } else {
-    //                 const StatusMenu = "Menu Kosong";
-    //                 return StatusMenu;
-    //             }
-    //         }
-            
-    //     });
     Menu.find({ stokMenu: {$gt: 0} })
+        .then(result => {
+            res.status(200).json({
+                message: 'Data menu berhasil dipanggil',
+                data: result
+            })
+        }).catch(err => {
+            next(err);
+        })
+    
+}
+
+exports.getNotAvailableMenu = (req, res, next) => {
+    Menu.find({ stokMenu: {$lt: 1} })
         .then(result => {
             res.status(200).json({
                 message: 'Data menu berhasil dipanggil',
