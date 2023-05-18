@@ -10,6 +10,13 @@ const RiwayatpesananController = require("../controllers/Riwayatpesanancontrolle
 const app = express();
 const Customer = require("../model/Customermodel")
 
+
+
+router.get("/" ,(req,res)=>{
+    let navPage = '<a href="/ListMenu" >List Menu Service</a><br> <a href="/allCustomer" >Customer</a>';
+    res.send(navPage);
+})
+
 router.get("/auth/login/success", (req, res) => {
     if (req.user) {
 
@@ -23,6 +30,7 @@ router.get("/auth/login/success", (req, res) => {
         res.status(403).json({ error: true, message: "Not Authorized" });
     }
 });
+
 router.get("/login/success", (req, res) => {
     if (req.user) {
         const data = req.user;
@@ -77,6 +85,7 @@ router.get('/NotAvailableMenu', MenuController.getNotAvailableMenu)
 
 router.post('/customer', CustomerController.createCustomer);
 router.get('/customer/:id', CustomerController.getCustomer);
+router.get('/allCustomer', CustomerController.getAllCustomer);
 
 //routes crud keranjang
 router.get('/cartPelanggan/:idPelanggan', KeranjangController.getListCart);
@@ -90,4 +99,7 @@ router.get('/historyPesananPelanggan/:idPelanggan', RiwayatpesananController.get
 // router.get('/ListMenuCustomer:id', getMenu.getListMenuById);
 // router.get('/ListMenuCustomer:meja', ListMenu.(getListMenuByMeja));
 
+router.get('*',(req,res)=>{
+    res.send('<h1> 404. This page does not exist. <a href="/" >Back Home</a> </h1>')
+})
 module.exports = router;

@@ -19,10 +19,21 @@ exports.getCustomer = (req, res) => {
     Customer.find({ id: `${id}` })
         .then(result => {
             res.status(200).json({
-                message: 'Data menu berhasil dipanggil',
+                message: 'Data Customer berhasil dipanggil',
                 data: result
             })
         }).catch(err => {
             next(err);
         })
+}
+exports.getAllCustomer = (req, res) => {
+    Customer.find({}).then(result => {
+        res.status(200).json({
+            message: 'Data Semua Customer Berhasil Dipanggil',
+            data: result
+        })
+    }).catch(err => {
+        next(err);
+    })
+
 }
