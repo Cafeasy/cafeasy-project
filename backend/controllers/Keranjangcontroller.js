@@ -119,7 +119,7 @@ exports.updateCartMinus = async (req, res, next) => {
     KeranjangPelanggan.findOneAndUpdate({idKeranjang: `${idKeranjang}`}, {$set:{qty: `${qtyMinus}`}}, {new: true})
     .then(result => {
         res.status(200).json({
-            message: 'Data keranjang berhasil diupdate',
+            message: 'Item berhasil dikurang 1',
             data: result
         })
     })
@@ -140,7 +140,7 @@ exports.updateCartPlus = async (req, res, next) => {
     KeranjangPelanggan.findOneAndUpdate({idKeranjang: `${idKeranjang}`}, {$set:{qty: `${qtyPlus}`}}, {new: true})
     .then(result => {
         res.status(200).json({
-            message: 'Data keranjang berhasil diupdate',
+            message: 'Item berhasil ditambah 1',
             data: result
         })
     })
