@@ -92,6 +92,8 @@ router.get('/cartPelanggan/:idPelanggan', KeranjangController.getListCart);
 router.post('/postCart/:idPelanggan/:idMenu', KeranjangController.postCart);
 router.delete('/delCart/:idPelanggan/:idKeranjang', KeranjangController.deleteCart);
 router.put('/cartPelanggan/:idKeranjang', KeranjangController.updateCart);
+router.put('/cartPelangganMinus/:idKeranjang', KeranjangController.updateCartMinus);
+router.put('/cartPelangganPlus/:idKeranjang', KeranjangController.updateCartPlus)
 
 //routes crud riwayat pesanan
 router.get('/historyPesananPelanggan/:idPelanggan', RiwayatpesananController.getListHistory);
