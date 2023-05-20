@@ -55,36 +55,6 @@ function CartList({ cart }) {
             </div>
 
             <ModalCustom menuList={cartItem} />
-            {/* <button
-              className="tittle"
-              onClick={() => {
-                const _CART = CART.map((item, index) => {
-                  return cartindex === index
-                    ? {
-                        ...item,
-                        quantity: item.quantity > 0 ? item.quantity - 1 : 0,
-                      }
-                    : item;
-                });
-                setCART(_CART);
-              }}
-            >
-              -
-            </button>
-            <span className="tittle"> {cartItem.quantity} </span>
-            <button
-              className="tittle"
-              onClick={() => {
-                const _CART = CART.map((item, index) => {
-                  return cartindex === index
-                    ? { ...item, quantity: item.quantity + 1 }
-                    : item;
-                });
-                setCART(_CART);
-              }}
-            >
-              +
-            </button> */}
           </span>
         );
       })}

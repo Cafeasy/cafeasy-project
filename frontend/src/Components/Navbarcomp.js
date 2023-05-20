@@ -7,6 +7,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Modal from "react-bootstrap/Modal";
+import { BsDashCircle } from "react-icons/bs";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
@@ -46,6 +47,7 @@ function Navbarcomp(props) {
   const urlParams = params.idUser;
 
   const user = props.user;
+
   const [menus, setMenus] = useState([]);
   useEffect(() => {
     axios
@@ -59,13 +61,80 @@ function Navbarcomp(props) {
         // console.log("error: data tidak terambil - ", err);
       });
   });
-  const [cart, setCart] = useState([]);
-  console.log(cart);
-  const addToCart = (data) => {
-    setCart([...cart, { ...data, quantity: 1 }]);
+  const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
+  // const datadalam = notifsukses.menu.namaMenu;
+  // console.log(datadalam);
+  const [inidata, setInidata] = useState();
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const post = {
+      qty: 1,
+      catatanPelanggan: "mantap banget gais",
+    };
+    try {
+      const res = await axios.post(
+        "http://localhost:8888/postCart/" + urlParams + "/" + inidata.idMenu,
+        post
+      );
+      console.log(res.data);
+    } catch (e) {
+      alert(e);
+    }
+  };
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:8888/cartPelanggan/" + urlParams)
+      .then((res) => setData(res.data.data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  // useEffect(() => {
+  //   axios
+  //     .delete("http://localhost:8888/delCart/" + urlParams + "/cart-nncum24ji8")
+  //     .then((res) => console.log(res))
+  //     .catch((err) => console.log(err));
+  // }, []);
+
+  const deleteItem = (value) => {
+    console.log(value);
+    axios
+      .delete("http://localhost:8888/delCart/" + urlParams + "/" + value)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
 
-  const [show, toggleShow] = useState(false);
+  const [show, setShow] = useState(false);
+  let [count, setCount] = useState(1);
+
+  function incrementCount() {
+    if (count < 10) {
+      setCount(count + 1);
+    }
+  }
+  function decrementCount() {
+    if (count > 1) {
+      setCount(count - 1);
+    }
+  }
+  const handleClick = () => {
+    setShow(!show);
+  };
+  const notifsukses = (menu) => {
+    Swal.fire({
+      title: "Sukses ",
+      text: "Sukses Menambah Keranjang " + menu.namaMenu,
+      icon: "success",
+      button: false,
+      timer: 1000,
+    });
+  };
+
+  const [cart, setCart] = useState([]);
+
+  const [toggleshow, toggleShow] = useState(false);
   const [active, setActive] = useState("firstcard");
 
   const [filter, setFilter] = useState("");
@@ -88,22 +157,25 @@ function Navbarcomp(props) {
     );
   });
 
+  const notifDelete = (value) => {
+    Swal.fire({
+      title: "Sukses ",
+      text: "Sukses Menghapus Keranjang " + value,
+      icon: "success",
+      button: false,
+      timer: 1500,
+    });
+  };
   const logout = () => {
     window.open(`${process.env.REACT_APP_API_URL}/auth/logout`, "_self");
   };
 
-  const masukKeranjang = (value) => {
-    console.log("menu: ", value);
+  const removeMe = (index) => {
+    const temp = [...cart];
+    temp.splice(index, 1);
+    setCart(temp);
   };
-  const notifsukses = (menu) => {
-    Swal.fire({
-      title: "Sukses ",
-      text: "Sukses Menambah Keranjang " + menu.namaMenu,
-      icon: "success",
-      button: false,
-      timer: 1000,
-    });
-  };
+
   return (
     <>
       <div className="">
@@ -297,17 +369,24 @@ function Navbarcomp(props) {
                         </div>
 
                         <div class="text text-end text-dark">
-                          <Button
-                            className="buttonplus"
-                            variant="text"
-                            onClick={() => {
-                              addToCart(menu);
-                              notifsukses(menu);
-                            }}
-                            // onClick={() => addToCart(menu)}
+                          <form
+                            action=""
+                            id="login"
+                            method="post"
+                            onSubmit={onSubmit}
                           >
-                            <BsPlusCircle></BsPlusCircle>
-                          </Button>
+                            <Button
+                              className="buttonplus"
+                              type="submit"
+                              variant="text"
+                              onClick={() => {
+                                notifsukses(menu);
+                                setInidata(menu);
+                              }}
+                            >
+                              <BsPlusCircle></BsPlusCircle>
+                            </Button>
+                          </form>
                         </div>
                       </div>
 
@@ -364,23 +443,151 @@ function Navbarcomp(props) {
         )}
         <div className="button-hide">
           <p onClick={showmoritem}>
-            <text onClick={() => toggleShow(!show)}>
+            <text onClick={() => toggleShow(!toggleshow)}>
               {show ? "" : "More Menu"}
             </text>
           </p>
           <p onClick={showmoritems}>
-            <text onClick={() => toggleShow(!show)}>
+            <text onClick={() => toggleShow(!toggleshow)}>
               {show ? "Less Menu " : ""}
             </text>
           </p>
           <p onClick={showmoritems}>
-            <text onClick={() => toggleShow(!show)}></text>
+            <text onClick={() => toggleShow(!toggleshow)}></text>
           </p>
         </div>
       </div>
 
       <div>
-        <CartList cart={cart}></CartList>
+        <div>
+          <div>
+            {data.map((d, i) => {
+              return (
+                <>
+                  <div className="delete_button">
+                    <BsDashCircle
+                      style={{ cursor: "pointer" }}
+                      class="mx-4"
+                      onClick={() => {
+                        removeMe(d.namaMenu);
+                        notifDelete(d.namaMenu);
+                        deleteItem(d.idKeranjang);
+                      }}
+                    />
+                  </div>
+                  <div> </div>
+                  <table style={{ maxHeight: "20vw" }} className="table2">
+                    <td
+                      className="tittle"
+                      onClick={handleClick}
+                      style={{ cursor: "pointer" }}
+                    >
+                      {" "}
+                      {d.namaMenu}{" "}
+                    </td>
+                    <td style={{ textAlign: "center" }}> {d.qty}x </td>
+                    <td> Rp. {numberWithCommas(d.hargaMenu * d.qty)},00</td>
+                    <td className="opration"></td>
+                    {/* <button onClick={handleDelete(d.idKeranjang)}>
+                      Delete
+                    </button> */}
+                    {show && (
+                      <Modal
+                        show={show}
+                        onHide={handleClick}
+                        aria-labelledby="contained-modal-title-vcenter"
+                        centered
+                      >
+                        <br></br>
+                        <CgArrowLeftO
+                          class="mx-4"
+                          size={35}
+                          onClick={handleClick}
+                          style={{ cursor: "pointer" }}
+                        />
+                        <Modal.Body>
+                          <img
+                            src={Gambarburger}
+                            alt="gambarpizza"
+                            className="gambarmodal"
+                          />
+                          <div className="textmodal">
+                            {d.namaMenu}
+                            <p></p>
+                          </div>
+                          {/* <div className="textmodal_deskripsi">{menuList.deskripsiMenu}</div> */}
+                          <div className="textmodal_harga">{d.hargaMenu}</div>
+                          <br></br>
+                          <Form>
+                            <Form.Group
+                              className="mb-3"
+                              controlId="exampleForm.ControlInput1"
+                            ></Form.Group>
+                            <Form.Group
+                              className="mb-3"
+                              controlId="exampleForm.ControlTextarea1"
+                            >
+                              <div className="modal_tengah">
+                                <Form.Group controlId="exampleForm.ControlInput1">
+                                  <Form.Label>Kuantitas :</Form.Label>
+                                  <br />
+                                  <Button
+                                    variant="text"
+                                    size="sm"
+                                    className="mx-4"
+                                    onClick={decrementCount}
+                                  >
+                                    <CgRemove size={25}></CgRemove>
+                                  </Button>
+
+                                  <strong>{d.qty}</strong>
+
+                                  <Button
+                                    variant="text"
+                                    size="sm"
+                                    className="mx-4"
+                                    onClick={incrementCount}
+                                  >
+                                    <CgAdd size={25}></CgAdd>
+                                  </Button>
+                                </Form.Group>
+
+                                <Form.Label>Tambahkan Catatan : </Form.Label>
+                                <Form.Control as="textarea" rows={3} />
+                              </div>
+                            </Form.Group>
+                          </Form>
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <div class="col text-center">
+                            <button
+                              className="button-konfir_modal"
+                              onClick={() => {
+                                notifsukses();
+                                handleClick();
+                              }}
+                            >
+                              Tambah Pesanan
+                            </button>
+                          </div>
+                        </Modal.Footer>
+                      </Modal>
+                    )}
+                  </table>
+                </>
+              );
+            })}
+          </div>
+          <p>
+            {" "}
+            <ul class="fw-bold">
+              <ul style={{ textAlign: "end" }}></ul>Total.
+              {data
+                .map((item) => item.hargaMenu * item.qty)
+                .reduce((total, value) => total + value, 0)}
+            </ul>
+          </p>
+        </div>
 
         <Link
           to={`/KonfirmasiPesanan/${menus.idMenu}`}
@@ -390,109 +597,19 @@ function Navbarcomp(props) {
             Konfirmasi Pemesanan
           </button>
         </Link>
-
         <div></div>
       </div>
     </>
   );
 }
-// const ModalCustom = ({ menuList }) => {
-//   const [show, setShow] = useState(false);
-//   let [count, setCount] = useState(0);
 
-//   function incrementCount() {
-//     if (count < 10) {
-//       setCount(count + 1);
-//     }
-//   }
-//   function decrementCount() {
-//     if (count > 0) {
-//       setCount(count - 1);
-//     }
-//   }
-//   const handleClick = () => {
-//     setShow(!show);
-//   };
+const ModalCustom = ({ menuList }) => {
+  const [menus, setMenus] = useState([]);
 
-//   return (
-//     <>
-//       <div class="text text-end text-dark">
-//         {
-//           <Button className="buttonplus" variant="text" onClick={handleClick}>
-//             <BsPlusCircle></BsPlusCircle>
-//           </Button>
-//         }
-//       </div>
-
-//       {show && (
-//         <Modal
-//           show={show}
-//           onHide={handleClick}
-//           aria-labelledby="contained-modal-title-vcenter"
-//           centered
-//         >
-//           <br></br>
-//           <CgArrowLeftO class="mx-4" size={35} onClick={handleClick} />
-//           <Modal.Body>
-//             <img src={Gambarburger} alt="gambarpizza" className="gambarmodal" />
-//             <div className="textmodal">
-//               {menuList.namaMenu}
-//               <p></p>
-//             </div>
-//             {/* <div className="textmodal_deskripsi">{menuList.deskripsiMenu}</div> */}
-//             <div className="textmodal_harga">{menuList.hargaMenu}</div>
-//             <br></br>
-//             <Form>
-//               <Form.Group
-//                 className="mb-3"
-//                 controlId="exampleForm.ControlInput1"
-//               ></Form.Group>
-//               <Form.Group
-//                 className="mb-3"
-//                 controlId="exampleForm.ControlTextarea1"
-//               >
-//                 <div className="modal_tengah">
-//                   <Form.Group controlId="exampleForm.ControlInput1">
-//                     <Form.Label>Kuantitas :</Form.Label>
-//                     <br />
-//                     <Button
-//                       variant="text"
-//                       size="sm"
-//                       className="mx-4"
-//                       onClick={decrementCount}
-//                     >
-//                       <CgRemove size={25}></CgRemove>
-//                     </Button>
-
-//                     <strong>{count}</strong>
-
-//                     <Button
-//                       variant="text"
-//                       size="sm"
-//                       className="mx-4"
-//                       onClick={incrementCount}
-//                     >
-//                       <CgAdd size={25}></CgAdd>
-//                     </Button>
-//                   </Form.Group>
-
-//                   <Form.Label>Tambahkan Catatan : </Form.Label>
-//                   <Form.Control as="textarea" rows={3} />
-//                 </div>
-//               </Form.Group>
-//             </Form>
-//           </Modal.Body>
-//           <Modal.Footer>
-//             <div class="col text-center">
-//               <button className="button-konfir_modal" onClick={handleClick}>
-//                 Tambah Pesanan
-//               </button>
-//             </div>
-//           </Modal.Footer>
-//         </Modal>
-//       )}
-//     </>
-//   );
-// };
+  const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
+  return <></>;
+};
 
 export default Navbarcomp;
