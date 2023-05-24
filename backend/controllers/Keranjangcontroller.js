@@ -9,7 +9,7 @@ exports.getListCart = async (req, res, next) => {
     KeranjangPelanggan.find({idPelanggan: `${idPelanggan}`})
     .then(result => {
         res.status(200).json({
-            message: 'Data keranjang berhasil dipanggil',
+            message: 'Data keranjang (' + idPelanggan + ') berhasil dipanggil',
             data: result
         })
     })
@@ -80,7 +80,7 @@ exports.deleteCart = async (req, res) => {
     KeranjangPelanggan.deleteOne(({idPelanggan: `${idPelanggan}`, idKeranjang: `${idKeranjang}`}))
     .then(result => {
         res.status(200).json({
-            message: 'Data keranjang berhasil dihapus',
+            message: 'Data keranjang pelanggan (' + idPelanggan + '/' + idPelanggan + ') berhasil dihapus',
             data: result
         })
     })
@@ -98,7 +98,7 @@ exports.updateCart = (req, res, next) => {
     KeranjangPelanggan.findOneAndUpdate({idKeranjang: `${idKeranjang}`}, {$set:{qty: `${qty}`, catatanPelanggan: `${catatanPelanggan}`}}, {new: true})
     .then(result => {
         res.status(200).json({
-            message: 'Data keranjang berhasil diupdate',
+            message: 'Data keranjang (' + idKeranjang + ') berhasil diupdate',
             data: result
         })
     })
@@ -119,7 +119,7 @@ exports.updateCartMinus = async (req, res, next) => {
     KeranjangPelanggan.findOneAndUpdate({idKeranjang: `${idKeranjang}`}, {$set:{qty: `${qtyMinus}`}}, {new: true})
     .then(result => {
         res.status(200).json({
-            message: 'Item berhasil dikurang 1',
+            message: 'Item (' + idKeranjang + ') berhasil dikurang 1',
             data: result
         })
     })
@@ -140,7 +140,7 @@ exports.updateCartPlus = async (req, res, next) => {
     KeranjangPelanggan.findOneAndUpdate({idKeranjang: `${idKeranjang}`}, {$set:{qty: `${qtyPlus}`}}, {new: true})
     .then(result => {
         res.status(200).json({
-            message: 'Item berhasil ditambah 1',
+            message: 'Item (' + idKeranjang + ') berhasil ditambah 1',
             data: result
         })
     })

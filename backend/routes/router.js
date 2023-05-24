@@ -7,6 +7,7 @@ const MenuController = require("../controllers/Menucontroller");
 const CustomerController = require("../controllers/Customercontroller");
 const KeranjangController = require("../controllers/Keranjangcontroller");
 const RiwayatpesananController = require("../controllers/Riwayatpesanancontroller");
+const TransaksiController = require("../controllers/TransaksiCustomercontroller");
 const app = express();
 const Customer = require("../model/Customermodel")
 
@@ -93,13 +94,20 @@ router.post('/postCart/:idPelanggan/:idMenu', KeranjangController.postCart);
 router.delete('/delCart/:idPelanggan/:idKeranjang', KeranjangController.deleteCart);
 router.put('/cartPelanggan/:idKeranjang', KeranjangController.updateCart);
 router.put('/cartPelangganMinus/:idKeranjang', KeranjangController.updateCartMinus);
-router.put('/cartPelangganPlus/:idKeranjang', KeranjangController.updateCartPlus)
+router.put('/cartPelangganPlus/:idKeranjang', KeranjangController.updateCartPlus);
 
 //routes crud riwayat pesanan
 router.get('/historyPesananPelanggan/:idPelanggan', RiwayatpesananController.getListHistory);
 // router.delete('delHistoryPesananPelanggan/:idPelanggan', RiwayatpesananController.deleteHistory);
 // router.get('/ListMenuCustomer:id', getMenu.getListMenuById);
 // router.get('/ListMenuCustomer:meja', ListMenu.(getListMenuByMeja));
+
+//routes crud transaksi
+router.get('/getTransaksi/:idPelanggan', TransaksiController.getTransaksiPelanggan);
+router.get('/getTransaksi/:idPelanggan/:idTransaksi', TransaksiController.getDetailTransaksiPelanggan);
+router.post('/postTransaksi/:idPelanggan', );
+router.delete('/delTransaksi/:idPelanggan', );
+router.put('/putTransaksi/:idPelanggan', );
 
 router.get('*',(req,res)=>{
     res.send('<h1> 404. This page does not exist. <a href="/" >Back Home</a> </h1>')

@@ -5,7 +5,7 @@ exports.getListHistory = async (req, res, next) => {
     RiwayatPesananPelanggan.find({ idPelanggan: `${idPelanggan}` })
         .then(result => {
             res.status(200).json({
-                message: 'Data riwayat pesanan berhasil dipanggil',
+                message: 'Data riwayat pesanan pelanggan (' + idPelanggan + ') berhasil dipanggil',
                 data: result
             })
         })
