@@ -5,13 +5,18 @@ const Customer = require("../model/Customermodel");
 
 exports.getListCart = async (req, res, next) => {
     const idPelanggan = req.params.idPelanggan;
-    
+    //find keranjang by id untuk memanggil qty dan harga
+    let findQtyHarga = await KeranjangPelanggan.find({idPelanggan: `${idPelanggan}`});
+
     KeranjangPelanggan.find({idPelanggan: `${idPelanggan}`})
     .then((result) => {
-        //contoh buat akumulasi harga
+        //operasi untuk melakukan perkalian harga dan qty, lalu di jumlahkan keseluruhan berdasarkan data yang ada
+        const multiply = findQtyHarga.reduce((accumulator, object) => {
+            return accumulator + (object.hargaMenu * object.qty);
+        }, 0)
         return res.status(200).json({
             message: 'Data keranjang berhasil dipanggil',
-            data: {result}
+            data: {result, multiply}
         })
     })
     .catch(err => {
