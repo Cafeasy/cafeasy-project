@@ -61,6 +61,7 @@ function Navbarcomp(props) {
         // console.log("error: data tidak terambil - ", err);
       });
   });
+  console.log(menus);
   const numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };
@@ -89,7 +90,7 @@ function Navbarcomp(props) {
       .get("http://localhost:8888/cartPelanggan/" + urlParams)
       .then((res) => setData(res.data.data))
       .catch((err) => console.log(err));
-  }, []);
+  }, [data]);
 
   // useEffect(() => {
   //   axios
@@ -461,7 +462,7 @@ function Navbarcomp(props) {
       <div>
         <div>
           <div>
-            {data.map((d, i) => {
+            {data.result?.map((d, i) => {
               return (
                 <>
                   <div className="delete_button">
@@ -582,8 +583,8 @@ function Navbarcomp(props) {
             {" "}
             <ul class="fw-bold">
               <ul style={{ textAlign: "end" }}></ul>Total.
-              {data
-                .map((item) => item.hargaMenu * item.qty)
+              {data.result
+                ?.map((item) => item.hargaMenu * item.qty)
                 .reduce((total, value) => total + value, 0)}
             </ul>
           </p>
