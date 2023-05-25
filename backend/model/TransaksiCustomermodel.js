@@ -29,7 +29,8 @@ const Transaksi = new Schema({
     },
     statusBayar: {
         type: String,
-        required: true
+        required: true,
+        default: "Belum bayar"
     }
 });
 

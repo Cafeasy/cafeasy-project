@@ -7,10 +7,11 @@ exports.getListCart = async (req, res, next) => {
     const idPelanggan = req.params.idPelanggan;
     
     KeranjangPelanggan.find({idPelanggan: `${idPelanggan}`})
-    .then(result => {
-        res.status(200).json({
-            message: 'Data keranjang (' + idPelanggan + ') berhasil dipanggil',
-            data: result
+    .then((result) => {
+        //contoh buat akumulasi harga
+        return res.status(200).json({
+            message: 'Data keranjang berhasil dipanggil',
+            data: {result}
         })
     })
     .catch(err => {
@@ -48,29 +49,49 @@ exports.postCart = async (req, res, next) => {
     const idMenu =  idMenuSign;
     const namaMenu = namaMenuSign;
     const hargaMenu = hargaMenuSign;
-    const qty = req.body.qty;
+    // const qty = req.body.qty;
     const catatanPelanggan = req.body.catatanPelanggan;
 
-    const insertCart = new KeranjangPelanggan({
-        idKeranjang: idKeranjang,
-        idPelanggan: idPelanggan,
-        namaPelanggan: namaPelanggan,
-        idMenu: idMenu,
-        namaMenu: namaMenu,
-        hargaMenu: hargaMenu,
-        qty: qty,
-        catatanPelanggan: catatanPelanggan
-    })
+    //check data keranjang by id menu dan id pelanggan
+    let checkCartByParams = await KeranjangPelanggan.findOne({idPelanggan: `${idPelangganCheck}`, idMenu: `${idMenuCheck}`});
 
-    insertCart.save().then(result => {
-        res.status(200).json({
-            message: "data keranjang berhasil disimpan",
-            data: result
+    if(checkCartByParams) {
+        let obyekCart = checkCartByParams.toObject();
+        const qtySign = obyekCart.qty;
+        const qtyPlus = qtySign+1;
+
+        KeranjangPelanggan.findOneAndUpdate({idPelanggan: `${idPelangganCheck}`, idMenu: `${idMenuCheck}`}, {$set:{qty: `${qtyPlus}`}}, {new: true})
+        .then(result => {
+            res.status(200).json({
+                message: 'Item berhasil ditambah 1',
+                data: result
+            })
         })
-    }).catch(err => {
-        console.log('err: ', err);
-    });
+        .catch(err => {
+            next(err);
+        })
+    } else {
+        const insertCart = new KeranjangPelanggan({
+            idKeranjang: idKeranjang,
+            idPelanggan: idPelanggan,
+            namaPelanggan: namaPelanggan,
+            idMenu: idMenu,
+            namaMenu: namaMenu,
+            hargaMenu: hargaMenu,
+            qty: 1,
+            catatanPelanggan: catatanPelanggan
+        })
     
+        insertCart.save().then(result => {
+            res.status(200).json({
+                message: "data keranjang berhasil disimpan",
+                data: result
+            })
+        }).catch(err => {
+            console.log('err: ', err);
+        });
+        
+    };
 }
 
 exports.deleteCart = async (req, res) => {
@@ -80,7 +101,7 @@ exports.deleteCart = async (req, res) => {
     KeranjangPelanggan.deleteOne(({idPelanggan: `${idPelanggan}`, idKeranjang: `${idKeranjang}`}))
     .then(result => {
         res.status(200).json({
-            message: 'Data keranjang pelanggan (' + idPelanggan + '/' + idPelanggan + ') berhasil dihapus',
+            message: 'Data keranjang pelanggan berhasil dihapus',
             data: result
         })
     })
@@ -98,7 +119,7 @@ exports.updateCart = (req, res, next) => {
     KeranjangPelanggan.findOneAndUpdate({idKeranjang: `${idKeranjang}`}, {$set:{qty: `${qty}`, catatanPelanggan: `${catatanPelanggan}`}}, {new: true})
     .then(result => {
         res.status(200).json({
-            message: 'Data keranjang (' + idKeranjang + ') berhasil diupdate',
+            message: 'Data keranjang berhasil diupdate',
             data: result
         })
     })
@@ -119,7 +140,7 @@ exports.updateCartMinus = async (req, res, next) => {
     KeranjangPelanggan.findOneAndUpdate({idKeranjang: `${idKeranjang}`}, {$set:{qty: `${qtyMinus}`}}, {new: true})
     .then(result => {
         res.status(200).json({
-            message: 'Item (' + idKeranjang + ') berhasil dikurang 1',
+            message: 'Item berhasil dikurang 1',
             data: result
         })
     })
@@ -140,7 +161,7 @@ exports.updateCartPlus = async (req, res, next) => {
     KeranjangPelanggan.findOneAndUpdate({idKeranjang: `${idKeranjang}`}, {$set:{qty: `${qtyPlus}`}}, {new: true})
     .then(result => {
         res.status(200).json({
-            message: 'Item (' + idKeranjang + ') berhasil ditambah 1',
+            message: 'Item berhasil ditambah 1',
             data: result
         })
     })

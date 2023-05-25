@@ -32,7 +32,7 @@ exports.getMenuByCategory = (req, res, next) => {
     Menu.find({ kategoriMenu: `${kategoriMenu}` })
         .then(result => {
             res.status(200).json({
-                message: 'Data menu berdasarkan kategori (' + kategoriMenu + ') berhasil dipanggil',
+                message: 'Data menu berdasarkan kategori berhasil dipanggil',
                 data: result
             })
         })
@@ -46,7 +46,7 @@ exports.getMenuDetail = (req, res, next) => {
     Menu.find({ idMenu: `${idMenu}` })
         .then(result => {
             res.status(200).json({
-                message: 'Data detail menu (' + idMenu + ') berhasil dipanggil',
+                message: 'Data detail menu berhasil dipanggil',
                 data: result
             })
         }
