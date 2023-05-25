@@ -11,12 +11,12 @@ exports.getListCart = async (req, res, next) => {
     KeranjangPelanggan.find({idPelanggan: `${idPelanggan}`})
     .then((result) => {
         //operasi untuk melakukan perkalian harga dan qty, lalu di jumlahkan keseluruhan berdasarkan data yang ada
-        const multiply = findQtyHarga.reduce((accumulator, object) => {
+        const totalHarga = findQtyHarga.reduce((accumulator, object) => {
             return accumulator + (object.hargaMenu * object.qty);
         }, 0)
         return res.status(200).json({
             message: 'Data keranjang berhasil dipanggil',
-            data: {result, multiply}
+            data: {result, totalHarga}
         })
     })
     .catch(err => {
