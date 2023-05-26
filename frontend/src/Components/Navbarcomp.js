@@ -61,7 +61,7 @@ function Navbarcomp(props) {
         // console.log("error: data tidak terambil - ", err);
       });
   });
-  console.log(menus);
+
   const numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };
@@ -98,7 +98,7 @@ function Navbarcomp(props) {
   //     .then((res) => console.log(res))
   //     .catch((err) => console.log(err));
   // }, []);
-
+  console.log(data);
   const deleteItem = (value) => {
     console.log(value);
     axios
@@ -476,7 +476,7 @@ function Navbarcomp(props) {
                       }}
                     />
                   </div>
-                  <div> </div>
+
                   <table style={{ maxHeight: "20vw" }} className="table2">
                     <td
                       className="tittle"
@@ -486,9 +486,11 @@ function Navbarcomp(props) {
                       {" "}
                       {d.namaMenu}{" "}
                     </td>
+
                     <td style={{ textAlign: "center" }}> {d.qty}x </td>
                     <td> Rp. {numberWithCommas(d.hargaMenu * d.qty)},00</td>
                     <td className="opration"></td>
+
                     {/* <button onClick={handleDelete(d.idKeranjang)}>
                       Delete
                     </button> */}
@@ -580,13 +582,14 @@ function Navbarcomp(props) {
             })}
           </div>
           <p>
-            {" "}
-            <ul class="fw-bold">
-              <ul style={{ textAlign: "end" }}></ul>Total.
-              {data.result
-                ?.map((item) => item.hargaMenu * item.qty)
-                .reduce((total, value) => total + value, 0)}
-            </ul>
+            <table
+              style={{ maxHeight: "20vw", fontSize: "15px" }}
+              className="table2"
+            >
+              <td class="fw-bold"> Total </td>
+              <td></td>
+              <td class="fw-bold"> Rp. {data.totalHarga}</td>
+            </table>
           </p>
         </div>
 
