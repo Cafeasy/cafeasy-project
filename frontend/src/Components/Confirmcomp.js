@@ -1,10 +1,24 @@
 import "../Style/Confirmpage.css";
 import { IoChevronBackCircleOutline } from "react-icons/io5";
-import React from "react";
+import Navbarcomp from "./Navbarcomp";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { CgArrowLeftO } from "react-icons/cg";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+
 const Confirmcomp = (props) => {
+  const params = useParams();
+  const urlParams = params.idUser;
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:8888/cartPelanggan/" + urlParams)
+      .then((res) => setData(res.data.data))
+      .catch((err) => console.log(err));
+  }, [data]);
+
   const menus = props.menu;
   const location = useLocation();
   const { url } = location.state;
@@ -15,7 +29,6 @@ const Confirmcomp = (props) => {
           <CgArrowLeftO class="mx-4" size={35} />
         </Link>
       </div>
-
       <br></br>
       <br></br>
       <div>
@@ -35,46 +48,22 @@ const Confirmcomp = (props) => {
           <tr className="text-title">
             <td>Paket yang dipilih</td>
           </tr>
-
-          <tr className="text-title1">
-            <td>American waffle </td>
-            <td style={{ textAlign: "center" }}>1x</td>
-            <td>Rp 20.000,00</td>
-          </tr>
-
-          <tr className="text-title1">
-            <td>Belgian waffle </td>
-            <td style={{ textAlign: "center" }}>1x</td>
-            <td>Rp 20.000,00</td>
-          </tr>
-
-          <tr className="text-title1">
-            <td>Diskon </td>
-            <td></td>
-            <td>(Rp 5.000,00)</td>
-          </tr>
-
-          <tr className="text-title1">
-            <td>Sub Total </td>
-            <td></td>
-            <td>Rp 20.000,00</td>
-          </tr>
-
-          <tr className="text-title1">
-            <td>Biaya pelayanan </td>
-            <td></td>
-            <td>Rp 2.000,00</td>
-          </tr>
-
-          <tr className="text-title1">
-            <td>Take away </td>
-            <td></td>
-            <td>Rp 2.000,00</td>
-          </tr>
+          {data.result?.map((item) => (
+            <>
+              <tr className="text-title1">
+                <td>{item.namaMenu} </td>
+                <td style={{ textAlign: "center" }}>{item.qty}x</td>
+                <td>Rp. {item.hargaMenu * item.qty}</td>
+              </tr>
+            </>
+          ))}
           <tr style={{ fontWeight: "bold" }}>
             <td>Total </td>
             <td></td>
-            <td>Rp 20.000,00</td>
+            <td>Rp. {data.totalHarga}</td>
+          </tr>
+          <tr>
+            <td> </td>
           </tr>
         </table>
       </div>

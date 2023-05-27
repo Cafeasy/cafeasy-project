@@ -17,3 +17,11 @@
 .delete_button {
   position: absolute;
 }
+.decrease_button {
+  position: absolute;
+  margin-left: 5%;
+}
+.increase_button {
+  position: absolute;
+  left: 55%;
+}

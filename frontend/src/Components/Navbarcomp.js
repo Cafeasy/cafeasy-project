@@ -8,6 +8,8 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Modal from "react-bootstrap/Modal";
 import { BsDashCircle } from "react-icons/bs";
+
+import { AiOutlineDelete } from "react-icons/ai";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
@@ -92,13 +94,24 @@ function Navbarcomp(props) {
       .catch((err) => console.log(err));
   }, [data]);
 
-  // useEffect(() => {
-  //   axios
-  //     .delete("http://localhost:8888/delCart/" + urlParams + "/cart-nncum24ji8")
-  //     .then((res) => console.log(res))
-  //     .catch((err) => console.log(err));
-  // }, []);
   console.log(data);
+
+  const addItem = (value) => {
+    console.log(value);
+    axios
+      .put("http://localhost:8888/cartPelangganPlus/" + value)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
+  const minItem = (value) => {
+    console.log(value);
+    axios
+      .put("http://localhost:8888/cartPelangganMinus/" + value)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
   const deleteItem = (value) => {
     console.log(value);
     axios
@@ -466,7 +479,7 @@ function Navbarcomp(props) {
               return (
                 <>
                   <div className="delete_button">
-                    <BsDashCircle
+                    <AiOutlineDelete
                       style={{ cursor: "pointer" }}
                       class="mx-4"
                       onClick={() => {
@@ -476,7 +489,6 @@ function Navbarcomp(props) {
                       }}
                     />
                   </div>
-
                   <table style={{ maxHeight: "20vw" }} className="table2">
                     <td
                       className="tittle"
@@ -486,14 +498,33 @@ function Navbarcomp(props) {
                       {" "}
                       {d.namaMenu}{" "}
                     </td>
+                    <div className="decrease_button">
+                      <BsDashCircle
+                        style={{ cursor: "pointer" }}
+                        class="mx-4"
+                        onClick={() => {
+                          removeMe(d.namaMenu);
+                          notifDelete(d.namaMenu);
+                          minItem(d.idKeranjang);
+                        }}
+                      />
+                    </div>
 
                     <td style={{ textAlign: "center" }}> {d.qty}x </td>
+                    <div className="increase_button">
+                      <BsPlusCircle
+                        style={{ cursor: "pointer" }}
+                        class="mx-4"
+                        onClick={() => {
+                          removeMe(d.namaMenu);
+                          notifsukses(d);
+                          addItem(d.idKeranjang);
+                        }}
+                      />
+                    </div>
                     <td> Rp. {numberWithCommas(d.hargaMenu * d.qty)},00</td>
                     <td className="opration"></td>
 
-                    {/* <button onClick={handleDelete(d.idKeranjang)}>
-                      Delete
-                    </button> */}
                     {show && (
                       <Modal
                         show={show}
@@ -588,15 +619,12 @@ function Navbarcomp(props) {
             >
               <td class="fw-bold"> Total </td>
               <td></td>
-              <td class="fw-bold"> Rp. {data.totalHarga}</td>
+              <td class="fw-bold"> Rp. {data.totalHarga},00</td>
             </table>
           </p>
         </div>
 
-        <Link
-          to={`/KonfirmasiPesanan/${menus.idMenu}`}
-          state={{ url: urlParams }}
-        >
+        <Link to={`/KonfirmasiPesanan/` + urlParams} state={{ url: urlParams }}>
           <button className="button-konfir" onClick={""}>
             Konfirmasi Pemesanan
           </button>
