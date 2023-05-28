@@ -1,6 +1,5 @@
 import "../Style/Confirmpage.css";
-import { IoChevronBackCircleOutline } from "react-icons/io5";
-import Navbarcomp from "./Navbarcomp";
+import "https://app.sandbox.midtrans.com/snap/snap.js";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { CgArrowLeftO } from "react-icons/cg";
@@ -18,7 +17,16 @@ const Confirmcomp = (props) => {
       .then((res) => setData(res.data.data))
       .catch((err) => console.log(err));
   }, [data]);
-
+  const payment = async (e) => {
+    e.preventDefault();
+    await axios
+      .get(`${process.env.REACT_APP_API_URL}/midtransPayment/`)
+      .then((res) => {
+        const responseAPI = res.data.data;
+        console.log("transaction token:", responseAPI);
+        window.snap.pay(responseAPI);
+      }).catch((err) => console.log("error : ", err));
+  }
   const menus = props.menu;
   const location = useLocation();
   const { url } = location.state;
@@ -71,7 +79,7 @@ const Confirmcomp = (props) => {
         <br></br>
         <br></br>
         <br></br>
-        <button className="button-proses-pembayaran">Bayar Di Kasir</button>
+        <button type="button" onClick={payment} className="button-proses-pembayaran">Bayar Di Kasir</button>
       </div>
     </div>
   );
