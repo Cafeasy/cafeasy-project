@@ -10,10 +10,10 @@ const RiwayatpesananController = require("../controllers/Riwayatpesanancontrolle
 const TransaksiController = require("../controllers/TransaksiCustomercontroller");
 const app = express();
 const Customer = require("../model/Customermodel")
+const Midtrans = require('../controllers/MidtransController.js')
 
 
-
-router.get("/" ,(req,res)=>{
+router.get("/", (req, res) => {
     let navPage = '<a href="/ListMenu" >List Menu Service</a><br> <a href="/allCustomer" >Customer</a>';
     res.send(navPage);
 })
@@ -38,11 +38,11 @@ router.get("/login/success", (req, res) => {
         const user = data
 
         const inputUser = {
-            id: "gusr"+user.id,
+            id: "gusr" + user.id,
             name: user.name.givenName + " " + user.name.familyName
         }
         Customer.create(inputUser)
-        res.redirect(process.env.CLIENT_URL + "Berandapage/" + "gusr"+user.id)
+        res.redirect(process.env.CLIENT_URL + "Berandapage/" + "gusr" + user.id)
 
 
     } else {
@@ -105,11 +105,13 @@ router.get('/historyPesananPelanggan/:idPelanggan', RiwayatpesananController.get
 //routes crud transaksi
 router.get('/getTransaksi/:idPelanggan', TransaksiController.getTransaksiPelanggan);
 router.get('/getTransaksi/:idPelanggan/:idTransaksi', TransaksiController.getDetailTransaksiPelanggan);
-router.post('/postTransaksi/:idPelanggan', );
-router.delete('/delTransaksi/:idPelanggan', );
-router.put('/putTransaksi/:idPelanggan', );
+router.post('/postTransaksi/:idPelanggan',);
+router.delete('/delTransaksi/:idPelanggan',);
+router.put('/putTransaksi/:idPelanggan',);
 
-router.get('*',(req,res)=>{
+router.get('/midtransPayment/', Midtrans.buatTransaction);
+
+router.get('*', (req, res) => {
     res.send('<h1> 404. This page does not exist. <a href="/" >Back Home</a> </h1>')
 })
 module.exports = router;
