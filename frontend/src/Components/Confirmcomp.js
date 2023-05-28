@@ -44,14 +44,17 @@ const Confirmcomp = (props) => {
         </div>
       </div>
       <div className="">
-        <table style={{ maxHeight: "20vw" }} className="isi-pesanan">
+        <table
+          style={{ width: "95%", textAlign: "left" }}
+          className="isi-pesanan"
+        >
           <tr className="text-title">
-            <td>Paket yang dipilih</td>
+            <td colSpan={1}>Paket yang dipilih</td>
           </tr>
           {data.result?.map((item) => (
             <>
               <tr className="text-title1">
-                <td>{item.namaMenu} </td>
+                <td style={{ padding: "5px" }}>{item.namaMenu} </td>
                 <td style={{ textAlign: "center" }}>{item.qty}x</td>
                 <td>Rp. {item.hargaMenu * item.qty}</td>
               </tr>
@@ -69,6 +72,8 @@ const Confirmcomp = (props) => {
       </div>
 
       <div>
+        <br></br>
+        <br></br>
         <br></br>
         <button className="button-proses-pembayaran">Bayar Di Kasir</button>
       </div>
