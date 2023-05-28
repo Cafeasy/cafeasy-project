@@ -492,7 +492,11 @@ function Navbarcomp(props) {
           <Row xs={2} md={4} className="g-0">
             {dataSearch.map((menu, masukKeranjang) => (
               <Col>
-                <Card className="mx-1 mb-5 border-0 " key={menu._id}>
+                <Card
+                  className="mx-1 mb-5 border-0 "
+                  key={menu._id}
+                  style={{ color: "grey" }}
+                >
                   <Link
                     to={`/Detailmenu/${menu.idMenu}`}
                     state={{ url: urlParams }}
