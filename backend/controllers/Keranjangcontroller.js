@@ -120,7 +120,6 @@ exports.updateCart = (req, res, next) => {
     const catatanPelanggan = req.body.catatanPelanggan;
     const idKeranjang = req.params.idKeranjang;
 
-   
     KeranjangPelanggan.findOneAndUpdate({idKeranjang: `${idKeranjang}`}, {$set:{qty: `${qty}`, catatanPelanggan: `${catatanPelanggan}`}}, {new: true})
     .then(result => {
         res.status(200).json({
@@ -141,17 +140,29 @@ exports.updateCartMinus = async (req, res, next) => {
     const qtySign = obyekCart.qty;
     const qtyMinus = qtySign-1;
 
-   
-    KeranjangPelanggan.findOneAndUpdate({idKeranjang: `${idKeranjang}`}, {$set:{qty: `${qtyMinus}`}}, {new: true})
-    .then(result => {
-        res.status(200).json({
-            message: 'Item berhasil dikurang 1',
-            data: result
+    if (obyekCart.qty <= 1) {
+        KeranjangPelanggan.deleteOne(({idKeranjang: `${idKeranjang}`}))
+        .then(result => {
+            res.status(200).json({
+                message: 'Data keranjang pelanggan berhasil dihapus',
+                data: result
+            })
         })
-    })
-    .catch(err => {
-        next(err);
-    })
+        .catch(err => {
+            next(err);
+        })
+    } else {
+        KeranjangPelanggan.findOneAndUpdate({idKeranjang: `${idKeranjang}`}, {$set:{qty: `${qtyMinus}`}}, {new: true})
+        .then(result => {
+            res.status(200).json({
+                message: 'Item berhasil dikurang 1',
+                data: result
+            })
+        })
+        .catch(err => {
+            next(err);
+        })
+    }
 }
 
 exports.updateCartPlus = async (req, res, next) => {
