@@ -25,10 +25,9 @@ function Berandapage() {
                 axios
                     .get(url2)
                     .then((result) => {
-                        const responseAPI = result.data;
-                        const data2 = responseAPI.data;
-                        data2.map((user1) => {
-                            setUser(user1)
+                        const responseAPI = result.data.data;
+                        responseAPI.map((res) => {
+                            setUser(res)
                         })
 
                         console.log("data API ada", responseAPI.data);

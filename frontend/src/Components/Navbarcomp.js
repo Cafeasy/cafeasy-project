@@ -794,7 +794,7 @@ function Navbarcomp(props) {
           </p>
         </div>
 
-        <Link to={`/MetodePembayaran/` + urlParams} state={{ url: urlParams }}>
+        <Link to={`/KonfirmasiPesanan/` + urlParams} state={{ url: urlParams }}>
           <button className="button-konfir" onClick={""}>
             Konfirmasi Pemesanan
           </button>

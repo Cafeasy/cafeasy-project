@@ -108,7 +108,7 @@ router.get('/getTransaksi/:idPelanggan/:idTransaksi', TransaksiController.getDet
 router.post('/postTransaksi/:idPelanggan',);
 router.delete('/delTransaksi/:idPelanggan',);
 router.put('/putTransaksi/:idPelanggan',);
-
+//routes payment Midtrans
 router.get('/midtransPayment/', Midtrans.buatTransaction);
 
 router.get('*', (req, res) => {

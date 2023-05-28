@@ -6,11 +6,13 @@ import { CgArrowLeftO } from "react-icons/cg";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Confirmcomp = (props) => {
   const params = useParams();
   const urlParams = params.idUser;
   const [data, setData] = useState([]);
+  const paymentSukses = useNavigate();
   useEffect(() => {
     axios
       .get("http://localhost:8888/cartPelanggan/" + urlParams)
@@ -27,6 +29,7 @@ const Confirmcomp = (props) => {
         window.snap.pay(responseAPI);
       })
       .catch((err) => console.log("error : ", err));
+      paymentSukses("/Statuspage/" + urlParams);
   };
   const menus = props.menu;
   const location = useLocation();
