@@ -34,7 +34,11 @@ function App() {
           path="/KonfirmasiPesanan/:idUser"
           element={<Confirmpage />}
         />
-        <Route exact path="/MetodePembayaran" element={<Methodpage />} />
+        <Route
+          exact
+          path="/MetodePembayaran/:idUser"
+          element={<Methodpage />}
+        />
         <Route exact path="/Detailmenu/:idMenu" element={<Detailmenupage />} />
         <Route
           exact

@@ -94,8 +94,6 @@ function Navbarcomp(props) {
       .catch((err) => console.log(err));
   }, [data]);
 
-  console.log(data);
-
   const addItem = (value) => {
     console.log(value);
     axios
@@ -119,6 +117,14 @@ function Navbarcomp(props) {
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
+
+  const [post, setPost] = React.useState(null);
+
+  React.useEffect(() => {
+    axios.get("http://localhost:8888/NotAvailableMenu").then((response) => {
+      setPost(response.data);
+    });
+  }, [post]);
 
   const [show, setShow] = useState(false);
   let [count, setCount] = useState(1);
@@ -249,6 +255,14 @@ function Navbarcomp(props) {
                       state={{ url: urlParams }}
                     >
                       Kontak
+                    </Nav.Link>
+
+                    <Nav.Link
+                      as={Link}
+                      to={`/MetodePembayaran/` + urlParams}
+                      state={{ url: urlParams }}
+                    >
+                      Metode Pembayaran
                     </Nav.Link>
 
                     <Nav.Link
@@ -400,6 +414,74 @@ function Navbarcomp(props) {
                             >
                               <BsPlusCircle></BsPlusCircle>
                             </Button>
+                          </form>
+                        </div>
+                      </div>
+
+                      <Card.Text className="menu-deskripsi">
+                        {menu.deskripsiMenu}
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              );
+            })}
+
+            {post?.data.map((menu, index) => {
+              return (
+                <Col>
+                  <Card
+                    className="mx-1  mb-5 border-0 "
+                    key={menu.idMenu}
+                    data-example={menu.namaMenu}
+                    masukKeranjang={menu.masukKeranjang}
+                  >
+                    <Link
+                      to={`/Detailmenu/${menu.idMenu}`}
+                      state={{ url: urlParams }}
+                    >
+                      <Card.Img variant="top" src={Gambarburger} />
+                    </Link>
+                    <Card.Body>
+                      <Card.Title className="menu-harga">
+                        {menu.hargaMenu}
+                      </Card.Title>
+                      <Card.Title className="menu-tittle">
+                        {menu.namaMenu}
+                      </Card.Title>
+                      <div className="rate">
+                        <div class="text text-end text-warning">
+                          <BsStarFill size="10px"></BsStarFill>
+                          <BsStarFill size="10px"></BsStarFill>
+                          <BsStarFill size="10px"></BsStarFill>
+                          <BsStarFill size="10px"></BsStarFill>
+                          <BsStarFill size="10px"></BsStarFill>
+                        </div>
+
+                        <div class="text text-end text-dark">
+                          <form
+                            action=""
+                            id="login"
+                            method="post"
+                            onSubmit={onSubmit}
+                          >
+                            <div
+                              className="menu-harga"
+                              style={{ fontSize: "13px" }}
+                            >
+                              Sold Out
+                            </div>
+                            {/* <Button
+                              className="buttonplus"
+                              type="submit"
+                              variant="text"
+                              onClick={() => {
+                                notifsukses(menu);
+                                setInidata(menu);
+                              }}
+                            >
+                              <BsPlusCircle></BsPlusCircle>
+                            </Button> */}
                           </form>
                         </div>
                       </div>
