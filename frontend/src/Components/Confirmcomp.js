@@ -43,33 +43,29 @@ const Confirmcomp = (props) => {
           </button>
         </div>
       </div>
-      <div className="">
-        <table
-          style={{ width: "95%", textAlign: "left" }}
-          className="isi-pesanan"
-        >
-          <tr className="text-title">
-            <td colSpan={1}>Paket yang dipilih</td>
-          </tr>
-          {data.result?.map((item) => (
-            <>
-              <tr className="text-title1">
-                <td style={{ padding: "5px" }}>{item.namaMenu} </td>
-                <td style={{ textAlign: "center" }}>{item.qty}x</td>
-                <td>Rp. {item.hargaMenu * item.qty}</td>
-              </tr>
-            </>
-          ))}
-          <tr style={{ fontWeight: "bold" }}>
-            <td>Total </td>
-            <td></td>
-            <td>Rp. {data.totalHarga}</td>
-          </tr>
-          <tr>
-            <td> </td>
-          </tr>
-        </table>
-      </div>
+
+      <table style={{ width: "95%", textAlign: "left", marginLeft: "3%" }}>
+        <tr className="text-title">
+          <td colSpan={1}>Paket yang dipilih</td>
+        </tr>
+        {data.result?.map((item) => (
+          <>
+            <tr className="text-title1">
+              <td style={{ padding: "5px" }}>{item.namaMenu} </td>
+              <td style={{ textAlign: "center" }}>{item.qty}x</td>
+              <td>Rp. {item.hargaMenu * item.qty}</td>
+            </tr>
+          </>
+        ))}
+        <tr style={{ fontWeight: "bold" }}>
+          <td>Total </td>
+          <td></td>
+          <td>Rp. {data.totalHarga}</td>
+        </tr>
+        <tr>
+          <td> </td>
+        </tr>
+      </table>
 
       <div>
         <br></br>

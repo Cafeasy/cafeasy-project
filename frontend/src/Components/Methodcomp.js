@@ -72,17 +72,23 @@ const Methodcomp = (props) => {
           <Accordion.Item eventKey="1">
             <Accordion.Header>M - Banking</Accordion.Header>
             <Accordion.Body>
-              <div class="card mx-auto" style={{ margin: "5px" }}>
-                <div class="card-body">
-                  <img
-                    class="card-img col float-start"
-                    src={BCALogo}
-                    alt="Card image"
-                    style={{ width: "50px" }}
-                  ></img>
-                  <div>Bank Central Asia</div>
+              <Link
+                to={`/KonfirmasiPesanan/` + urlParams}
+                state={{ url: urlParams }}
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <div class="card mx-auto" style={{ margin: "5px" }}>
+                  <div class="card-body">
+                    <img
+                      class="card-img col float-start"
+                      src={BCALogo}
+                      alt="Card image"
+                      style={{ width: "50px" }}
+                    ></img>
+                    <div>BCA</div>
+                  </div>
                 </div>
-              </div>
+              </Link>
               <div class="card mx-auto" style={{ margin: "5px" }}>
                 <div class="card-body">
                   <img
@@ -134,17 +140,6 @@ const Methodcomp = (props) => {
           <Accordion.Item eventKey="2">
             <Accordion.Header>E - Money</Accordion.Header>
             <Accordion.Body>
-              <div class="card mx-auto" style={{ margin: "5px" }}>
-                <div class="card-body">
-                  <img
-                    class="card-img col float-start"
-                    src={BCALogo}
-                    alt="Card image"
-                    style={{ width: "50px" }}
-                  ></img>
-                  <div>Bank Central Asia</div>
-                </div>
-              </div>
               <div class="card mx-auto" style={{ margin: "5px" }}>
                 <div class="card-body">
                   <img
