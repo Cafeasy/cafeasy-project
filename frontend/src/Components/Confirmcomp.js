@@ -71,7 +71,10 @@ const Confirmcomp = (props) => {
         <br></br>
         <br></br>
         <br></br>
-        <button className="button-proses-pembayaran">Bayar Di Kasir</button>
+
+        <Link to={`/Statuspage/` + urlParams} state={{ url: urlParams }}>
+          <button className="button-proses-pembayaran">Bayar Di Kasir</button>
+        </Link>
       </div>
     </div>
   );

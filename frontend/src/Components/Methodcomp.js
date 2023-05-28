@@ -2,6 +2,10 @@ import "../Style/Methodpage.css";
 import { IoChevronBackCircleOutline } from "react-icons/io5";
 import Navbarcomp from "./Navbarcomp";
 import BCALogo from "../Photo/bcalogo.png";
+import MANDIRIlogo from "../Photo/mandirilogo.png";
+import MEGAlogo from "../Photo/megalogo.png";
+import BRIlogo from "../Photo/brilogo.png";
+import BNIlogo from "../Photo/bnilogo.png";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { CgArrowLeftO } from "react-icons/cg";
@@ -85,7 +89,7 @@ const Methodcomp = (props) => {
                       alt="Card image"
                       style={{ width: "50px" }}
                     ></img>
-                    <div>BCA</div>
+                    <div>Bank Central Asia</div>
                   </div>
                 </div>
               </Link>
@@ -93,44 +97,44 @@ const Methodcomp = (props) => {
                 <div class="card-body">
                   <img
                     class="card-img col float-start"
-                    src={BCALogo}
+                    src={MANDIRIlogo}
                     alt="Card image"
                     style={{ width: "50px" }}
                   ></img>
-                  <div>Bank Central Asia</div>
+                  <div>Bank Mandiri</div>
                 </div>
               </div>
               <div class="card mx-auto" style={{ margin: "5px" }}>
                 <div class="card-body">
                   <img
                     class="card-img col float-start"
-                    src={BCALogo}
+                    src={MEGAlogo}
                     alt="Card image"
                     style={{ width: "50px" }}
                   ></img>
-                  <div>Bank Central Asia</div>
+                  <div>Bank Mega</div>
                 </div>
               </div>
               <div class="card mx-auto" style={{ margin: "5px" }}>
                 <div class="card-body">
                   <img
                     class="card-img col float-start"
-                    src={BCALogo}
+                    src={BNIlogo}
                     alt="Card image"
                     style={{ width: "50px" }}
                   ></img>
-                  <div>Bank Central Asia</div>
+                  <div>Bank Negara Indonesia</div>
                 </div>
               </div>
               <div class="card mx-auto" style={{ margin: "5px" }}>
                 <div class="card-body">
                   <img
                     class="card-img col float-start"
-                    src={BCALogo}
+                    src={BRIlogo}
                     alt="Card image"
                     style={{ width: "50px" }}
                   ></img>
-                  <div>Bank Central Asia</div>
+                  <div>Bank Rakyat Indonesia</div>
                 </div>
               </div>
             </Accordion.Body>
@@ -148,7 +152,7 @@ const Methodcomp = (props) => {
                     alt="Card image"
                     style={{ width: "50px" }}
                   ></img>
-                  <div>Bank Central Asia</div>
+                  <div>Ovo</div>
                 </div>
               </div>
               <div class="card mx-auto" style={{ margin: "5px" }}>
@@ -159,7 +163,7 @@ const Methodcomp = (props) => {
                     alt="Card image"
                     style={{ width: "50px" }}
                   ></img>
-                  <div>Bank Central Asia</div>
+                  <div>Dana</div>
                 </div>
               </div>
               <div class="card mx-auto" style={{ margin: "5px" }}>
@@ -170,7 +174,18 @@ const Methodcomp = (props) => {
                     alt="Card image"
                     style={{ width: "50px" }}
                   ></img>
-                  <div>Bank Central Asia</div>
+                  <div>Shopeepay</div>
+                </div>
+              </div>
+              <div class="card mx-auto" style={{ margin: "5px" }}>
+                <div class="card-body">
+                  <img
+                    class="card-img col float-start"
+                    src={BCALogo}
+                    alt="Card image"
+                    style={{ width: "50px" }}
+                  ></img>
+                  <div>Gopay</div>
                 </div>
               </div>
             </Accordion.Body>

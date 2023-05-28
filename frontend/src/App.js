@@ -45,9 +45,9 @@ function App() {
           path="/RiwayatPesanan/:idMenu"
           element={<Riwayatpesananpage />}
         />
+        <Route exact path="/Statuspage/:idUser" element={<Statuspage />} />
         <Route exact path="/Kontakpage/:idMenu" element={<Kontakpage />} />
         <Route exact path="/Bantuanpage/:idMenu" element={<BantuanPage />} />
-        <Route exact path="/Statuspage/:idMenu" element={<Statuspage />} />
       </Routes>
     </Router>
   );

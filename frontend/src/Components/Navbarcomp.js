@@ -121,10 +121,23 @@ function Navbarcomp(props) {
   const [post, setPost] = React.useState(null);
 
   React.useEffect(() => {
-    axios.get("http://localhost:8888/NotAvailableMenu").then((response) => {
-      setPost(response.data);
-    });
+    axios
+      .get("http://localhost:8888/ListMenuByCategory/Minuman")
+      .then((response) => {
+        setPost(response.data);
+      });
   }, [post]);
+
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:8888/ListMenuByCategory/Minuman")
+      .then((result) => {
+        console.log(result.data);
+        setPosts(result.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   const [show, setShow] = useState(false);
   let [count, setCount] = useState(1);
@@ -357,7 +370,7 @@ function Navbarcomp(props) {
       <div className="listmenu">
         {active === "firstcard" && (
           <Row xs={2} md={4} className="g-0">
-            {dataSearch.slice(0, visible).map((menu, index) => {
+            {dataSearch.map((menu, index) => {
               return (
                 <Col>
                   <Card
@@ -418,7 +431,6 @@ function Navbarcomp(props) {
                 </Col>
               );
             })}
-
             {post?.data.map((menu, index) => {
               return (
                 <Col>
@@ -463,17 +475,6 @@ function Navbarcomp(props) {
                             >
                               Sold Out
                             </div>
-                            {/* <Button
-                              className="buttonplus"
-                              type="submit"
-                              variant="text"
-                              onClick={() => {
-                                notifsukses(menu);
-                                setInidata(menu);
-                              }}
-                            >
-                              <BsPlusCircle></BsPlusCircle>
-                            </Button> */}
                           </form>
                         </div>
                       </div>
@@ -533,7 +534,98 @@ function Navbarcomp(props) {
             ))}
           </Row>
         )}
-        <div className="button-hide">
+        {active === "thirdcard" && (
+          <Row xs={2} md={4} className="g-0">
+            {dataSearch.map((menu, masukKeranjang) => (
+              <Col>
+                <Card
+                  className="mx-1 mb-5 border-0 "
+                  key={menu._id}
+                  style={{ color: "grey" }}
+                >
+                  <Link
+                    to={`/Detailmenu/${menu.idMenu}`}
+                    state={{ url: urlParams }}
+                  >
+                    <Card.Img variant="top" src={Gambarburger} />
+                  </Link>
+                  <Card.Body>
+                    <Card.Title className="menu-harga">62K</Card.Title>
+                    <Card.Title className="menu-tittle">
+                      {menu.namaMenu}
+                    </Card.Title>
+                    <div className="rate">
+                      <div class="text text-end text-warning">
+                        <BsStarFill size="10px"></BsStarFill>
+                        <BsStarFill size="10px"></BsStarFill>
+                        <BsStarFill size="10px"></BsStarFill>
+                        <BsStarFill size="10px"></BsStarFill>
+                        <BsStarFill size="10px"></BsStarFill>
+                      </div>
+
+                      <div class="text text-end text-dark">
+                        <Button className="buttonplus" variant="text">
+                          <BsPlusCircle></BsPlusCircle>
+                        </Button>
+                      </div>
+                    </div>
+
+                    <Card.Text className="menu-deskripsi">
+                      {menu.deskripsiMenu}
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        )}
+
+        {active === "fourthcard" && (
+          <Row xs={2} md={4} className="g-0">
+            {post?.data.map((menu, masukKeranjang) => (
+              <Col>
+                <Card
+                  className="mx-1 mb-5 border-0 "
+                  key={menu._id}
+                  style={{ color: "grey" }}
+                >
+                  <Link
+                    to={`/Detailmenu/${menu.idMenu}`}
+                    state={{ url: urlParams }}
+                  >
+                    <Card.Img variant="top" src={Gambarburger} />
+                  </Link>
+                  <Card.Body>
+                    <Card.Title className="menu-harga">62K</Card.Title>
+                    <Card.Title className="menu-tittle">
+                      {menu.namaMenu}
+                    </Card.Title>
+                    <div className="rate">
+                      <div class="text text-end text-warning">
+                        <BsStarFill size="10px"></BsStarFill>
+                        <BsStarFill size="10px"></BsStarFill>
+                        <BsStarFill size="10px"></BsStarFill>
+                        <BsStarFill size="10px"></BsStarFill>
+                        <BsStarFill size="10px"></BsStarFill>
+                      </div>
+
+                      <div class="text text-end text-dark">
+                        <Button className="buttonplus" variant="text">
+                          <BsPlusCircle></BsPlusCircle>
+                        </Button>
+                      </div>
+                    </div>
+
+                    <Card.Text className="menu-deskripsi">
+                      {menu.deskripsiMenu}
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        )}
+        {/* <div className="button-hide">
           <p onClick={showmoritem}>
             <text onClick={() => toggleShow(!toggleshow)}>
               {show ? "" : "More Menu"}
@@ -547,7 +639,7 @@ function Navbarcomp(props) {
           <p onClick={showmoritems}>
             <text onClick={() => toggleShow(!toggleshow)}></text>
           </p>
-        </div>
+        </div> */}
       </div>
 
       <div>

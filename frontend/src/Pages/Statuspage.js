@@ -3,12 +3,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import { useParams } from "react-router-dom";
+
 function Statuspage(props) {
   const [menu, setMenu] = useState([]);
   const idUser = props.idUser;
 
   const idMenu = useParams();
-  const url = `${process.env.REACT_APP_API_URL}/Statuspage/${idMenu.idMenu}`;
+  const url = `${process.env.REACT_APP_API_URL}/KonfirmasiPesanan/${idMenu.idMenu}`;
 
   useEffect(() => {
     axios
