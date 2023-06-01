@@ -3,13 +3,14 @@ const RiwayatPesananPelanggan = require("../model/Riwayatpesananmodel");
 const Customer = require("../model/Customermodel");
 const KeranjangPelanggan = require("../model/Keranjangmodel");
 
+
 exports.getTransaksiPelanggan = async (req, res, next) => {
     const idPelanggan = req.params.idPelanggan;
     
     TransaksiPelanggan.find({idPelanggan: `${idPelanggan}`})
     .then(result => {
         res.status(200).json({
-            message: 'Data transaksi pelanggan (' + idPelanggan + ') berhasil dipanggil',
+            message: 'Data transaksi berhasil dipanggil',
             data: result
         })
     })
@@ -21,13 +22,24 @@ exports.getTransaksiPelanggan = async (req, res, next) => {
 exports.getDetailTransaksiPelanggan = async (req, res, next) => {
     const idPelanggan = req.params.idPelanggan;
     const idTransaksi = req.params.idTransaksi;
+
+    let findQtyHarga = await TransaksiPelanggan.findOne({idPelanggan: `${idPelanggan}`, idTransaksi: `${idTransaksi}`});
     
     TransaksiPelanggan.find({idPelanggan: `${idPelanggan}`, idTransaksi: `${idTransaksi}`})
-    .then(result => {
-        res.status(200).json({
-            message: 'Data transaksi (' + idTransaksi + ') berhasil dipanggil',
-            data: result
-        })
+    .then((result) => {
+        let objek = findQtyHarga.toObject();
+        var totalHarga = 0;
+        const len = objek.dataPesanan.length;
+
+        for (var i = 0; i<len; i++) {
+            totalHarga = totalHarga + (objek.dataPesanan[i].hargaMenu * objek.dataPesanan[i].qty)
+        }  
+
+        return res.status(200).json({
+            message: 'Data transaksi pelanggan berhasil dipanggil',
+            data: {result, totalHarga}
+        })      
+        
     })
     .catch(err => {
         next(err);

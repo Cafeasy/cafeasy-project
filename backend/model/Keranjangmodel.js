@@ -16,24 +16,8 @@ const ListCartCust = new Schema({
         type: String,
         required: true
     },
-    idMenu: {
-        type: String,
-        required: true
-    },
-    namaMenu: {
-        type: String,
-        required: true
-    },
-    hargaMenu: {
-        type: Number,
-        required: true
-    },
-    qty: {
-        type: Number,
-        required: true
-    },
-    catatanPelanggan: {
-        type: String,
+    dataPesanan: {
+        type: Array,
         required: true
     }
 

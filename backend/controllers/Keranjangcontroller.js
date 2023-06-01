@@ -6,18 +6,23 @@ const Customer = require("../model/Customermodel");
 exports.getListCart = async (req, res, next) => {
     const idPelanggan = req.params.idPelanggan;
     //find keranjang by id untuk memanggil qty dan harga
-    let findQtyHarga = await KeranjangPelanggan.find({idPelanggan: `${idPelanggan}`});
-
+    let findQtyHarga = await KeranjangPelanggan.findOne({idPelanggan: `${idPelanggan}`});
+    
     KeranjangPelanggan.find({idPelanggan: `${idPelanggan}`})
     .then((result) => {
-        //operasi untuk melakukan perkalian harga dan qty, lalu di jumlahkan keseluruhan berdasarkan data yang ada
-        const totalHarga = findQtyHarga.reduce((accumulator, object) => {
-            return accumulator + (object.hargaMenu * object.qty);
-        }, 0)
+        let objek = findQtyHarga.toObject();
+        var totalHarga = 0;
+        const len = objek.dataPesanan.length;
+
+        for (var i = 0; i<len; i++) {
+            totalHarga = totalHarga + (objek.dataPesanan[i].hargaMenu * objek.dataPesanan[i].qty)
+        }  
+
         return res.status(200).json({
-            message: 'Data keranjang berhasil dipanggil',
+            message: 'Data keranjang pelanggan berhasil dipanggil',
             data: {result, totalHarga}
-        })
+        })      
+        
     })
     .catch(err => {
         next(err);
@@ -54,37 +59,43 @@ exports.postCart = async (req, res, next) => {
     const idMenu =  idMenuSign;
     const namaMenu = namaMenuSign;
     const hargaMenu = hargaMenuSign;
-    // const qty = req.body.qty;
     const catatanPelanggan = req.body.catatanPelanggan;
 
     //check data keranjang by id menu dan id pelanggan
-    let checkCartByParams = await KeranjangPelanggan.findOne({idPelanggan: `${idPelangganCheck}`, idMenu: `${idMenuCheck}`});
 
-    if(checkCartByParams) {
-        let obyekCart = checkCartByParams.toObject();
-        const qtySign = obyekCart.qty;
-        const qtyPlus = qtySign+1;
+    let checkCartByParams = await KeranjangPelanggan.findOne({idPelanggan: `${idPelangganCheck}`, "dataPesanan.idMenu":  `${idMenu}`});
+    let checkPelangganByParams = await KeranjangPelanggan.findOne({idPelanggan: `${idPelangganCheck}`});
 
-        KeranjangPelanggan.findOneAndUpdate({idPelanggan: `${idPelangganCheck}`, idMenu: `${idMenuCheck}`}, {$set:{qty: `${qtyPlus}`}}, {new: true})
-        .then(result => {
-            res.status(200).json({
-                message: 'Item berhasil ditambah 1',
-                data: result
+    if (checkPelangganByParams) {
+        if(checkCartByParams) {
+            KeranjangPelanggan.findOneAndUpdate({idPelanggan: `${idPelangganCheck}`, 'dataPesanan.idMenu': `${idMenu}` }, {$inc:{ 'dataPesanan.$.qty': 1}}, {new: true})
+            .then(result => {
+                res.status(200).json({
+                    message: 'Item berhasil ditambah 1',
+                    data: result
+                })
             })
-        })
-        .catch(err => {
-            next(err);
-        })
+            .catch(err => {
+                next(err);
+            })
+        } else {
+            KeranjangPelanggan.findOneAndUpdate({idPelanggan: `${idPelangganCheck}`}, {$push:{ dataPesanan: {idMenu: idMenu, namaMenu: namaMenu, hargaMenu: hargaMenu, qty: 1, catatanPelanggan: "-"}}}, {new: true})
+            .then(result => {
+                res.status(200).json({
+                    message: 'Item berhasil ditambah 1',
+                    data: result
+                })
+            })
+            .catch(err => {
+                next(err);
+            })
+        };
     } else {
         const insertCart = new KeranjangPelanggan({
             idKeranjang: idKeranjang,
             idPelanggan: idPelanggan,
             namaPelanggan: namaPelanggan,
-            idMenu: idMenu,
-            namaMenu: namaMenu,
-            hargaMenu: hargaMenu,
-            qty: 1,
-            catatanPelanggan: catatanPelanggan
+            dataPesanan: [{idMenu: idMenu, namaMenu: namaMenu, hargaMenu: hargaMenu, qty: 1, catatanPelanggan: catatanPelanggan}]
         })
     
         insertCart.save().then(result => {
@@ -95,18 +106,17 @@ exports.postCart = async (req, res, next) => {
         }).catch(err => {
             console.log('err: ', err);
         });
-        
-    };
+    }
 }
 
-exports.deleteCart = async (req, res) => {
+exports.deleteCart = async (req, res, next) => {
     const idPelanggan= req.params.idPelanggan;
-    const idKeranjang= req.params.idKeranjang;
-
-    KeranjangPelanggan.deleteOne(({idPelanggan: `${idPelanggan}`, idKeranjang: `${idKeranjang}`}))
+    const idMenu= req.params.idMenu;
+    
+    KeranjangPelanggan.findOneAndUpdate({idPelanggan: `${idPelanggan}`, 'dataPesanan.idMenu': `${idMenu}`}, {$pull:{ 'dataPesanan':{ idMenu:  `${idMenu}`} } }, {new: true})
     .then(result => {
         res.status(200).json({
-            message: 'Data keranjang pelanggan berhasil dihapus',
+            message: 'Item berhasil ditambah 1',
             data: result
         })
     })
@@ -115,12 +125,12 @@ exports.deleteCart = async (req, res) => {
     })
 }
 
-exports.updateCart = (req, res, next) => {
-    const qty = req.body.qty;
+exports.updateCartCatatanPelanggan = (req, res, next) => {
     const catatanPelanggan = req.body.catatanPelanggan;
-    const idKeranjang = req.params.idKeranjang;
+    const idPelanggan = req.params.idPelanggan;
+    const idMenu = req.params.idMenu;
 
-    KeranjangPelanggan.findOneAndUpdate({idKeranjang: `${idKeranjang}`}, {$set:{qty: `${qty}`, catatanPelanggan: `${catatanPelanggan}`}}, {new: true})
+    KeranjangPelanggan.findOneAndUpdate({idPelanggan: `${idPelanggan}`, 'dataPesanan.idMenu':  `${idMenu}`}, {$set: { 'dataPesanan.$.catatanPelanggan': `${catatanPelanggan}` }}, {new: true})
     .then(result => {
         res.status(200).json({
             message: 'Data keranjang berhasil diupdate',
