@@ -112,17 +112,34 @@ exports.postCart = async (req, res, next) => {
 exports.deleteCart = async (req, res, next) => {
     const idPelanggan= req.params.idPelanggan;
     const idMenu= req.params.idMenu;
-    
-    KeranjangPelanggan.findOneAndUpdate({idPelanggan: `${idPelanggan}`, 'dataPesanan.idMenu': `${idMenu}`}, {$pull:{ 'dataPesanan':{ idMenu:  `${idMenu}`} } }, {new: true})
-    .then(result => {
-        res.status(200).json({
-            message: 'Item berhasil ditambah 1',
-            data: result
+
+    let checkCartByParams = await KeranjangPelanggan.findOne({idPelanggan: `${idPelanggan}`});
+    let obyekCart = checkCartByParams.toObject();
+    let len = obyekCart.dataPesanan.length;
+
+    if (len < 1) {
+        KeranjangPelanggan.deleteOne(({idPelanggan: `${idPelanggan}`}))
+        .then(result => {
+            res.status(200).json({
+                message: 'data keranjang telah dihapus',
+                data: result
+            })
         })
-    })
-    .catch(err => {
-        next(err);
-    })
+        .catch(err => {
+            next(err);
+        })
+    } else {
+        KeranjangPelanggan.findOneAndUpdate({idPelanggan: `${idPelanggan}`, 'dataPesanan.idMenu': `${idMenu}`}, {$pull:{ 'dataPesanan':{ idMenu:  `${idMenu}`} } }, {new: true})
+        .then(result => {
+            res.status(200).json({
+                message: 'Item berhasil dihapus',
+                data: result
+            })
+        })
+        .catch(err => {
+            next(err);
+        })
+    }
 }
 
 exports.updateCartCatatanPelanggan = (req, res, next) => {
@@ -143,18 +160,18 @@ exports.updateCartCatatanPelanggan = (req, res, next) => {
 }
 
 exports.updateCartMinus = async (req, res, next) => {
-    const idKeranjang = req.params.idKeranjang;
-    let checkCartByParams = await KeranjangPelanggan.findOne({idKeranjang: `${idKeranjang}`});
+    const idPelanggan = req.params.idPelanggan;
+    const idMenu = req.params.idMenu;
+    let checkCartByParams = await KeranjangPelanggan.findOne({idPelanggan: `${idPelanggan}`});
+    let checkCartQty = await KeranjangPelanggan.findOne({idPelanggan: `${idPelanggan}`, 'dataPesanan.idMenu': `${idMenu}`, 'dataPesanan.qty': {$lte: 1}});
     let obyekCart = checkCartByParams.toObject();
-
-    const qtySign = obyekCart.qty;
-    const qtyMinus = qtySign-1;
-
-    if (obyekCart.qty <= 1) {
-        KeranjangPelanggan.deleteOne(({idKeranjang: `${idKeranjang}`}))
+    let len = obyekCart.dataPesanan.length;
+    // console.log(len);
+    if (len < 1) {
+        KeranjangPelanggan.deleteOne(({idPelanggan: `${idPelanggan}`}))
         .then(result => {
             res.status(200).json({
-                message: 'Data keranjang pelanggan berhasil dihapus',
+                message: 'data keranjang telah dihapus',
                 data: result
             })
         })
@@ -162,29 +179,37 @@ exports.updateCartMinus = async (req, res, next) => {
             next(err);
         })
     } else {
-        KeranjangPelanggan.findOneAndUpdate({idKeranjang: `${idKeranjang}`}, {$set:{qty: `${qtyMinus}`}}, {new: true})
-        .then(result => {
-            res.status(200).json({
-                message: 'Item berhasil dikurang 1',
-                data: result
+        if (checkCartQty) {
+            KeranjangPelanggan.findOneAndUpdate({idPelanggan: `${idPelanggan}`, 'dataPesanan.idMenu': `${idMenu}`}, {$pull:{ 'dataPesanan':{ idMenu:  `${idMenu}`} } }, {new: true})
+            .then(result => {
+                res.status(200).json({
+                    message: 'Item dihapus dari keranjang',
+                    data: result
+                })
             })
-        })
-        .catch(err => {
-            next(err);
-        })
+            .catch(err => {
+                next(err);
+            })
+        } else {
+            KeranjangPelanggan.findOneAndUpdate({idPelanggan: `${idPelanggan}`, 'dataPesanan.idMenu': `${idMenu}` }, {$inc:{ 'dataPesanan.$.qty': -1}}, {new: true})
+            .then(result => {
+                res.status(200).json({
+                    message: 'Item berhasil dikurangi 1',
+                    data: result
+                })
+            })
+            .catch(err => {
+                next(err);
+            })
+        }
     }
 }
 
 exports.updateCartPlus = async (req, res, next) => {
-    const idKeranjang = req.params.idKeranjang;
-    let checkCartByParams = await KeranjangPelanggan.findOne({idKeranjang: `${idKeranjang}`});
-    let obyekCart = checkCartByParams.toObject();
-
-    const qtySign = obyekCart.qty;
-    const qtyPlus = qtySign+1;
-
+    const idPelanggan = req.params.idPelanggan;
+    const idMenu = req.params.idMenu;
    
-    KeranjangPelanggan.findOneAndUpdate({idKeranjang: `${idKeranjang}`}, {$set:{qty: `${qtyPlus}`}}, {new: true})
+    KeranjangPelanggan.findOneAndUpdate({idPelanggan: `${idPelanggan}`, 'dataPesanan.idMenu': `${idMenu}` }, {$inc:{ 'dataPesanan.$.qty': 1}}, {new: true})
     .then(result => {
         res.status(200).json({
             message: 'Item berhasil ditambah 1',
