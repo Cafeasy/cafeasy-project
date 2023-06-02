@@ -82,7 +82,7 @@ exports.postCart = async (req, res, next) => {
             KeranjangPelanggan.findOneAndUpdate({idPelanggan: `${idPelangganCheck}`}, {$push:{ dataPesanan: {idMenu: idMenu, namaMenu: namaMenu, hargaMenu: hargaMenu, qty: 1, catatanPelanggan: "-"}}}, {new: true})
             .then(result => {
                 res.status(200).json({
-                    message: 'Item berhasil ditambah 1',
+                    message: 'Item berhasil ditambah',
                     data: result
                 })
             })
@@ -100,7 +100,7 @@ exports.postCart = async (req, res, next) => {
     
         insertCart.save().then(result => {
             res.status(200).json({
-                message: "data keranjang berhasil disimpan",
+                message: "Item berhasil ditambah",
                 data: result
             })
         }).catch(err => {
@@ -150,7 +150,7 @@ exports.updateCartCatatanPelanggan = (req, res, next) => {
     KeranjangPelanggan.findOneAndUpdate({idPelanggan: `${idPelanggan}`, 'dataPesanan.idMenu':  `${idMenu}`}, {$set: { 'dataPesanan.$.catatanPelanggan': `${catatanPelanggan}` }}, {new: true})
     .then(result => {
         res.status(200).json({
-            message: 'Data keranjang berhasil diupdate',
+            message: 'Catatan pelanggan berhasil diupdate',
             data: result
         })
     })

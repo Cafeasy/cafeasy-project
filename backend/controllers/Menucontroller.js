@@ -5,7 +5,7 @@ exports.getListMenu = (req, res, next) => {
     Menu.find({ stokMenu: {$gt: 0} })
         .then(result => {
             res.status(200).json({
-                message: 'Data menu berhasil dipanggil',
+                message: 'Data menu available berhasil dipanggil',
                 data: result
             })
         }).catch(err => {
@@ -18,7 +18,7 @@ exports.getNotAvailableMenu = (req, res, next) => {
     Menu.find({ stokMenu: {$lt: 1} })
         .then(result => {
             res.status(200).json({
-                message: 'Data menu berhasil dipanggil',
+                message: 'Data menu not available berhasil dipanggil',
                 data: result
             })
         }).catch(err => {
