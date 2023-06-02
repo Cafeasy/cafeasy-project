@@ -2,6 +2,7 @@ const TransaksiPelanggan = require("../model/TransaksiCustomermodel");
 const RiwayatPesananPelanggan = require("../model/Riwayatpesananmodel");
 const Customer = require("../model/Customermodel");
 const KeranjangPelanggan = require("../model/Keranjangmodel");
+const KeranjangController = require("../controllers/Keranjangcontroller");
 
 
 exports.getTransaksiPelanggan = async (req, res, next) => {
@@ -47,51 +48,51 @@ exports.getDetailTransaksiPelanggan = async (req, res, next) => {
 }
 
 exports.postTransaksiPelanggan = async (req, res, next) => {
-    //generate idTransaksi
-    const uniqueid = (Math.random()).toString(32).slice(3)
+    //check data berdasarkan request idKeranjang req url
+    var idKeranjangCheck = req.params.idKeranjang;
 
-    const idPelangganCheck = req.params.idPelanggan;
+    //query cari data keranjang berdasarkan id yang direquest pada url dan menjadikan object
+    let checkKeranjangByParams = await KeranjangPelanggan.findOne({idKeranjang: `${idKeranjangCheck}`});
+    let obyekKeranjang = checkKeranjangByParams.toObject();
 
-    let checkNamaPelangganById = await Customer.findOne({id: `${idPelangganCheck}`});
-    let obyekPelanggan = checkNamaPelangganById.toObject();
+    //sign data ke variable yang akan dijadikan data insert keranjang
+    var idKeranjangSign = obyekKeranjang.idKeranjang;
+    var idPelangganSign = obyekKeranjang.idPelanggan;
+    var namaPelangganSign = obyekKeranjang.name;
+    var dataPesananSign = obyekKeranjang.dataPesanan;
 
-    let checkKeranjangPelangganById = await Keranjang.findOne({id: `${idPelangganCheck}`});
-    let obyekKeranjang = checkKeranjangPelangganById.toObject();
+    //var untuk menampung total harga
+    var totalHarga = 0;
     
-    let idPelangganSign = obyekPelanggan.id;
-    let namaPelangganSign = obyekPelanggan.namaPelanggan;
-
-    let idMenuSign = obyekKeranjang.idMenu;
-    let namaMenuSign = obyekKeranjang.namaMenu;
-    let hargaMenuSign = obyekKeranjang.hargaMenu;
-    let qtyCartSign = obyekKeranjang.qty;
-    let totalHargaPermenu = qtyCartSign * hargaMenuSign;
-
-    const idTransaksi = "tr-"+uniqueid;
-    const idPelanggan = idPelangganSign;
-    const namaPelanggan = namaPelangganSign;
-    const noMeja = req.body.noMeja;
-    const idMenu = idMenuSign;
-    const namaMenu = namaMenuSign;
-    const hargaMenu = hargaMenuSign;
-    const qty = qtyCartSign;
-    const totalHarga = totalHargaPermenu;
+    //looping untuk mengambil total harga data pesanan
+    const len = obyekKeranjang.dataPesanan.length;
+    // console.log(obyekKeranjang.dataPesanan);
+    for (var i = 0; i<len; i++) {
+        totalHarga = totalHarga + (obyekKeranjang.dataPesanan[i].hargaMenu * obyekKeranjang.dataPesanan[i].qty)
+    }
 
     const insertTransaksi = new TransaksiPelanggan({
-        idTransaksi: idTransaksi,
-        idPelanggan: idPelanggan,
-        namaPelanggan: namaPelanggan,
-        noMeja: noMeja,
-        dataPesanan: [{idMenu, namaMenu, hargaMenu, qty}],
+        idTransaksi: idKeranjangSign,
+        idPelanggan: idPelangganSign,
+        namaPelanggan: namaPelangganSign,
+        tanggal: Date.now(),
+        noMeja: 8,
+        dataPesanan: dataPesananSign,
+        totalHarga: totalHarga,
+        statusBayar: "Belum bayar"
     })
-
+        
     insertTransaksi.save().then(result => {
         res.status(200).json({
-            message: "Data Transaksi (" + idTransaksi + ") berhasil disimpan",
+            message: "Transaksi disimpan, selesaikan pembayaran agar pesanan diproses ya",
             data: result
         })
     }).catch(err => {
-        console.log('err: ', err);
-    })
+        next(err);
+    });
 
+    KeranjangPelanggan.deleteOne(({idKeranjang: `${idKeranjangCheck}`}))
+    .catch(err => {
+        next(err);
+    })
 }

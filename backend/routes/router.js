@@ -103,9 +103,9 @@ router.get('/historyPesananPelanggan/:idPelanggan', RiwayatpesananController.get
 // router.get('/ListMenuCustomer:meja', ListMenu.(getListMenuByMeja));
 
 //routes crud transaksi
-router.get('/getTransaksi/:idPelanggan', TransaksiController.getTransaksiPelanggan);
-router.get('/getTransaksi/:idPelanggan/:idTransaksi', TransaksiController.getDetailTransaksiPelanggan);
-router.post('/postTransaksi/:idPelanggan',);
+router.get('/getAllTransaksi/:idPelanggan', TransaksiController.getTransaksiPelanggan);
+router.get('/getDetailTransaksi/:idPelanggan/:idTransaksi', TransaksiController.getDetailTransaksiPelanggan);
+router.post('/postTransaksi/:idKeranjang', TransaksiController.postTransaksiPelanggan);
 router.delete('/delTransaksi/:idPelanggan',);
 router.put('/putTransaksi/:idPelanggan',);
 //routes payment Midtrans

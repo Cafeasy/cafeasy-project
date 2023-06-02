@@ -95,7 +95,7 @@ exports.postCart = async (req, res, next) => {
             idKeranjang: idKeranjang,
             idPelanggan: idPelanggan,
             namaPelanggan: namaPelanggan,
-            dataPesanan: [{idMenu: idMenu, namaMenu: namaMenu, hargaMenu: hargaMenu, qty: 1, catatanPelanggan: catatanPelanggan}]
+            dataPesanan: [{idMenu: idMenu, namaMenu: namaMenu, hargaMenu: hargaMenu, qty: 1, catatanPelanggan: "-"}]
         })
     
         insertCart.save().then(result => {

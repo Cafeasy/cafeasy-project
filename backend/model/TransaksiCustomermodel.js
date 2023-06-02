@@ -19,7 +19,7 @@ const Transaksi = new Schema({
         type: Number,
         required: true
     },
-    dataPesanan: {
+    dataPesanan: {  
         type: Array,
         required: true
     },
@@ -30,9 +30,8 @@ const Transaksi = new Schema({
     statusBayar: {
         type: String,
         required: true,
-        default: "Belum bayar"
     }
-});
+}, {versionKey : false, timestamps: true});
 
 module.exports = mongoose.model('TransaksiPelanggan', Transaksi, 'transaksi');
 
