@@ -209,6 +209,8 @@ function Navbarcomp(props) {
     setCart(temp);
   };
 
+  let arr = data.result ?? [];
+
   return (
     <>
       <div className="">
@@ -645,7 +647,7 @@ function Navbarcomp(props) {
       <div>
         <div>
           <div>
-            {data.result?.map((d, i) => {
+            {arr[0]?.dataPesanan?.map((d, i) => {
               return (
                 <>
                   <div className="delete_button">
