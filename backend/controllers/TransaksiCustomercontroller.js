@@ -3,6 +3,7 @@ const RiwayatPesananPelanggan = require("../model/Riwayatpesananmodel");
 const Customer = require("../model/Customermodel");
 const KeranjangPelanggan = require("../model/Keranjangmodel");
 const KeranjangController = require("../controllers/Keranjangcontroller");
+const Riwayatpesananmodel = require("../model/Riwayatpesananmodel");
 
 
 exports.getTransaksiPelanggan = async (req, res, next) => {
@@ -58,7 +59,7 @@ exports.postTransaksiPelanggan = async (req, res, next) => {
     //sign data ke variable yang akan dijadikan data insert keranjang
     var idKeranjangSign = obyekKeranjang.idKeranjang;
     var idPelangganSign = obyekKeranjang.idPelanggan;
-    var namaPelangganSign = obyekKeranjang.name;
+    var namaPelangganSign = obyekKeranjang.namaPelanggan;
     var dataPesananSign = obyekKeranjang.dataPesanan;
 
     //var untuk menampung total harga
@@ -92,6 +93,55 @@ exports.postTransaksiPelanggan = async (req, res, next) => {
     });
 
     KeranjangPelanggan.deleteOne(({idKeranjang: `${idKeranjangCheck}`}))
+    .catch(err => {
+        next(err);
+    })
+}
+
+exports.updateStatusBayar = async (req, res, next) => {
+    //update status bayar
+    const idTransaksiCheck = req.params.idTransaksi;
+
+    TransaksiPelanggan.findOneAndUpdate({idTransaksi: `${idTransaksiCheck}`}, {$set: { statusBayar: "Sukses" }}, {new: true})
+    .then(result => {
+        res.status(200).json({
+            message: 'Status bayar berhasil diupdate - Pembayaran Sukses',
+            data: result
+        })
+    })
+    .catch(err => {
+        next(err);
+    })
+
+    //insert ke history transaksi
+    let checkTransaksiByParams = await TransaksiPelanggan.findOne({idTransaksi: `${idTransaksiCheck}`});
+    let obyekTransaksi = checkTransaksiByParams.toObject();
+
+    var idTransaksi = obyekTransaksi.idTransaksi;
+    var idPelanggan = obyekTransaksi.idPelanggan;
+    var namaPelanggan = obyekTransaksi.namaPelanggan;
+    var tanggal = obyekTransaksi.tanggal;
+    var noMeja = obyekTransaksi.noMeja;
+    var dataPesanan = obyekTransaksi.dataPesanan;
+    var totalHarga = obyekTransaksi.totalHarga;
+    var statusBayar = obyekTransaksi.statusBayar;
+
+    const insertRiwayatTransaksi = new Riwayatpesananmodel({
+        idTransaksi: idTransaksi,
+        idPelanggan: idPelanggan,
+        namaPelanggan: namaPelanggan,
+        tanggal: tanggal,
+        noMeja: noMeja,
+        dataPesanan: dataPesanan,
+        totalHarga: totalHarga,
+        statusBayar: statusBayar
+    })
+
+    insertRiwayatTransaksi.save().catch(err => {
+        next(err);
+    });
+
+    TransaksiPelanggan.deleteOne(({idTransaksi: `${idTransaksiCheck}`}))
     .catch(err => {
         next(err);
     })

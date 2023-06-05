@@ -99,15 +99,13 @@ router.put('/cartPelangganPlus/:idPelanggan/:idMenu', KeranjangController.update
 //routes crud riwayat pesanan
 router.get('/historyPesananPelanggan/:idPelanggan', RiwayatpesananController.getListHistory);
 // router.delete('delHistoryPesananPelanggan/:idPelanggan', RiwayatpesananController.deleteHistory);
-// router.get('/ListMenuCustomer:id', getMenu.getListMenuById);
-// router.get('/ListMenuCustomer:meja', ListMenu.(getListMenuByMeja));
 
 //routes crud transaksi
 router.get('/getAllTransaksi/:idPelanggan', TransaksiController.getTransaksiPelanggan);
 router.get('/getDetailTransaksi/:idPelanggan/:idTransaksi', TransaksiController.getDetailTransaksiPelanggan);
 router.post('/postTransaksi/:idKeranjang', TransaksiController.postTransaksiPelanggan);
 router.delete('/delTransaksi/:idPelanggan',);
-router.put('/putTransaksi/:idPelanggan',);
+router.put('/updateStatusBayar/:idTransaksi', TransaksiController.updateStatusBayar);
 //routes payment Midtrans
 router.get('/midtransPayment/', Midtrans.buatTransaction);
 

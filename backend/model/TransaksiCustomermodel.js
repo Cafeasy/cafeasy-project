@@ -11,6 +11,10 @@ const Transaksi = new Schema({
         type: String,
         required: true
     },
+    namaPelanggan: {
+        type: String,
+        required: true
+    },
     tanggal: {
         type: Date,
         default: Date.now

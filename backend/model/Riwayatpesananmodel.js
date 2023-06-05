@@ -12,6 +12,10 @@ const RiwayatPesananModel = new Schema({
         type: String,
         required: true
     },
+    namaPelanggan: {
+        type: String,
+        required: true
+    },
     tanggal: {
         type: Date,
         required: true
@@ -20,28 +24,10 @@ const RiwayatPesananModel = new Schema({
         type: Number,
         required: true
     },
-    dataPesanan: [{
-        idMenu: {
-            type: String,
-            required: true
-        },
-        namaMenu: {
-            type: String,
-            required: true
-        },
-        hargaMenu: {
-            type: Number,
-            required: true
-        },
-        qty: {
-            type: Number,
-            required: true
-        },
-        catatanPelanggan: {
-            type: String,
-            required: true
-        }
-    }],
+    dataPesanan: {
+        type: Array,
+        required: true
+    },
     statusBayar: {
         type: String,
         required: true
@@ -51,6 +37,6 @@ const RiwayatPesananModel = new Schema({
         required: true
     }
 
-});
+}, {versionKey : false, timestamps: true});
 
 module.exports = mongoose.model('RiwayatPesanan', RiwayatPesananModel, 'riwayatPesananPelanggan');
