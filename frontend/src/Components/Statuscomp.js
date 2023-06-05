@@ -22,11 +22,11 @@ const Statuscomp = (props) => {
 
   const menus = props.menu;
   const location = useLocation();
-  const { url } = location.state;
+
   return (
     <div className="App">
       <div className="logo-back">
-        <Link to={`/Berandapage/${url}`} style={{ color: "black" }}>
+        <Link to={`/Berandapage/${urlParams}`} style={{ color: "black" }}>
           <CgArrowLeftO class="mx-4" size={35} />
         </Link>
       </div>
@@ -102,7 +102,7 @@ const Statuscomp = (props) => {
           </div>
         </div>
         <br></br>
-        <Link to={`/Berandapage/${url}`}>
+        <Link to={`/Berandapage/${urlParams}`}>
           <button className="button-proses-pembayaran">Kembali</button>
         </Link>
       </div>

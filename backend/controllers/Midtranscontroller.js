@@ -3,7 +3,7 @@ const crypto = require("crypto");
 const midtransClient = require('midtrans-client');
 const id = crypto.randomBytes(16).toString("hex");
 let snap = new midtransClient.Snap({
-    isProduction : false,
+    isProduction: false,
     serverKey: process.env.MIDTRANS_SERVER_KEY,
     clientKey: process.env.MIDTRANS_CLIENT_KEY
 });
@@ -31,11 +31,12 @@ exports.buatTransaction = async (req, res) => {
 
     try {
         await snap.createTransaction(parameter)
-            .then((transaction) =>
+            .then((transaction) => {
                 res.status(201)
                     .json({ message: "Berhasil", data: transaction.token, url: transaction.redirect_url })
+            }
             ).catch((error) => res.status(500).json({ message: "error" + error }))
-        
+
     } catch (err) {
         res.status(400).json("error :" + err);
     }

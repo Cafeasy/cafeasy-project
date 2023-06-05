@@ -1,5 +1,4 @@
 import "../Style/Confirmpage.css";
-import "https://app.sandbox.midtrans.com/snap/snap.js";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { CgArrowLeftO } from "react-icons/cg";
@@ -7,6 +6,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import "https://app.sandbox.midtrans.com/snap/snap.js";
 
 const Confirmcomp = (props) => {
   const params = useParams();
@@ -19,18 +19,25 @@ const Confirmcomp = (props) => {
       .then((res) => setData(res.data.data))
       .catch((err) => console.log(err));
   }, [data]);
+
   const payment = async (e) => {
     e.preventDefault();
     await axios
       .get(`${process.env.REACT_APP_API_URL}/midtransPayment/`)
       .then((res) => {
         const responseAPI = res.data.data;
-        console.log("transaction token:", responseAPI);
-        window.snap.pay(responseAPI);
+        console.log("transaction token:", responseAPI, "url :", res.data.url);
+        window.snap.pay(responseAPI, {
+          onSuccess: function () { paymentSukses("/Statuspage/" + urlParams) },
+          onPending: function () { paymentSukses("/Statuspage/" + urlParams) },
+          onError: function () { paymentSukses("/Statuspage/" + urlParams) },
+          onClose: function () { paymentSukses("/Statuspage/" + urlParams) }
+        });
       })
       .catch((err) => console.log("error : ", err));
-      paymentSukses("/Statuspage/" + urlParams);
+
   };
+
   const menus = props.menu;
   const location = useLocation();
   const { url } = location.state;
