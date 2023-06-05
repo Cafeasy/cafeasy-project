@@ -10,7 +10,7 @@ const RiwayatpesananController = require("../controllers/Riwayatpesanancontrolle
 const TransaksiController = require("../controllers/TransaksiCustomercontroller");
 const app = express();
 const Customer = require("../model/Customermodel")
-const Midtrans = require('../controllers/MidtransController.js')
+const Midtrans = require('../controllers/Midtranscontroller.js')
 
 
 router.get("/", (req, res) => {
