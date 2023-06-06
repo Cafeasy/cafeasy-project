@@ -15,7 +15,7 @@ exports.getListCart = async (req, res, next) => {
     KeranjangPelanggan.find({ idPelanggan: `${idPelanggan}` })
         .then((result) => {
             var totalHarga = 0;
-            const len = ""??objek.dataPesanan.length;
+            const len = objek.dataPesanan.length??"";
 
             for (var i = 0; i < len; i++) {
                 totalHarga = totalHarga + (objek.dataPesanan[i].hargaMenu * objek.dataPesanan[i].qty)
