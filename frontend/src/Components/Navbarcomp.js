@@ -703,7 +703,7 @@ function Navbarcomp(props) {
                     <div className="increase_button">
                       <BsPlusCircle
                         style={{ cursor: "pointer" }}
-                        class="mx-4"
+                        class="mx-5"
                         onClick={() => {
                           removeMe(d.namaMenu);
                           notifsukses(d);

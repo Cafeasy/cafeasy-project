@@ -64,7 +64,9 @@ const Statuscomp = (props) => {
         {arr[0]?.dataPesanan?.map((item) => (
           <>
             <tr className="text-title1">
-              <td style={{ padding: "5px" }}>{item.namaMenu} </td>
+              <td style={{ padding: "5px", paddingLeft: "5%" }}>
+                {item.namaMenu}{" "}
+              </td>
               <td style={{ textAlign: "center" }}>{item.qty}x</td>
               <td>Rp. {item.hargaMenu * item.qty}</td>
             </tr>
