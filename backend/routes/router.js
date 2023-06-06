@@ -69,7 +69,7 @@ router.get(
 
 router.get("/auth/logout", (req, res) => {
     req.logout();
-    res.redirect(process.env.CLIENT_URL + "Loginpage");
+    res.redirect(process.env.CLIENT_URL + "/Loginpage");
 });
 
 router.use('/testing', (req, res, next) => {
