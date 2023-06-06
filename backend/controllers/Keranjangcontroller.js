@@ -8,11 +8,14 @@ exports.getListCart = async (req, res, next) => {
     //find keranjang by id untuk memanggil qty dan harga
     let findQtyHarga = await KeranjangPelanggan.findOne({ idPelanggan: `${idPelanggan}` });
 
+    if(findQtyHarga) {
+        var objek = findQtyHarga.toObject();
+    }
+
     KeranjangPelanggan.find({ idPelanggan: `${idPelanggan}` })
         .then((result) => {
-            let objek = findQtyHarga.toObject();
             var totalHarga = 0;
-            const len = objek.dataPesanan.length;
+            const len = ""??objek.dataPesanan.length;
 
             for (var i = 0; i < len; i++) {
                 totalHarga = totalHarga + (objek.dataPesanan[i].hargaMenu * objek.dataPesanan[i].qty)
