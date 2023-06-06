@@ -22,7 +22,7 @@ const Statuscomp = (props) => {
 
   const menus = props.menu;
   const location = useLocation();
-
+  let arr = data.result ?? [];
   return (
     <div className="App">
       <div className="logo-back">
@@ -54,7 +54,7 @@ const Statuscomp = (props) => {
             Detail Transaksi
           </td>
         </tr>
-        {data.result?.map((item) => (
+        {arr[0]?.dataPesanan?.map((item) => (
           <>
             <tr className="text-title1">
               <td style={{ padding: "5px" }}>{item.namaMenu} </td>

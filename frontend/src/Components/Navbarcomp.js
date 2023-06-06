@@ -180,18 +180,22 @@ function Navbarcomp(props) {
   const showmoritems = () => {
     setVisible((prevValue) => prevValue - 12);
   };
+
   const searchText = (event) => {
     setFilter(event.target.value);
   };
-  let dataSearch = menus.filter((item) => {
-    return Object.keys(item).some((key) =>
-      item[key]
-        .toString()
-        .toLowerCase()
-        .includes(filter.toString().toLowerCase())
-    );
-  });
 
+  const [cari, setCari] = useState("");
+
+  let dataSearch = menus.filter((val) => {
+    if (cari === "") {
+      return val;
+    } else if (
+      val.namaMenu?.toLocaleLowerCase().includes(cari.toLocaleLowerCase())
+    ) {
+      return val;
+    }
+  });
   const notifDelete = (value) => {
     Swal.fire({
       title: "Sukses ",
@@ -287,12 +291,10 @@ function Navbarcomp(props) {
             </Container>
             <Form className="d-flex mx-auto">
               <Form.Control
-                type="input"
                 placeholder="Search....."
                 className="searchbar"
                 aria-label="Search"
-                value={filter}
-                onChange={searchText.bind(this)}
+                onChange={(e) => setCari(e.target.value)}
               />
             </Form>
           </Navbar>
@@ -435,62 +437,74 @@ function Navbarcomp(props) {
                 </Col>
               );
             })}
-            {post?.data.map((menu, index) => {
-              return (
-                <Col>
-                  <Card
-                    className="mx-1  mb-5 border-0 "
-                    key={menu.idMenu}
-                    data-example={menu.namaMenu}
-                    masukKeranjang={menu.masukKeranjang}
-                  >
-                    <Link
-                      to={`/Detailmenu/${menu.idMenu}`}
-                      state={{ url: urlParams }}
+            {post?.data
+              .filter((val) => {
+                if (cari === "") {
+                  return val;
+                } else if (
+                  val.namaMenu
+                    ?.toLocaleLowerCase()
+                    .includes(cari.toLocaleLowerCase())
+                ) {
+                  return val;
+                }
+              })
+              .map((menu, index) => {
+                return (
+                  <Col>
+                    <Card
+                      className="mx-1  mb-5 border-0 "
+                      key={menu.idMenu}
+                      data-example={menu.namaMenu}
+                      masukKeranjang={menu.masukKeranjang}
                     >
-                      <Card.Img variant="top" src={Gambarburger} />
-                    </Link>
-                    <Card.Body>
-                      <Card.Title className="menu-harga">
-                        {menu.hargaMenu}
-                      </Card.Title>
-                      <Card.Title className="menu-tittle">
-                        {menu.namaMenu}
-                      </Card.Title>
-                      <div className="rate">
-                        <div class="text text-end text-warning">
-                          <BsStarFill size="10px"></BsStarFill>
-                          <BsStarFill size="10px"></BsStarFill>
-                          <BsStarFill size="10px"></BsStarFill>
-                          <BsStarFill size="10px"></BsStarFill>
-                          <BsStarFill size="10px"></BsStarFill>
-                        </div>
+                      <Link
+                        to={`/Detailmenu/${menu.idMenu}`}
+                        state={{ url: urlParams }}
+                      >
+                        <Card.Img variant="top" src={Gambarburger} />
+                      </Link>
+                      <Card.Body>
+                        <Card.Title className="menu-harga">
+                          {menu.hargaMenu}
+                        </Card.Title>
+                        <Card.Title className="menu-tittle">
+                          {menu.namaMenu}
+                        </Card.Title>
+                        <div className="rate">
+                          <div class="text text-end text-warning">
+                            <BsStarFill size="10px"></BsStarFill>
+                            <BsStarFill size="10px"></BsStarFill>
+                            <BsStarFill size="10px"></BsStarFill>
+                            <BsStarFill size="10px"></BsStarFill>
+                            <BsStarFill size="10px"></BsStarFill>
+                          </div>
 
-                        <div class="text text-end text-dark">
-                          <form
-                            action=""
-                            id="login"
-                            method="post"
-                            onSubmit={onSubmit}
-                          >
-                            <div
-                              className="menu-harga"
-                              style={{ fontSize: "13px" }}
+                          <div class="text text-end text-dark">
+                            <form
+                              action=""
+                              id="login"
+                              method="post"
+                              onSubmit={onSubmit}
                             >
-                              Sold Out
-                            </div>
-                          </form>
+                              <div
+                                className="menu-harga"
+                                style={{ fontSize: "13px" }}
+                              >
+                                Sold Out
+                              </div>
+                            </form>
+                          </div>
                         </div>
-                      </div>
 
-                      <Card.Text className="menu-deskripsi">
-                        {menu.deskripsiMenu}
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              );
-            })}
+                        <Card.Text className="menu-deskripsi">
+                          {menu.deskripsiMenu}
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                );
+              })}
           </Row>
         )}
         {active === "secondcard" && (

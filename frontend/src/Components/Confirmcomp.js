@@ -28,19 +28,28 @@ const Confirmcomp = (props) => {
         const responseAPI = res.data.data;
         console.log("transaction token:", responseAPI, "url :", res.data.url);
         window.snap.pay(responseAPI, {
-          onSuccess: function () { paymentSukses("/Statuspage/" + urlParams) },
-          onPending: function () { paymentSukses("/Statuspage/" + urlParams) },
-          onError: function () { paymentSukses("/Statuspage/" + urlParams) },
-          onClose: function () { paymentSukses("/Statuspage/" + urlParams) }
+          onSuccess: function () {
+            paymentSukses("/Statuspage/" + urlParams);
+          },
+          onPending: function () {
+            paymentSukses("/Statuspage/" + urlParams);
+          },
+          onError: function () {
+            paymentSukses("/Statuspage/" + urlParams);
+          },
+          onClose: function () {
+            paymentSukses("/Statuspage/" + urlParams);
+          },
         });
       })
       .catch((err) => console.log("error : ", err));
-
   };
 
   const menus = props.menu;
   const location = useLocation();
   const { url } = location.state;
+
+  let arr = data.result ?? [];
   return (
     <div className="App">
       <div className="logo-back">
@@ -67,7 +76,7 @@ const Confirmcomp = (props) => {
         <tr className="text-title">
           <td colSpan={1}>Paket yang dipilih</td>
         </tr>
-        {data.result?.map((item) => (
+        {arr[0]?.dataPesanan?.map((item) => (
           <>
             <tr className="text-title1">
               <td style={{ padding: "5px" }}>{item.namaMenu} </td>
