@@ -97,7 +97,7 @@ function Navbarcomp(props) {
   const addItem = (value) => {
     console.log(value);
     axios
-      .put("http://localhost:8888/cartPelangganPlus/" + value)
+      .put("http://localhost:8888/cartPelangganPlus/" + urlParams + "/" + value)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
@@ -105,7 +105,9 @@ function Navbarcomp(props) {
   const minItem = (value) => {
     console.log(value);
     axios
-      .put("http://localhost:8888/cartPelangganMinus/" + value)
+      .put(
+        "http://localhost:8888/cartPelangganMinus/" + urlParams + "/" + value
+      )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
@@ -657,7 +659,7 @@ function Navbarcomp(props) {
                       onClick={() => {
                         removeMe(d.namaMenu);
                         notifDelete(d.namaMenu);
-                        deleteItem(d.idKeranjang);
+                        deleteItem(d.idMenu);
                       }}
                     />
                   </div>
@@ -677,7 +679,7 @@ function Navbarcomp(props) {
                         onClick={() => {
                           removeMe(d.namaMenu);
                           notifDelete(d.namaMenu);
-                          minItem(d.idKeranjang);
+                          minItem(d.idMenu);
                         }}
                       />
                     </div>
@@ -690,7 +692,7 @@ function Navbarcomp(props) {
                         onClick={() => {
                           removeMe(d.namaMenu);
                           notifsukses(d);
-                          addItem(d.idKeranjang);
+                          addItem(d.idMenu);
                         }}
                       />
                     </div>
