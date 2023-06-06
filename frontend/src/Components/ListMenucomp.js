@@ -12,7 +12,7 @@ const ListMenucomp = () => {
     //menus adalah nama state, dan setMenus adalah method untuk merubah state
     const [menus, setMenus] = useState([]);
     useEffect(() => {
-        axios.get('http://localhost:8888/ListMenu')
+        axios.get( `${process.env.REACT_APP_API_URL}/ListMenu`)
         .then(result => {
             console.log('data API ada', result.data);
             const responseAPI = result.data;

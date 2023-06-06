@@ -10,7 +10,7 @@ function Berandapage() {
     const [user, setUser] = useState(null);
     const params = useParams()
     const idUser = params.idUser
-    console.log("Ini id: ", idUser.substring(0, 4))
+    console.log("Ini id: ", idUser)
     const getUser = async () => {
         try {
 
@@ -21,9 +21,8 @@ function Berandapage() {
                 console.log("data api ada", data)
 
             } else if (idUser.substring(0, 4) === "nusr") {
-                const url2 = `${process.env.REACT_APP_API_URL}/customer/${idUser}`;
-                axios
-                    .get(url2)
+
+                await axios.get(`${process.env.REACT_APP_API_URL}/getCustomerById/`+idUser)
                     .then((result) => {
                         const responseAPI = result.data.data;
                         responseAPI.map((res) => {

@@ -32,7 +32,7 @@ router.get("/auth/login/success", (req, res) => {
     }
 });
 
-router.get("/login/success", (req, res) => {
+router.get("/login/success", async(req, res)  => {
     if (req.user) {
         const data = req.user;
         const user = data
@@ -41,10 +41,15 @@ router.get("/login/success", (req, res) => {
             id: "gusr" + user.id,
             name: user.name.givenName + " " + user.name.familyName
         }
-        Customer.create(inputUser)
-        res.redirect(process.env.CLIENT_URL + "Berandapage/" + "gusr" + user.id)
 
-
+        let hasil = await  Customer.findOne({ id: `gusr${user.id}` })
+        if (hasil) {
+            let oldUser = hasil.toObject();
+            res.redirect(process.env.CLIENT_URL + "/Berandapage/" + "gusr" + oldUser.id)
+        } else {
+            Customer.create(inputUser)
+            res.redirect(process.env.CLIENT_URL + "/Berandapage/" + "gusr" + user.id)
+        }
     } else {
         res.status(403).json({ error: true, message: "Not Authorized" });
     }
@@ -83,10 +88,11 @@ router.get('/ListMenu', MenuController.getListMenu);
 router.get('/ListMenuByCategory/:kategoriMenu', MenuController.getMenuByCategory);
 router.get('/DetailMenu/:idMenu', MenuController.getMenuDetail);
 router.get('/NotAvailableMenu', MenuController.getNotAvailableMenu)
-
+//Customer
 router.post('/customer', CustomerController.createCustomer);
-router.get('/customer/:id', CustomerController.getCustomer);
+router.get('/getCustomerByName/:name', CustomerController.getCustomerByName);
 router.get('/allCustomer', CustomerController.getAllCustomer);
+router.get('/getCustomerById/:idUser', CustomerController.getCustomerById);
 
 //routes crud keranjang
 router.get('/cartPelanggan/:idPelanggan', KeranjangController.getListCart);

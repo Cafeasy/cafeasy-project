@@ -20,11 +20,17 @@ function Logincomp() {
   const submitUser = async (e) => {
     if (name != "") {
       e.preventDefault();
-      await axios.post(`${process.env.REACT_APP_API_URL}/customer`, {
-        id: idPelanggan.toString(),
-        name: name.toString(),
-      });
-      beranda("/Berandapage/" + idPelanggan);
+      let res = await axios.get(`${process.env.REACT_APP_API_URL}/getCustomerByName/` + name)
+      console.log(res.data.data);
+      if (res.data.data) {
+        beranda("/Berandapage/" + res.data.data.id);
+      } else {
+        await axios.post(`${process.env.REACT_APP_API_URL}/customer`, {
+          id: idPelanggan.toString(),
+          name: name.toString(),
+        });
+        beranda("/Berandapage/" + idPelanggan.toString());
+      }
     }
   };
 

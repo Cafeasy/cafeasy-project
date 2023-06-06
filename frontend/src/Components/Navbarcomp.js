@@ -78,7 +78,7 @@ function Navbarcomp(props) {
     };
     try {
       const res = await axios.post(
-        "http://localhost:8888/postCart/" + urlParams + "/" + inidata.idMenu,
+        `${process.env.REACT_APP_API_URL}/postCart/` + urlParams + "/" + inidata.idMenu,
         post
       );
       console.log(res.data);
@@ -89,7 +89,7 @@ function Navbarcomp(props) {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:8888/cartPelanggan/" + urlParams)
+      .get( `${process.env.REACT_APP_API_URL}/cartPelanggan/` + urlParams)
       .then((res) => setData(res.data.data))
       .catch((err) => console.log(err));
   }, [data]);
@@ -97,7 +97,7 @@ function Navbarcomp(props) {
   const addItem = (value) => {
     console.log(value);
     axios
-      .put("http://localhost:8888/cartPelangganPlus/" + urlParams + "/" + value)
+      .put( `${process.env.REACT_APP_API_URL}/cartPelangganPlus/` + urlParams + "/" + value)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
@@ -106,7 +106,7 @@ function Navbarcomp(props) {
     console.log(value);
     axios
       .put(
-        "http://localhost:8888/cartPelangganMinus/" + urlParams + "/" + value
+        `${process.env.REACT_APP_API_URL}/cartPelangganMinus/` + urlParams + "/" + value
       )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
@@ -115,7 +115,7 @@ function Navbarcomp(props) {
   const deleteItem = (value) => {
     console.log(value);
     axios
-      .delete("http://localhost:8888/delCart/" + urlParams + "/" + value)
+      .delete( `${process.env.REACT_APP_API_URL}/delCart/`+ urlParams + "/" + value)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
@@ -124,7 +124,7 @@ function Navbarcomp(props) {
 
   React.useEffect(() => {
     axios
-      .get("http://localhost:8888/ListMenuByCategory/Minuman")
+      .get( `${process.env.REACT_APP_API_URL}/ListMenuByCategory/Minuman`)
       .then((response) => {
         setPost(response.data);
       });
@@ -133,7 +133,7 @@ function Navbarcomp(props) {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:8888/ListMenuByCategory/Minuman")
+      .get(` ${process.env.REACT_APP_API_URL}/ListMenuByCategory/Minuman`)
       .then((result) => {
         console.log(result.data);
         setPosts(result.data);
