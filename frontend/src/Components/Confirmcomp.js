@@ -15,7 +15,7 @@ const Confirmcomp = (props) => {
   const paymentSukses = useNavigate();
   useEffect(() => {
     axios
-      .get("http://localhost:8888/cartPelanggan/" + urlParams)
+      .get(`${process.env.REACT_APP_API_URL}/cartPelanggan/`+ urlParams)
       .then((res) => setData(res.data.data))
       .catch((err) => console.log(err));
   }, [data]);
