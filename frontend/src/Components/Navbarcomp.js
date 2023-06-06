@@ -196,6 +196,7 @@ function Navbarcomp(props) {
       return val;
     }
   });
+
   const notifDelete = (value) => {
     Swal.fire({
       title: "Sukses ",

@@ -27,7 +27,7 @@ const Statuscomp = (props) => {
     <div className="App">
       <div className="logo-back">
         <Link to={`/Berandapage/${urlParams}`} style={{ color: "black" }}>
-          <CgArrowLeftO class="mx-4" size={35} />
+          <CgArrowLeftO size={35} style={{ paddingRight: "5%" }} />
         </Link>
       </div>
       <br></br>
@@ -48,7 +48,14 @@ const Statuscomp = (props) => {
         Terimakasih sudah melakukan transaksi pada aplikasi Cafeasy
       </div>
       <br></br>
-      <table style={{ width: "95%", textAlign: "left", marginLeft: "3%" }}>
+      <table
+        style={{
+          width: "95%",
+          textAlign: "left",
+          marginLeft: "3%",
+          border: "1px solid #BFBFBF",
+        }}
+      >
         <tr className="text-title">
           <td colSpan={3} style={{ textAlign: "center" }}>
             Detail Transaksi
@@ -95,10 +102,14 @@ const Statuscomp = (props) => {
         <br></br>
         <div class="row">
           <div class="col-6">
-            <button className="button-status">Simpan Bill</button>
+            <button className="button-status" style={{ borderRadius: "8px" }}>
+              Simpan Bill
+            </button>
           </div>
           <div class="col-6">
-            <button className="button-status">Bagikan</button>
+            <button className="button-status" style={{ borderRadius: "8px" }}>
+              Bagikan
+            </button>
           </div>
         </div>
         <br></br>

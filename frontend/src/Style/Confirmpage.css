@@ -1,8 +1,8 @@
 table {
-  box-shadow: 0px 0px 0px 1px;
 }
 table td {
   width: 35%;
+  padding-left: 5%;
 }
 table tr {
 }
@@ -57,6 +57,16 @@ table tr {
 
 .text-title {
   font-weight: bolder;
+}
+
+.text-title3 {
+  padding-left: 5%;
+
+  font-size: 13px;
+  line-height: 12px;
+  /* identical to box height */
+
+  color: #252525;
 }
 
 .button-status {

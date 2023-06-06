@@ -15,7 +15,7 @@ const Confirmcomp = (props) => {
   const paymentSukses = useNavigate();
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/cartPelanggan/`+ urlParams)
+      .get(`${process.env.REACT_APP_API_URL}/cartPelanggan/` + urlParams)
       .then((res) => setData(res.data.data))
       .catch((err) => console.log(err));
   }, [data]);
@@ -54,7 +54,7 @@ const Confirmcomp = (props) => {
     <div className="App">
       <div className="logo-back">
         <Link to={`/Berandapage/${url}`} style={{ color: "black" }}>
-          <CgArrowLeftO class="mx-4" size={35} />
+          <CgArrowLeftO size={35} style={{ paddingRight: "5%" }} />
         </Link>
       </div>
       <br></br>
@@ -72,14 +72,23 @@ const Confirmcomp = (props) => {
         </div>
       </div>
 
-      <table style={{ width: "95%", textAlign: "left", marginLeft: "3%" }}>
+      <table
+        style={{
+          width: "95%",
+          textAlign: "left",
+          marginLeft: "3%",
+          border: "1px solid #BFBFBF",
+        }}
+      >
         <tr className="text-title">
-          <td colSpan={1}>Paket yang dipilih</td>
+          <td colSpan={2}>Paket yang dipilih</td>
         </tr>
         {arr[0]?.dataPesanan?.map((item) => (
           <>
-            <tr className="text-title1">
-              <td style={{ padding: "5px" }}>{item.namaMenu} </td>
+            <tr className="text-title3">
+              <td style={{ padding: "5px", paddingLeft: "5%", width: "40%" }}>
+                {item.namaMenu}{" "}
+              </td>
               <td style={{ textAlign: "center" }}>{item.qty}x</td>
               <td>Rp. {item.hargaMenu * item.qty}</td>
             </tr>
@@ -87,8 +96,10 @@ const Confirmcomp = (props) => {
         ))}
         <tr style={{ fontWeight: "bold" }}>
           <td>Total </td>
-          <td></td>
-          <td>Rp. {data.totalHarga}</td>
+
+          <td colSpan={2} style={{ textAlign: "center", paddingLeft: "30%" }}>
+            Rp. {data.totalHarga}
+          </td>
         </tr>
         <tr>
           <td> </td>
@@ -97,8 +108,7 @@ const Confirmcomp = (props) => {
 
       <div>
         <br></br>
-        <br></br>
-        <br></br>
+
         <button
           type="button"
           onClick={payment}
