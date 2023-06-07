@@ -64,7 +64,6 @@ exports.postCart = async (req, res, next) => {
         const idMenu = idMenuSign;
         const namaMenu = namaMenuSign;
         const hargaMenu = hargaMenuSign;
-        const catatanPelanggan = req.body.catatanPelanggan;
 
         //check data keranjang by id menu dan id pelanggan
         let checkCartByParams = await KeranjangPelanggan.findOne({ idPelanggan: `${idPelangganCheck}`, "dataPesanan.idMenu": `${idMenu}` });
