@@ -185,8 +185,11 @@ const Statuscomp = (props) => {
           </div>
         </div>
         <br></br>
-        <Link to={`/Berandapage/${urlParams}`}>
-          <button className="button-proses-pembayaran">Kembali</button>
+
+        <Link to={`/Penilaian/` + urlParams} state={{ url: urlParams }}>
+          <button className="button-proses-pembayaran" onClick={""}>
+            Nilai Pesanan
+          </button>
         </Link>
       </div>
     </div>
