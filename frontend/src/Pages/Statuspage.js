@@ -11,7 +11,7 @@ function Statuspage(props) {
   const idMenu = useParams();
   const url = `${process.env.REACT_APP_API_URL}/KonfirmasiPesanan/${idMenu.idMenu}`;
 
-  useEffect(() => {
+  http: useEffect(() => {
     axios
       .get(url)
       .then((result) => {

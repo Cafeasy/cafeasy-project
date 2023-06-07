@@ -78,7 +78,10 @@ function Navbarcomp(props) {
     };
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_API_URL}/postCart/` + urlParams + "/" + inidata.idMenu,
+        `${process.env.REACT_APP_API_URL}/postCart/` +
+          urlParams +
+          "/" +
+          inidata.idMenu,
         post
       );
       console.log(res.data);
@@ -89,7 +92,7 @@ function Navbarcomp(props) {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .get( `${process.env.REACT_APP_API_URL}/cartPelanggan/` + urlParams)
+      .get(`${process.env.REACT_APP_API_URL}/cartPelanggan/` + urlParams)
       .then((res) => setData(res.data.data))
       .catch((err) => console.log(err));
   }, [data]);
@@ -97,7 +100,12 @@ function Navbarcomp(props) {
   const addItem = (value) => {
     console.log(value);
     axios
-      .put( `${process.env.REACT_APP_API_URL}/cartPelangganPlus/` + urlParams + "/" + value)
+      .put(
+        `${process.env.REACT_APP_API_URL}/cartPelangganPlus/` +
+          urlParams +
+          "/" +
+          value
+      )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
@@ -106,7 +114,10 @@ function Navbarcomp(props) {
     console.log(value);
     axios
       .put(
-        `${process.env.REACT_APP_API_URL}/cartPelangganMinus/` + urlParams + "/" + value
+        `${process.env.REACT_APP_API_URL}/cartPelangganMinus/` +
+          urlParams +
+          "/" +
+          value
       )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
@@ -115,7 +126,9 @@ function Navbarcomp(props) {
   const deleteItem = (value) => {
     console.log(value);
     axios
-      .delete( `${process.env.REACT_APP_API_URL}/delCart/`+ urlParams + "/" + value)
+      .delete(
+        `${process.env.REACT_APP_API_URL}/delCart/` + urlParams + "/" + value
+      )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
@@ -124,22 +137,22 @@ function Navbarcomp(props) {
 
   React.useEffect(() => {
     axios
-      .get( `${process.env.REACT_APP_API_URL}/ListMenuByCategory/Minuman`)
+      .get(`${process.env.REACT_APP_API_URL}/ListMenuByCategory/Minuman`)
       .then((response) => {
         setPost(response.data);
       });
   }, [post]);
 
-  const [posts, setPosts] = useState([]);
-  useEffect(() => {
-    axios
-      .get(` ${process.env.REACT_APP_API_URL}/ListMenuByCategory/Minuman`)
-      .then((result) => {
-        console.log(result.data);
-        setPosts(result.data);
-      })
-      .catch((error) => console.log(error));
-  }, []);
+  // const [posts, setPosts] = useState([]);
+  // useEffect(() => {
+  //   axios
+  //     .get(` ${process.env.REACT_APP_API_URL}/ListMenuByCategory/Minuman`)
+  //     .then((result) => {
+  //       console.log(result.data);
+  //       setPosts(result.data);
+  //     })
+  //     .catch((error) => console.log(error));
+  // }, []);
 
   const [show, setShow] = useState(false);
   let [count, setCount] = useState(1);
@@ -407,28 +420,15 @@ function Navbarcomp(props) {
                           <BsStarFill size="10px"></BsStarFill>
                           <BsStarFill size="10px"></BsStarFill>
                         </div>
-
-                        <div class="text text-end text-dark">
-                          <form
-                            action=""
-                            id="login"
-                            method="post"
-                            onSubmit={onSubmit}
-                          >
-                            <Button
-                              className="buttonplus"
-                              type="submit"
-                              variant="text"
-                              onClick={() => {
-                                notifsukses(menu);
-                                setInidata(menu);
-                              }}
-                            >
-                              <BsPlusCircle></BsPlusCircle>
-                            </Button>
-                          </form>
-                        </div>
                       </div>
+
+                      <ModalCustom
+                        menuList={menu}
+                        onSubmit={onSubmit}
+                        notifsukses={notifsukses}
+                        menu={menu}
+                        setInidata={setInidata}
+                      />
 
                       <Card.Text className="menu-deskripsi">
                         {menu.deskripsiMenu}
@@ -684,9 +684,15 @@ function Navbarcomp(props) {
                       onClick={handleClick}
                       style={{ cursor: "pointer" }}
                     >
-                      {" "}
-                      {d.namaMenu}{" "}
+                      <ModalCustomKeranjang
+                        menuList={d}
+                        onSubmit={onSubmit}
+                        notifsukses={notifsukses}
+                        menu={d}
+                        setInidata={setInidata}
+                      />
                     </td>
+
                     <div className="decrease_button">
                       <BsDashCircle
                         style={{ cursor: "pointer" }}
@@ -713,89 +719,6 @@ function Navbarcomp(props) {
                     </div>
                     <td> Rp. {numberWithCommas(d.hargaMenu * d.qty)},00</td>
                     <td className="opration"></td>
-
-                    {show && (
-                      <Modal
-                        show={show}
-                        onHide={handleClick}
-                        aria-labelledby="contained-modal-title-vcenter"
-                        centered
-                      >
-                        <br></br>
-                        <CgArrowLeftO
-                          class="mx-4"
-                          size={35}
-                          onClick={handleClick}
-                          style={{ cursor: "pointer" }}
-                        />
-                        <Modal.Body>
-                          <img
-                            src={Gambarburger}
-                            alt="gambarpizza"
-                            className="gambarmodal"
-                          />
-                          <div className="textmodal">
-                            {d.namaMenu}
-                            <p></p>
-                          </div>
-                          {/* <div className="textmodal_deskripsi">{menuList.deskripsiMenu}</div> */}
-                          <div className="textmodal_harga">{d.hargaMenu}</div>
-                          <br></br>
-                          <Form>
-                            <Form.Group
-                              className="mb-3"
-                              controlId="exampleForm.ControlInput1"
-                            ></Form.Group>
-                            <Form.Group
-                              className="mb-3"
-                              controlId="exampleForm.ControlTextarea1"
-                            >
-                              <div className="modal_tengah">
-                                <Form.Group controlId="exampleForm.ControlInput1">
-                                  <Form.Label>Kuantitas :</Form.Label>
-                                  <br />
-                                  <Button
-                                    variant="text"
-                                    size="sm"
-                                    className="mx-4"
-                                    onClick={decrementCount}
-                                  >
-                                    <CgRemove size={25}></CgRemove>
-                                  </Button>
-
-                                  <strong>{d.qty}</strong>
-
-                                  <Button
-                                    variant="text"
-                                    size="sm"
-                                    className="mx-4"
-                                    onClick={incrementCount}
-                                  >
-                                    <CgAdd size={25}></CgAdd>
-                                  </Button>
-                                </Form.Group>
-
-                                <Form.Label>Tambahkan Catatan : </Form.Label>
-                                <Form.Control as="textarea" rows={3} />
-                              </div>
-                            </Form.Group>
-                          </Form>
-                        </Modal.Body>
-                        <Modal.Footer>
-                          <div class="col text-center">
-                            <button
-                              className="button-konfir_modal"
-                              onClick={() => {
-                                notifsukses();
-                                handleClick();
-                              }}
-                            >
-                              Tambah Pesanan
-                            </button>
-                          </div>
-                        </Modal.Footer>
-                      </Modal>
-                    )}
                   </table>
                 </>
               );
@@ -808,7 +731,7 @@ function Navbarcomp(props) {
             >
               <td class="fw-bold"> Total </td>
               <td></td>
-              <td class="fw-bold"> Rp. {data.totalHarga},00</td>
+              <td class="fw-bold"> Rp. {data.totalHarga}</td>
             </table>
           </p>
         </div>
@@ -824,13 +747,165 @@ function Navbarcomp(props) {
   );
 }
 
-const ModalCustom = ({ menuList }) => {
-  const [menus, setMenus] = useState([]);
+export default Navbarcomp;
 
-  const numberWithCommas = (x) => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+export const ModalCustomKeranjang = ({
+  menuList,
+  onSubmit,
+  notifsukses,
+  menu,
+  setInidata,
+}) => {
+  const [show, setShow] = useState(false);
+  let [count, setCount] = useState(0);
+
+  const handleClick = () => {
+    setShow(!show);
   };
-  return <></>;
+
+  return (
+    <>
+      <div onClick={handleClick}>{menuList.namaMenu}</div>
+      {show && (
+        <Modal
+          show={show}
+          onHide={handleClick}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <br></br>
+          <CgArrowLeftO class="mx-4" size={35} onClick={handleClick} />
+          <Modal.Body>
+            <img src={Gambarburger} alt="gambarpizza" className="gambarmodal" />
+            <div className="textmodal">
+              {menuList.namaMenu}
+              <p></p>
+            </div>
+            {/* <div className="textmodal_deskripsi">{menuList.deskripsiMenu}</div> */}
+            <div className="textmodal_harga">{"50K"}</div>
+            <br></br>
+            <Form>
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlInput1"
+              ></Form.Group>
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlTextarea1"
+              >
+                <div className="modal_tengah">
+                  <Form.Group controlId="exampleForm.ControlInput1">
+                    <Form.Label>Kuantitas :</Form.Label>
+                    <br />
+
+                    <strong>{menuList.qty}</strong>
+                  </Form.Group>
+
+                  <Form.Label>Tambahkan Catatan : </Form.Label>
+                  <Form.Control as="textarea" rows={3} />
+                </div>
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <div class="col text-center">
+              <button className="button-konfir_modal" onClick={handleClick}>
+                Edit Pesanan
+              </button>
+            </div>
+          </Modal.Footer>
+        </Modal>
+      )}
+    </>
+  );
 };
 
-export default Navbarcomp;
+export const ModalCustom = ({
+  menuList,
+  onSubmit,
+  notifsukses,
+  menu,
+  setInidata,
+}) => {
+  const [show, setShow] = useState(false);
+
+  const handleClick = () => {
+    setShow(!show);
+  };
+
+  return (
+    <>
+      <div class="text text-end text-dark">
+        <Button
+          className="buttonplus"
+          variant="text"
+          onClick={handleClick}
+          style={{ paddingTop: "15px", paddingRight: "1px" }}
+        >
+          <BsPlusCircle></BsPlusCircle>
+        </Button>
+      </div>
+
+      {show && (
+        <Modal
+          show={show}
+          onHide={handleClick}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <br></br>
+          <CgArrowLeftO class="mx-4" size={35} onClick={handleClick} />
+          <Modal.Body>
+            <img src={Gambarburger} alt="gambarpizza" className="gambarmodal" />
+            <div className="textmodal">
+              {menuList.namaMenu}
+              <p></p>
+            </div>
+            {/* <div className="textmodal_deskripsi">{menuList.deskripsiMenu}</div> */}
+            <div className="textmodal_harga">{"50K"}</div>
+            <br></br>
+            <Form>
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlInput1"
+              ></Form.Group>
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlTextarea1"
+              >
+                <div className="modal_tengah">
+                  <Form.Group controlId="exampleForm.ControlInput1">
+                    <Form.Label>Kuantitas :</Form.Label>
+                    <br />
+
+                    <strong>1</strong>
+                  </Form.Group>
+
+                  <Form.Label>Tambahkan Catatan : </Form.Label>
+                  <Form.Control as="textarea" rows={3} />
+                </div>
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <div class="col text-center">
+              <form action="" id="login" method="post" onSubmit={onSubmit}>
+                <button
+                  className="button-konfir_modal"
+                  type="submit"
+                  variant="text"
+                  onClick={() => {
+                    notifsukses(menu);
+                    setInidata(menu);
+                  }}
+                >
+                  Tambah Pesanan
+                </button>
+              </form>
+            </div>
+          </Modal.Footer>
+        </Modal>
+      )}
+    </>
+  );
+};

@@ -1,204 +1,191 @@
 .navmenu {
-    margin-top: 1%;
-
-
+  margin-top: 1%;
 }
 
 .button-konfir {
-    position: relative;
-    left: 50%;
+  position: relative;
+  left: 50%;
 
-    transform: translate(-50%, -50%);
-    background: #1F2937;
-    margin-top: 2%;
+  transform: translate(-50%, -50%);
+  background: #1f2937;
+  margin-top: 2%;
 
-    padding: 1px 25%;
-    font-weight: medium;
-    font-family: 'Montserrat';
-    font-size: 15px;
+  padding: 1px 25%;
+  font-weight: medium;
+  font-family: "Montserrat";
+  font-size: 15px;
 
-    border-radius: 8px;
-    color: #FFFFFF;
+  border-radius: 8px;
+  color: #ffffff;
 }
 
 body,
-
 a {
-    outline: none;
+  outline: none;
 }
 
 .navbar-container {
-    text-align: center;
-    text-indent: 5px;
-    font-family: 'Montserrat';
-    font-weight: bold;
-    padding: 10px;
-
+  text-align: center;
+  text-indent: 5px;
+  font-family: "Montserrat";
+  font-weight: bold;
+  padding: 10px;
 }
 
 .navbar-container ul {
-    margin: 0;
-    padding: 0;
-    text-align: right;
-    display: inline-block;
-    vertical-align: middle;
+  margin: 0;
+  padding: 0;
+  text-align: right;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .navbar-container ul li {
-    display: inline-block;
-    font-size: 100%;
+  display: inline-block;
+  font-size: 100%;
 }
 
 .navbar-container ul li a {
-    color: black;
-    text-decoration: none;
-    display: inline-block;
-    padding: 10px;
-    transition: color 0.5s;
+  color: black;
+  text-decoration: none;
+  display: inline-block;
+  padding: 10px;
+  transition: color 0.5s;
 }
 
 .navbar-container ul li .underline {
-    height: 3px;
-    background-color: transparent;
-    width: 0%;
-    transition: width 0.2s, background-color 0.5s;
-    margin: 0 auto;
+  height: 3px;
+  background-color: transparent;
+  width: 0%;
+  transition: width 0.2s, background-color 0.5s;
+  margin: 0 auto;
 }
 
 .navbar-container ul li:hover .underline {
-    background-color: black;
-    width: 100%;
+  background-color: black;
+  width: 100%;
 }
 
-.navbar-container ul li:hover a {}
+.navbar-container ul li:hover a {
+}
 
 .navbar-container ul li:active a {
-    transition: none;
-    color: rgba(255, 255, 255, 0.76);
+  transition: none;
+  color: rgba(255, 255, 255, 0.76);
 }
 
 .navbar-container ul li:active .underline {
-    transition: none;
-    background-color: rgba(255, 255, 255, 0.76);
+  transition: none;
+  background-color: rgba(255, 255, 255, 0.76);
 }
 
-
 .searchbar {
-    box-sizing: border-box;
-    background: #FFFFFF;
-    border: 1px solid #EBEBEB;
-    border-radius: 15px;
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px solid #ebebeb;
+  border-radius: 15px;
 }
 
 .daftarmenu {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 3px 25px;
-    gap: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 3px 25px;
+  gap: 10px;
 
-    position: center;
-    width: 149px;
-    height: 30px;
-    left: 122px;
-    top: 77px;
+  position: center;
+  width: 149px;
+  height: 30px;
+  left: 122px;
+  top: 77px;
 
-    background: #1F2937;
-    border-radius: 5px;
+  background: #1f2937;
+  border-radius: 5px;
 }
 
 .logonav {
-    position: absolute;
-    bottom: 93%;
-    width: 7%;
-    height: 5%;
-
+  position: absolute;
+  bottom: 93%;
+  width: 7%;
+  height: 5%;
 }
 
 .logotext {
-    position: absolute;
-    bottom: 92%;
-    font-size: large;
-    left: 15%;
+  position: absolute;
+  bottom: 92%;
+  font-size: large;
+  left: 15%;
 
-
-    color: #DADADA;
-
+  color: #dadada;
 }
 
 .brand-color {
+  position: absolute;
+  width: 83%;
+  height: 7%;
+  top: 1%;
+  right: 16.5%;
 
-    position: absolute;
-    width: 83%;
-    height: 7%;
-    top: 1%;
-    right: 16.5%;
+  background: #1a1a27;
+  backdrop-filter: blur(2px);
+  /* Note: backdrop-filter has minimal browser support */
 
-    background: #1A1A27;
-    backdrop-filter: blur(2px);
-    /* Note: backdrop-filter has minimal browser support */
-
-    border-radius: 0px 30px 30px 0px;
+  border-radius: 0px 30px 30px 0px;
 }
 .modal_tengah {
-    text-align: center;
-    font-weight: bold;
-    
-    font-family: 'Montserrat';
-font-style: normal;
+  text-align: center;
+  font-weight: bold;
+
+  font-family: "Montserrat";
+  font-style: normal;
 }
 .gambarmodal {
-    
-    float: left;
-    height: 100px;
-    width: 100px; 
-    margin-right: 15px;
-    margin-left: 30px;
-    
+  float: left;
+  height: 100px;
+  width: 100px;
+  margin-right: 15px;
+  margin-left: 30px;
 }
-.textmodal{
-
-
-    text-align: justify;
-    font-weight: bold;
-    font-family: 'Montserrat';
+.textmodal {
+  text-align: justify;
+  font-weight: bold;
+  font-family: "Montserrat";
 }
-.textmodal_deskripsi{
-    font-family: 'Montserrat';
-    font-size: small;
+.textmodal_deskripsi {
+  font-family: "Montserrat";
+  font-size: small;
 
-    text-align: justify;
-    margin-bottom: 2%;
+  text-align: justify;
+  margin-bottom: 2%;
 }
-.textmodal_harga{
-    font-family: 'Montserrat';
-    font-weight: bolder;
-    color: red;
+.textmodal_harga {
+  font-family: "Montserrat";
+  font-weight: bolder;
+  color: red;
 
-    text-align: justify;
-    font-size: 23px;
+  text-align: justify;
+  font-size: 23px;
 }
 
 .button-konfir_modal {
-    position: relative;
-    
-    text-align: center;
-    background: #1F2937;
-    margin-bottom: 5%;
+  position: relative;
 
-    padding: 1px 25%;
-    font-weight: bold;
-    font-family: 'Montserrat';
-    font-size: 15px;
-  
-    border-radius: 8px;
-    color: #FFFFFF;
+  text-align: center;
+  background: #1f2937;
+  margin-bottom: 5%;
+
+  padding: 1px 25%;
+  font-weight: bold;
+  font-family: "Montserrat";
+  font-size: 15px;
+
+  border-radius: 8px;
+  color: #ffffff;
 }
 
 .button-hide {
-    font-size: small;
-    opacity: 50%;
-    text-align: center;
+  font-size: small;
+  opacity: 50%;
+  text-align: center;
 }
-
