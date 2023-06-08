@@ -1,6 +1,4 @@
 import "../Style/Confirmpage.css";
-import { IoChevronBackCircleOutline } from "react-icons/io5";
-import Navbarcomp from "./Navbarcomp";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { CgArrowLeftO } from "react-icons/cg";
@@ -8,8 +6,6 @@ import React, { useState, useEffect, createRef } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { BsCheckCircle } from "react-icons/bs";
-import { useScreenshot, createFileName } from "use-react-screenshot";
-
 import html2canvas from "html2canvas";
 import Swal from "sweetalert2";
 const Statuscomp = (props) => {

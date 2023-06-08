@@ -114,7 +114,7 @@ const Confirmcomp = (props) => {
           onClick={payment}
           className="button-proses-pembayaran"
         >
-          Bayar Di Kasir
+          Pilih Metode Pembayaran
         </button>
       </div>
     </div>
