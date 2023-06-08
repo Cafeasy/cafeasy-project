@@ -1,11 +1,10 @@
 import "../Style/Confirmpage.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { CgArrowLeftO } from "react-icons/cg";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import "https://app.sandbox.midtrans.com/snap/snap.js";
 
 const Confirmcomp = (props) => {
@@ -17,29 +16,49 @@ const Confirmcomp = (props) => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/cartPelanggan/` + urlParams)
       .then((res) => setData(res.data.data))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("message :", err));
   }, [data]);
 
+  const toStatusPage = (idOrder) => {
+    paymentSukses("/Statuspage/" + urlParams, { state: { id: 1, idOrder: idOrder } });
+  }
+
   const payment = async (e) => {
+    let parameter;
+    let idOrder;
+    {
+      data?.result.map((newData) => (
+        parameter = {
+          "transaction_details": {
+            "order_id": newData.idKeranjang.toString(),
+            "gross_amount": data.totalHarga
+          },
+          "credit_card": {
+            "secure": true
+          },
+          "customer_details": {
+            "first_name": newData.namaPelanggan.toString(),
+            "last_name": "",
+          }
+        },
+        idOrder = newData.idKeranjang
+      ))
+    };
+
+
     e.preventDefault();
     await axios
-      .get(`${process.env.REACT_APP_API_URL}/midtransPayment/`)
+      .post(`${process.env.REACT_APP_API_URL}/midtransPayment/`,
+        parameter
+      )
       .then((res) => {
         const responseAPI = res.data.data;
         console.log("transaction token:", responseAPI, "url :", res.data.url);
         window.snap.pay(responseAPI, {
-          onSuccess: function () {
-            paymentSukses("/Statuspage/" + urlParams);
-          },
-          onPending: function () {
-            paymentSukses("/Statuspage/" + urlParams);
-          },
-          onError: function () {
-            paymentSukses("/Statuspage/" + urlParams);
-          },
-          onClose: function () {
-            paymentSukses("/Statuspage/" + urlParams);
-          },
+          onSuccess: () => (toStatusPage(idOrder)),
+          onPending: () => (toStatusPage(idOrder)),
+          onError: () => (toStatusPage(idOrder)),
+          onClose: () => (toStatusPage(idOrder)),
         });
       })
       .catch((err) => console.log("error : ", err));

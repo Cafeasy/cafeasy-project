@@ -9,8 +9,8 @@ const KeranjangController = require("../controllers/Keranjangcontroller");
 const RiwayatpesananController = require("../controllers/Riwayatpesanancontroller");
 const TransaksiController = require("../controllers/TransaksiCustomercontroller");
 const app = express();
-const Customer = require("../model/Customermodel")
-const Midtrans = require('../controllers/Midtranscontroller.js')
+const Customer = require("../model/Customermodel");
+const Midtrans = require('../controllers/MidtransController');
 
 
 router.get("/", (req, res) => {
@@ -113,7 +113,9 @@ router.post('/postTransaksi/:idKeranjang', TransaksiController.postTransaksiPela
 router.delete('/delTransaksi/:idPelanggan',);
 router.put('/updateStatusBayar/:idTransaksi', TransaksiController.updateStatusBayar);
 //routes payment Midtrans
-router.get('/midtransPayment/', Midtrans.buatTransaction);
+router.post('/midtransPayment/', Midtrans.buatTransaction);
+router.get('/getTransactionStatus/:idOrder', Midtrans.getTransactionStatus);
+
 
 router.get('*', (req, res) => {
     res.send('<h1> 404. This page does not exist. <a href="/" >Back Home</a> </h1>')
