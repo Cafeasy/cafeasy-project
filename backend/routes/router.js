@@ -77,10 +77,10 @@ router.get("/auth/logout", (req, res) => {
     res.redirect(process.env.CLIENT_URL + "/Loginpage");
 });
 
-router.use('/testing', (req, res, next) => {
-    res.json({ name: "tes", tes: "yes" });
-    next();
-});
+// router.use('/testing', (req, res, next) => {
+//     res.json({ name: "tes", tes: "yes" });
+//     next();
+// });
 
 
 //routes crud daftar menu
