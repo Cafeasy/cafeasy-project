@@ -34,7 +34,6 @@ exports.getTransactionStatus = async (req, res) => {
     const options = {
         method: 'GET',
         headers: {
-            accept: 'application/json',
             authorization: 'Basic U0ItTWlkLXNlcnZlci1BMDQ2MHdVN3JWYjk2aGIwX2poNG5NSTE6'
         }
     };

@@ -54,7 +54,7 @@ const Statuscomp = (props) => {
 
   React.useEffect(() => {
     axios
-      .get("http://localhost:8888/getCustomerById/" + urlParams)
+      .get(`${process.env.REACT_APP_API_URL}/getCustomerById/` + urlParams)
       .then((response) => {
         setPost(response.data);
       });
@@ -65,7 +65,7 @@ const Statuscomp = (props) => {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:8888/cartPelanggan/" + urlParams)
+      .get(`${process.env.REACT_APP_API_URL}/cartPelanggan/` + urlParams)
       .then((res) => setData(res.data.data))
       .catch((err) => console.log(err));
   }, [data]);
