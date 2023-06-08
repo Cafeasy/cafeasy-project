@@ -8,6 +8,8 @@ import { useParams } from "react-router-dom";
 import { BsCheckCircle } from "react-icons/bs";
 import html2canvas from "html2canvas";
 import Swal from "sweetalert2";
+
+
 const Statuscomp = (props) => {
   const printRef = React.useRef();
   const [copySuccess, setCopySuccess] = useState("");
@@ -49,7 +51,7 @@ const Statuscomp = (props) => {
   };
   const params = useParams();
   const urlParams = params.idUser;
-  const user = props.user;
+
   const [post, setPost] = React.useState(null);
 
   React.useEffect(() => {
@@ -63,17 +65,29 @@ const Statuscomp = (props) => {
   let ininama = post?.data[0]?.name;
 
   const [data, setData] = useState([]);
+  const [dataStatusTransaksi, setDataStatusTransaksi] = useState([]);
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/cartPelanggan/` + urlParams)
-      .then((res) => setData(res.data.data))
+      .then((res) => (
+        setData(res.data.data)))
+      .then(() => {
+        let idOrder = data?.result[0]?.idKeranjang;
+        axios
+          .get(`${process.env.REACT_APP_API_URL}/getTransactionStatus/` + `${idOrder}`)
+          .then((res) =>
+            setDataStatusTransaksi(res.data)
+          )
+          .catch((err) => console.log(err));
+      }
+
+      )
       .catch((err) => console.log(err));
-  }, [data]);
+  }, []);
 
   const menus = props.menu;
-  const location = useLocation();
-  let arr = data.result ?? [];
 
+  let arr = data.result ?? [];
   return (
     <div className="App">
       <div className="logo-back">
@@ -87,8 +101,7 @@ const Statuscomp = (props) => {
         <br></br>
         <BsCheckCircle style={{ fontSize: "100" }}></BsCheckCircle>
         <div style={{ fontSize: "25px", fontWeight: "bold" }}>
-          Pembayaran Berhasil
-        </div>
+          {dataStatusTransaksi?.data?.transaction_status}   </div >
         <div
           style={{
             fontSize: "13px",
@@ -172,7 +185,7 @@ const Statuscomp = (props) => {
                 notifsukses();
                 copyToClipBoard(
                   "Pembayaran berhasil dilakukan! Buka tautan ini untuk melihat nota transaksi yang sudah dibayar : " +
-                    urlParams
+                  urlParams
                 );
               }}
             >

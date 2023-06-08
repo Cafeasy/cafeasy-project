@@ -19,9 +19,7 @@ const Confirmcomp = (props) => {
       .catch((err) => console.log("message :", err));
   }, [data]);
 
-  const toStatusPage = (idOrder) => {
-    paymentSukses("/Statuspage/" + urlParams, { state: { id: 1, idOrder: idOrder } });
-  }
+
 
   const payment = async (e) => {
     let parameter;
@@ -30,7 +28,7 @@ const Confirmcomp = (props) => {
       data?.result.map((newData) => (
         parameter = {
           "transaction_details": {
-            "order_id": newData.idKeranjang.toString(),
+            "order_id": newData.idKeranjang.toString()+"1",
             "gross_amount": data.totalHarga
           },
           "credit_card": {
@@ -55,10 +53,10 @@ const Confirmcomp = (props) => {
         const responseAPI = res.data.data;
         console.log("transaction token:", responseAPI, "url :", res.data.url);
         window.snap.pay(responseAPI, {
-          onSuccess: () => (toStatusPage(idOrder)),
-          onPending: () => (toStatusPage(idOrder)),
-          onError: () => (toStatusPage(idOrder)),
-          onClose: () => (toStatusPage(idOrder)),
+          onSuccess: () => (paymentSukses("/Statuspage/" + urlParams, { idOrder: idOrder })),
+          onPending: () => (paymentSukses("/Statuspage/" + urlParams, { idOrder: idOrder })),
+          onError: () => (paymentSukses("/Statuspage/" + urlParams, { idOrder: idOrder })),
+          onClose: () => (paymentSukses("/Statuspage/" + urlParams, { idOrder: idOrder })),
         });
       })
       .catch((err) => console.log("error : ", err));
