@@ -11,8 +11,7 @@ let snap = new midtransClient.Snap({
 //     serverKey: process.env.MIDTRANS_SERVER_KEY,
 //     clientKey: process.env.MIDTRANS_CLIENT_KEY
 // })
-
-exports.buatTransaction = async (req, res) => {
+async function createTransaction(req, res) {
     let param = req.body;
     const dataKeranjang = JSON.stringify(param);
     try {
@@ -28,7 +27,10 @@ exports.buatTransaction = async (req, res) => {
     }
 }
 
-exports.getTransactionStatus = async (req, res) => {
+exports.buatTransaction = async (req, res) => {
+    createTransaction(req, res);
+}
+async function getTransactionStatuss(req, res) {
     const orderId = req.params.idOrder.toString();
     const url = 'https://api.sandbox.midtrans.com/v2/' + orderId + '/status';
     const options = {
@@ -49,4 +51,7 @@ exports.getTransactionStatus = async (req, res) => {
         res.status(401).json({ message: "Gagal get status", data: err });
     }
 
+}
+exports.getTransactionStatus = async (req, res) => {
+    getTransactionStatuss(req, res);
 }
