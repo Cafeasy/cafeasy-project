@@ -109,7 +109,7 @@ exports.postCart = async (req, res, next) => {
                     data: result
                 })
             }).catch(err => {
-                console.log('err: ', err);
+                next(err)
             });
         }
     }
