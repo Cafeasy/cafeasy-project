@@ -64,6 +64,8 @@ exports.postCart = async (req, res, next) => {
         const idMenu = idMenuSign;
         const namaMenu = namaMenuSign;
         const hargaMenu = hargaMenuSign;
+        const qty = req.body.qty;
+        const catatanPelanggan = req.body.catatanPelanggan;
 
         //check data keranjang by id menu dan id pelanggan
         let checkCartByParams = await KeranjangPelanggan.findOne({ idPelanggan: `${idPelangganCheck}`, "dataPesanan.idMenu": `${idMenu}` });
@@ -71,10 +73,10 @@ exports.postCart = async (req, res, next) => {
 
         if (checkPelangganByParams) {
             if (checkCartByParams) {
-                KeranjangPelanggan.findOneAndUpdate({ idPelanggan: `${idPelangganCheck}`, 'dataPesanan.idMenu': `${idMenu}` }, { $inc: { 'dataPesanan.$.qty': 1 } }, { new: true })
+                KeranjangPelanggan.findOneAndUpdate({ idPelanggan: `${idPelangganCheck}`, 'dataPesanan.idMenu': `${idMenu}` }, { $inc: { 'dataPesanan.$.qty': qty } }, { new: true })
                     .then(result => {
                         res.status(200).json({
-                            message: 'Item berhasil ditambah 1',
+                            message: 'Item berhasil ditambah',
                             data: result
                         })
                     })
@@ -82,7 +84,7 @@ exports.postCart = async (req, res, next) => {
                         next(err);
                     })
             } else {
-                KeranjangPelanggan.findOneAndUpdate({ idPelanggan: `${idPelangganCheck}` }, { $push: { dataPesanan: { idMenu: idMenu, namaMenu: namaMenu, hargaMenu: hargaMenu, qty: 1, catatanPelanggan: "-" } } }, { new: true })
+                KeranjangPelanggan.findOneAndUpdate({ idPelanggan: `${idPelangganCheck}` }, { $push: { dataPesanan: { idMenu: idMenu, namaMenu: namaMenu, hargaMenu: hargaMenu, qty: qty, catatanPelanggan: catatanPelanggan } } }, { new: true })
                     .then(result => {
                         res.status(200).json({
                             message: 'Item berhasil ditambah',
@@ -98,7 +100,7 @@ exports.postCart = async (req, res, next) => {
                 idKeranjang: idKeranjang,
                 idPelanggan: idPelanggan,
                 namaPelanggan: namaPelanggan,
-                dataPesanan: [{ idMenu: idMenu, namaMenu: namaMenu, hargaMenu: hargaMenu, qty: 1, catatanPelanggan: "-" }]
+                dataPesanan: [{ idMenu: idMenu, namaMenu: namaMenu, hargaMenu: hargaMenu, qty: qty, catatanPelanggan: catatanPelanggan }]
             })
 
             insertCart.save().then(result => {
