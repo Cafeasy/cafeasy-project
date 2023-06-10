@@ -70,6 +70,7 @@ function Navbarcomp(props) {
   // const datadalam = notifsukses.menu.namaMenu;
   // console.log(datadalam);
   const [inidata, setInidata] = useState();
+
   const onSubmit = async (e) => {
     e.preventDefault();
     const post = {
@@ -110,8 +111,24 @@ function Navbarcomp(props) {
       .catch((err) => console.log(err));
   };
 
+  const updateCatatan = (value) => {
+    const post = {
+      catatanPelanggan: "mantap banget gais",
+    };
+    axios
+      .put(
+        `${process.env.REACT_APP_API_URL}/updateCartCatatanPelanggan/` +
+          urlParams +
+          "/" +
+          value.idMenu,
+        post
+      )
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+    console.log(value.catatanPelanggan);
+  };
+
   const minItem = (value) => {
-    console.log(value);
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/cartPelangganMinus/` +
@@ -682,6 +699,7 @@ function Navbarcomp(props) {
                         notifsukses={notifsukses}
                         menu={d}
                         setInidata={setInidata}
+                        updateCatatan={updateCatatan}
                       />
                     </td>
 
@@ -747,6 +765,7 @@ export const ModalCustomKeranjang = ({
   notifsukses,
   menu,
   setInidata,
+  updateCatatan,
 }) => {
   const [show, setShow] = useState(false);
   let [count, setCount] = useState(0);
@@ -801,7 +820,14 @@ export const ModalCustomKeranjang = ({
           </Modal.Body>
           <Modal.Footer>
             <div class="col text-center">
-              <button className="button-konfir_modal" onClick={handleClick}>
+              <button
+                className="button-konfir_modal"
+                onClick={() => {
+                  notifsukses();
+                  handleClick();
+                  updateCatatan(menuList);
+                }}
+              >
                 Edit Pesanan
               </button>
             </div>
