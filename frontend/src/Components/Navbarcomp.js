@@ -110,10 +110,10 @@ function Navbarcomp(props) {
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
-
+  let [catatankrj, setCatatankrj] = useState("");
   const updateCatatan = (value) => {
     const post = {
-      catatanPelanggan: "ayam",
+      catatanPelanggan: catatankrj,
     };
     axios
       .put(
@@ -705,6 +705,7 @@ function Navbarcomp(props) {
                         menu={d}
                         setInidata={setInidata}
                         updateCatatan={updateCatatan}
+                        setCatatankrj={setCatatankrj}
                       />
                     </td>
 
@@ -771,7 +772,7 @@ export const ModalCustomKeranjang = ({
   menu,
   setInidata,
   updateCatatan,
-  setCatatan,
+  setCatatankrj,
 }) => {
   const [show, setShow] = useState(false);
   let [count, setCount] = useState(0);
@@ -822,7 +823,8 @@ export const ModalCustomKeranjang = ({
                   <Form.Control
                     as="textarea"
                     rows={3}
-                    onChange={(e) => setCatatan(e.target.value)}
+                    placeholder={menuList.catatanPelanggan}
+                    onChange={(e) => setCatatankrj(e.target.value)}
                   />
                 </div>
               </Form.Group>
