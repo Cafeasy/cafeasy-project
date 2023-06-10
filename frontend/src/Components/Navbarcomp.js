@@ -74,8 +74,8 @@ function Navbarcomp(props) {
   const onSubmit = async (e) => {
     e.preventDefault();
     const post = {
-      qty: 1,
-      catatanPelanggan: "mantap banget gais",
+      qty: count,
+      catatanPelanggan: catatan,
     };
     try {
       const res = await axios.post(
@@ -113,7 +113,7 @@ function Navbarcomp(props) {
 
   const updateCatatan = (value) => {
     const post = {
-      catatanPelanggan: "mantap banget gais",
+      catatanPelanggan: "ayam",
     };
     axios
       .put(
@@ -172,18 +172,6 @@ function Navbarcomp(props) {
   // }, []);
 
   const [show, setShow] = useState(false);
-  let [count, setCount] = useState(1);
-
-  function incrementCount() {
-    if (count < 10) {
-      setCount(count + 1);
-    }
-  }
-  function decrementCount() {
-    if (count > 1) {
-      setCount(count - 1);
-    }
-  }
   const handleClick = () => {
     setShow(!show);
   };
@@ -240,6 +228,19 @@ function Navbarcomp(props) {
     window.open(`${process.env.REACT_APP_API_URL}/auth/logout`, "_self");
   };
 
+  let [catatan, setCatatan] = useState("");
+
+  let [count, setCount] = useState(0);
+  function incrementCount() {
+    if (count < 10) {
+      setCount(count + 1);
+    }
+  }
+  function decrementCount() {
+    if (count > 0) {
+      setCount(count - 1);
+    }
+  }
   const removeMe = (index) => {
     const temp = [...cart];
     temp.splice(index, 1);
@@ -437,6 +438,10 @@ function Navbarcomp(props) {
                         notifsukses={notifsukses}
                         menu={menu}
                         setInidata={setInidata}
+                        incrementCount={incrementCount}
+                        decrementCount={decrementCount}
+                        count={count}
+                        setCatatan={setCatatan}
                       />
 
                       <Card.Text className="menu-deskripsi">
@@ -766,6 +771,7 @@ export const ModalCustomKeranjang = ({
   menu,
   setInidata,
   updateCatatan,
+  setCatatan,
 }) => {
   const [show, setShow] = useState(false);
   let [count, setCount] = useState(0);
@@ -813,7 +819,11 @@ export const ModalCustomKeranjang = ({
                   </Form.Group>
 
                   <Form.Label>Tambahkan Catatan : </Form.Label>
-                  <Form.Control as="textarea" rows={3} />
+                  <Form.Control
+                    as="textarea"
+                    rows={3}
+                    onChange={(e) => setCatatan(e.target.value)}
+                  />
                 </div>
               </Form.Group>
             </Form>
@@ -823,7 +833,6 @@ export const ModalCustomKeranjang = ({
               <button
                 className="button-konfir_modal"
                 onClick={() => {
-                  notifsukses();
                   handleClick();
                   updateCatatan(menuList);
                 }}
@@ -844,13 +853,16 @@ export const ModalCustom = ({
   notifsukses,
   menu,
   setInidata,
+  incrementCount,
+  decrementCount,
+  count,
+  setCatatan,
 }) => {
   const [show, setShow] = useState(false);
 
   const handleClick = () => {
     setShow(!show);
   };
-
   return (
     <>
       <div class="text text-end text-dark">
@@ -895,12 +907,33 @@ export const ModalCustom = ({
                   <Form.Group controlId="exampleForm.ControlInput1">
                     <Form.Label>Kuantitas :</Form.Label>
                     <br />
+                    <Button
+                      variant="text"
+                      size="sm"
+                      className="mx-4"
+                      onClick={decrementCount}
+                    >
+                      <CgRemove size={25}></CgRemove>
+                    </Button>
 
-                    <strong>1</strong>
+                    <strong>{count}</strong>
+
+                    <Button
+                      variant="text"
+                      size="sm"
+                      className="mx-4"
+                      onClick={incrementCount}
+                    >
+                      <CgAdd size={25}></CgAdd>
+                    </Button>
                   </Form.Group>
 
                   <Form.Label>Tambahkan Catatan : </Form.Label>
-                  <Form.Control as="textarea" rows={3} />
+                  <Form.Control
+                    onChange={(e) => setCatatan(e.target.value)}
+                    as="textarea"
+                    rows={3}
+                  />
                 </div>
               </Form.Group>
             </Form>
