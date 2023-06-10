@@ -1,5 +1,19 @@
 const Customer = require("../model/Customermodel")
 
+
+async function buatCustomer(customer) {
+    return await Customer.create(customer);
+}
+
+async function getOneCustomerByName(name) {
+
+    return await Customer.findOne({ name: name });
+}
+
+async function getOneCustomerById(id) {
+    return await Customer.findOne({ id: id });
+}
+
 exports.createCustomer = async (req, res) => {
     const id = req.body.id
     const name = req.body.name
@@ -8,27 +22,24 @@ exports.createCustomer = async (req, res) => {
         name: name
     }
     try {
-        await Customer.create(pelanggan)
+        await buatCustomer(pelanggan);
         res.status(200).json({ message: "berhasil input", data: pelanggan })
 
-    } catch {
-        res.status(400).json({ message: "gagal input" })
+    } catch (err) {
+        res.status(400).json({ message: "gagal input", data: err })
     }
 }
-exports.getCustomerByName = async (req, res, next) => {
-    const name = req.params.name
+exports.getCustomerByName = async (req, res) => {
+    const name = req.params.name;
+
     try {
-        await Customer.findOne({ name: `${name}` })
-            .then(result => {
-                res.status(200).json({
-                    message: 'Data Customer berhasil dipanggil',
-                    data: result
-                })
-            }).catch(err => {
-                next(err);
+        await getOneCustomerByName(name)
+            .then((result) => {
+                res.status(200).json({ message: "berhasil get Data", data: result })
             })
-    } catch {
-        res.status(400).json({ message: "gagal get Data" })
+            .catch((err) => res.status(404).json({ message: "gagal get Data", data: err }))
+    } catch (err) {
+        res.status(400).json({ message: "gagal get Data", err })
     }
 
 }
@@ -47,7 +58,7 @@ exports.getAllCustomer = (req, res) => {
 exports.getCustomerById = async (req, res, next) => {
     const id = req.params.idUser
     try {
-        await Customer.find({ id: `${id}` })
+        await getOneCustomerById(id)
             .then(result => {
                 res.status(200).json({
                     message: 'Data Customer berhasil dipanggil',
@@ -61,3 +72,6 @@ exports.getCustomerById = async (req, res, next) => {
     }
 
 }
+exports.getOneCustomerByName = getOneCustomerByName;
+exports.buatCustomer = buatCustomer;
+exports.getOneCustomerById = getOneCustomerById;

@@ -1,6 +1,7 @@
 require('dotenv').config();
 const midtransClient = require('midtrans-client');
 const fetch = require('node-fetch');
+
 let snap = new midtransClient.Snap({
     isProduction: false,
     serverKey: process.env.MIDTRANS_SERVER_KEY,
@@ -26,13 +27,9 @@ async function createTransaction(req, res) {
         res.status(500).json("error :" + err);
     }
 }
+async function getTransactionStatuss(req, res, idOrder) {
 
-exports.buatTransaction = async (req, res) => {
-    createTransaction(req, res);
-}
-async function getTransactionStatuss(req, res) {
-    const orderId = req.params.idOrder.toString();
-    const url = 'https://api.sandbox.midtrans.com/v2/' + orderId + '/status';
+    const url = 'https://api.sandbox.midtrans.com/v2/' + idOrder + '/status';
     const options = {
         method: 'GET',
         headers: {
@@ -52,6 +49,12 @@ async function getTransactionStatuss(req, res) {
     }
 
 }
+
+exports.buatTransaction = async (req, res) => {
+    createTransaction(req, res);
+}
+
 exports.getTransactionStatus = async (req, res) => {
-    getTransactionStatuss(req, res);
+    const orderId = req.params.idOrder.toString();
+    await getTransactionStatuss(req, res, orderId);
 }
