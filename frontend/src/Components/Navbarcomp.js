@@ -381,25 +381,25 @@ function Navbarcomp(props) {
         <div class="navbar-container">
           <ul>
             <li fill class="nav-link active-link">
-              <a href="#" onClick={() => setActive("firstcard")}>
+              <a href="#link1" onClick={() => setActive("firstcard")}>
                 All Menu
               </a>
               <div class="underline"></div>
             </li>
             <li class="nav-link">
-              <a href="#" onClick={() => setActive("secondcard")}>
+              <a href="#link2" onClick={() => setActive("secondcard")}>
                 Desert
               </a>
               <div class="underline"></div>
             </li>
             <li class="nav-link">
-              <a href="#" onClick={() => setActive("thirdcard")}>
+              <a href="#link3" onClick={() => setActive("thirdcard")}>
                 Main Course
               </a>
               <div class="underline"></div>
             </li>
             <li class="nav-link">
-              <a href="#" onClick={() => setActive("fourthcard")}>
+              <a href="#link4" onClick={() => setActive("fourthcard")}>
                 Drink
               </a>
               <div class="underline"></div>
@@ -408,7 +408,7 @@ function Navbarcomp(props) {
         </div>
       </div>
 
-      <div className="listmenu">
+      <div className="listmenu" id="link1">
         {active === "firstcard" && (
           <Row xs={2} md={4} className="g-0">
             {dataSearch.map((menu, index) => {
@@ -534,7 +534,7 @@ function Navbarcomp(props) {
           </Row>
         )}
         {active === "secondcard" && (
-          <Row xs={2} md={4} className="g-0">
+          <Row xs={2} md={4} className="g-0" id="link2">
             {posts?.data
               .filter((val) => {
                 if (cari === "") {
@@ -600,7 +600,7 @@ function Navbarcomp(props) {
           </Row>
         )}
         {active === "thirdcard" && (
-          <Row xs={2} md={4} className="g-0">
+          <Row xs={2} md={4} className="g-0" id="link3">
             {mainc?.data
               .filter((val) => {
                 if (cari === "") {
@@ -667,7 +667,7 @@ function Navbarcomp(props) {
         )}
 
         {active === "fourthcard" && (
-          <Row xs={2} md={4} className="g-0">
+          <Row xs={2} md={4} className="g-0" id="link4">
             {post?.data
               .filter((val) => {
                 if (cari === "") {
