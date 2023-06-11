@@ -13,9 +13,9 @@ mongoose.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
-// const client = mongoose.connection;
-// client.on('error', (error) => console.log(error));
-// client.once('open', () => console.log('Database Connected...'));
+const client = mongoose.connection;
+client.on('error', (error) => console.log(error));
+client.once('open', () => console.log('Database Connected...'));
 
 module.exports.closeDatabse = async () => {
     await mongoose.connection.close();

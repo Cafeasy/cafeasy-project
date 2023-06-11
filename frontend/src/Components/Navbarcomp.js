@@ -52,6 +52,7 @@ function Navbarcomp(props) {
 
   const [menus, setMenus] = useState([]);
   useEffect(() => {
+    console.log('ini nama user : ', user?.name);
     axios
       .get("http://localhost:8888/ListMenu")
       .then((result) => {
@@ -80,9 +81,9 @@ function Navbarcomp(props) {
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_API_URL}/postCart/` +
-          urlParams +
-          "/" +
-          inidata.idMenu,
+        urlParams +
+        "/" +
+        inidata.idMenu,
         post
       );
       console.log(res.data);
@@ -103,9 +104,9 @@ function Navbarcomp(props) {
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/cartPelangganPlus/` +
-          urlParams +
-          "/" +
-          value
+        urlParams +
+        "/" +
+        value
       )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
@@ -118,9 +119,9 @@ function Navbarcomp(props) {
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/updateCartCatatanPelanggan/` +
-          urlParams +
-          "/" +
-          value.idMenu,
+        urlParams +
+        "/" +
+        value.idMenu,
         post
       )
       .then((res) => console.log(res))
@@ -132,9 +133,9 @@ function Navbarcomp(props) {
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/cartPelangganMinus/` +
-          urlParams +
-          "/" +
-          value
+        urlParams +
+        "/" +
+        value
       )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
