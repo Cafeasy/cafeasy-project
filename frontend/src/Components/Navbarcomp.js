@@ -160,16 +160,27 @@ function Navbarcomp(props) {
       });
   }, [post]);
 
-  // const [posts, setPosts] = useState([]);
-  // useEffect(() => {
-  //   axios
-  //     .get(` ${process.env.REACT_APP_API_URL}/ListMenuByCategory/Minuman`)
-  //     .then((result) => {
-  //       console.log(result.data);
-  //       setPosts(result.data);
-  //     })
-  //     .catch((error) => console.log(error));
-  // }, []);
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    axios
+      .get(` ${process.env.REACT_APP_API_URL}/ListMenuByCategory/Dessert`)
+      .then((result) => {
+        console.log(result.data);
+        setPosts(result.data);
+      })
+      .catch((error) => console.log(error));
+  }, [posts]);
+
+  const [mainc, setMainc] = useState([]);
+  useEffect(() => {
+    axios
+      .get(` ${process.env.REACT_APP_API_URL}/ListMenuByCategory/Main Course`)
+      .then((result) => {
+        console.log(result.data);
+        setMainc(result.data);
+      })
+      .catch((error) => console.log(error));
+  }, [mainc]);
 
   const [show, setShow] = useState(false);
   const handleClick = () => {
@@ -230,14 +241,14 @@ function Navbarcomp(props) {
 
   let [catatan, setCatatan] = useState("");
 
-  let [count, setCount] = useState(0);
+  let [count, setCount] = useState(1);
   function incrementCount() {
-    if (count < 10) {
+    if (count < 50) {
       setCount(count + 1);
     }
   }
   function decrementCount() {
-    if (count > 0) {
+    if (count > 1) {
       setCount(count - 1);
     }
   }
@@ -371,7 +382,7 @@ function Navbarcomp(props) {
           <ul>
             <li fill class="nav-link active-link">
               <a href="#" onClick={() => setActive("firstcard")}>
-                Waffels
+                All Menu
               </a>
               <div class="underline"></div>
             </li>
@@ -524,138 +535,201 @@ function Navbarcomp(props) {
         )}
         {active === "secondcard" && (
           <Row xs={2} md={4} className="g-0">
-            {dataSearch.map((menu, masukKeranjang) => (
-              <Col>
-                <Card
-                  className="mx-1 mb-5 border-0 "
-                  key={menu._id}
-                  style={{ color: "grey" }}
-                >
-                  <Link
-                    to={`/Detailmenu/${menu.idMenu}`}
-                    state={{ url: urlParams }}
+            {posts?.data
+              .filter((val) => {
+                if (cari === "") {
+                  return val;
+                } else if (
+                  val.namaMenu
+                    ?.toLocaleLowerCase()
+                    .includes(cari.toLocaleLowerCase())
+                ) {
+                  return val;
+                }
+              })
+              .map((menu, masukKeranjang) => (
+                <Col>
+                  <Card
+                    className="mx-1  mb-5 border-0 "
+                    key={menu.idMenu}
+                    data-example={menu.namaMenu}
+                    masukKeranjang={menu.masukKeranjang}
                   >
-                    <Card.Img variant="top" src={Gambarburger} />
-                  </Link>
-                  <Card.Body>
-                    <Card.Title className="menu-harga">62K</Card.Title>
-                    <Card.Title className="menu-tittle">
-                      {menu.namaMenu}
-                    </Card.Title>
-                    <div className="rate">
-                      <div class="text text-end text-warning">
-                        <BsStarFill size="10px"></BsStarFill>
-                        <BsStarFill size="10px"></BsStarFill>
-                        <BsStarFill size="10px"></BsStarFill>
-                        <BsStarFill size="10px"></BsStarFill>
-                        <BsStarFill size="10px"></BsStarFill>
+                    <Link
+                      to={`/Detailmenu/${menu.idMenu}`}
+                      state={{ url: urlParams }}
+                    >
+                      <Card.Img variant="top" src={Gambarburger} />
+                    </Link>
+                    <Card.Body>
+                      <Card.Title className="menu-harga">
+                        {menu.hargaMenu}
+                      </Card.Title>
+                      <Card.Title className="menu-tittle">
+                        {menu.namaMenu}
+                      </Card.Title>
+                      <div className="rate">
+                        <div class="text text-end text-warning">
+                          <BsStarFill size="10px"></BsStarFill>
+                          <BsStarFill size="10px"></BsStarFill>
+                          <BsStarFill size="10px"></BsStarFill>
+                          <BsStarFill size="10px"></BsStarFill>
+                          <BsStarFill size="10px"></BsStarFill>
+                        </div>
                       </div>
 
-                      <div class="text text-end text-dark">
-                        <Button className="buttonplus" variant="text">
-                          <BsPlusCircle></BsPlusCircle>
-                        </Button>
-                      </div>
-                    </div>
+                      <ModalCustom
+                        menuList={menu}
+                        onSubmit={onSubmit}
+                        notifsukses={notifsukses}
+                        menu={menu}
+                        setInidata={setInidata}
+                        incrementCount={incrementCount}
+                        decrementCount={decrementCount}
+                        count={count}
+                        setCatatan={setCatatan}
+                      />
 
-                    <Card.Text className="menu-deskripsi">
-                      {menu.deskripsiMenu}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
+                      <Card.Text className="menu-deskripsi">
+                        {menu.deskripsiMenu}
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
           </Row>
         )}
         {active === "thirdcard" && (
           <Row xs={2} md={4} className="g-0">
-            {dataSearch.map((menu, masukKeranjang) => (
-              <Col>
-                <Card
-                  className="mx-1 mb-5 border-0 "
-                  key={menu._id}
-                  style={{ color: "grey" }}
-                >
-                  <Link
-                    to={`/Detailmenu/${menu.idMenu}`}
-                    state={{ url: urlParams }}
+            {mainc?.data
+              .filter((val) => {
+                if (cari === "") {
+                  return val;
+                } else if (
+                  val.namaMenu
+                    ?.toLocaleLowerCase()
+                    .includes(cari.toLocaleLowerCase())
+                ) {
+                  return val;
+                }
+              })
+              .map((menu, masukKeranjang) => (
+                <Col>
+                  <Card
+                    className="mx-1  mb-5 border-0 "
+                    key={menu.idMenu}
+                    data-example={menu.namaMenu}
+                    masukKeranjang={menu.masukKeranjang}
                   >
-                    <Card.Img variant="top" src={Gambarburger} />
-                  </Link>
-                  <Card.Body>
-                    <Card.Title className="menu-harga">62K</Card.Title>
-                    <Card.Title className="menu-tittle">
-                      {menu.namaMenu}
-                    </Card.Title>
-                    <div className="rate">
-                      <div class="text text-end text-warning">
-                        <BsStarFill size="10px"></BsStarFill>
-                        <BsStarFill size="10px"></BsStarFill>
-                        <BsStarFill size="10px"></BsStarFill>
-                        <BsStarFill size="10px"></BsStarFill>
-                        <BsStarFill size="10px"></BsStarFill>
+                    <Link
+                      to={`/Detailmenu/${menu.idMenu}`}
+                      state={{ url: urlParams }}
+                    >
+                      <Card.Img variant="top" src={Gambarburger} />
+                    </Link>
+                    <Card.Body>
+                      <Card.Title className="menu-harga">
+                        {menu.hargaMenu}
+                      </Card.Title>
+                      <Card.Title className="menu-tittle">
+                        {menu.namaMenu}
+                      </Card.Title>
+                      <div className="rate">
+                        <div class="text text-end text-warning">
+                          <BsStarFill size="10px"></BsStarFill>
+                          <BsStarFill size="10px"></BsStarFill>
+                          <BsStarFill size="10px"></BsStarFill>
+                          <BsStarFill size="10px"></BsStarFill>
+                          <BsStarFill size="10px"></BsStarFill>
+                        </div>
                       </div>
 
-                      <div class="text text-end text-dark">
-                        <Button className="buttonplus" variant="text">
-                          <BsPlusCircle></BsPlusCircle>
-                        </Button>
-                      </div>
-                    </div>
+                      <ModalCustom
+                        menuList={menu}
+                        onSubmit={onSubmit}
+                        notifsukses={notifsukses}
+                        menu={menu}
+                        setInidata={setInidata}
+                        incrementCount={incrementCount}
+                        decrementCount={decrementCount}
+                        count={count}
+                        setCatatan={setCatatan}
+                      />
 
-                    <Card.Text className="menu-deskripsi">
-                      {menu.deskripsiMenu}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
+                      <Card.Text className="menu-deskripsi">
+                        {menu.deskripsiMenu}
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
           </Row>
         )}
 
         {active === "fourthcard" && (
           <Row xs={2} md={4} className="g-0">
-            {post?.data.map((menu, masukKeranjang) => (
-              <Col>
-                <Card
-                  className="mx-1 mb-5 border-0 "
-                  key={menu._id}
-                  style={{ color: "grey" }}
-                >
-                  <Link
-                    to={`/Detailmenu/${menu.idMenu}`}
-                    state={{ url: urlParams }}
+            {post?.data
+              .filter((val) => {
+                if (cari === "") {
+                  return val;
+                } else if (
+                  val.namaMenu
+                    ?.toLocaleLowerCase()
+                    .includes(cari.toLocaleLowerCase())
+                ) {
+                  return val;
+                }
+              })
+              .map((menu, masukKeranjang) => (
+                <Col>
+                  <Card
+                    className="mx-1  mb-5 border-0 "
+                    key={menu.idMenu}
+                    data-example={menu.namaMenu}
+                    masukKeranjang={menu.masukKeranjang}
                   >
-                    <Card.Img variant="top" src={Gambarburger} />
-                  </Link>
-                  <Card.Body>
-                    <Card.Title className="menu-harga">62K</Card.Title>
-                    <Card.Title className="menu-tittle">
-                      {menu.namaMenu}
-                    </Card.Title>
-                    <div className="rate">
-                      <div class="text text-end text-warning">
-                        <BsStarFill size="10px"></BsStarFill>
-                        <BsStarFill size="10px"></BsStarFill>
-                        <BsStarFill size="10px"></BsStarFill>
-                        <BsStarFill size="10px"></BsStarFill>
-                        <BsStarFill size="10px"></BsStarFill>
+                    <Link
+                      to={`/Detailmenu/${menu.idMenu}`}
+                      state={{ url: urlParams }}
+                    >
+                      <Card.Img variant="top" src={Gambarburger} />
+                    </Link>
+                    <Card.Body>
+                      <Card.Title className="menu-harga">
+                        {menu.hargaMenu}
+                      </Card.Title>
+                      <Card.Title className="menu-tittle">
+                        {menu.namaMenu}
+                      </Card.Title>
+                      <div className="rate">
+                        <div class="text text-end text-warning">
+                          <BsStarFill size="10px"></BsStarFill>
+                          <BsStarFill size="10px"></BsStarFill>
+                          <BsStarFill size="10px"></BsStarFill>
+                          <BsStarFill size="10px"></BsStarFill>
+                          <BsStarFill size="10px"></BsStarFill>
+                        </div>
                       </div>
 
-                      <div class="text text-end text-dark">
-                        <Button className="buttonplus" variant="text">
-                          <BsPlusCircle></BsPlusCircle>
-                        </Button>
-                      </div>
-                    </div>
+                      <ModalCustom
+                        menuList={menu}
+                        onSubmit={onSubmit}
+                        notifsukses={notifsukses}
+                        menu={menu}
+                        setInidata={setInidata}
+                        incrementCount={incrementCount}
+                        decrementCount={decrementCount}
+                        count={count}
+                        setCatatan={setCatatan}
+                      />
 
-                    <Card.Text className="menu-deskripsi">
-                      {menu.deskripsiMenu}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
+                      <Card.Text className="menu-deskripsi">
+                        {menu.deskripsiMenu}
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
           </Row>
         )}
         {/* <div className="button-hide">
@@ -768,7 +842,6 @@ export default Navbarcomp;
 export const ModalCustomKeranjang = ({
   menuList,
   onSubmit,
-  notifsukses,
   menu,
   setInidata,
   updateCatatan,
@@ -780,7 +853,15 @@ export const ModalCustomKeranjang = ({
   const handleClick = () => {
     setShow(!show);
   };
-
+  const notifsukses = (menuList) => {
+    Swal.fire({
+      title: "Sukses ",
+      text: "Sukses Mengedit Keranjang " + menuList.namaMenu,
+      icon: "success",
+      button: false,
+      timer: 1000,
+    });
+  };
   return (
     <>
       <div onClick={handleClick}>{menuList.namaMenu}</div>
@@ -837,6 +918,7 @@ export const ModalCustomKeranjang = ({
                 onClick={() => {
                   handleClick();
                   updateCatatan(menuList);
+                  notifsukses(menuList);
                 }}
               >
                 Edit Pesanan
