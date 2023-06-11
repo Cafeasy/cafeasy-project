@@ -35,6 +35,6 @@ const ListMenumodel = new Schema({
     // stokMenu: "test",
     // deskripsiMenu: "test",
     // kategoriMenu: "test"
-});
+}, {versionKey : false});
 
 module.exports = mongoose.model('Menu', ListMenumodel, 'menu');

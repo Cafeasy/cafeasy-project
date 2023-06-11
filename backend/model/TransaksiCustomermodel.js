@@ -35,7 +35,7 @@ const Transaksi = new Schema({
         type: String,
         required: true,
     }
-}, {versionKey : false, timestamps: true});
+}, {versionKey : false});
 
 module.exports = mongoose.model('TransaksiPelanggan', Transaksi, 'transaksi');
 

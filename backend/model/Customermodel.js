@@ -11,7 +11,7 @@ const CustomerModel = new Schema({
         type: String, required: true
     }
 
-},{versionKey : false,})
+},{versionKey : false})
 
 
 module.exports = mongoose.model('Pelanggan', CustomerModel, 'pelanggan');
