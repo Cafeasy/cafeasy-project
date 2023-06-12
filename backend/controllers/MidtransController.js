@@ -27,7 +27,7 @@ async function createTransaction(req, res) {
         res.status(500).json("error :" + err);
     }
 }
-async function getTransactionStatuss(req, res, idOrder) {
+async function getTransactionStatuss(idOrder) {
 
     const url = 'https://api.sandbox.midtrans.com/v2/' + idOrder + '/status';
     const options = {
@@ -37,17 +37,11 @@ async function getTransactionStatuss(req, res, idOrder) {
         }
     };
 
-    try {
-        const response = await fetch(url, options);
-        const dataTransaksi = await response.json();
-        if (dataTransaksi) {
-            res.status(200).json({ message: "get Status", data: dataTransaksi });
-        }
 
-    } catch (err) {
-        res.status(401).json({ message: "Gagal get status", data: err });
-    }
+    const response = await fetch(url, options);
+    const dataTransaksi = await response.json();
 
+    return dataTransaksi;
 }
 
 exports.buatTransaction = async (req, res) => {
@@ -56,5 +50,14 @@ exports.buatTransaction = async (req, res) => {
 
 exports.getTransactionStatus = async (req, res) => {
     const orderId = req.params.idOrder.toString();
-    await getTransactionStatuss(req, res, orderId);
+    try {
+        const result = await getTransactionStatuss(orderId);
+        res.status(200).json({
+            message: "data get berhasil", data: result
+        })
+    } catch (err) {
+        res.status(404).json({
+            message: "data get fail", data: err
+        })
+    }
 }

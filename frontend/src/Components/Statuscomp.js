@@ -84,7 +84,7 @@ const Statuscomp = (props) => {
       )
       .catch((err) => console.log(err));
   }, []);
-
+console.log(dataStatusTransaksi);
   const menus = props.menu;
 
   let arr = data.result ?? [];

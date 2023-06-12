@@ -28,24 +28,24 @@ const Confirmcomp = (props) => {
       data?.result.map((newData) => (
         parameter = {
           "transaction_details": {
-            "order_id": newData.idKeranjang.toString()+"1",
+            "order_id": newData.idKeranjang,
             "gross_amount": data.totalHarga
           },
           "credit_card": {
             "secure": true
           },
           "customer_details": {
-            "first_name": newData.namaPelanggan.toString(),
+            "first_name": newData.namaPelanggan,
             "last_name": "",
           }
         },
         idOrder = newData.idKeranjang
       ))
     };
-
+    console.log(idOrder);
 
     e.preventDefault();
-    await axios
+    axios
       .post(`${process.env.REACT_APP_API_URL}/midtransPayment/`,
         parameter
       )
