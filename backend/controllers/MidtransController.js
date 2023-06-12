@@ -12,20 +12,11 @@ let snap = new midtransClient.Snap({
 //     serverKey: process.env.MIDTRANS_SERVER_KEY,
 //     clientKey: process.env.MIDTRANS_CLIENT_KEY
 // })
-async function createTransaction(req, res) {
-    let param = req.body;
-    const dataKeranjang = JSON.stringify(param);
-    try {
-        await snap.createTransaction(dataKeranjang)
-            .then((transaction) => {
-                res.status(201)
-                    .json({ message: "Berhasil", data: transaction.token, url: transaction.redirect_url })
-            }
-            ).catch((error) => res.status(400).json({ message: "error" + error }))
+async function createTransaction(dataKeranjang) {
 
-    } catch (err) {
-        res.status(500).json("error :" + err);
-    }
+
+    return await snap.createTransaction(dataKeranjang)
+
 }
 async function getTransactionStatuss(idOrder) {
 
@@ -45,7 +36,15 @@ async function getTransactionStatuss(idOrder) {
 }
 
 exports.buatTransaction = async (req, res) => {
-    createTransaction(req, res);
+    let param = req.body;
+    const dataKeranjang = JSON.stringify(param);
+    createTransaction(dataKeranjang).then((transaction) => {
+        res.status(201)
+            .json({ message: "Berhasil", data: transaction.token, url: transaction.redirect_url })
+    }
+    ).catch((error) => res.status(400).json({ message: "error" + error }))
+
+
 }
 
 exports.getTransactionStatus = async (req, res) => {
