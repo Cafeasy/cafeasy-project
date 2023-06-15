@@ -27,8 +27,15 @@ const ListMenumodel = new Schema({
     kategoriMenu: {
         type: String,
         required: true
+    },
+    image: {
+        type: String,
+        require: true
+    },
+    imageUrl: {
+        type: String,
+        require: true
     }
-
     // idMenu: "test",
     // namaMenu: "test",
     // hargaMenu: "test",
