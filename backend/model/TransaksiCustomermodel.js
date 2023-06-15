@@ -1,4 +1,5 @@
 require("../config/database");
+const { faArrowTrendUp } = require("@fortawesome/free-solid-svg-icons");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -16,8 +17,8 @@ const Transaksi = new Schema({
         required: true
     },
     tanggal: {
-        type: Date,
-        default: Date.now
+        type: String,
+        required: true
     },
     noMeja: {
         type: Number,
@@ -35,7 +36,7 @@ const Transaksi = new Schema({
         type: String,
         required: true,
     }
-}, {versionKey : false});
+}, {versionKey : false, timestamps : true});
 
 module.exports = mongoose.model('TransaksiPelanggan', Transaksi, 'transaksi');
 

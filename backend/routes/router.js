@@ -6,7 +6,6 @@ const express = require('express');
 const MenuController = require("../controllers/Menucontroller");
 const CustomerController = require("../controllers/Customercontroller");
 const KeranjangController = require("../controllers/Keranjangcontroller");
-const RiwayatpesananController = require("../controllers/Riwayatpesanancontroller");
 const TransaksiController = require("../controllers/TransaksiCustomercontroller");
 const app = express();
 const Customer = require("../model/Customermodel");
@@ -101,10 +100,6 @@ router.delete('/delCart/:idPelanggan/:idMenu', KeranjangController.deleteCart);
 router.put('/updateCartCatatanPelanggan/:idPelanggan/:idMenu', KeranjangController.updateCartCatatanPelanggan);
 router.put('/cartPelangganMinus/:idPelanggan/:idMenu', KeranjangController.updateCartMinus);
 router.put('/cartPelangganPlus/:idPelanggan/:idMenu', KeranjangController.updateCartPlus);
-
-//routes crud riwayat pesanan
-router.get('/historyPesananPelanggan/:idPelanggan', RiwayatpesananController.getListHistory);
-// router.delete('delHistoryPesananPelanggan/:idPelanggan', RiwayatpesananController.deleteHistory);
 
 //routes crud transaksi
 router.get('/getAllTransaksi/:idPelanggan', TransaksiController.getTransaksiPelanggan);
