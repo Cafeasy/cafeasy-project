@@ -52,7 +52,7 @@ function Navbarcomp(props) {
 
   const [menus, setMenus] = useState([]);
   useEffect(() => {
-    console.log('ini nama user : ', user?.name);
+    // console.log("ini nama user : ", user?.name);
     axios
       .get("http://localhost:8888/ListMenu")
       .then((result) => {
@@ -81,9 +81,9 @@ function Navbarcomp(props) {
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_API_URL}/postCart/` +
-        urlParams +
-        "/" +
-        inidata.idMenu,
+          urlParams +
+          "/" +
+          inidata.idMenu,
         post
       );
       console.log(res.data);
@@ -100,13 +100,12 @@ function Navbarcomp(props) {
   }, [data]);
 
   const addItem = (value) => {
-    console.log(value);
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/cartPelangganPlus/` +
-        urlParams +
-        "/" +
-        value
+          urlParams +
+          "/" +
+          value
       )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
@@ -119,23 +118,22 @@ function Navbarcomp(props) {
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/updateCartCatatanPelanggan/` +
-        urlParams +
-        "/" +
-        value.idMenu,
+          urlParams +
+          "/" +
+          value.idMenu,
         post
       )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
-    console.log(value.catatanPelanggan);
   };
 
   const minItem = (value) => {
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/cartPelangganMinus/` +
-        urlParams +
-        "/" +
-        value
+          urlParams +
+          "/" +
+          value
       )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
@@ -166,24 +164,33 @@ function Navbarcomp(props) {
     axios
       .get(` ${process.env.REACT_APP_API_URL}/ListMenuByCategory/Dessert`)
       .then((result) => {
-        console.log(result.data);
         setPosts(result.data);
       })
       .catch((error) => console.log(error));
   }, [posts]);
+
+  const [kategorimenu, setKategorimenu] = useState([]);
+  useEffect(() => {
+    axios
+      .get(` ${process.env.REACT_APP_API_URL}/kategoriMenu`)
+      .then((result) => {
+        setKategorimenu(result.data);
+      })
+      .catch((error) => console.log(error));
+  }, [kategorimenu]);
+  console.log(kategorimenu);
 
   const [mainc, setMainc] = useState([]);
   useEffect(() => {
     axios
       .get(` ${process.env.REACT_APP_API_URL}/ListMenuByCategory/Main Course`)
       .then((result) => {
-        console.log(result.data);
         setMainc(result.data);
       })
       .catch((error) => console.log(error));
   }, [mainc]);
 
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const handleClick = () => {
     setShow(!show);
   };
@@ -200,7 +207,7 @@ function Navbarcomp(props) {
   const [cart, setCart] = useState([]);
 
   const [toggleshow, toggleShow] = useState(false);
-  const [active, setActive] = useState("firstcard");
+  const [active, setActive] = useState("All Menu");
 
   const [filter, setFilter] = useState("");
   const [visible, setVisible] = useState(2);
@@ -260,10 +267,11 @@ function Navbarcomp(props) {
   };
 
   let arr = data.result ?? [];
-
+  let ktgr = kategorimenu.data ?? [];
   return (
     <>
       <div className="">
+        <div></div>
         {["sm"].map((expand) => (
           <Navbar key={expand} expand={expand} className="mb-4">
             <Container fluid>
@@ -380,37 +388,23 @@ function Navbarcomp(props) {
 
       <div>
         <div class="navbar-container">
-          <ul>
-            <li fill class="nav-link active-link">
-              <a href="#link1" onClick={() => setActive("firstcard")}>
-                All Menu
-              </a>
-              <div class="underline"></div>
-            </li>
-            <li class="nav-link">
-              <a href="#link2" onClick={() => setActive("secondcard")}>
-                Desert
-              </a>
-              <div class="underline"></div>
-            </li>
-            <li class="nav-link">
-              <a href="#link3" onClick={() => setActive("thirdcard")}>
-                Main Course
-              </a>
-              <div class="underline"></div>
-            </li>
-            <li class="nav-link">
-              <a href="#link4" onClick={() => setActive("fourthcard")}>
-                Drink
-              </a>
-              <div class="underline"></div>
-            </li>
-          </ul>
+          {ktgr.map((isi, index) => (
+            <>
+              <ul>
+                <li fill class="nav-link active-link">
+                  <a onClick={() => setActive(isi.namaKategori)}>
+                    {isi.namaKategori}
+                  </a>
+                  <div class="underline"></div>
+                </li>
+              </ul>
+            </>
+          ))}
         </div>
       </div>
 
       <div className="listmenu" id="link1">
-        {active === "firstcard" && (
+        {active === "All Menu" && (
           <Row xs={2} md={4} className="g-0">
             {dataSearch.map((menu, index) => {
               return (
@@ -534,7 +528,7 @@ function Navbarcomp(props) {
               })}
           </Row>
         )}
-        {active === "secondcard" && (
+        {active === "Snack" && (
           <Row xs={2} md={4} className="g-0" id="link2">
             {posts?.data
               .filter((val) => {
@@ -600,7 +594,7 @@ function Navbarcomp(props) {
               ))}
           </Row>
         )}
-        {active === "thirdcard" && (
+        {active === "Main Course" && (
           <Row xs={2} md={4} className="g-0" id="link3">
             {mainc?.data
               .filter((val) => {
@@ -667,7 +661,7 @@ function Navbarcomp(props) {
           </Row>
         )}
 
-        {active === "fourthcard" && (
+        {active === "Minuman" && (
           <Row xs={2} md={4} className="g-0" id="link4">
             {post?.data
               .filter((val) => {
