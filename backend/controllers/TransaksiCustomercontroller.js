@@ -104,13 +104,20 @@ exports.postTransaksiPelanggan = async (req, res, next) => {
 exports.updateStatusBayar = async (req, res, next) => {
     //update status bayar
     const idTransaksiCheck = req.params.idTransaksi;
-
+    const statusBayar = await Midtrans.getTransactionStatuss(idTransaksiCheck);
+  
     //date gmt
     var ndate = new Date().toLocaleString('en-US', {
         timeZone: 'Asia/Jakarta'
     })
+    let newStatusBayar = statusBayar.transaction_status;
+    if (newStatusBayar.toString() == "settlement") {
+        newStatusBayar = "SUCCESS";
 
-    TransaksiPelanggan.findOneAndUpdate({ idTransaksi: `${idTransaksiCheck}` }, { $set: { statusBayar: "Sukses Bayar Cashless", tanggal: ndate } }, { new: true })
+    } else {
+        newStatusBayar = statusBayar.transaction_status.toString().toUpperCase();
+    }
+    TransaksiPelanggan.findOneAndUpdate({ idTransaksi: `${idTransaksiCheck}` }, { $set: { statusBayar: newStatusBayar, tanggal: ndate } }, { new: true })
         .then(result => {
             res.status(200).json({
                 message: 'Status bayar berhasil diupdate - Pembayaran Sukses',

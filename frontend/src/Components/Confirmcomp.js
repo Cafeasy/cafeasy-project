@@ -44,19 +44,33 @@ const Confirmcomp = (props) => {
     };
     console.log(idOrder);
 
+
     e.preventDefault();
     axios
       .post(`${process.env.REACT_APP_API_URL}/midtransPayment/`,
         parameter
       )
-      .then((res) => {
+      .then(async (res) => {
         const responseAPI = res.data.data;
-        console.log("transaction token:", responseAPI, "url :", res.data.url);
+
+        const newIdOrder = idOrder;
+        console.log(newIdOrder);
+        await axios.post(`${process.env.REACT_APP_API_URL}/postTransaksi/${idOrder}`);
         window.snap.pay(responseAPI, {
-          onSuccess: () => (paymentSukses("/Statuspage/" + urlParams, { idOrder: idOrder })),
-          onPending: () => (paymentSukses("/Statuspage/" + urlParams, { idOrder: idOrder })),
-          onError: () => (paymentSukses("/Statuspage/" + urlParams, { idOrder: idOrder })),
-          onClose: () => (paymentSukses("/Statuspage/" + urlParams, { idOrder: idOrder })),
+          onSuccess: () => {
+            axios.put(`${process.env.REACT_APP_API_URL}/updateStatusBayar/${newIdOrder.toString()}`).then(() => (paymentSukses("/Statuspage/" + urlParams, { state: { idOrder: newIdOrder } })))
+
+          },
+          onPending: () => {
+            axios.put(`${process.env.REACT_APP_API_URL}/updateStatusBayar/${newIdOrder.toString()}`).then(() => (paymentSukses("/Statuspage/" + urlParams, { state: { idOrder: newIdOrder } })))
+          },
+          onError: () => {
+            axios.put(`${process.env.REACT_APP_API_URL}/updateStatusBayar/${newIdOrder.toString()}`).then(() => (paymentSukses("/Statuspage/" + urlParams, { state: { idOrder: newIdOrder } })))
+          },
+          onClose: () => {
+            axios.put(`${process.env.REACT_APP_API_URL}/updateStatusBayar/${newIdOrder.toString()}`).then(() => (paymentSukses("/Statuspage/" + urlParams, { state: { idOrder: newIdOrder } })))
+
+          },
         });
       })
       .catch((err) => console.log("error : ", err));

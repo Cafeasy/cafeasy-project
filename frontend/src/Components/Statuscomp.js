@@ -2,7 +2,7 @@ import "../Style/Confirmpage.css";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { CgArrowLeftO } from "react-icons/cg";
-import React, { useState, useEffect, createRef } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { BsCheckCircle } from "react-icons/bs";
@@ -11,6 +11,8 @@ import Swal from "sweetalert2";
 
 
 const Statuscomp = (props) => {
+  const location = useLocation();
+  const newIdOrder = location.state.idOrder;
   const printRef = React.useRef();
   const [copySuccess, setCopySuccess] = useState("");
   const copyToClipBoard = async (copyMe) => {
@@ -52,39 +54,25 @@ const Statuscomp = (props) => {
   const params = useParams();
   const urlParams = params.idUser;
 
-  const [post, setPost] = React.useState(null);
 
-  React.useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/getCustomerById/` + urlParams)
-      .then((response) => {
-        setPost(response.data);
-      });
-  }, [post]);
-
-  let ininama = post?.data[0]?.name;
 
   const [data, setData] = useState([]);
-  const [dataStatusTransaksi, setDataStatusTransaksi] = useState([]);
+  const [dataStatusTransaksi, setDataStatusTransaksi] = useState();
+  console.log("ini new id order: ", newIdOrder.toString());
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/cartPelanggan/` + urlParams)
-      .then((res) => (
-        setData(res.data.data)))
-      .then(() => {
-        let idOrder = data?.result[0]?.idKeranjang;
-        axios
-          .get(`${process.env.REACT_APP_API_URL}/getTransactionStatus/` + `${idOrder}`)
-          .then((res) =>
-            setDataStatusTransaksi(res.data)
-          )
-          .catch((err) => console.log(err));
-      }
+    axios.get(`${process.env.REACT_APP_API_URL}/getDetailTransaksi/${urlParams}/${newIdOrder}`).then((res) => {
 
-      )
-      .catch((err) => console.log(err));
-  }, []);
-console.log(dataStatusTransaksi);
+      const responseAPI = res.data;
+
+      responseAPI.data.result?.map((item) => {
+
+        setDataStatusTransaksi(item.statusBayar);
+      })
+      setData(res.data.data);
+      console.log(`ini data : ${data}, ini data Transaksi : ${dataStatusTransaksi}`);
+    }).catch((err) => console.log(err));
+  }, [data, dataStatusTransaksi]);
+  // console.log(dataStatusTransaksi);
   const menus = props.menu;
 
   let arr = data.result ?? [];
@@ -101,7 +89,7 @@ console.log(dataStatusTransaksi);
         <br></br>
         <BsCheckCircle style={{ fontSize: "100" }}></BsCheckCircle>
         <div style={{ fontSize: "25px", fontWeight: "bold" }}>
-          {dataStatusTransaksi?.data?.transaction_status}   </div >
+          Status Pembayaran : {dataStatusTransaksi} </div >
         <div
           style={{
             fontSize: "13px",
@@ -135,6 +123,7 @@ console.log(dataStatusTransaksi);
                 <td style={{ textAlign: "center" }}>{item.qty}x</td>
                 <td>Rp. {item.hargaMenu * item.qty}</td>
               </tr>
+
             </>
           ))}
           <tr style={{ fontWeight: "bold" }}>
@@ -142,6 +131,7 @@ console.log(dataStatusTransaksi);
             <td></td>
             <td>Rp. {data.totalHarga}</td>
           </tr>
+
           <br></br>
           <tr>
             <td style={{ fontWeight: "bold" }}>Pembayaran BCA </td>
@@ -156,7 +146,7 @@ console.log(dataStatusTransaksi);
           <tr>
             <td>Nama Pengguna </td>
             <td></td>
-            <td>{ininama}</td>
+            <td>{data}</td>
           </tr>
           <tr>
             <td>No telpon </td>

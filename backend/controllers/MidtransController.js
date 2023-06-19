@@ -13,13 +13,9 @@ let snap = new midtransClient.Snap({
 //     clientKey: process.env.MIDTRANS_CLIENT_KEY
 // })
 async function createTransaction(dataKeranjang) {
-
-
     return await snap.createTransaction(dataKeranjang)
-
 }
 async function getTransactionStatuss(idOrder) {
-
     const url = 'https://api.sandbox.midtrans.com/v2/' + idOrder + '/status';
     const options = {
         method: 'GET',
@@ -27,11 +23,8 @@ async function getTransactionStatuss(idOrder) {
             authorization: 'Basic U0ItTWlkLXNlcnZlci1BMDQ2MHdVN3JWYjk2aGIwX2poNG5NSTE6'
         }
     };
-
-
     const response = await fetch(url, options);
     const dataTransaksi = await response.json();
-
     return dataTransaksi;
 }
 
@@ -43,12 +36,10 @@ exports.buatTransaction = async (req, res) => {
             .json({ message: "Berhasil", data: transaction.token, url: transaction.redirect_url })
     }
     ).catch((error) => res.status(400).json({ message: "error" + error }))
-
-
 }
 
 exports.getTransactionStatus = async (req, res) => {
-    const orderId = req.params.idOrder.toString();
+    const orderId = req.params.idOrder;
     try {
         const result = await getTransactionStatuss(orderId);
         res.status(200).json({
@@ -60,3 +51,4 @@ exports.getTransactionStatus = async (req, res) => {
         })
     }
 }
+exports.getTransactionStatuss = getTransactionStatuss;
