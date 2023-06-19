@@ -1,5 +1,5 @@
 require("../config/database");
-const { faArrowTrendUp } = require("@fortawesome/free-solid-svg-icons");
+
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 

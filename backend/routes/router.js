@@ -45,7 +45,7 @@ router.get("/login/success", async(req, res)  => {
         let hasil = await  Customer.findOne({ id: `gusr${user.id}` })
         if (hasil) {
             let oldUser = hasil.toObject();
-            res.redirect(process.env.CLIENT_URL + "/Berandapage/" + "gusr" + oldUser.id)
+            res.redirect(process.env.CLIENT_URL + "/Berandapage/"  + oldUser.id)
         } else {
             Customer.create(inputUser)
             res.redirect(process.env.CLIENT_URL + "/Berandapage/" + "gusr" + user.id)
