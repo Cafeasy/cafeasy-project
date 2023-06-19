@@ -7,6 +7,7 @@ const MenuController = require("../controllers/Menucontroller");
 const CustomerController = require("../controllers/Customercontroller");
 const KeranjangController = require("../controllers/Keranjangcontroller");
 const TransaksiController = require("../controllers/TransaksiCustomercontroller");
+const KategoriMenucontroller = require("../controllers/KategoriMenucontroller");
 const app = express();
 const Customer = require("../model/Customermodel");
 const Midtrans = require('../controllers/MidtransController');
@@ -86,7 +87,11 @@ router.get("/auth/logout", (req, res) => {
 router.get('/ListMenu', MenuController.getListMenu);
 router.get('/ListMenuByCategory/:kategoriMenu', MenuController.getMenuByCategory);
 router.get('/DetailMenu/:idMenu', MenuController.getMenuDetail);
-router.get('/NotAvailableMenu', MenuController.getNotAvailableMenu)
+router.get('/NotAvailableMenu', MenuController.getNotAvailableMenu);
+
+//routes crud kategori menu
+router.get('/kategoriMenu', KategoriMenucontroller.getAllKategoriMenu);
+
 //Customer
 router.post('/customer', CustomerController.createCustomer);
 router.get('/getCustomerByName/:name', CustomerController.getCustomerByName);
