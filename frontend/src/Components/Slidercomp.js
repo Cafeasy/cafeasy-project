@@ -1,8 +1,3 @@
+const Slidercomp = () => {};
 
-
-const Slidercomp = () => {
-
-
-}
-
-export default Slidercomp
+export default Slidercomp;

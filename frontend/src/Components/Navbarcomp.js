@@ -36,15 +36,6 @@ import { CgRemove } from "react-icons/cg";
 import { useParams } from "react-router-dom";
 
 function Navbarcomp(props) {
-  // class App extends Component {
-  //   constructor(props) {
-  //     super(props);
-  //     this.state = {
-  //       keranjangs: [],
-  //     };
-  //   }
-  // }
-
   const params = useParams();
   const urlParams = params.idUser;
 
