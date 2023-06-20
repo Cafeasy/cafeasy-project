@@ -1,10 +1,8 @@
 import "../Style/Confirmpage.css";
-import { useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { CgArrowLeftO } from "react-icons/cg";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import { BsCheckCircle } from "react-icons/bs";
 import html2canvas from "html2canvas";
 import Swal from "sweetalert2";
@@ -15,6 +13,10 @@ const Statuscomp = (props) => {
   const newIdOrder = location.state.idOrder;
   const printRef = React.useRef();
   const [copySuccess, setCopySuccess] = useState("");
+  let [data, setData] = useState([]);
+  useEffect(() => {
+    getDataTransaksi();
+  }, []);
   const copyToClipBoard = async (copyMe) => {
     try {
       await navigator.clipboard.writeText(copyMe);
@@ -54,28 +56,13 @@ const Statuscomp = (props) => {
   const params = useParams();
   const urlParams = params.idUser;
 
-
-
-  const [data, setData] = useState([]);
-  const [dataStatusTransaksi, setDataStatusTransaksi] = useState();
-  console.log("ini new id order: ", newIdOrder.toString());
-  useEffect(() => {
+  const getDataTransaksi = () => {
     axios.get(`${process.env.REACT_APP_API_URL}/getDetailTransaksi/${urlParams}/${newIdOrder}`).then((res) => {
-
-      const responseAPI = res.data;
-
-      responseAPI.data.result?.map((item) => {
-
-        setDataStatusTransaksi(item.statusBayar);
-      })
-      setData(res.data.data);
-      console.log(`ini data : ${data}, ini data Transaksi : ${dataStatusTransaksi}`);
+      const response = res.data.data;
+      console.log(response[0]?.dataPesanan[0]?.idMenu);
+      setData(response);
     }).catch((err) => console.log(err));
-  }, [data, dataStatusTransaksi]);
-  // console.log(dataStatusTransaksi);
-  const menus = props.menu;
-
-  let arr = data.result ?? [];
+  }
   return (
     <div className="App">
       <div className="logo-back">
@@ -88,8 +75,10 @@ const Statuscomp = (props) => {
         <br></br>
         <br></br>
         <BsCheckCircle style={{ fontSize: "100" }}></BsCheckCircle>
+
         <div style={{ fontSize: "25px", fontWeight: "bold" }}>
-          Status Pembayaran : {dataStatusTransaksi} </div >
+          Status Pembayaran : {data[0].statusBayar} </div >
+
         <div
           style={{
             fontSize: "13px",
@@ -101,6 +90,7 @@ const Statuscomp = (props) => {
           Terimakasih sudah melakukan transaksi pada aplikasi Cafeasy
         </div>
         <br></br>
+
         <table
           style={{
             width: "95%",
@@ -114,22 +104,22 @@ const Statuscomp = (props) => {
               Detail Transaksi
             </td>
           </tr>
-          {arr[0]?.dataPesanan?.map((item) => (
-            <>
-              <tr className="text-title1">
-                <td style={{ padding: "5px", paddingLeft: "5%" }}>
-                  {item.namaMenu}{" "}
-                </td>
-                <td style={{ textAlign: "center" }}>{item.qty}x</td>
-                <td>Rp. {item.hargaMenu * item.qty}</td>
-              </tr>
 
-            </>
-          ))}
+
+          <tr className="text-title1" >
+            <td style={{ padding: "5px", paddingLeft: "5%" }}>
+              {data[0]?.dataPesanan[0]?.namaMenu}
+            </td>
+            <td style={{ textAlign: "center" }}>{data[0]?.dataPesanan[0]?.qty}x</td>
+            <td>Rp. {data[0]?.dataPesanan[0]?.hargaMenu * data[0]?.dataPesanan[0]?.qty}</td>
+          </tr>
+
+
+
           <tr style={{ fontWeight: "bold" }}>
             <td>Total </td>
             <td></td>
-            <td>Rp. {data.totalHarga}</td>
+            <td>Rp. {data[0].totalHarga}</td>
           </tr>
 
           <br></br>
@@ -146,7 +136,7 @@ const Statuscomp = (props) => {
           <tr>
             <td>Nama Pengguna </td>
             <td></td>
-            <td>{data}</td>
+            <td>{data[0].namaPelanggan}</td>
           </tr>
           <tr>
             <td>No telpon </td>
@@ -186,7 +176,7 @@ const Statuscomp = (props) => {
         <br></br>
 
         <Link to={`/Penilaian/` + urlParams} state={{ url: urlParams }}>
-          <button className="button-proses-pembayaran" onClick={""}>
+          <button className="button-proses-pembayaran" >
             Nilai Pesanan
           </button>
         </Link>

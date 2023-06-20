@@ -37,7 +37,7 @@ exports.getDetailTransaksiPelanggan = async (req, res, next) => {
 
             return res.status(200).json({
                 message: 'Data transaksi pelanggan berhasil dipanggil',
-                data: { result, totalHarga }
+                data: result
             })
 
         })
@@ -105,7 +105,7 @@ exports.updateStatusBayar = async (req, res, next) => {
     //update status bayar
     const idTransaksiCheck = req.params.idTransaksi;
     const statusBayar = await Midtrans.getTransactionStatuss(idTransaksiCheck);
-  
+
     //date gmt
     var ndate = new Date().toLocaleString('en-US', {
         timeZone: 'Asia/Jakarta'
