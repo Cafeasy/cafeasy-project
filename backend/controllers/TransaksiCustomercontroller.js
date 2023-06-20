@@ -9,10 +9,17 @@ exports.getTransaksiPelanggan = async (req, res, next) => {
 
     TransaksiPelanggan.find({ idPelanggan: `${idPelanggan}` })
         .then(result => {
-            res.status(200).json({
-                message: 'Data transaksi berhasil dipanggil',
-                data: result
-            })
+            if(result) {
+                res.status(200).json({
+                    message: 'Data transaksi berhasil dipanggil',
+                    data: result
+                })
+            } else if(!result) {
+                res.status(404).json({
+                    message: 'Data transaksi gagal dipanggil',
+                    data: result
+                })
+            }
         })
         .catch(err => {
             next(err);
@@ -23,23 +30,19 @@ exports.getDetailTransaksiPelanggan = async (req, res, next) => {
     const idPelanggan = req.params.idPelanggan;
     const idTransaksi = req.params.idTransaksi;
 
-    let findQtyHarga = await TransaksiPelanggan.findOne({ idPelanggan: `${idPelanggan}`, idTransaksi: `${idTransaksi}` });
-
     TransaksiPelanggan.find({ idPelanggan: `${idPelanggan}`, idTransaksi: `${idTransaksi}` })
-        .then((result) => {
-            let objek = findQtyHarga.toObject();
-            var totalHarga = 0;
-            const len = objek.dataPesanan.length;
-
-            for (var i = 0; i < len; i++) {
-                totalHarga = totalHarga + (objek.dataPesanan[i].hargaMenu * objek.dataPesanan[i].qty)
+        .then(result => {
+            if(result) {
+                res.status(200).json({
+                    message: 'Data transaksi pelanggan berhasil dipanggil',
+                    data: result
+                })
+            } else if(Qresult) {
+                res.status(404).json({
+                    message: 'Data transaksi pelanggan gagal dipanggil',
+                    data: result
+                })
             }
-
-            return res.status(200).json({
-                message: 'Data transaksi pelanggan berhasil dipanggil',
-                data: result
-            })
-
         })
         .catch(err => {
             next(err);

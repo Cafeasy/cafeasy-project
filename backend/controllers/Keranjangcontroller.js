@@ -126,10 +126,17 @@ exports.deleteCart = async (req, res, next) => {
     if (len < 1) {
         KeranjangPelanggan.deleteOne(({ idPelanggan: `${idPelanggan}` }))
             .then(result => {
-                res.status(200).json({
-                    message: 'data keranjang telah dihapus',
-                    data: result
-                })
+                if(result) {
+                    res.status(200).json({
+                        message: 'data keranjang telah dihapus',
+                        data: result
+                    })
+                } else if (!result) {
+                    res.status(404).json({
+                        message: 'data keranjang gagal dihapus',
+                        data: result
+                    })
+                }
             })
             .catch(err => {
                 next(err);
@@ -137,10 +144,17 @@ exports.deleteCart = async (req, res, next) => {
     } else {
         KeranjangPelanggan.findOneAndUpdate({ idPelanggan: `${idPelanggan}`, 'dataPesanan.idMenu': `${idMenu}` }, { $pull: { 'dataPesanan': { idMenu: `${idMenu}` } } }, { new: true })
             .then(result => {
-                res.status(200).json({
-                    message: 'Item berhasil dihapus',
-                    data: result
-                })
+                if(result){
+                    res.status(200).json({
+                        message: 'Item berhasil dihapus',
+                        data: result
+                    })
+                } else if(!result) {
+                    res.status(404).json({
+                        message: 'Item gagal dihapus',
+                        data: result
+                    })
+                }
             })
             .catch(err => {
                 next(err);
@@ -176,10 +190,17 @@ exports.updateCartMinus = async (req, res, next) => {
     if (len < 1) {
         KeranjangPelanggan.deleteOne(({ idPelanggan: `${idPelanggan}` }))
             .then(result => {
-                res.status(200).json({
-                    message: 'data keranjang telah dihapus',
-                    data: result
-                })
+                if(result) {
+                    res.status(200).json({
+                        message: 'data keranjang telah dihapus',
+                        data: result
+                    })
+                } else if(!result) {
+                    res.status(404).json({
+                        message: 'data keranjang gagal dihapus',
+                        data: result
+                    })
+                }
             })
             .catch(err => {
                 next(err);
@@ -188,10 +209,17 @@ exports.updateCartMinus = async (req, res, next) => {
         if (checkCartQty) {
             KeranjangPelanggan.findOneAndUpdate({ idPelanggan: `${idPelanggan}`, 'dataPesanan.idMenu': `${idMenu}` }, { $pull: { 'dataPesanan': { idMenu: `${idMenu}` } } }, { new: true })
                 .then(result => {
-                    res.status(200).json({
-                        message: 'Item dihapus dari keranjang',
-                        data: result
-                    })
+                    if(result) {
+                        res.status(200).json({
+                            message: 'Item dihapus dari keranjang',
+                            data: result
+                        })
+                    } else if (!result) {
+                        res.status(404).json({
+                            message: 'Item gagal dihapus dari keranjang',
+                            data: result
+                        })
+                    }
                 })
                 .catch(err => {
                     next(err);
@@ -199,10 +227,17 @@ exports.updateCartMinus = async (req, res, next) => {
         } else {
             KeranjangPelanggan.findOneAndUpdate({ idPelanggan: `${idPelanggan}`, 'dataPesanan.idMenu': `${idMenu}` }, { $inc: { 'dataPesanan.$.qty': -1 } }, { new: true })
                 .then(result => {
-                    res.status(200).json({
-                        message: 'Item berhasil dikurangi 1',
-                        data: result
-                    })
+                    if(result) {
+                        res.status(200).json({
+                            message: 'Item berhasil dikurangi 1',
+                            data: result
+                        })
+                    } else if(!result) {
+                        res.status(200).json({
+                            message: 'Item gagal dikurangi 1',
+                            data: result
+                        })
+                    }
                 })
                 .catch(err => {
                     next(err);
@@ -217,10 +252,17 @@ exports.updateCartPlus = async (req, res, next) => {
 
     KeranjangPelanggan.findOneAndUpdate({ idPelanggan: `${idPelanggan}`, 'dataPesanan.idMenu': `${idMenu}` }, { $inc: { 'dataPesanan.$.qty': 1 } }, { new: true })
         .then(result => {
-            res.status(200).json({
-                message: 'Item berhasil ditambah 1',
-                data: result
-            })
+            if(result) {
+                res.status(200).json({
+                    message: 'Item berhasil ditambah 1',
+                    data: result
+                })
+            } else if (!result) {
+                res.status(404).json({
+                    message: 'Item gagal ditambah 1',
+                    data: result
+                })
+            }
         })
         .catch(err => {
             next(err);
