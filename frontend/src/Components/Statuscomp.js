@@ -77,7 +77,7 @@ const Statuscomp = (props) => {
         <BsCheckCircle style={{ fontSize: "100" }}></BsCheckCircle>
 
         <div style={{ fontSize: "25px", fontWeight: "bold" }}>
-          Status Pembayaran : {data[0].statusBayar} </div >
+          Status Pembayaran : {data[0]?.statusBayar} </div >
 
         <div
           style={{
@@ -112,14 +112,13 @@ const Statuscomp = (props) => {
             </td>
             <td style={{ textAlign: "center" }}>{data[0]?.dataPesanan[0]?.qty}x</td>
             <td>Rp. {data[0]?.dataPesanan[0]?.hargaMenu * data[0]?.dataPesanan[0]?.qty}</td>
+
           </tr>
-
-
 
           <tr style={{ fontWeight: "bold" }}>
             <td>Total </td>
             <td></td>
-            <td>Rp. {data[0].totalHarga}</td>
+            <td>Rp. {data[0]?.totalHarga}</td>
           </tr>
 
           <br></br>
@@ -136,7 +135,7 @@ const Statuscomp = (props) => {
           <tr>
             <td>Nama Pengguna </td>
             <td></td>
-            <td>{data[0].namaPelanggan}</td>
+            <td>{data[0]?.namaPelanggan}</td>
           </tr>
           <tr>
             <td>No telpon </td>
