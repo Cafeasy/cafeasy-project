@@ -37,12 +37,13 @@
 .menu-deskripsi {
   position: relative;
   text-align: justify;
+  font-weight: 200;
   font-family: "Montserrat";
   width: 74%;
-  font-size: 12px;
+  font-size: 11px;
   padding-top: 2%;
   opacity: 70%;
-  color: #252525;
+  color: black;
 
   overflow: hidden;
   display: -webkit-box;

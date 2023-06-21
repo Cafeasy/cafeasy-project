@@ -140,11 +140,17 @@ function Navbarcomp(props) {
       .catch((err) => console.log(err));
   };
 
+  let [kateg, setKateg] = useState("0");
+  const datakateg = (value) => {
+    setKateg(value);
+    setActive(value);
+  };
+
   const [post, setPost] = React.useState(null);
 
   React.useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/ListMenuByCategory/Minuman`)
+      .get(`${process.env.REACT_APP_API_URL}/ListMenuByCategory/` + kateg)
       .then((response) => {
         setPost(response.data);
       });
@@ -169,7 +175,6 @@ function Navbarcomp(props) {
       })
       .catch((error) => console.log(error));
   }, [kategorimenu]);
-  console.log(kategorimenu);
 
   const [mainc, setMainc] = useState([]);
   useEffect(() => {
@@ -259,6 +264,7 @@ function Navbarcomp(props) {
 
   let arr = data.result ?? [];
   let ktgr = kategorimenu.data ?? [];
+
   return (
     <>
       <div className="">
@@ -376,14 +382,21 @@ function Navbarcomp(props) {
           </Carousel.Item>
         </Carousel>
       </div>
-
+      <br></br>
+      {/* <div style={{ whiteSpace: "nowrap", overflow: "scroll" }}> */}
       <div>
         <div class="navbar-container">
+          <ul>
+            <li fill class="nav-link active-link">
+              <a onClick={() => setActive("All Menu")}>All Menu</a>
+              <div class="underline"></div>
+            </li>
+          </ul>{" "}
           {ktgr.map((isi, index) => (
             <>
               <ul>
                 <li fill class="nav-link active-link">
-                  <a onClick={() => setActive(isi.namaKategori)}>
+                  <a onClick={() => datakateg(isi.namaKategori)}>
                     {isi.namaKategori}
                   </a>
                   <div class="underline"></div>
@@ -391,11 +404,174 @@ function Navbarcomp(props) {
               </ul>
             </>
           ))}
+          <br></br>
+          <br></br>
+          {/* </div> */}
+          {active === "All Menu" && (
+            <Row xs={2} md={4} className="g-0">
+              {dataSearch.map((menu, masukKeranjang) => (
+                <Col>
+                  <Card
+                    className="  mb-3 border-0 "
+                    key={menu.idMenu}
+                    data-example={menu.namaMenu}
+                    masukKeranjang={menu.masukKeranjang}
+                  >
+                    <Link
+                      to={`/Detailmenu/${menu.idMenu}`}
+                      state={{ url: urlParams }}
+                    >
+                      <Card.Img
+                        variant="top"
+                        src={menu.imageUrl}
+                        className="gambarnya"
+                      />
+                    </Link>
+                    <Card.Body>
+                      <div style={{ textAlign: "left" }}>
+                        {" "}
+                        <Card.Title className="menu-harga">
+                          {menu.hargaMenu}
+                        </Card.Title>
+                        <Card.Title
+                          className="menu-tittle"
+                          style={{ textIndent: "1px" }}
+                        >
+                          {menu.namaMenu}
+                        </Card.Title>
+                      </div>
+
+                      <div className="rate">
+                        <div class="text text-end text-warning">
+                          <BsStarFill size="10px"></BsStarFill>
+                          <BsStarFill size="10px"></BsStarFill>
+                          <BsStarFill size="10px"></BsStarFill>
+                          <BsStarFill size="10px"></BsStarFill>
+                          <BsStarFill size="10px"></BsStarFill>
+                        </div>
+                      </div>
+
+                      <ModalCustom
+                        menuList={menu}
+                        onSubmit={onSubmit}
+                        notifsukses={notifsukses}
+                        menu={menu}
+                        setInidata={setInidata}
+                        incrementCount={incrementCount}
+                        decrementCount={decrementCount}
+                        count={count}
+                        setCatatan={setCatatan}
+                      />
+                      <div>
+                        {" "}
+                        <Card.Text
+                          className="menu-deskripsi"
+                          style={{
+                            textIndent: "1px",
+
+                            fontWeight: "50px",
+                          }}
+                        >
+                          {menu.deskripsiMenu}
+                        </Card.Text>
+                      </div>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
+          )}
+          {ktgr.map((isi, index) => (
+            <>
+              {active === isi.namaKategori && (
+                <Row xs={2} md={4} className="g-0">
+                  {post?.data
+                    .filter((val) => {
+                      if (cari === "") {
+                        return val;
+                      } else if (
+                        val.namaMenu
+                          ?.toLocaleLowerCase()
+                          .includes(cari.toLocaleLowerCase())
+                      ) {
+                        return val;
+                      }
+                    })
+                    .map((menu, masukKeranjang) => (
+                      <Col>
+                        <Card
+                          className="  mb-3 border-0 "
+                          key={menu.idMenu}
+                          data-example={menu.namaMenu}
+                          masukKeranjang={menu.masukKeranjang}
+                        >
+                          <Link
+                            to={`/Detailmenu/${menu.idMenu}`}
+                            state={{ url: urlParams }}
+                          >
+                            <Card.Img
+                              variant="top"
+                              src={menu.imageUrl}
+                              className="gambarnya"
+                            />
+                          </Link>
+                          <Card.Body>
+                            <div style={{ textAlign: "left" }}>
+                              {" "}
+                              <Card.Title className="menu-harga">
+                                {menu.hargaMenu}
+                              </Card.Title>
+                              <Card.Title
+                                className="menu-tittle"
+                                style={{ textIndent: "1px" }}
+                              >
+                                {menu.namaMenu}
+                              </Card.Title>
+                            </div>
+
+                            <div className="rate">
+                              <div class="text text-end text-warning">
+                                <BsStarFill size="10px"></BsStarFill>
+                                <BsStarFill size="10px"></BsStarFill>
+                                <BsStarFill size="10px"></BsStarFill>
+                                <BsStarFill size="10px"></BsStarFill>
+                                <BsStarFill size="10px"></BsStarFill>
+                              </div>
+                            </div>
+
+                            <ModalCustom
+                              menuList={menu}
+                              onSubmit={onSubmit}
+                              notifsukses={notifsukses}
+                              menu={menu}
+                              setInidata={setInidata}
+                              incrementCount={incrementCount}
+                              decrementCount={decrementCount}
+                              count={count}
+                              setCatatan={setCatatan}
+                            />
+                            <div>
+                              {" "}
+                              <Card.Text
+                                className="menu-deskripsi"
+                                style={{ textIndent: "1px" }}
+                              >
+                                {menu.deskripsiMenu}
+                              </Card.Text>
+                            </div>
+                          </Card.Body>
+                        </Card>
+                      </Col>
+                    ))}
+                </Row>
+              )}
+            </>
+          ))}
         </div>
       </div>
 
       <div className="listmenu" id="link1">
-        {active === "All Menu" && (
+        {/* {active === "All Menu" && (
           <Row xs={2} md={4} className="g-0">
             {dataSearch.map((menu, index) => {
               return (
@@ -410,7 +586,11 @@ function Navbarcomp(props) {
                       to={`/Detailmenu/${menu.idMenu}`}
                       state={{ url: urlParams }}
                     >
-                      <Card.Img variant="top" src={Gambarburger} />
+                      <Card.Img
+                        variant="top"
+                        className="gambarnya"
+                        src={menu.imageUrl}
+                      />
                     </Link>
                     <Card.Body>
                       <Card.Title className="menu-harga">
@@ -474,7 +654,7 @@ function Navbarcomp(props) {
                         to={`/Detailmenu/${menu.idMenu}`}
                         state={{ url: urlParams }}
                       >
-                        <Card.Img variant="top" src={Gambarburger} />
+                        <Card.Img variant="top" src={menu.imageUrl} />
                       </Link>
                       <Card.Body>
                         <Card.Title className="menu-harga">
@@ -518,10 +698,10 @@ function Navbarcomp(props) {
                 );
               })}
           </Row>
-        )}
-        {active === "Snack" && (
+        )} */}
+        {/* {active === "Dessert" && (
           <Row xs={2} md={4} className="g-0" id="link2">
-            {posts?.data
+            {post?.data
               .filter((val) => {
                 if (cari === "") {
                   return val;
@@ -584,10 +764,10 @@ function Navbarcomp(props) {
                 </Col>
               ))}
           </Row>
-        )}
-        {active === "Main Course" && (
+        )} */}
+        {/* {active === "Main Course" && (
           <Row xs={2} md={4} className="g-0" id="link3">
-            {mainc?.data
+            {post?.data
               .filter((val) => {
                 if (cari === "") {
                   return val;
@@ -611,7 +791,7 @@ function Navbarcomp(props) {
                       to={`/Detailmenu/${menu.idMenu}`}
                       state={{ url: urlParams }}
                     >
-                      <Card.Img variant="top" src={Gambarburger} />
+                      <Card.Img variant="top" src={menu.imageUrl} />
                     </Link>
                     <Card.Body>
                       <Card.Title className="menu-harga">
@@ -717,22 +897,7 @@ function Navbarcomp(props) {
                 </Col>
               ))}
           </Row>
-        )}
-        {/* <div className="button-hide">
-          <p onClick={showmoritem}>
-            <text onClick={() => toggleShow(!toggleshow)}>
-              {show ? "" : "More Menu"}
-            </text>
-          </p>
-          <p onClick={showmoritems}>
-            <text onClick={() => toggleShow(!toggleshow)}>
-              {show ? "Less Menu " : ""}
-            </text>
-          </p>
-          <p onClick={showmoritems}>
-            <text onClick={() => toggleShow(!toggleshow)}></text>
-          </p>
-        </div> */}
+        )} */}
       </div>
 
       <div>
@@ -867,7 +1032,7 @@ export const ModalCustomKeranjang = ({
               <p></p>
             </div>
             {/* <div className="textmodal_deskripsi">{menuList.deskripsiMenu}</div> */}
-            <div className="textmodal_harga">{"50K"}</div>
+            <div className="textmodal_harga">{menuList.hargaMenu}</div>
             <br></br>
             <Form>
               <Form.Group
@@ -940,7 +1105,7 @@ export const ModalCustom = ({
           className="buttonplus"
           variant="text"
           onClick={handleClick}
-          style={{ paddingTop: "15px", paddingRight: "1px" }}
+          style={{ paddingTop: "21px", paddingRight: "1px" }}
         >
           <BsPlusCircle></BsPlusCircle>
         </Button>
@@ -962,7 +1127,7 @@ export const ModalCustom = ({
               <p></p>
             </div>
             {/* <div className="textmodal_deskripsi">{menuList.deskripsiMenu}</div> */}
-            <div className="textmodal_harga">{"50K"}</div>
+            <div className="textmodal_harga">{menuList.hargaMenu}</div>
             <br></br>
             <Form>
               <Form.Group

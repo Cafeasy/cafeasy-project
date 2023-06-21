@@ -7,7 +7,6 @@ import { BsCheckCircle } from "react-icons/bs";
 import html2canvas from "html2canvas";
 import Swal from "sweetalert2";
 
-
 const Statuscomp = (props) => {
   const location = useLocation();
   const newIdOrder = location.state.idOrder;
@@ -57,12 +56,18 @@ const Statuscomp = (props) => {
   const urlParams = params.idUser;
 
   const getDataTransaksi = () => {
-    axios.get(`${process.env.REACT_APP_API_URL}/getDetailTransaksi/${urlParams}/${newIdOrder}`).then((res) => {
-      const response = res.data.data;
-      console.log(response[0]?.dataPesanan[0]?.idMenu);
-      setData(response);
-    }).catch((err) => console.log(err));
-  }
+    axios
+      .get(
+        `${process.env.REACT_APP_API_URL}/getDetailTransaksi/${urlParams}/${newIdOrder}`
+      )
+      .then((res) => {
+        const response = res.data.data;
+        console.log(response[0]?.dataPesanan[0]?.idMenu);
+        setData(response);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="App">
       <div className="logo-back">
@@ -77,7 +82,8 @@ const Statuscomp = (props) => {
         <BsCheckCircle style={{ fontSize: "100" }}></BsCheckCircle>
 
         <div style={{ fontSize: "25px", fontWeight: "bold" }}>
-          Status Pembayaran : {data[0]?.statusBayar} </div >
+          Status Pembayaran : {data[0]?.statusBayar}{" "}
+        </div>
 
         <div
           style={{
@@ -105,14 +111,18 @@ const Statuscomp = (props) => {
             </td>
           </tr>
 
-
-          <tr className="text-title1" >
+          <tr className="text-title1">
             <td style={{ padding: "5px", paddingLeft: "5%" }}>
               {data[0]?.dataPesanan[0]?.namaMenu}
             </td>
-            <td style={{ textAlign: "center" }}>{data[0]?.dataPesanan[0]?.qty}x</td>
-            <td>Rp. {data[0]?.dataPesanan[0]?.hargaMenu * data[0]?.dataPesanan[0]?.qty}</td>
-
+            <td style={{ textAlign: "center" }}>
+              {data[0]?.dataPesanan[0]?.qty}x
+            </td>
+            <td>
+              Rp.{" "}
+              {data[0]?.dataPesanan[0]?.hargaMenu *
+                data[0]?.dataPesanan[0]?.qty}
+            </td>
           </tr>
 
           <tr style={{ fontWeight: "bold" }}>
@@ -164,7 +174,7 @@ const Statuscomp = (props) => {
                 notifsukses();
                 copyToClipBoard(
                   "Pembayaran berhasil dilakukan! Buka tautan ini untuk melihat nota transaksi yang sudah dibayar : " +
-                  urlParams
+                    urlParams
                 );
               }}
             >
@@ -175,9 +185,7 @@ const Statuscomp = (props) => {
         <br></br>
 
         <Link to={`/Penilaian/` + urlParams} state={{ url: urlParams }}>
-          <button className="button-proses-pembayaran" >
-            Nilai Pesanan
-          </button>
+          <button className="button-proses-pembayaran">Nilai Pesanan</button>
         </Link>
       </div>
     </div>
