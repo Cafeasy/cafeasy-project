@@ -383,36 +383,37 @@ function Navbarcomp(props) {
         </Carousel>
       </div>
       <br></br>
-      {/* <div style={{ whiteSpace: "nowrap", overflow: "scroll" }}> */}
+
       <div>
         <div class="navbar-container">
-          <ul>
-            <li fill class="nav-link active-link">
-              <a onClick={() => setActive("All Menu")}>All Menu</a>
-              <div class="underline"></div>
-            </li>
-          </ul>{" "}
-          {ktgr.map((isi, index) => (
-            <>
-              <ul>
-                <li fill class="nav-link active-link">
-                  <a onClick={() => datakateg(isi.namaKategori)}>
-                    {isi.namaKategori}
-                  </a>
-                  <div class="underline"></div>
-                </li>
-              </ul>
-            </>
-          ))}
+          <div style={{ overflow: "auto", whiteSpace: "nowrap" }}>
+            <ul>
+              <li fill class="nav-link active-link">
+                <a onClick={() => setActive("All Menu")}>All Menu</a>
+                <div class="underline"></div>
+              </li>
+            </ul>{" "}
+            {ktgr.map((isi, index) => (
+              <>
+                <ul>
+                  <li fill class="nav-link active-link">
+                    <a onClick={() => datakateg(isi.namaKategori)}>
+                      {isi.namaKategori}
+                    </a>
+                    <div class="underline"></div>
+                  </li>
+                </ul>
+              </>
+            ))}
+          </div>
           <br></br>
-          <br></br>
-          {/* </div> */}
+
           {active === "All Menu" && (
             <Row xs={2} md={4} className="g-0">
               {dataSearch.map((menu, masukKeranjang) => (
                 <Col>
                   <Card
-                    className="  mb-3 border-0 "
+                    className="mx-2 mb-3 border-0 "
                     key={menu.idMenu}
                     data-example={menu.namaMenu}
                     masukKeranjang={menu.masukKeranjang}
@@ -500,7 +501,7 @@ function Navbarcomp(props) {
                     .map((menu, masukKeranjang) => (
                       <Col>
                         <Card
-                          className="  mb-3 border-0 "
+                          className="mx-2  mb-3 border-0 "
                           key={menu.idMenu}
                           data-example={menu.namaMenu}
                           masukKeranjang={menu.masukKeranjang}
@@ -910,6 +911,9 @@ function Navbarcomp(props) {
                     <AiOutlineDelete
                       style={{ cursor: "pointer" }}
                       class="mx-4"
+                      size={18}
+                      opacity={0.5}
+                      color="red"
                       onClick={() => {
                         removeMe(d.namaMenu);
                         notifDelete(d.namaMenu);
@@ -937,6 +941,9 @@ function Navbarcomp(props) {
                     <div className="decrease_button">
                       <BsDashCircle
                         style={{ cursor: "pointer" }}
+                        size={18}
+                        opacity={0.5}
+                        color="red"
                         class="mx-4"
                         onClick={() => {
                           removeMe(d.namaMenu);
@@ -950,6 +957,9 @@ function Navbarcomp(props) {
                     <div className="increase_button">
                       <BsPlusCircle
                         style={{ cursor: "pointer" }}
+                        opacity={0.5}
+                        size={18}
+                        color="red"
                         class="mx-5"
                         onClick={() => {
                           removeMe(d.namaMenu);
@@ -958,7 +968,7 @@ function Navbarcomp(props) {
                         }}
                       />
                     </div>
-                    <td> Rp. {numberWithCommas(d.hargaMenu * d.qty)},00</td>
+                    <td> Rp. {numberWithCommas(d.hargaMenu * d.qty)}</td>
                     <td className="opration"></td>
                   </table>
                 </>
@@ -1026,7 +1036,11 @@ export const ModalCustomKeranjang = ({
           <br></br>
           <CgArrowLeftO class="mx-4" size={35} onClick={handleClick} />
           <Modal.Body>
-            <img src={Gambarburger} alt="gambarpizza" className="gambarmodal" />
+            <img
+              src={menuList.imageUrl}
+              alt="gambarpizza"
+              className="gambarmodal"
+            />
             <div className="textmodal">
               {menuList.namaMenu}
               <p></p>
@@ -1098,6 +1112,13 @@ export const ModalCustom = ({
   const handleClick = () => {
     setShow(!show);
   };
+
+  const tambahMenu = () => {
+    setTimeout(() => {
+      setShow(!show);
+    }, 1000);
+  };
+
   return (
     <>
       <div class="text text-end text-dark">
@@ -1121,7 +1142,11 @@ export const ModalCustom = ({
           <br></br>
           <CgArrowLeftO class="mx-4" size={35} onClick={handleClick} />
           <Modal.Body>
-            <img src={Gambarburger} alt="gambarpizza" className="gambarmodal" />
+            <img
+              src={menuList.imageUrl}
+              alt="gambarpizza"
+              className="gambarmodal"
+            />
             <div className="textmodal">
               {menuList.namaMenu}
               <p></p>
@@ -1183,6 +1208,7 @@ export const ModalCustom = ({
                   onClick={() => {
                     notifsukses(menu);
                     setInidata(menu);
+                    tambahMenu();
                   }}
                 >
                   Tambah Pesanan
