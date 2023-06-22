@@ -4,10 +4,13 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { CgArrowLeftO } from "react-icons/cg";
+import { useState, useEffect } from "react";
+import axios from "axios";
 const Riwayatpesanancomp = (props) => {
   const menus = props.menu;
   const location = useLocation();
   const { url } = location.state;
+  console.log(url);
   return (
     <div className="App">
       <br></br>
@@ -20,7 +23,7 @@ const Riwayatpesanancomp = (props) => {
             className="button-konfir-pesanan"
             disabled="true"
           >
-            KONFIRMASI PESANAN
+            RIWAYAT PESANAN
           </button>
         </div>
       </div>
