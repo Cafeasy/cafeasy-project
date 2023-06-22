@@ -1,10 +1,9 @@
 .buttonplus {
   position: absolute;
-  right: 0;
 }
 
 .menu-tittle {
-  width: 78%;
+  width: 75%;
   height: 5%;
 
   font-family: "Montserrat";
@@ -15,7 +14,17 @@
 
   color: #252525;
 }
-
+.oval {
+  background: #1f2937;
+  display: inline-block;
+  width: auto;
+  width: 100%;
+  font-weight: medium;
+  font-family: "Montserrat";
+  font-size: 10px;
+  border-radius: 8px;
+  color: #ffffff;
+}
 .menu-harga {
   position: absolute;
   right: 0;
@@ -25,9 +34,9 @@
 
 .rate {
   position: absolute;
-  right: 0;
+  right: -2px;
 
-  font-family: "Montserrat";
+  font-family: "Montserat";
   font-weight: 700;
   font-size: 18px;
 
@@ -36,7 +45,7 @@
 
 .menu-deskripsi {
   position: relative;
-  text-align: justify;
+  text-align: left;
   font-weight: 200;
   font-family: "Montserrat";
   width: 74%;

@@ -30,7 +30,7 @@ import { useNavigate } from "react-router-dom";
 import CartList from "./Cartlist";
 import { Link } from "react-router-dom";
 import { CgAdd } from "react-icons/cg";
-
+import { BsFillCartPlusFill } from "react-icons/bs";
 import { CgArrowLeftO } from "react-icons/cg";
 import { CgRemove } from "react-icons/cg";
 import { useParams } from "react-router-dom";
@@ -82,6 +82,7 @@ function Navbarcomp(props) {
       alert(e);
     }
   };
+
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
@@ -186,7 +187,7 @@ function Navbarcomp(props) {
       .catch((error) => console.log(error));
   }, [mainc]);
 
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const handleClick = () => {
     setShow(!show);
   };
@@ -409,75 +410,77 @@ function Navbarcomp(props) {
           <br></br>
 
           {active === "All Menu" && (
-            <Row xs={2} md={4} className="g-0">
+            <Row xs={2} md={4} className="g-1">
               {dataSearch.map((menu, masukKeranjang) => (
                 <Col>
-                  <Card
-                    className="mx-2 mb-3 border-0 "
-                    key={menu.idMenu}
-                    data-example={menu.namaMenu}
-                    masukKeranjang={menu.masukKeranjang}
-                  >
-                    <Link
-                      to={`/Detailmenu/${menu.idMenu}`}
-                      state={{ url: urlParams }}
+                  <div class="shadow-sm  mb-1 mx-1 bg-white rounded">
+                    <Card
+                      className="mx-2 mb-3 border-0 "
+                      key={menu.idMenu}
+                      data-example={menu.namaMenu}
+                      masukKeranjang={menu.masukKeranjang}
                     >
-                      <Card.Img
-                        variant="top"
-                        src={menu.imageUrl}
-                        className="gambarnya"
-                      />
-                    </Link>
-                    <Card.Body>
-                      <div style={{ textAlign: "left" }}>
-                        {" "}
-                        <Card.Title className="menu-harga">
-                          {menu.hargaMenu}
-                        </Card.Title>
-                        <Card.Title
-                          className="menu-tittle"
-                          style={{ textIndent: "1px" }}
-                        >
-                          {menu.namaMenu}
-                        </Card.Title>
-                      </div>
-
-                      <div className="rate">
-                        <div class="text text-end text-warning">
-                          <BsStarFill size="10px"></BsStarFill>
-                          <BsStarFill size="10px"></BsStarFill>
-                          <BsStarFill size="10px"></BsStarFill>
-                          <BsStarFill size="10px"></BsStarFill>
-                          <BsStarFill size="10px"></BsStarFill>
+                      <Link
+                        to={`/Detailmenu/${menu.idMenu}`}
+                        state={{ url: urlParams }}
+                      >
+                        <Card.Img
+                          variant="top"
+                          src={menu.imageUrl}
+                          className="gambarnya"
+                        />
+                      </Link>
+                      <Card.Body>
+                        <div style={{ textAlign: "left" }}>
+                          {" "}
+                          <Card.Title className="menu-harga">
+                            {menu.hargaMenu}
+                          </Card.Title>
+                          <Card.Title
+                            className="menu-tittle"
+                            style={{ textIndent: "1px" }}
+                          >
+                            {menu.namaMenu}
+                          </Card.Title>
                         </div>
-                      </div>
 
-                      <ModalCustom
-                        menuList={menu}
-                        onSubmit={onSubmit}
-                        notifsukses={notifsukses}
-                        menu={menu}
-                        setInidata={setInidata}
-                        incrementCount={incrementCount}
-                        decrementCount={decrementCount}
-                        count={count}
-                        setCatatan={setCatatan}
-                      />
-                      <div>
-                        {" "}
-                        <Card.Text
-                          className="menu-deskripsi"
-                          style={{
-                            textIndent: "1px",
+                        <div className="rate">
+                          <div class="text text-end text-warning">
+                            <BsStarFill size="10px"></BsStarFill>
+                            <BsStarFill size="10px"></BsStarFill>
+                            <BsStarFill size="10px"></BsStarFill>
+                            <BsStarFill size="10px"></BsStarFill>
+                            <BsStarFill size="10px"></BsStarFill>
+                          </div>
+                        </div>
 
-                            fontWeight: "50px",
-                          }}
-                        >
-                          {menu.deskripsiMenu}
-                        </Card.Text>
-                      </div>
-                    </Card.Body>
-                  </Card>
+                        <div>
+                          {" "}
+                          <Card.Text
+                            className="menu-deskripsi"
+                            style={{
+                              textIndent: "1px",
+
+                              fontWeight: "50px",
+                            }}
+                          >
+                            {menu.deskripsiMenu}
+                          </Card.Text>
+                          <ModalCustom
+                            menuList={menu}
+                            onSubmit={onSubmit}
+                            notifsukses={notifsukses}
+                            menu={menu}
+                            setInidata={setInidata}
+                            incrementCount={incrementCount}
+                            decrementCount={decrementCount}
+                            count={count}
+                            setCatatan={setCatatan}
+                          />
+                        </div>
+                      </Card.Body>
+                    </Card>
+                  </div>
                 </Col>
               ))}
             </Row>
@@ -485,7 +488,7 @@ function Navbarcomp(props) {
           {ktgr.map((isi, index) => (
             <>
               {active === isi.namaKategori && (
-                <Row xs={2} md={4} className="g-0">
+                <Row xs={2} md={4} className="g-1">
                   {post?.data
                     .filter((val) => {
                       if (cari === "") {
@@ -500,68 +503,70 @@ function Navbarcomp(props) {
                     })
                     .map((menu, masukKeranjang) => (
                       <Col>
-                        <Card
-                          className="mx-2  mb-3 border-0 "
-                          key={menu.idMenu}
-                          data-example={menu.namaMenu}
-                          masukKeranjang={menu.masukKeranjang}
-                        >
-                          <Link
-                            to={`/Detailmenu/${menu.idMenu}`}
-                            state={{ url: urlParams }}
+                        <div class="shadow-sm  mb-1 mx-2 bg-white rounded">
+                          <Card
+                            className="mx-2  mb-3 border-0 "
+                            key={menu.idMenu}
+                            data-example={menu.namaMenu}
+                            masukKeranjang={menu.masukKeranjang}
                           >
-                            <Card.Img
-                              variant="top"
-                              src={menu.imageUrl}
-                              className="gambarnya"
-                            />
-                          </Link>
-                          <Card.Body>
-                            <div style={{ textAlign: "left" }}>
-                              {" "}
-                              <Card.Title className="menu-harga">
-                                {menu.hargaMenu}
-                              </Card.Title>
-                              <Card.Title
-                                className="menu-tittle"
-                                style={{ textIndent: "1px" }}
-                              >
-                                {menu.namaMenu}
-                              </Card.Title>
-                            </div>
-
-                            <div className="rate">
-                              <div class="text text-end text-warning">
-                                <BsStarFill size="10px"></BsStarFill>
-                                <BsStarFill size="10px"></BsStarFill>
-                                <BsStarFill size="10px"></BsStarFill>
-                                <BsStarFill size="10px"></BsStarFill>
-                                <BsStarFill size="10px"></BsStarFill>
+                            <Link
+                              to={`/Detailmenu/${menu.idMenu}`}
+                              state={{ url: urlParams }}
+                            >
+                              <Card.Img
+                                variant="top"
+                                src={menu.imageUrl}
+                                className="gambarnya"
+                              />
+                            </Link>
+                            <Card.Body>
+                              <div style={{ textAlign: "left" }}>
+                                {" "}
+                                <Card.Title className="menu-harga">
+                                  {menu.hargaMenu}
+                                </Card.Title>
+                                <Card.Title
+                                  className="menu-tittle"
+                                  style={{ textIndent: "1px" }}
+                                >
+                                  {menu.namaMenu}
+                                </Card.Title>
                               </div>
-                            </div>
 
-                            <ModalCustom
-                              menuList={menu}
-                              onSubmit={onSubmit}
-                              notifsukses={notifsukses}
-                              menu={menu}
-                              setInidata={setInidata}
-                              incrementCount={incrementCount}
-                              decrementCount={decrementCount}
-                              count={count}
-                              setCatatan={setCatatan}
-                            />
-                            <div>
-                              {" "}
-                              <Card.Text
-                                className="menu-deskripsi"
-                                style={{ textIndent: "1px" }}
-                              >
-                                {menu.deskripsiMenu}
-                              </Card.Text>
-                            </div>
-                          </Card.Body>
-                        </Card>
+                              <div className="rate">
+                                <div class="text text-end text-warning">
+                                  <BsStarFill size="10px"></BsStarFill>
+                                  <BsStarFill size="10px"></BsStarFill>
+                                  <BsStarFill size="10px"></BsStarFill>
+                                  <BsStarFill size="10px"></BsStarFill>
+                                  <BsStarFill size="10px"></BsStarFill>
+                                </div>
+                              </div>
+
+                              <div>
+                                {" "}
+                                <Card.Text
+                                  className="menu-deskripsi"
+                                  style={{ textIndent: "1px" }}
+                                >
+                                  {menu.deskripsiMenu}
+                                </Card.Text>
+                                <ModalCustom
+                                  menuList={menu}
+                                  onSubmit={onSubmit}
+                                  notifsukses={notifsukses}
+                                  menu={menu}
+                                  setInidata={setInidata}
+                                  incrementCount={incrementCount}
+                                  decrementCount={decrementCount}
+                                  count={count}
+                                  setCatatan={setCatatan}
+                                />
+                              </div>
+                            </Card.Body>
+                          </Card>
+                        </div>
                       </Col>
                     ))}
                 </Row>
@@ -959,7 +964,7 @@ function Navbarcomp(props) {
                         style={{ cursor: "pointer" }}
                         opacity={0.5}
                         size={18}
-                        color="red"
+                        color="green"
                         class="mx-5"
                         onClick={() => {
                           removeMe(d.namaMenu);
@@ -1121,17 +1126,28 @@ export const ModalCustom = ({
 
   return (
     <>
-      <div class="text text-end text-dark">
+      {/* <div class="text text-end text-dark">
         <Button
           className="buttonplus"
           variant="text"
           onClick={handleClick}
-          style={{ paddingTop: "21px", paddingRight: "1px" }}
+          style={{
+            paddingTop: "21px",
+            paddingRight: "1px",
+            color: "red",
+          }}
         >
-          <BsPlusCircle></BsPlusCircle>
+          asdasd
         </Button>
-      </div>
+      </div> */}
 
+      <button
+        className="oval"
+        onClick={handleClick}
+        style={{ whiteSpace: "nowrap" }}
+      >
+        <BsFillCartPlusFill size={12}></BsFillCartPlusFill> Keranjang
+      </button>
       {show && (
         <Modal
           show={show}

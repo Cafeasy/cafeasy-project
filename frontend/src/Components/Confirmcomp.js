@@ -19,57 +19,94 @@ const Confirmcomp = (props) => {
       .catch((err) => console.log("message :", err));
   }, [data]);
 
-
-
   const payment = async (e) => {
     let parameter;
     let idOrder;
     {
-      data?.result.map((newData) => (
-        parameter = {
-          "transaction_details": {
-            "order_id": newData.idKeranjang,
-            "gross_amount": data.totalHarga
-          },
-          "credit_card": {
-            "secure": true
-          },
-          "customer_details": {
-            "first_name": newData.namaPelanggan,
-            "last_name": "",
-          }
-        },
-        idOrder = newData.idKeranjang
-      ))
-    };
+      data?.result.map(
+        (newData) => (
+          (parameter = {
+            transaction_details: {
+              order_id: newData.idKeranjang,
+              gross_amount: data.totalHarga,
+            },
+            credit_card: {
+              secure: true,
+            },
+            customer_details: {
+              first_name: newData.namaPelanggan,
+              last_name: "",
+            },
+          }),
+          (idOrder = newData.idKeranjang)
+        )
+      );
+    }
     console.log(idOrder);
-
 
     e.preventDefault();
     axios
-      .post(`${process.env.REACT_APP_API_URL}/midtransPayment/`,
-        parameter
-      )
+      .post(`${process.env.REACT_APP_API_URL}/midtransPayment/`, parameter)
       .then(async (res) => {
         const responseAPI = res.data.data;
 
         const newIdOrder = idOrder;
         console.log(newIdOrder);
-        await axios.post(`${process.env.REACT_APP_API_URL}/postTransaksi/${idOrder}`);
+        await axios.post(
+          `${process.env.REACT_APP_API_URL}/postTransaksi/${idOrder}`
+        );
         window.snap.pay(responseAPI, {
           onSuccess: () => {
-            axios.put(`${process.env.REACT_APP_API_URL}/updateStatusBayar/${newIdOrder.toString()}`).then(() => (paymentSukses("/Statuspage/" + urlParams, { state: { idOrder: newIdOrder } })))
-
+            axios
+              .put(
+                `${
+                  process.env.REACT_APP_API_URL
+                }/updateStatusBayar/${newIdOrder.toString()}`
+              )
+              .then(() =>
+                paymentSukses("/Statuspage/" + urlParams, {
+                  state: { idOrder: newIdOrder },
+                })
+              );
           },
           onPending: () => {
-            axios.put(`${process.env.REACT_APP_API_URL}/updateStatusBayar/${newIdOrder.toString()}`).then(() => (paymentSukses("/Statuspage/" + urlParams, { state: { idOrder: newIdOrder } })))
+            axios
+              .put(
+                `${
+                  process.env.REACT_APP_API_URL
+                }/updateStatusBayar/${newIdOrder.toString()}`
+              )
+              .then(() =>
+                paymentSukses("/Statuspage/" + urlParams, {
+                  state: { idOrder: newIdOrder },
+                })
+              );
           },
           onError: () => {
-            axios.put(`${process.env.REACT_APP_API_URL}/updateStatusBayar/${newIdOrder.toString()}`).then(() => (paymentSukses("/Statuspage/" + urlParams, { state: { idOrder: newIdOrder } })))
+            axios
+              .put(
+                `${
+                  process.env.REACT_APP_API_URL
+                }/updateStatusBayar/${newIdOrder.toString()}`
+              )
+              .then(() =>
+                paymentSukses("/Statuspage/" + urlParams, {
+                  state: { idOrder: newIdOrder },
+                })
+              );
           },
           onClose: () => {
-            axios.put(`${process.env.REACT_APP_API_URL}/updateStatusBayar/${newIdOrder.toString()}`).then(() => (paymentSukses("/Statuspage/" + urlParams, { state: { idOrder: newIdOrder } })))
-
+            axios
+              .put(
+                `${
+                  process.env.REACT_APP_API_URL
+                }/updateStatusBayar/${newIdOrder.toString()}`
+              )
+              .then(() =>
+                paymentSukses("/Statuspage/" + urlParams, {
+                  state: { idOrder: newIdOrder },
+                })
+              );
           },
         });
       })

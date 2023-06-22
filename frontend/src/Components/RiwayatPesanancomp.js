@@ -10,73 +10,73 @@ const Riwayatpesanancomp = (props) => {
   const { url } = location.state;
   return (
     <div className="App">
-    <br></br>
-    <br></br>
-    <div>
       <br></br>
-      <div class="d-grid  col-9 mx-auto mt-6">
-        <button
-          type="submit"
-          className="button-konfir-pesanan"
-          disabled="true"
-        >
-          KONFIRMASI PESANAN
-        </button>
+      <br></br>
+      <div>
+        <br></br>
+        <div class="d-grid  col-9 mx-auto mt-6">
+          <button
+            type="submit"
+            className="button-konfir-pesanan"
+            disabled="true"
+          >
+            KONFIRMASI PESANAN
+          </button>
+        </div>
       </div>
-    </div>
-    <div className="">
-      <table style={{ maxHeight: "20vw" }} className="isi-pesanan">
-        <tr className="text-title">
-          <td>Paket yang dipilih</td>
-        </tr>
+      <div className="">
+        <table style={{ maxHeight: "20vw" }} className="isi-pesanan">
+          <tr className="text-title">
+            <td>Paket yang dipilih</td>
+          </tr>
 
-        <tr className="text-title1">
-          <td>American waffle </td>
-          <td style={{ textAlign: "center" }}>1x</td>
-          <td>Rp 20.000,00</td>
-        </tr>
+          <tr className="text-title1">
+            <td>American waffle </td>
+            <td style={{ textAlign: "center" }}>1x</td>
+            <td>Rp 20.000,00</td>
+          </tr>
 
-        <tr className="text-title1">
-          <td>Belgian waffle </td>
-          <td style={{ textAlign: "center" }}>1x</td>
-          <td>Rp 20.000,00</td>
-        </tr>
+          <tr className="text-title1">
+            <td>Belgian waffle </td>
+            <td style={{ textAlign: "center" }}>1x</td>
+            <td>Rp 20.000,00</td>
+          </tr>
 
-        <tr className="text-title1">
-          <td>Diskon </td>
-          <td></td>
-          <td>(Rp 5.000,00)</td>
-        </tr>
+          <tr className="text-title1">
+            <td>Diskon </td>
+            <td></td>
+            <td>(Rp 5.000,00)</td>
+          </tr>
 
-        <tr className="text-title1">
-          <td>Sub Total </td>
-          <td></td>
-          <td>Rp 20.000,00</td>
-        </tr>
+          <tr className="text-title1">
+            <td>Sub Total </td>
+            <td></td>
+            <td>Rp 20.000,00</td>
+          </tr>
 
-        <tr className="text-title1">
-          <td>Biaya pelayanan </td>
-          <td></td>
-          <td>Rp 2.000,00</td>
-        </tr>
+          <tr className="text-title1">
+            <td>Biaya pelayanan </td>
+            <td></td>
+            <td>Rp 2.000,00</td>
+          </tr>
 
-        <tr className="text-title1">
-          <td>Take away </td>
-          <td></td>
-          <td>Rp 2.000,00</td>
-        </tr>
-        <tr style={{ fontWeight: "bold" }}>
-          <td>Total </td>
-          <td></td>
-          <td>Rp 20.000,00</td>
-        </tr>
-      </table>
-    </div>
+          <tr className="text-title1">
+            <td>Take away </td>
+            <td></td>
+            <td>Rp 2.000,00</td>
+          </tr>
+          <tr style={{ fontWeight: "bold" }}>
+            <td>Total </td>
+            <td></td>
+            <td>Rp 20.000,00</td>
+          </tr>
+        </table>
+      </div>
 
-    <div>
+      <div>
         <br></br>
         <Link to={`/Berandapage/${url}`}>
-        <button className="button-proses-pembayaran">Kembali</button>
+          <button className="button-proses-pembayaran">Kembali</button>
         </Link>
       </div>
     </div>
