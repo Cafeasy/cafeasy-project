@@ -56,6 +56,7 @@ exports.postCart = async (req, res, next) => {
         let idMenuSign = obyekMenu.idMenu;
         let namaMenuSign = obyekMenu.namaMenu;
         let hargaMenuSign = obyekMenu.hargaMenu;
+        let imageUrlSign = obyekMenu.imageUrl;
 
         //proses insert keranjang
         const idKeranjang = "cart-" + uniqueid;
@@ -65,6 +66,7 @@ exports.postCart = async (req, res, next) => {
         const namaMenu = namaMenuSign;
         const hargaMenu = hargaMenuSign;
         const qty = req.body.qty;
+        const imageUrl = imageUrlSign;
         const catatanPelanggan = req.body.catatanPelanggan;
 
         //check data keranjang by id menu dan id pelanggan
@@ -84,7 +86,7 @@ exports.postCart = async (req, res, next) => {
                         next(err);
                     })
             } else {
-                KeranjangPelanggan.findOneAndUpdate({ idPelanggan: `${idPelangganCheck}` }, { $push: { dataPesanan: { idMenu: idMenu, namaMenu: namaMenu, hargaMenu: hargaMenu, qty: qty, catatanPelanggan: catatanPelanggan } } }, { new: true })
+                KeranjangPelanggan.findOneAndUpdate({ idPelanggan: `${idPelangganCheck}` }, { $push: { dataPesanan: { idMenu: idMenu, namaMenu: namaMenu, hargaMenu: hargaMenu, qty: qty, catatanPelanggan: catatanPelanggan, imageUrl: imageUrl } } }, { new: true })
                     .then(result => {
                         res.status(200).json({
                             message: 'Item berhasil ditambah',
@@ -100,7 +102,7 @@ exports.postCart = async (req, res, next) => {
                 idKeranjang: idKeranjang,
                 idPelanggan: idPelanggan,
                 namaPelanggan: namaPelanggan,
-                dataPesanan: [{ idMenu: idMenu, namaMenu: namaMenu, hargaMenu: hargaMenu, qty: qty, catatanPelanggan: catatanPelanggan }]
+                dataPesanan: [{ idMenu: idMenu, namaMenu: namaMenu, hargaMenu: hargaMenu, qty: qty, catatanPelanggan: catatanPelanggan, imageUrl: imageUrl }]
             })
 
             insertCart.save().then(result => {
