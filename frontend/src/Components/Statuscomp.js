@@ -67,6 +67,8 @@ const Statuscomp = (props) => {
       })
       .catch((err) => console.log(err));
   };
+  let arr = data;
+  console.log(data[0]?.dataPesanan);
 
   return (
     <div className="App">
@@ -111,19 +113,19 @@ const Statuscomp = (props) => {
             </td>
           </tr>
 
-          <tr className="text-title1">
-            <td style={{ padding: "5px", paddingLeft: "5%" }}>
-              {data[0]?.dataPesanan[0]?.namaMenu}
-            </td>
-            <td style={{ textAlign: "center" }}>
-              {data[0]?.dataPesanan[0]?.qty}x
-            </td>
-            <td>
-              Rp.{" "}
-              {data[0]?.dataPesanan[0]?.hargaMenu *
-                data[0]?.dataPesanan[0]?.qty}
-            </td>
-          </tr>
+          {data[0]?.dataPesanan.map((d, i) => {
+            return (
+              <>
+                <tr className="text-title1">
+                  <td style={{ padding: "5px", paddingLeft: "5%" }}>
+                    {d.namaMenu}
+                  </td>
+                  <td style={{ textAlign: "center" }}>{d.qty}x </td>
+                  <td>Rp. {d.hargaMenu * d.qty}</td>
+                </tr>
+              </>
+            );
+          })}
 
           <tr style={{ fontWeight: "bold" }}>
             <td>Total </td>

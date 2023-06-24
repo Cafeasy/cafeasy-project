@@ -24,4 +24,6 @@
 .increase_button {
   position: absolute;
   left: 58%;
+
+  background: "#1f2937";
 }

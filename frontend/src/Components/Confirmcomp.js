@@ -221,8 +221,8 @@ const Confirmcomp = (props) => {
               <td style={{ padding: "5px", paddingLeft: "5%", width: "40%" }}>
                 {item.namaMenu}{" "}
               </td>
-              <td style={{ textAlign: "center" }}>{item.qty}x</td>
-              <td>Rp. {item.hargaMenu * item.qty}</td>
+              <td style={{ textAlign: "center", width: "30%" }}>{item.qty}x</td>
+              <td>Rp.{item.hargaMenu * item.qty}</td>
             </tr>
             <tr className="text-title3">
               <td

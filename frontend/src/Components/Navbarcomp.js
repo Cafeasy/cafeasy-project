@@ -157,16 +157,6 @@ function Navbarcomp(props) {
       });
   }, [post]);
 
-  const [posts, setPosts] = useState([]);
-  useEffect(() => {
-    axios
-      .get(` ${process.env.REACT_APP_API_URL}/ListMenuByCategory/Dessert`)
-      .then((result) => {
-        setPosts(result.data);
-      })
-      .catch((error) => console.log(error));
-  }, [posts]);
-
   const [kategorimenu, setKategorimenu] = useState([]);
   useEffect(() => {
     axios
@@ -176,16 +166,6 @@ function Navbarcomp(props) {
       })
       .catch((error) => console.log(error));
   }, [kategorimenu]);
-
-  const [mainc, setMainc] = useState([]);
-  useEffect(() => {
-    axios
-      .get(` ${process.env.REACT_APP_API_URL}/ListMenuByCategory/Main Course`)
-      .then((result) => {
-        setMainc(result.data);
-      })
-      .catch((error) => console.log(error));
-  }, [mainc]);
 
   const [show, setShow] = useState(false);
   const handleClick = () => {
@@ -262,7 +242,7 @@ function Navbarcomp(props) {
 
   let arr = data.result ?? [];
   let ktgr = kategorimenu.data ?? [];
-
+  console.log(arr);
   return (
     <>
       <div className="">
@@ -481,6 +461,7 @@ function Navbarcomp(props) {
               ))}
             </Row>
           )}
+
           {ktgr.map((isi, index) => (
             <>
               {active === isi.namaKategori && (
@@ -626,10 +607,9 @@ function Navbarcomp(props) {
                     <td style={{ textAlign: "center" }}> {d.qty}x </td>
                     <div className="increase_button">
                       <AiFillPlusCircle
-                        style={{ cursor: "pointer" }}
+                        style={{ cursor: "pointer", fill: "navy" }}
                         opacity={0.5}
                         size={18}
-                        color="navy"
                         class="mx-5"
                         onClick={() => {
                           removeMe(d.namaMenu);

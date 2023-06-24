@@ -62,12 +62,13 @@ table tr {
 }
 .text-title {
   font-weight: bolder;
+  font-size: large;
 }
 
 .text-title3 {
   padding-left: 5%;
 
-  font-size: 13px;
+  font-size: 16px;
   line-height: 12px;
   /* identical to box height */
 

@@ -79,9 +79,11 @@ const Penilaiancomp = (props) => {
       <div>
         <br></br>
 
-        <button type="button" className="button-proses-pembayaran">
-          Kirim
-        </button>
+        <Link to={`/Berandapage/${url}`}>
+          <button type="button" className="button-proses-pembayaran">
+            Kirim
+          </button>
+        </Link>
       </div>
     </div>
   );
