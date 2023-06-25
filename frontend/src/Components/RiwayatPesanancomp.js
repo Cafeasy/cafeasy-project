@@ -51,6 +51,11 @@ const Riwayatpesanancomp = (props) => {
 
   return (
     <div className="App">
+      <div className="logo-back">
+        <Link to={`/Berandapage/${url}`} style={{ color: "black" }}>
+          <CgArrowLeftO size={35} style={{ paddingRight: "5%" }} />
+        </Link>
+      </div>
       <br></br>
       <br></br>
       <div>
@@ -81,9 +86,6 @@ const Riwayatpesanancomp = (props) => {
                     <small class="text-muted">{d.tanggal}</small>
                   </p>
 
-                  <p class="card-text">
-                    <small class="text-muted">{d.idTransaksi}</small>
-                  </p>
                   {/* {d.dataPesanan.map((d, index) => {
                     return (
                       <>
@@ -119,9 +121,6 @@ const Riwayatpesanancomp = (props) => {
 
       <div>
         <br></br>
-        <Link to={`/Berandapage/${url}`}>
-          <button className="button-proses-pembayaran">Kembali</button>
-        </Link>
       </div>
     </div>
   );
@@ -142,16 +141,22 @@ export const Modaltransaksi = ({
   return (
     <>
       {" "}
-      <Button
-        className="nextButton"
+      <button
+        className="button-detail"
         onClick={() => {
           handleClick(value.idTransaksi);
           handleShow();
         }}
+        style={{ borderRadius: "8px" }}
       >
         Detail
-      </Button>
-      <Modal show={show} onHide={handleClose} centered>
+      </button>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        centered
+        style={{ background: "white", outline: "none" }}
+      >
         <Modal.Header closeButton>
           <Modal.Title class="modal-title w-100 text-center">
             <h3>Riwayat Transaksi</h3>
@@ -194,8 +199,12 @@ export const Modaltransaksi = ({
         </div>
 
         <br></br>
-        <div class="modal-footer border-0">{isitransaksi?.totalHarga}</div>
         <Modal.Footer>
+          <div class="modal-footer border-0">
+            <h5 style={{ fontWeight: "bold" }}>
+              Total. {isitransaksi?.totalHarga}
+            </h5>
+          </div>
           {/* <div>
             <a>Transfer Ke bank BCA</a>
             <p>PT. Cafeasy</p>

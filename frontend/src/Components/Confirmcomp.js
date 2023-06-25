@@ -203,65 +203,65 @@ const Confirmcomp = (props) => {
           </button>
         </div>
       </div>
-
-      <table
-        style={{
-          width: "95%",
-          textAlign: "left",
-          marginLeft: "3%",
-          border: "1px solid #BFBFBF",
-        }}
-      >
-        <tr className="text-title">
-          <td colSpan={2}>Paket yang dipilih</td>
-        </tr>
-        {arr[0]?.dataPesanan?.map((item) => (
-          <>
-            <tr className="text-title3">
-              <td style={{ padding: "5px", paddingLeft: "5%", width: "40%" }}>
-                {item.namaMenu}{" "}
-              </td>
-              <td style={{ textAlign: "center", width: "30%" }}>{item.qty}x</td>
-              <td>Rp.{item.hargaMenu * item.qty}</td>
-            </tr>
-            <tr className="text-title3">
-              <td
-                style={{
-                  padding: "5px",
-                  paddingLeft: "5%",
-                  width: "40%",
-                  opacity: "0.5",
-                  fontSize: "12px",
-                  color: "red",
-                  textDecoration: "underline",
-                }}
-                onClick={handleShow}
-              >
-                <ModalCustomKeranjang
-                  menuList={item}
-                  notifsukses={notifsukses}
-                  menu={item}
-                  updateCatatan={updateCatatan}
-                  setCatatankrj={setCatatankrj}
-                  addItem={addItem}
-                  minItem={minItem}
-                />
-              </td>
-            </tr>
-          </>
-        ))}
-        <tr style={{ fontWeight: "bold" }}>
-          <td>Total </td>
-
-          <td colSpan={2} style={{ textAlign: "center", paddingLeft: "30%" }}>
-            Rp. {data.totalHarga}
-          </td>
-        </tr>
-        <tr>
-          <td> </td>
-        </tr>
-      </table>
-
+      <div class="container">
+        <table
+          style={{
+            width: "95%",
+            textAlign: "left",
+            marginLeft: "3%",
+            border: "1px solid #BFBFBF",
+          }}
+        >
+          <tr className="text-title">
+            <td colSpan={2}>Paket yang dipilih</td>
+          </tr>
+          {arr[0]?.dataPesanan?.map((item) => (
+            <>
+              <tr className="text-title3">
+                <td style={{ padding: "5px", paddingLeft: "5%", width: "40%" }}>
+                  {item.namaMenu}{" "}
+                </td>
+                <td style={{ textAlign: "center", width: "30%" }}>
+                  {item.qty}x
+                </td>
+                <td>Rp.{item.hargaMenu * item.qty}</td>
+              </tr>
+              <tr className="text-title3">
+                <td
+                  style={{
+                    padding: "5px",
+                    paddingLeft: "5%",
+                    width: "40%",
+                    opacity: "0.5",
+                    fontSize: "12px",
+                    color: "red",
+                    textDecoration: "underline",
+                  }}
+                  onClick={handleShow}
+                >
+                  <ModalCustomKeranjang
+                    menuList={item}
+                    notifsukses={notifsukses}
+                    menu={item}
+                    updateCatatan={updateCatatan}
+                    setCatatankrj={setCatatankrj}
+                    addItem={addItem}
+                    minItem={minItem}
+                  />
+                </td>
+              </tr>
+            </>
+          ))}
+          <tr style={{ fontWeight: "bold" }}>
+            <td>Total </td>
+            <td></td>
+            <td>Rp. {data.totalHarga}</td>
+          </tr>
+          <tr>
+            <td> </td>
+          </tr>
+        </table>
+      </div>
       <div>
         <br></br>
 
@@ -324,7 +324,7 @@ export const ModalCustomKeranjang = ({
           width: "40%",
           cursor: "pointer",
           fontSize: "12px",
-          color: "red",
+          color: "blue",
           textDecoration: "underline",
         }}
         onClick={handleShow}
@@ -385,9 +385,8 @@ export const ModalCustomKeranjang = ({
                         style={{
                           cursor: "pointer",
                         }}
-                        opacity={0.5}
                         size={18}
-                        color="navy"
+                        color="#1f2937"
                         class="mx-4"
                         onClick={() => {
                           notifsukses(menuList);

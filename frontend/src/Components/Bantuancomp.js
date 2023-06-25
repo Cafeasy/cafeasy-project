@@ -26,23 +26,11 @@ const Bantuancomp = (props) => {
         </div>
       </div>
 
-      <div class="d-grid gap-20 col-10 mx-auto">
-        <Form className="d-flex">
-          <Form.Control
-            type="search"
-            placeholder="Search"
-            className="me-5 rounded-pill"
-            aria-label="Search"
-          />
-          <Button className="rounded-pill" variant="outline-primary">
-            Search
-          </Button>
-        </Form>
-      </div>
+      <div class="d-grid gap-20 col-10 mx-auto"></div>
       <br></br>
 
       <div class="d-grid gap-20 col-10 mx-auto">
-        <Accordion defaultActiveKey="0">
+        <Accordion defaultActiveKey="10">
           <Accordion.Item eventKey="0">
             <Accordion.Header>
               Saya tidak dapat menggunakan aplikasi Cafeasy
@@ -73,6 +61,14 @@ const Bantuancomp = (props) => {
               e-payment ataupun bayar langsung.
             </Accordion.Body>
           </Accordion.Item>
+
+          <Accordion.Item eventKey="3">
+            <Accordion.Header>Tampilan menu tidak terlihat</Accordion.Header>
+            <Accordion.Body>
+              Silahkan coba anda refresh kembali browser yang anda pakai.
+            </Accordion.Body>
+          </Accordion.Item>
+          <br></br>
         </Accordion>
       </div>
 

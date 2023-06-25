@@ -67,8 +67,21 @@ const Statuscomp = (props) => {
       })
       .catch((err) => console.log(err));
   };
+
+  let idtransaksi = data[0]?.idTransaksi;
+  const [message, setMessage] = useState();
+  const [metode, setMetode] = useState();
+  React.useEffect(() => {
+    axios
+      .get(
+        `${process.env.REACT_APP_API_URL}/getTransactionStatus/` + idtransaksi
+      )
+      .then((response) => {
+        setMetode(response.data);
+      });
+  }, [metode]);
+
   let arr = data;
-  console.log(data[0]?.dataPesanan);
 
   return (
     <div className="App">
@@ -135,13 +148,18 @@ const Statuscomp = (props) => {
 
           <br></br>
           <tr>
-            <td style={{ fontWeight: "bold" }}>Pembayaran BCA </td>
+            <td style={{ fontWeight: "bold", whiteSpace: "nowrap" }}>
+              Pembayaran {metode.data.payment_type}{" "}
+            </td>
           </tr>
           <tr>
             <td style={{ fontSize: "13px", opacity: "50%" }}>Barista Rizky </td>
           </tr>
           <tr>
-            <td style={{ fontSize: "13px", opacity: "50%" }}>Meja no.01 </td>
+            <td style={{ fontSize: "13px", opacity: "50%" }}>
+              {" "}
+              Meja no.{data[0]?.noMeja}{" "}
+            </td>
           </tr>
           <br></br>
           <tr>

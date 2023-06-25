@@ -607,8 +607,10 @@ function Navbarcomp(props) {
                     <td style={{ textAlign: "center" }}> {d.qty}x </td>
                     <div className="increase_button">
                       <AiFillPlusCircle
-                        style={{ cursor: "pointer", fill: "navy" }}
-                        opacity={0.5}
+                        style={{
+                          cursor: "pointer",
+                          color: "#1f2937",
+                        }}
                         size={18}
                         class="mx-5"
                         onClick={() => {
