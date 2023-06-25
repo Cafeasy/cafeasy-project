@@ -20,7 +20,7 @@ import "../Style/Maincourse.css";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { BsStarFill } from "react-icons/bs";
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Button from "react-bootstrap/esm/Button";
 import Carousel from "react-bootstrap/Carousel";
 import "../Style/Slidergambar.css";
@@ -240,13 +240,58 @@ function Navbarcomp(props) {
   }
   const removeMe = (index) => {};
 
+  const [shows, setShows] = useState(true);
+
+  const handleClose = () => setShows(false);
+  const handleShow = () => setShows(true);
+
+  const [message, setMessage] = useState("");
+  const handleChange = (event) => {
+    setMessage(event.target.value);
+  };
   let arr = data.result ?? [];
   let ktgr = kategorimenu.data ?? [];
-  console.log(arr);
+  console.log(message);
   return (
     <>
       <div className="">
-        <div></div>
+        <div>
+          <Modal
+            show={shows}
+            onHide={handleClose}
+            backdrop="static"
+            keyboard={false}
+            centered
+          >
+            <Modal.Body>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">
+                      Masukan Nomor Meja :
+                    </label>
+                    <input
+                      required
+                      onChange={handleChange}
+                      type="number"
+                      class="form-control"
+                    ></input>
+                  </div>
+                </form>
+              </div>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                type="submit"
+                variant="primary"
+                disabled={message === ""}
+                onClick={handleClose}
+              >
+                Understood
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </div>
         {["sm"].map((expand) => (
           <Navbar key={expand} expand={expand} className="mb-4">
             <Container fluid>
