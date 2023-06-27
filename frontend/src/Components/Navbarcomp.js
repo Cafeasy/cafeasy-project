@@ -83,6 +83,7 @@ function Navbarcomp(props) {
   };
 
   const [data, setData] = useState([]);
+
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/cartPelanggan/` + urlParams)
@@ -251,7 +252,7 @@ function Navbarcomp(props) {
   };
   let arr = data.result ?? [];
   let ktgr = kategorimenu.data ?? [];
-  console.log(message);
+
   return (
     <>
       <div className="">
@@ -369,11 +370,11 @@ function Navbarcomp(props) {
           <Carousel.Item>
             <img
               className="Gambarslider"
-              src={Gambarburger}
+              src={`${menus[1].imageUrl}`}
               alt="First slide"
             />
             <Carousel.Caption>
-              <h3 className="caption">Burger Besar</h3>
+              <h3 className="caption">{`${menus[1].namaMenu}`}</h3>
               <p className="caption2">120k.</p>
             </Carousel.Caption>
           </Carousel.Item>
