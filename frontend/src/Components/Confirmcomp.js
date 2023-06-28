@@ -212,16 +212,34 @@ const Confirmcomp = (props) => {
             border: "1px solid #BFBFBF",
           }}
         >
-          <tr className="text-title">
-            <td colSpan={2}>Paket yang dipilih</td>
+          <tr style={{ fontSize: "15px", fontWeight: "bolder  " }}>
+            <td>Menu yang dipilih</td>
+            <td style={{ textAlign: "center" }}>Kuantitas</td>
+            <td>Subtotal </td>
           </tr>
+
           {arr[0]?.dataPesanan?.map((item) => (
             <>
               <tr className="text-title3">
-                <td style={{ padding: "5px", paddingLeft: "5%", width: "40%" }}>
+                <td style={{ width: "45%" }}>
+                  {" "}
+                  <img
+                    src={item.imageUrl}
+                    alt="gambarpizza"
+                    className="gambarkonfir"
+                  />
+                  <br></br>
                   {item.namaMenu}{" "}
+                  <td style={{ opacity: "0.5", fontSize: "10px" }}>
+                    <div className="text-catatan"> {item.catatanPelanggan}</div>
+                  </td>
                 </td>
-                <td style={{ textAlign: "center", width: "30%" }}>
+
+                <td
+                  style={{
+                    textAlign: "center",
+                  }}
+                >
                   {item.qty}x
                 </td>
                 <td>Rp.{item.hargaMenu * item.qty}</td>
@@ -236,8 +254,10 @@ const Confirmcomp = (props) => {
                     fontSize: "12px",
                     color: "red",
                     textDecoration: "underline",
+                    position: "absolute",
+                    marginTop: "-20px",
+                    marginLeft: "65 px",
                   }}
-                  onClick={handleShow}
                 >
                   <ModalCustomKeranjang
                     menuList={item}
@@ -319,17 +339,8 @@ export const ModalCustomKeranjang = ({
 
   return (
     <>
-      <div
-        style={{
-          width: "40%",
-          cursor: "pointer",
-          fontSize: "12px",
-          color: "blue",
-          textDecoration: "underline",
-        }}
-        onClick={handleShow}
-      >
-        Edit{" "}
+      <div style={{}} onClick={handleShow}>
+        Catatan{" "}
       </div>
       {show && (
         <Modal

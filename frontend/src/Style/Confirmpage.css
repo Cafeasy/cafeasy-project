@@ -1,7 +1,4 @@
-table {
-}
 table td {
-  width: 35%;
   padding-left: 5%;
 }
 table tr {
@@ -73,6 +70,13 @@ table tr {
   /* identical to box height */
 
   color: #252525;
+}
+
+.text-catatan {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 7ch;
 }
 
 .button-status {

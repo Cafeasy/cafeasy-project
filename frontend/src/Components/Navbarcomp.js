@@ -257,7 +257,7 @@ function Navbarcomp(props) {
     <>
       <div className="">
         <div>
-          <Modal
+          {/* <Modal
             show={shows}
             onHide={handleClose}
             backdrop="static"
@@ -291,7 +291,7 @@ function Navbarcomp(props) {
                 Understood
               </Button>
             </Modal.Footer>
-          </Modal>
+          </Modal> */}
         </div>
         {["sm"].map((expand) => (
           <Navbar key={expand} expand={expand} className="mb-4">
@@ -370,12 +370,12 @@ function Navbarcomp(props) {
           <Carousel.Item>
             <img
               className="Gambarslider"
-              src={`${menus[1].imageUrl}`}
+              src={`${menus[1]?.imageUrl}`}
               alt="First slide"
             />
             <Carousel.Caption>
-              <h3 className="caption">{`${menus[1].namaMenu}`}</h3>
-              <p className="caption2">120k.</p>
+              <h3 className="caption">{`${menus[1]?.namaMenu}`}</h3>
+              <p className="caption2">{`${menus[1]?.hargaMenu}`}.</p>
             </Carousel.Caption>
           </Carousel.Item>
 
@@ -622,7 +622,7 @@ function Navbarcomp(props) {
                     <td
                       className="tittle"
                       onClick={handleClick}
-                      style={{ cursor: "pointer" }}
+                      style={{ cursor: "pointer", width: "35%" }}
                     >
                       <ModalCustomKeranjang
                         menuList={d}
@@ -637,7 +637,7 @@ function Navbarcomp(props) {
 
                     <div className="decrease_button">
                       <AiFillMinusCircle
-                        style={{ cursor: "pointer" }}
+                        style={{ cursor: "pointer", width: "35%" }}
                         size={18}
                         opacity={0.5}
                         color="black"
@@ -650,12 +650,16 @@ function Navbarcomp(props) {
                       />
                     </div>
 
-                    <td style={{ textAlign: "center" }}> {d.qty}x </td>
+                    <td style={{ textAlign: "center", width: "40%" }}>
+                      {" "}
+                      {d.qty}x{" "}
+                    </td>
                     <div className="increase_button">
                       <AiFillPlusCircle
                         style={{
                           cursor: "pointer",
                           color: "#1f2937",
+                          width: "35%",
                         }}
                         size={18}
                         class="mx-5"
