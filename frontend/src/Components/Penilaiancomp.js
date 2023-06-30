@@ -55,11 +55,13 @@ const Penilaiancomp = (props) => {
         Makanan / Minuman Secara Keseluruhan
       </div>
       <div className="App">
-        <Rating
+        {
+          /* <Rating
           onClick={handleRating}
 
           /* Available Props */
-        />
+          /> */
+        }
       </div>
       <br></br>
       <label

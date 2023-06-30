@@ -80,12 +80,12 @@ const Riwayatpesanancomp = (props) => {
             >
               <div class="col-md-4">
                 <div class="card-body">
-                  <h5 class="card-title">Meja no : {d.noMeja}</h5>
+                  <h2 class="card-title">Meja no : {d.noMeja}</h2>
 
                   <p class="card-text">
                     <small class="text-muted">{d.tanggal}</small>
                   </p>
-
+                  <h6 class="card-title">Pembayaran : {d.statusBayar}</h6>
                   {/* {d.dataPesanan.map((d, index) => {
                     return (
                       <>
@@ -108,7 +108,7 @@ const Riwayatpesanancomp = (props) => {
                     show={show}
                     handleClose={handleClose}
                     riwayat={riwayat}
-                    idtransaksi={transaksi.idTransaksi}
+                    idtransaksi={transaksi?.idTransaksi}
                     handleClick={handleClick}
                     isitransaksi={isitransaksi}
                   ></Modaltransaksi>
@@ -200,6 +200,7 @@ export const Modaltransaksi = ({
 
         <br></br>
         <Modal.Footer>
+          <div class="modal-footer border-0"></div>
           <div class="modal-footer border-0">
             <h5 style={{ fontWeight: "bold" }}>
               Total. {isitransaksi?.totalHarga}

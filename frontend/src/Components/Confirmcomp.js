@@ -256,7 +256,7 @@ const Confirmcomp = (props) => {
                     textDecoration: "underline",
                     position: "absolute",
                     marginTop: "-20px",
-                    marginLeft: "65 px",
+                    marginLeft: "65px",
                   }}
                 >
                   <ModalCustomKeranjang

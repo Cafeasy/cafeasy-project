@@ -467,7 +467,7 @@ function Navbarcomp(props) {
                         </div>
 
                         <div className="rate">
-                          <div class="text text-end text-warning">
+                          <div class="text text-end text-white">
                             <BsStarFill size="10px"></BsStarFill>
                             <BsStarFill size="10px"></BsStarFill>
                             <BsStarFill size="10px"></BsStarFill>
@@ -558,7 +558,7 @@ function Navbarcomp(props) {
                               </div>
 
                               <div className="rate">
-                                <div class="text text-end text-warning">
+                                <div class="text text-end text-white">
                                   <BsStarFill size="10px"></BsStarFill>
                                   <BsStarFill size="10px"></BsStarFill>
                                   <BsStarFill size="10px"></BsStarFill>
