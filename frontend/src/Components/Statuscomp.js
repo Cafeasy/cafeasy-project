@@ -204,8 +204,8 @@ const Statuscomp = (props) => {
         </div>
         <br></br>
 
-        <Link to={`/Penilaian/` + urlParams} state={{ url: urlParams }}>
-          <button className="button-proses-pembayaran">Nilai Pesanan</button>
+        <Link to={`/Berandapage/` + urlParams} state={{ url: urlParams }}>
+          <button className="button-proses-pembayaran">Kembali</button>
         </Link>
       </div>
     </div>
