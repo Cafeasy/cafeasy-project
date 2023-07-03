@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 
 const Statuscomp = (props) => {
   const location = useLocation();
-  const newIdOrder = location.state.idOrder;
+  const newIdOrder = location.state?.idOrder;
   const printRef = React.useRef();
   const [copySuccess, setCopySuccess] = useState("");
   let [data, setData] = useState([]);
@@ -149,7 +149,7 @@ const Statuscomp = (props) => {
           <br></br>
           <tr>
             <td style={{ fontWeight: "bold", whiteSpace: "nowrap" }}>
-              Pembayaran {metode.data.payment_type}{" "}
+              Pembayaran {metode?.data?.payment_type}{" "}
             </td>
           </tr>
           <tr>
