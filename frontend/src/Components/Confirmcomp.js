@@ -105,14 +105,12 @@ const Confirmcomp = (props) => {
         )
       );
     }
-    console.log(idOrder);
 
     e.preventDefault();
     axios
       .post(`${process.env.REACT_APP_API_URL}/midtransPayment/`, parameter)
       .then(async (res) => {
         const responseAPI = res.data.data;
-
         const newIdOrder = idOrder;
         console.log(newIdOrder);
         await axios.post(
@@ -176,6 +174,41 @@ const Confirmcomp = (props) => {
       .catch((err) => console.log("error : ", err));
   };
 
+  const paymentkasir = async (e) => {
+    let parameter;
+    let idOrder;
+    {
+      data?.result.map(
+        (newData) => (
+          (parameter = {
+            transaction_details: {
+              order_id: newData.idKeranjang,
+              gross_amount: data.totalHarga,
+            },
+            credit_card: {
+              secure: true,
+            },
+            customer_details: {
+              first_name: newData.namaPelanggan,
+              last_name: "",
+            },
+          }),
+          (idOrder = newData.idKeranjang)
+        )
+      );
+    }
+
+    e.preventDefault();
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/postTransaksi/${idOrder}`)
+      .then(() =>
+        paymentSukses("/Statuspage/" + urlParams, {
+          state: { idOrder: idOrder },
+        })
+      )
+
+      .catch((err) => console.log("error : ", err));
+  };
   const menus = props.menu;
   const location = useLocation();
   const { url } = location.state;
@@ -290,7 +323,17 @@ const Confirmcomp = (props) => {
           onClick={payment}
           className="button-proses-pembayaran"
         >
-          Pilih Metode Pembayaran
+          Bayar Melalui Bank / Ewallet
+        </button>
+        <br></br>
+        <br></br>
+
+        <button
+          type="button"
+          className="button-proses-pembayaran"
+          onClick={paymentkasir}
+        >
+          Bayar Melalui kasir
         </button>
       </div>
     </div>

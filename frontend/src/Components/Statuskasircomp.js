@@ -7,12 +7,13 @@ import { BsCheckCircle } from "react-icons/bs";
 import html2canvas from "html2canvas";
 import Swal from "sweetalert2";
 
-const Statuscomp = (props) => {
+const Statuskasircomp = (props) => {
   const location = useLocation();
   const newIdOrder = location.state?.idOrder;
   const printRef = React.useRef();
   const [copySuccess, setCopySuccess] = useState("");
   let [data, setData] = useState([]);
+
   useEffect(() => {
     getDataTransaksi();
   }, []);
@@ -80,7 +81,7 @@ const Statuscomp = (props) => {
         setMetode(response.data);
       });
   }, [metode]);
-  console.log(metode);
+
   let arr = data;
 
   return (
@@ -202,4 +203,4 @@ const Statuscomp = (props) => {
   );
 };
 
-export default Statuscomp;
+export default Statuskasircomp;

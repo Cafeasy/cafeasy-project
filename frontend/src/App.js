@@ -20,6 +20,7 @@ import BantuanPage from "./Pages/Bantuanpage";
 import Kontakpage from "./Pages/Kontakpage";
 import Statuspage from "./Pages/Statuspage";
 import Penilaianpage from "./Pages/Penilaianpage";
+import Statuskasirpage from "./Pages/Statuskasirpage";
 
 function App() {
   return (
@@ -48,6 +49,11 @@ function App() {
         />
         <Route exact path="/Penilaian/:idMenu" element={<Penilaianpage />} />
         <Route exact path="/Statuspage/:idUser" element={<Statuspage />} />
+        <Route
+          exact
+          path="/Statuskasirpage/:idUser"
+          element={<Statuskasirpage />}
+        />
         <Route exact path="/Kontakpage/:idMenu" element={<Kontakpage />} />
         <Route exact path="/Bantuanpage/:idMenu" element={<BantuanPage />} />
       </Routes>
