@@ -19,8 +19,13 @@ const ListCartCust = new Schema({
     dataPesanan: {
         type: Array,
         required: true
+    },
+    noMeja: {
+        type: Number,
+        required: false
     }
 
-}, {versionKey : false, timestamps : true});
+
+}, { versionKey: false, timestamps: true });
 
 module.exports = mongoose.model('KeranjangPelanggan', ListCartCust, 'keranjangPelanggan');

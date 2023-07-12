@@ -35,7 +35,7 @@ exports.getListCart = async (req, res, next) => {
 
 exports.postCart = async (req, res, next) => {
   const uniqueid = Math.random().toString(32).slice(3);
-
+  const noMeja = req.body.noMeja;
   //check data berdasarkan request idMenu parameter
   const idMenuCheck = req.params.idMenu;
   const idPelangganCheck = req.params.idPelanggan;
@@ -131,6 +131,7 @@ exports.postCart = async (req, res, next) => {
         idKeranjang: idKeranjang,
         idPelanggan: idPelanggan,
         namaPelanggan: namaPelanggan,
+        noMeja: noMeja,
         dataPesanan: [
           {
             idMenu: idMenu,

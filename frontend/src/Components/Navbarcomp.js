@@ -34,14 +34,20 @@ import { CgArrowLeftO } from "react-icons/cg";
 import { CgRemove } from "react-icons/cg";
 import { useParams } from "react-router-dom";
 
+
 function Navbarcomp(props) {
   const params = useParams();
   const urlParams = params.idUser;
 
   const user = props.user;
-
   const [menus, setMenus] = useState([]);
+  var noMeja = localStorage.getItem('noMeja');
   useEffect(() => {
+    if (noMeja === null) {
+      setShows(true)
+    } else {
+      setShows(false)
+    }
     // console.log("ini nama user : ", user?.name);
     axios
       .get(`${process.env.REACT_APP_API_URL}/ListMenu`)
@@ -65,15 +71,16 @@ function Navbarcomp(props) {
   const onSubmit = async (e) => {
     e.preventDefault();
     const post = {
+      noMeja: noMeja,
       qty: count,
       catatanPelanggan: catatan,
     };
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_API_URL}/postCart/` +
-          urlParams +
-          "/" +
-          inidata.idMenu,
+        urlParams +
+        "/" +
+        inidata.idMenu,
         post
       );
       console.log(res.data);
@@ -95,9 +102,9 @@ function Navbarcomp(props) {
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/cartPelangganPlus/` +
-          urlParams +
-          "/" +
-          value
+        urlParams +
+        "/" +
+        value
       )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
@@ -111,9 +118,9 @@ function Navbarcomp(props) {
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/updateCartCatatanPelanggan/` +
-          urlParams +
-          "/" +
-          value.idMenu,
+        urlParams +
+        "/" +
+        value.idMenu,
         post
       )
       .then((res) => console.log(res))
@@ -124,9 +131,9 @@ function Navbarcomp(props) {
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/cartPelangganMinus/` +
-          urlParams +
-          "/" +
-          value
+        urlParams +
+        "/" +
+        value
       )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
@@ -222,6 +229,9 @@ function Navbarcomp(props) {
     });
   };
   const logout = () => {
+
+    localStorage.removeItem("noMeja");
+
     window.open(`${process.env.REACT_APP_API_URL}/auth/logout`, "_self");
   };
 
@@ -239,16 +249,16 @@ function Navbarcomp(props) {
       setCount(count - 1);
     }
   }
-  const removeMe = (index) => {};
+  const removeMe = (index) => { };
 
   const [shows, setShows] = useState(true);
 
   const handleClose = () => setShows(false);
   const handleShow = () => setShows(true);
 
-  const [message, setMessage] = useState("");
+
   const handleChange = (event) => {
-    setMessage(event.target.value);
+    localStorage.setItem('noMeja', event.target.value);
   };
   let arr = data.result ?? [];
   let ktgr = kategorimenu.data ?? [];
@@ -256,43 +266,50 @@ function Navbarcomp(props) {
   return (
     <>
       <div className="">
-        <div>
-          {/* <Modal
-            show={shows}
-            onHide={handleClose}
-            backdrop="static"
-            keyboard={false}
-            centered
-          >
-            <Modal.Body>
-              <div class="modal-body">
-                <form>
-                  <div class="form-group">
-                    <label for="recipient-name" class="col-form-label">
-                      Masukan Nomor Meja :
-                    </label>
-                    <input
-                      required
-                      onChange={handleChange}
-                      type="number"
-                      class="form-control"
-                    ></input>
-                  </div>
-                </form>
-              </div>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button
-                type="submit"
-                variant="primary"
-                disabled={message === ""}
+
+        <Modal
+          show={shows}
+          onHide={handleClose}
+          backdrop="static"
+          keyboard={false}
+          centered
+        >
+          <Modal.Body>
+            <div class="modal-body">
+              <button
                 onClick={handleClose}
-              >
-                Understood
-              </Button>
-            </Modal.Footer>
-          </Modal> */}
-        </div>
+                type="button"
+                class="btn-close"
+                data-mdb-dismiss="modal"
+                aria-label="Close"
+              ></button>
+              <form>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">
+                    Masukan Nomor Meja :
+                  </label>
+                  <input
+                    required
+                    onChange={handleChange}
+                    type="number"
+                    class="form-control"
+                  ></input>
+                </div>
+              </form>
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              type="submit"
+              variant="primary"
+              disabled={localStorage.getItem("noMeja") === ""}
+              onClick={handleChange}
+            >
+              Understood
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
         {["sm"].map((expand) => (
           <Navbar key={expand} expand={expand} className="mb-4">
             <Container fluid>

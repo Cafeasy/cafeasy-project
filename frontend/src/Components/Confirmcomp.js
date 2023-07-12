@@ -28,9 +28,9 @@ const Confirmcomp = (props) => {
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/updateCartCatatanPelanggan/` +
-          urlParams +
-          "/" +
-          value.idMenu,
+        urlParams +
+        "/" +
+        value.idMenu,
         post
       )
       .then((res) => console.log(res))
@@ -41,9 +41,9 @@ const Confirmcomp = (props) => {
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/cartPelangganMinus/` +
-          urlParams +
-          "/" +
-          value
+        urlParams +
+        "/" +
+        value
       )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
@@ -52,9 +52,9 @@ const Confirmcomp = (props) => {
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/cartPelangganPlus/` +
-          urlParams +
-          "/" +
-          value
+        urlParams +
+        "/" +
+        value
       )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
@@ -112,7 +112,6 @@ const Confirmcomp = (props) => {
       .then(async (res) => {
         const responseAPI = res.data.data;
         const newIdOrder = idOrder;
-        console.log(newIdOrder);
         await axios.post(
           `${process.env.REACT_APP_API_URL}/postTransaksi/${idOrder}`
         );
@@ -120,8 +119,7 @@ const Confirmcomp = (props) => {
           onSuccess: () => {
             axios
               .put(
-                `${
-                  process.env.REACT_APP_API_URL
+                `${process.env.REACT_APP_API_URL
                 }/updateStatusBayar/${newIdOrder.toString()}`
               )
               .then(() =>
@@ -133,8 +131,7 @@ const Confirmcomp = (props) => {
           onPending: () => {
             axios
               .put(
-                `${
-                  process.env.REACT_APP_API_URL
+                `${process.env.REACT_APP_API_URL
                 }/updateStatusBayar/${newIdOrder.toString()}`
               )
               .then(() =>
@@ -146,8 +143,7 @@ const Confirmcomp = (props) => {
           onError: () => {
             axios
               .put(
-                `${
-                  process.env.REACT_APP_API_URL
+                `${process.env.REACT_APP_API_URL
                 }/updateStatusBayar/${newIdOrder.toString()}`
               )
               .then(() =>
@@ -159,8 +155,7 @@ const Confirmcomp = (props) => {
           onClose: () => {
             axios
               .put(
-                `${
-                  process.env.REACT_APP_API_URL
+                `${process.env.REACT_APP_API_URL
                 }/updateStatusBayar/${newIdOrder.toString()}`
               )
               .then(() =>
@@ -175,36 +170,30 @@ const Confirmcomp = (props) => {
   };
 
   const paymentkasir = async (e) => {
-    let parameter;
     let idOrder;
+
     {
       data?.result.map(
         (newData) => (
-          (parameter = {
-            transaction_details: {
-              order_id: newData.idKeranjang,
-              gross_amount: data.totalHarga,
-            },
-            credit_card: {
-              secure: true,
-            },
-            customer_details: {
-              first_name: newData.namaPelanggan,
-              last_name: "",
-            },
-          }),
-          (idOrder = newData.idKeranjang)
+          idOrder = newData.idKeranjang
         )
       );
-    }
-
-    e.preventDefault();
+    }     console.log(idOrder);
     axios
       .post(`${process.env.REACT_APP_API_URL}/postTransaksi/${idOrder}`)
-      .then(() =>
-        paymentSukses("/Statuspage/" + urlParams, {
-          state: { idOrder: idOrder },
-        })
+      .then(() => {
+        const newIdOrder = idOrder;
+        axios
+          .put(
+            `${process.env.REACT_APP_API_URL
+            }/updateStatusBayar/${newIdOrder.toString()}`
+          )
+          .then(() =>
+            paymentSukses("/Statuspage/" + urlParams, {
+              state: { idOrder: newIdOrder },
+            })
+          );
+      }
       )
 
       .catch((err) => console.log("error : ", err));

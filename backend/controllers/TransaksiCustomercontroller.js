@@ -9,12 +9,12 @@ exports.getTransaksiPelanggan = async (req, res, next) => {
 
     TransaksiPelanggan.find({ idPelanggan: `${idPelanggan}` })
         .then(result => {
-            if(result) {
+            if (result) {
                 res.status(200).json({
                     message: 'Data transaksi berhasil dipanggil',
                     data: result
                 })
-            } else if(!result) {
+            } else if (!result) {
                 res.status(404).json({
                     message: 'Data transaksi gagal dipanggil',
                     data: result
@@ -32,12 +32,12 @@ exports.getDetailTransaksiPelanggan = async (req, res, next) => {
 
     TransaksiPelanggan.find({ idPelanggan: `${idPelanggan}`, idTransaksi: `${idTransaksi}` })
         .then(result => {
-            if(result) {
+            if (result) {
                 res.status(200).json({
                     message: 'Data transaksi pelanggan berhasil dipanggil',
                     data: result
                 })
-            } else if(Qresult) {
+            } else if (Qresult) {
                 res.status(404).json({
                     message: 'Data transaksi pelanggan gagal dipanggil',
                     data: result
@@ -114,7 +114,10 @@ exports.updateStatusBayar = async (req, res, next) => {
         timeZone: 'Asia/Jakarta'
     })
     let newStatusBayar = statusBayar.transaction_status;
-    if (newStatusBayar.toString() == "settlement") {
+    if (!statusBayar.transaction_status) {
+        newStatusBayar = "Pembayaran Dilakukan Di kasir";
+    }
+    else if (newStatusBayar.toString() == "settlement") {
         newStatusBayar = "SUCCESS";
 
     } else {
