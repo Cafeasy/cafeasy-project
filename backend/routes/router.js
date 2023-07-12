@@ -8,6 +8,7 @@ const CustomerController = require("../controllers/Customercontroller");
 const KeranjangController = require("../controllers/Keranjangcontroller");
 const TransaksiController = require("../controllers/TransaksiCustomercontroller");
 const KategoriMenucontroller = require("../controllers/KategoriMenucontroller");
+const BannerController = require("../controllers/Bannercontroller");
 const app = express();
 const Customer = require("../model/Customermodel");
 const Midtrans = require('../controllers/MidtransController');
@@ -106,11 +107,14 @@ router.put('/updateCartCatatanPelanggan/:idPelanggan/:idMenu', KeranjangControll
 router.put('/cartPelangganMinus/:idPelanggan/:idMenu', KeranjangController.updateCartMinus);
 router.put('/cartPelangganPlus/:idPelanggan/:idMenu', KeranjangController.updateCartPlus);
 
+//routes banner
+router.get('/getAllBanner', BannerController.getAllBanner);
+router.get('/getBannerById/:idBanner', BannerController.getBannerById);
+
 //routes crud transaksi
 router.get('/getAllTransaksi/:idPelanggan', TransaksiController.getTransaksiPelanggan);
 router.get('/getDetailTransaksi/:idPelanggan/:idTransaksi', TransaksiController.getDetailTransaksiPelanggan);
 router.post('/postTransaksi/:idKeranjang', TransaksiController.postTransaksiPelanggan);
-router.delete('/delTransaksi/:idPelanggan',);
 router.put('/updateStatusBayar/:idTransaksi', TransaksiController.updateStatusBayar);
 //routes payment Midtrans
 router.post('/midtransPayment/', Midtrans.buatTransaction);
