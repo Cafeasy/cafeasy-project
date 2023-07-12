@@ -62,6 +62,7 @@ exports.postTransaksiPelanggan = async (req, res, next) => {
     var idPelangganSign = obyekKeranjang.idPelanggan;
     var namaPelangganSign = obyekKeranjang.namaPelanggan;
     var dataPesananSign = obyekKeranjang.dataPesanan;
+    var noMejaPelanggan = obyekKeranjang.noMeja;
 
     //date gmt
     var ndate = new Date().toLocaleString('en-US', {
@@ -83,7 +84,7 @@ exports.postTransaksiPelanggan = async (req, res, next) => {
         idPelanggan: idPelangganSign,
         namaPelanggan: namaPelangganSign,
         tanggal: ndate,
-        noMeja: 8,
+        noMeja: noMejaPelanggan,
         dataPesanan: dataPesananSign,
         totalHarga: totalHarga,
         statusBayar: "Belum bayar"
