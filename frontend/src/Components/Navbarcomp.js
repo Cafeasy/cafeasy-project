@@ -34,21 +34,22 @@ import { CgArrowLeftO } from "react-icons/cg";
 import { CgRemove } from "react-icons/cg";
 import { useParams } from "react-router-dom";
 
-
 function Navbarcomp(props) {
   const params = useParams();
   const urlParams = params.idUser;
 
   const user = props.user;
   const [menus, setMenus] = useState([]);
-  var noMeja = localStorage.getItem('noMeja');
+  var noMeja = localStorage.getItem("noMeja");
+  // console.log(noMeja);
   useEffect(() => {
     if (noMeja === null) {
-      setShows(true)
+      setShows(true);
     } else {
-      setShows(false)
+      setShows(false);
     }
     // console.log("ini nama user : ", user?.name);
+
     axios
       .get(`${process.env.REACT_APP_API_URL}/ListMenu`)
       .then((result) => {
@@ -78,9 +79,9 @@ function Navbarcomp(props) {
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_API_URL}/postCart/` +
-        urlParams +
-        "/" +
-        inidata.idMenu,
+          urlParams +
+          "/" +
+          inidata.idMenu,
         post
       );
       console.log(res.data);
@@ -102,9 +103,9 @@ function Navbarcomp(props) {
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/cartPelangganPlus/` +
-        urlParams +
-        "/" +
-        value
+          urlParams +
+          "/" +
+          value
       )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
@@ -118,9 +119,9 @@ function Navbarcomp(props) {
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/updateCartCatatanPelanggan/` +
-        urlParams +
-        "/" +
-        value.idMenu,
+          urlParams +
+          "/" +
+          value.idMenu,
         post
       )
       .then((res) => console.log(res))
@@ -131,9 +132,9 @@ function Navbarcomp(props) {
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/cartPelangganMinus/` +
-        urlParams +
-        "/" +
-        value
+          urlParams +
+          "/" +
+          value
       )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
@@ -229,7 +230,6 @@ function Navbarcomp(props) {
     });
   };
   const logout = () => {
-
     localStorage.removeItem("noMeja");
 
     window.open(`${process.env.REACT_APP_API_URL}/auth/logout`, "_self");
@@ -249,24 +249,23 @@ function Navbarcomp(props) {
       setCount(count - 1);
     }
   }
-  const removeMe = (index) => { };
+  const removeMe = (index) => {};
 
   const [shows, setShows] = useState(true);
 
   const handleClose = () => setShows(false);
-  const handleShow = () => setShows(true);
 
-
-  const handleChange = (event) => {
-    localStorage.setItem('noMeja', event.target.value);
-  };
   let arr = data.result ?? [];
   let ktgr = kategorimenu.data ?? [];
+  const [name, setName] = useState("");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    localStorage.setItem("noMeja", name);
+  };
 
   return (
     <>
       <div className="">
-
         <Modal
           show={shows}
           onHide={handleClose}
@@ -276,38 +275,28 @@ function Navbarcomp(props) {
         >
           <Modal.Body>
             <div class="modal-body">
-              <button
-                onClick={handleClose}
-                type="button"
-                class="btn-close"
-                data-mdb-dismiss="modal"
-                aria-label="Close"
-              ></button>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div class="form-group">
                   <label for="recipient-name" class="col-form-label">
                     Masukan Nomor Meja :
                   </label>
                   <input
                     required
-                    onChange={handleChange}
+                    onChange={(e) => setName(e.target.value)}
+                    value={name}
                     type="number"
                     class="form-control"
                   ></input>
                 </div>
+
+                <Modal.Footer>
+                  <Button type="submit" variant="primary" onClick={handleClose}>
+                    Submit
+                  </Button>
+                </Modal.Footer>
               </form>
             </div>
           </Modal.Body>
-          <Modal.Footer>
-            <Button
-              type="submit"
-              variant="primary"
-              disabled={localStorage.getItem("noMeja") === ""}
-              onClick={handleChange}
-            >
-              Understood
-            </Button>
-          </Modal.Footer>
         </Modal>
 
         {["sm"].map((expand) => (
