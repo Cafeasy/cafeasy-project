@@ -11,7 +11,6 @@ const Detailmenucomp = (props) => {
   const { url } = location.state;
   return (
     <div className="App">
-      npm
       <img src={menus.imageUrl} alt="test" className="parallax" />
       <div class="content">
         <div className="detail-namamenu"> {menus.namaMenu}</div>
