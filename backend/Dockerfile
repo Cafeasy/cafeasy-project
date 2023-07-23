@@ -1,0 +1,19 @@
+FROM node:17
+
+#WORKING DIR
+WORKDIR /usr/src/app
+
+#COPY PACKAGE JSON FILE
+COPY package*.json ./
+
+#INSTALL PACKAGE
+RUN npm install
+
+#COPY SOURCE FILES
+COPY . .
+
+#EXPOSE API PORT
+EXPOSE 8888
+
+#RUN THE APP
+CMD ["npm", "start"]
