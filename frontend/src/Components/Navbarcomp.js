@@ -265,7 +265,7 @@ function Navbarcomp(props) {
 
   return (
     <>
-      <div className="">
+      <div className="app">
         <Modal
           show={shows}
           onHide={handleClose}
@@ -443,7 +443,7 @@ function Navbarcomp(props) {
                 <Col>
                   <div class="shadow-sm  mb-1 mx-1 bg-white rounded">
                     <Card
-                      className="mx-2 mb-3 border-0 "
+                      className="mx-1 mb-3 border-0 "
                       key={menu.idMenu}
                       data-example={menu.namaMenu}
                       masukKeranjang={menu.masukKeranjang}
@@ -473,13 +473,7 @@ function Navbarcomp(props) {
                         </div>
 
                         <div className="rate">
-                          <div class="text text-end text-white">
-                            <BsStarFill size="10px"></BsStarFill>
-                            <BsStarFill size="10px"></BsStarFill>
-                            <BsStarFill size="10px"></BsStarFill>
-                            <BsStarFill size="10px"></BsStarFill>
-                            <BsStarFill size="10px"></BsStarFill>
-                          </div>
+                          <div class="text text-end text-red"></div>
                         </div>
 
                         <div>
@@ -532,9 +526,9 @@ function Navbarcomp(props) {
                     })
                     .map((menu, masukKeranjang) => (
                       <Col>
-                        <div class="shadow-sm  mb-1 mx-2 bg-white rounded">
+                        <div class="shadow-sm  mb-1 mx-1 bg-white rounded">
                           <Card
-                            className="mx-2  mb-3 border-0 "
+                            className="mx-1 mb-3 border-0 "
                             key={menu.idMenu}
                             data-example={menu.namaMenu}
                             masukKeranjang={menu.masukKeranjang}
@@ -564,20 +558,18 @@ function Navbarcomp(props) {
                               </div>
 
                               <div className="rate">
-                                <div class="text text-end text-white">
-                                  <BsStarFill size="10px"></BsStarFill>
-                                  <BsStarFill size="10px"></BsStarFill>
-                                  <BsStarFill size="10px"></BsStarFill>
-                                  <BsStarFill size="10px"></BsStarFill>
-                                  <BsStarFill size="10px"></BsStarFill>
-                                </div>
+                                <div class="text text-end text-red"></div>
                               </div>
 
                               <div>
                                 {" "}
                                 <Card.Text
                                   className="menu-deskripsi"
-                                  style={{ textIndent: "1px" }}
+                                  style={{
+                                    textIndent: "1px",
+
+                                    fontWeight: "50px",
+                                  }}
                                 >
                                   {menu.deskripsiMenu}
                                 </Card.Text>
@@ -853,6 +845,15 @@ export const ModalCustom = ({
       >
         <BsFillCartPlusFill size={12}></BsFillCartPlusFill> Keranjang
       </button>
+      <button
+        disabled={true}
+        className="oval2"
+        onClick={handleClick}
+        style={{ whiteSpace: "nowrap" }}
+      >
+        Tersdia
+      </button>
+      <div class="text text-end text-white">halo</div>
       {show && (
         <Modal
           show={show}

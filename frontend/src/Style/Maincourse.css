@@ -6,7 +6,7 @@
   width: 75%;
   height: 5%;
 
-  font-family: "Montserrat";
+  font-family: "Poppins";
   font-style: normal;
   font-weight: bold;
 
@@ -15,13 +15,30 @@
   color: #252525;
 }
 .oval {
+  position: absolute;
+  left: 0;
+
+  padding-left: 20px;
+  margin-left: 10px;
+  text-align: center;
   background: #1f2937;
   display: inline-block;
-  width: auto;
-  width: 100%;
+  text-align: left;
+  width: 68%;
   font-weight: medium;
-  font-family: "Montserrat";
-  font-size: 10px;
+  font-family: "Poppins";
+  font-size: 8px;
+  border-radius: 8px;
+  color: #ffffff;
+}
+.oval2 {
+  background: #007bff;
+  position: absolute;
+  right: 0;
+  width: 40px;
+  font-weight: medium;
+  font-family: "Poppins";
+  font-size: 8px;
   border-radius: 8px;
   color: #ffffff;
 }
@@ -38,7 +55,7 @@
 
   font-family: "Montserat";
   font-weight: 700;
-  font-size: 18px;
+  font-size: 8px;
 
   color: #db1c1c;
 }
@@ -47,7 +64,7 @@
   position: relative;
   text-align: left;
   font-weight: 200;
-  font-family: "Montserrat";
+  font-family: "Poppins";
   width: 74%;
   font-size: 11px;
   padding-top: 2%;

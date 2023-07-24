@@ -12,7 +12,7 @@
 
   padding: 1px 25%;
   font-weight: medium;
-  font-family: "Montserrat";
+  font-family: "Poppins";
   font-size: 15px;
 
   border-radius: 8px;
@@ -27,7 +27,7 @@ a {
 .navbar-container {
   text-align: center;
   text-indent: 5px;
-  font-family: "Montserrat";
+  font-family: "Poppins";
   font-weight: bold;
   padding: 10px;
 }
@@ -136,7 +136,7 @@ a {
   text-align: center;
   font-weight: bold;
 
-  font-family: "Montserrat";
+  font-family: "Poppins";
   font-style: normal;
 }
 .gambarmodal {
@@ -161,18 +161,18 @@ a {
 .textmodal {
   text-align: justify;
   font-weight: bold;
-  font-family: "Montserrat";
+  font-family: "Poppins";
   font-size: 25px;
 }
 .textmodal_deskripsi {
-  font-family: "Montserrat";
+  font-family: "Poppins";
   font-size: small;
 
   text-align: justify;
   margin-bottom: 2%;
 }
 .textmodal_harga {
-  font-family: "Montserrat";
+  font-family: "Poppins";
   font-weight: bolder;
   color: red;
   text-align: center;
@@ -189,7 +189,7 @@ a {
 
   padding: 1px 25%;
   font-weight: bold;
-  font-family: "Montserrat";
+  font-family: "Poppins";
   font-size: 15px;
 
   border-radius: 8px;
