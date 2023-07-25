@@ -90,6 +90,15 @@ function Navbarcomp(props) {
     }
   };
 
+  const [banner, setBanner] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/getAllBanner`)
+      .then((res) => setBanner(res.data.data))
+      .catch((err) => console.log(err));
+  }, [banner]);
+
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -383,42 +392,19 @@ function Navbarcomp(props) {
       <div className="bestmenu">
         {" "}
         <Carousel>
-          <Carousel.Item>
-            <img
-              className="Gambarslider"
-              src={`${menus[1]?.imageUrl}`}
-              alt="First slide"
-            />
-            <Carousel.Caption>
-              <h3 className="caption">{`${menus[1]?.namaMenu}`}</h3>
-              <p className="caption2">{`${menus[1]?.hargaMenu}`}.</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-
-          <Carousel.Item>
-            <img
-              className="Gambarslider"
-              src={Gambarpizza}
-              alt="Second slide"
-            />
-
-            <Carousel.Caption>
-              <h3 className="caption">Pizza Domino</h3>
-              <p className="caption2">90K</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="Gambarslider"
-              src={Gambarwaffels}
-              alt="Third slide"
-            />
-
-            <Carousel.Caption>
-              <h3 className="caption">Waffles Murah</h3>
-              <p className="caption2">40k</p>
-            </Carousel.Caption>
-          </Carousel.Item>
+          {banner.map((isi, index) => (
+            <Carousel.Item>
+              <img
+                className="Gambarslider"
+                src={banner[index]?.imageUrl}
+                alt="First slide"
+              />
+              <Carousel.Caption>
+                <h3 className="caption">{banner[index]?.namaBanner}</h3>
+                {/* <p className="caption2">{`${menus[1]?.hargaMenu}`}.</p> */}
+              </Carousel.Caption>
+            </Carousel.Item>
+          ))}
         </Carousel>
       </div>
       <br></br>
