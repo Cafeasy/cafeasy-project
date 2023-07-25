@@ -83,8 +83,53 @@ const Riwayatpesanancomp = (props) => {
       {riwayat.data?.map((d, index) => {
         return (
           <>
-            <div class="card mx-4" style={{ marginBottom: "5px" }}>
-              <div class="col-md-4">
+            {/* <div class="card-mx-4  text-black text-center p-3">
+              <blockquote class="blockquote mb-0">
+                <h2
+                  class="card-title"
+                  style={{ textAlign: "left", fontWeight: "bold" }}
+                >
+                  {" "}
+                  Meja no : {d.noMeja}
+                </h2>
+
+                {/* <p class="card-text">
+                    <small class="text-muted">{d.tanggal}</small>
+                  </p>
+                  <h6 class="card-title">Pembayaran : {d.statusBayar}</h6> */}
+            {/* <p
+                  style={{
+                    textalign: "left",
+                    width: "49%",
+                    display: "inline-block",
+                  }}
+                >
+                  {d.tanggal}
+                </p>
+                <p
+                  style={{
+                    textalign: "right",
+                    width: "50%",
+                    display: "inline-block",
+                  }}
+                >
+                  Status : {d.statusBayar}
+                </p>
+                <Modaltransaksi
+                  value={d}
+                  handleShow={handleShow}
+                  show={show}
+                  handleClose={handleClose}
+                  riwayat={riwayat}
+                  idtransaksi={transaksi?.idTransaksi}
+                  handleClick={handleClick}
+                  isitransaksi={isitransaksi}
+                  metode={metode}
+                ></Modaltransaksi>
+              </blockquote>
+            </div> */}{" "}
+            <div class="card mx-3" style={{ marginBottom: "5px" }}>
+              <div class="col-md-5 ">
                 <div class="card-body">
                   <h2
                     class="card-title"
