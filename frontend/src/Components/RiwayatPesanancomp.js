@@ -46,6 +46,15 @@ const Riwayatpesanancomp = (props) => {
         setTransaksi(response.data);
       });
   }, [transaksi]);
+
+  const [metode, setMetode] = useState();
+  React.useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/getTransactionStatus/` + message)
+      .then((response) => {
+        setMetode(response.data);
+      });
+  }, [metode]);
   // console.log(transaksi?.data[0]?.dataPesanan);
   let isitransaksi = transaksi?.data[0];
 
@@ -66,7 +75,7 @@ const Riwayatpesanancomp = (props) => {
             className="button-konfir-pesanan"
             disabled="true"
           >
-            RIWAYAT PESANAN
+            RIWAYAT TRANSAKSI
           </button>
         </div>
       </div>
@@ -74,34 +83,39 @@ const Riwayatpesanancomp = (props) => {
       {riwayat.data?.map((d, index) => {
         return (
           <>
-            <div
-              class="card mx-4"
-              style={{ textAlign: "left", marginBottom: "5px" }}
-            >
+            <div class="card mx-4" style={{ marginBottom: "5px" }}>
               <div class="col-md-4">
                 <div class="card-body">
-                  <h2 class="card-title">Meja no : {d.noMeja}</h2>
+                  <h2
+                    class="card-title"
+                    style={{ textAlign: "left", fontWeight: "bold" }}
+                  >
+                    {" "}
+                    Meja no : {d.noMeja}
+                  </h2>
 
-                  <p class="card-text">
+                  {/* <p class="card-text">
                     <small class="text-muted">{d.tanggal}</small>
                   </p>
-                  <h6 class="card-title">Pembayaran : {d.statusBayar}</h6>
-                  {/* {d.dataPesanan.map((d, index) => {
-                    return (
-                      <>
-                        <div>halo</div>
-                      </>
-                    );
-                  })} */}
-
-                  {/* <button
-                    onClick={() => {
-                      handleClick(d.idTransaksi);
+                  <h6 class="card-title">Pembayaran : {d.statusBayar}</h6> */}
+                  <p
+                    style={{
+                      textalign: "left",
+                      width: "49%",
+                      display: "inline-block",
                     }}
                   >
-                    Update
-                  </button> */}
-
+                    {d.tanggal}
+                  </p>
+                  <p
+                    style={{
+                      textalign: "right",
+                      width: "50%",
+                      display: "inline-block",
+                    }}
+                  >
+                    Status : {d.statusBayar}
+                  </p>
                   <Modaltransaksi
                     value={d}
                     handleShow={handleShow}
@@ -111,6 +125,7 @@ const Riwayatpesanancomp = (props) => {
                     idtransaksi={transaksi?.idTransaksi}
                     handleClick={handleClick}
                     isitransaksi={isitransaksi}
+                    metode={metode}
                   ></Modaltransaksi>
                 </div>
               </div>
@@ -137,6 +152,7 @@ export const Modaltransaksi = ({
   idtransaksi,
   handleClick,
   isitransaksi,
+  metode,
 }) => {
   return (
     <>
@@ -155,31 +171,15 @@ export const Modaltransaksi = ({
         show={show}
         onHide={handleClose}
         centered
-        style={{ background: "white", outline: "none" }}
+        style={{ background: "white" }}
       >
         <Modal.Header closeButton>
           <Modal.Title class="modal-title w-100 text-center">
-            <h3>Riwayat Transaksi</h3>
+            <h3>Detail Transaksi</h3>
           </Modal.Title>
         </Modal.Header>
         <div className="">
           <table class="table table-borderless">
-            {/* {riwayat.data?.map((d, index) => {
-              return (
-                <>
-                  <div>ha</div>
-                  {d.dataPesanan.map((d, index) => {
-                    console.log(d);
-                    return (
-                      <>
-                        <div>halo</div>
-                      </>
-                    );
-                  })}
-                </>
-              );
-            })} */}
-
             {isitransaksi?.dataPesanan.map((d, index) => {
               return (
                 <>
@@ -196,27 +196,58 @@ export const Modaltransaksi = ({
               );
             })}
           </table>
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <th scope="row"></th>
+                <td>Meja</td>
+                <td></td>
+                <td style={{ textAlign: "right" }}> {isitransaksi?.noMeja}</td>
+              </tr>
+              <tr>
+                <th scope="row"></th>
+                <td>Waktu</td>
+                <td></td>
+                <td style={{ textAlign: "right" }}> {isitransaksi?.tanggal}</td>
+              </tr>
+              <tr>
+                <th scope="row"></th>
+                <td>Status</td>
+                <td></td>
+                <td style={{ textAlign: "right" }}>
+                  {" "}
+                  {isitransaksi?.statusBayar}
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"></th>
+                <td>Pembayaran</td>
+                <td></td>
+                <td style={{ textAlign: "right" }}>
+                  {" "}
+                  {metode?.data?.payment_type}
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"></th>
+                <td>Nama Pemesan</td>
+                <td></td>
+                <td style={{ textAlign: "right" }}>
+                  {" "}
+                  {isitransaksi?.namaPelanggan}
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         <br></br>
         <Modal.Footer>
-          <div class="modal-footer border-0"></div>
           <div class="modal-footer border-0">
             <h5 style={{ fontWeight: "bold" }}>
               Total. {isitransaksi?.totalHarga}
             </h5>
           </div>
-          {/* <div>
-            <a>Transfer Ke bank BCA</a>
-            <p>PT. Cafeasy</p>
-            <p>98123819238912391</p>
-          </div> */}
-          {/* <Button variant="secondary" onClick={handleClose}>
-        Close
-      </Button>
-      <Button variant="primary" onClick={handleClose}>
-        Save Changes
-      </Button> */}
         </Modal.Footer>
       </Modal>
     </>
