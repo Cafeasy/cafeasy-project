@@ -108,6 +108,18 @@ function Navbarcomp(props) {
       .catch((err) => console.log(err));
   }, [data]);
 
+  const minItem = (value) => {
+    axios
+      .put(
+        `${process.env.REACT_APP_API_URL}/cartPelangganMinus/` +
+          urlParams +
+          "/" +
+          value
+      )
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
   const addItem = (value) => {
     axios
       .put(
@@ -132,18 +144,6 @@ function Navbarcomp(props) {
           "/" +
           value.idMenu,
         post
-      )
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  };
-
-  const minItem = (value) => {
-    axios
-      .put(
-        `${process.env.REACT_APP_API_URL}/cartPelangganMinus/` +
-          urlParams +
-          "/" +
-          value
       )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
@@ -738,7 +738,6 @@ function Navbarcomp(props) {
                         color="black"
                         class="mx-4"
                         onClick={() => {
-                          removeMe(d.namaMenu);
                           notifDelete(d.namaMenu);
                           minItem(d.idMenu);
                         }}
@@ -948,7 +947,7 @@ export const ModalCustom = ({
         onClick={handleClick}
         style={{ whiteSpace: "nowrap" }}
       >
-        Tersdia
+        Tersedia
       </button>
       <div class="text text-end text-white">halo</div>
       {show && (

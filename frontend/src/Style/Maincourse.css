@@ -27,7 +27,7 @@
   text-align: center;
   background: #1f2937;
   display: inline-block;
-  text-align: left;
+  height: 20px;
   width: 68%;
   font-weight: medium;
   font-family: "Poppins";
@@ -36,6 +36,7 @@
   color: #ffffff;
 }
 .oval2 {
+  height: 20px;
   background: #007bff;
   position: absolute;
   right: 0;
