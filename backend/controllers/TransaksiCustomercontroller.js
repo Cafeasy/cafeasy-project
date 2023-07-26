@@ -10,17 +10,10 @@ exports.getTransaksiPelanggan = async (req, res, next) => {
 
     TransaksiPelanggan.find({ idPelanggan: `${idPelanggan}` })
         .then(result => {
-            if (result) {
-                res.status(200).json({
-                    message: 'Data transaksi berhasil dipanggil',
-                    data: result
-                })
-            } else if (!result) {
-                res.status(404).json({
-                    message: 'Data transaksi gagal dipanggil',
-                    data: result
-                })
-            }
+            res.status(200).json({
+                message: 'Data transaksi berhasil dipanggil',
+                data: result
+            })
         })
         .catch(err => {
             next(err);
@@ -33,17 +26,10 @@ exports.getDetailTransaksiPelanggan = async (req, res, next) => {
 
     TransaksiPelanggan.find({ idPelanggan: `${idPelanggan}`, idTransaksi: `${idTransaksi}` })
         .then(result => {
-            if (result) {
-                res.status(200).json({
-                    message: 'Data transaksi pelanggan berhasil dipanggil',
-                    data: result
-                })
-            } else if (Qresult) {
-                res.status(404).json({
-                    message: 'Data transaksi pelanggan gagal dipanggil',
-                    data: result
-                })
-            }
+            res.status(200).json({
+                message: 'Data transaksi pelanggan berhasil dipanggil',
+                data: result
+            })
         })
         .catch(err => {
             next(err);

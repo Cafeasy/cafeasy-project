@@ -16,21 +16,21 @@ exports.getListCart = async (req, res, next) => {
 
   KeranjangPelanggan.find({ idPelanggan: `${idPelanggan}` })
     .then((result) => {
-      var totalHarga = 0;
-      for (var i = 0; i < len; i++) {
-        totalHarga =
-          totalHarga +
-          objek.dataPesanan[i].hargaMenu * objek.dataPesanan[i].qty;
-      }
+        var totalHarga = 0;
+        for (var i = 0; i < len; i++) {
+          totalHarga =
+            totalHarga +
+            objek.dataPesanan[i].hargaMenu * objek.dataPesanan[i].qty;
+        }
 
-      return res.status(200).json({
-        message: "Data keranjang pelanggan berhasil dipanggil",
-        data: { result, totalHarga },
-      });
+        return res.status(200).json({
+          message: "Data keranjang pelanggan berhasil dipanggil",
+          data: { result, totalHarga },
+        });
     })
-    .catch((err) => {
+    .catch(err => {
       next(err);
-    });
+    })
 };
 
 exports.postCart = async (req, res, next) => {
@@ -91,10 +91,10 @@ exports.postCart = async (req, res, next) => {
           { new: true }
         )
           .then((result) => {
-            res.status(200).json({
-              message: "Item berhasil ditambah",
-              data: result,
-            });
+              res.status(200).json({
+                message: "Item berhasil ditambah",
+                data: result,
+              });
           })
           .catch((err) => {
             next(err);
@@ -172,17 +172,10 @@ exports.deleteCart = async (req, res, next) => {
   if (len < 1) {
     KeranjangPelanggan.deleteOne({ idPelanggan: `${idPelanggan}` })
       .then((result) => {
-        if (result) {
           res.status(200).json({
             message: "data keranjang telah dihapus",
             data: result,
           });
-        } else if (!result) {
-          res.status(404).json({
-            message: "data keranjang gagal dihapus",
-            data: result,
-          });
-        }
       })
       .catch((err) => {
         next(err);
@@ -194,17 +187,10 @@ exports.deleteCart = async (req, res, next) => {
       { new: true }
     )
       .then((result) => {
-        if (result) {
           res.status(200).json({
             message: "Item berhasil dihapus",
             data: result,
           });
-        } else if (!result) {
-          res.status(404).json({
-            message: "Item gagal dihapus",
-            data: result,
-          });
-        }
       })
       .catch((err) => {
         next(err);
@@ -250,17 +236,10 @@ exports.updateCartMinus = async (req, res, next) => {
   if (len < 1) {
     KeranjangPelanggan.deleteOne({ idPelanggan: `${idPelanggan}` })
       .then((result) => {
-        if (result) {
           res.status(200).json({
             message: "data keranjang telah dihapus",
             data: result,
           });
-        } else if (!result) {
-          res.status(404).json({
-            message: "data keranjang gagal dihapus",
-            data: result,
-          });
-        }
       })
       .catch((err) => {
         next(err);
@@ -273,17 +252,10 @@ exports.updateCartMinus = async (req, res, next) => {
         { new: true }
       )
         .then((result) => {
-          if (result) {
             res.status(200).json({
               message: "Item dihapus dari keranjang",
               data: result,
             });
-          } else if (!result) {
-            res.status(404).json({
-              message: "Item gagal dihapus dari keranjang",
-              data: result,
-            });
-          }
         })
         .catch((err) => {
           next(err);
@@ -295,17 +267,10 @@ exports.updateCartMinus = async (req, res, next) => {
         { new: true }
       )
         .then((result) => {
-          if (result) {
             res.status(200).json({
               message: "Item berhasil dikurangi 1",
               data: result,
             });
-          } else if (!result) {
-            res.status(200).json({
-              message: "Item gagal dikurangi 1",
-              data: result,
-            });
-          }
         })
         .catch((err) => {
           next(err);
@@ -324,17 +289,10 @@ exports.updateCartPlus = async (req, res, next) => {
     { new: true }
   )
     .then((result) => {
-      if (result) {
         res.status(200).json({
           message: "Item berhasil ditambah 1",
           data: result,
         });
-      } else if (!result) {
-        res.status(404).json({
-          message: "Item gagal ditambah 1",
-          data: result,
-        });
-      }
     })
     .catch((err) => {
       next(err);

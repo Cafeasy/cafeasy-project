@@ -33,6 +33,17 @@ app.use(
     })
 );
 
+app.use((error, req, res, next) => {
+    const status = error.errorStatus || 500;
+    const message = error.message;
+    const data = error.data;
+    res.status(status).json({
+        success:false,
+        message: message,
+        data: data
+    })
+})
+
 app.listen(port, () => console.log(`Listenting on port ${port}..., server up n running`));
 // app.listen(4000);
 app.use("/", router);
