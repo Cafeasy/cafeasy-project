@@ -242,7 +242,7 @@ exports.updateCartMinus = async (req, res, next) => {
   let checkCartQty = await KeranjangPelanggan.findOne({
     idPelanggan: `${idPelanggan}`,
     "dataPesanan.idMenu": `${idMenu}`,
-    "dataPesanan.$.qty": { $lte: 1 },
+    "dataPesanan.qty": { $lte: 1 },
   });
   let obyekCart = checkCartByParams.toObject();
   let len = obyekCart.dataPesanan.length;
