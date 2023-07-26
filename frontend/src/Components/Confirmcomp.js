@@ -28,9 +28,9 @@ const Confirmcomp = (props) => {
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/updateCartCatatanPelanggan/` +
-        urlParams +
-        "/" +
-        value.idMenu,
+          urlParams +
+          "/" +
+          value.idMenu,
         post
       )
       .then((res) => console.log(res))
@@ -41,9 +41,9 @@ const Confirmcomp = (props) => {
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/cartPelangganMinus/` +
-        urlParams +
-        "/" +
-        value
+          urlParams +
+          "/" +
+          value
       )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
@@ -52,9 +52,9 @@ const Confirmcomp = (props) => {
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/cartPelangganPlus/` +
-        urlParams +
-        "/" +
-        value
+          urlParams +
+          "/" +
+          value
       )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
@@ -119,7 +119,8 @@ const Confirmcomp = (props) => {
           onSuccess: () => {
             axios
               .put(
-                `${process.env.REACT_APP_API_URL
+                `${
+                  process.env.REACT_APP_API_URL
                 }/updateStatusBayar/${newIdOrder.toString()}`
               )
               .then(() =>
@@ -131,7 +132,8 @@ const Confirmcomp = (props) => {
           onPending: () => {
             axios
               .put(
-                `${process.env.REACT_APP_API_URL
+                `${
+                  process.env.REACT_APP_API_URL
                 }/updateStatusBayar/${newIdOrder.toString()}`
               )
               .then(() =>
@@ -143,7 +145,8 @@ const Confirmcomp = (props) => {
           onError: () => {
             axios
               .put(
-                `${process.env.REACT_APP_API_URL
+                `${
+                  process.env.REACT_APP_API_URL
                 }/updateStatusBayar/${newIdOrder.toString()}`
               )
               .then(() =>
@@ -155,7 +158,8 @@ const Confirmcomp = (props) => {
           onClose: () => {
             axios
               .put(
-                `${process.env.REACT_APP_API_URL
+                `${
+                  process.env.REACT_APP_API_URL
                 }/updateStatusBayar/${newIdOrder.toString()}`
               )
               .then(() =>
@@ -173,19 +177,17 @@ const Confirmcomp = (props) => {
     let idOrder;
 
     {
-      data?.result.map(
-        (newData) => (
-          idOrder = newData.idKeranjang
-        )
-      );
-    }     console.log(idOrder);
+      data?.result.map((newData) => (idOrder = newData.idKeranjang));
+    }
+    console.log(idOrder);
     axios
       .post(`${process.env.REACT_APP_API_URL}/postTransaksi/${idOrder}`)
       .then(() => {
         const newIdOrder = idOrder;
         axios
           .put(
-            `${process.env.REACT_APP_API_URL
+            `${
+              process.env.REACT_APP_API_URL
             }/updateStatusBayar/${newIdOrder.toString()}`
           )
           .then(() =>
@@ -193,8 +195,7 @@ const Confirmcomp = (props) => {
               state: { idOrder: newIdOrder },
             })
           );
-      }
-      )
+      })
 
       .catch((err) => console.log("error : ", err));
   };
@@ -382,7 +383,7 @@ export const ModalCustomKeranjang = ({
           centered
         >
           <br></br>
-          <CgArrowLeftO class="mx-4" size={35} onClick={handleClick} />
+
           <Modal.Body>
             <img
               src={menuList.imageUrl}
@@ -417,7 +418,6 @@ export const ModalCustomKeranjang = ({
                         color="black"
                         class="mx-4"
                         onClick={() => {
-                          notifDelete(menuList.namaMenu);
                           minItem(menuList.idMenu);
                         }}
                       />
@@ -432,7 +432,6 @@ export const ModalCustomKeranjang = ({
                         color="#1f2937"
                         class="mx-4"
                         onClick={() => {
-                          notifsukses(menuList);
                           addItem(menuList.idMenu);
                         }}
                       />

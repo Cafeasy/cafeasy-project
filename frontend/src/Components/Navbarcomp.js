@@ -84,6 +84,7 @@ function Navbarcomp(props) {
           inidata.idMenu,
         post
       );
+
       console.log(res.data);
     } catch (e) {
       alert(e);
@@ -258,6 +259,7 @@ function Navbarcomp(props) {
   let [catatan, setCatatan] = useState("");
 
   let [count, setCount] = useState(1);
+
   function incrementCount() {
     if (count < 50) {
       setCount(count + 1);
@@ -268,7 +270,6 @@ function Navbarcomp(props) {
       setCount(count - 1);
     }
   }
-  const removeMe = (index) => {};
 
   const [shows, setShows] = useState(true);
 
@@ -707,7 +708,6 @@ function Navbarcomp(props) {
                       size={18}
                       color="black"
                       onClick={() => {
-                        removeMe(d.namaMenu);
                         notifDelete(d.namaMenu);
                         deleteItem(d.idMenu);
                       }}
@@ -758,7 +758,6 @@ function Navbarcomp(props) {
                         size={18}
                         class="mx-5"
                         onClick={() => {
-                          removeMe(d.namaMenu);
                           notifsukses(d);
                           addItem(d.idMenu);
                         }}
