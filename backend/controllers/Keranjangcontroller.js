@@ -260,7 +260,7 @@ exports.updateCartMinus = async (req, res, next) => {
         .catch((err) => {
           next(err);
         });
-    } else {
+    } else if(!checkCartQty){
       KeranjangPelanggan.findOneAndUpdate(
         { idPelanggan: `${idPelanggan}`, "dataPesanan.idMenu": `${idMenu}` },
         { $inc: { "dataPesanan.$.qty": -1 } },
