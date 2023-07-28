@@ -244,15 +244,13 @@ exports.updateCartMinus = async (req, res, next) => {
       .catch((err) => {
         next(err);
       });
-  } else {
-    if (checkCartQty) {
+  } else if (checkCartQty) {
       // console.log(checkCartQty);
       KeranjangPelanggan.findOneAndUpdate(
         { idPelanggan: `${idPelanggan}`, "dataPesanan.idMenu": `${idMenu}` },
         { $pull: { dataPesanan: { idMenu: `${idMenu}` } } },
         { new: true }
-      )
-        .then((result) => {
+      ).then((result) => {
             res.status(200).json({
               message: "Item dihapus dari keranjang",
               data: result,
@@ -260,8 +258,8 @@ exports.updateCartMinus = async (req, res, next) => {
         })
         .catch((err) => {
           next(err);
-        });
-    } else if(!checkCartQty){
+      });
+  } else if (!checkCartQty) {
       // console.log(checkCartQty);
       KeranjangPelanggan.findOneAndUpdate(
         { idPelanggan: `${idPelanggan}`, "dataPesanan.idMenu": `${idMenu}` },
@@ -277,7 +275,6 @@ exports.updateCartMinus = async (req, res, next) => {
         .catch((err) => {
           next(err);
         });
-    }
   }
 };
 
