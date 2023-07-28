@@ -228,7 +228,7 @@ exports.updateCartMinus = async (req, res, next) => {
   let checkCartQty = await KeranjangPelanggan.findOne({
     idPelanggan: `${idPelanggan}`,
     "dataPesanan.idMenu": `${idMenu}`,
-    "dataPesanan.qty": { $lte: 1 },
+    "dataPesanan.qty": 1,
   });
   let obyekCart = checkCartByParams.toObject();
   let len = obyekCart.dataPesanan.length;
@@ -246,6 +246,7 @@ exports.updateCartMinus = async (req, res, next) => {
       });
   } else {
     if (checkCartQty) {
+      // console.log(checkCartQty);
       KeranjangPelanggan.findOneAndUpdate(
         { idPelanggan: `${idPelanggan}`, "dataPesanan.idMenu": `${idMenu}` },
         { $pull: { dataPesanan: { idMenu: `${idMenu}` } } },
@@ -261,6 +262,7 @@ exports.updateCartMinus = async (req, res, next) => {
           next(err);
         });
     } else if(!checkCartQty){
+      // console.log(checkCartQty);
       KeranjangPelanggan.findOneAndUpdate(
         { idPelanggan: `${idPelanggan}`, "dataPesanan.idMenu": `${idMenu}` },
         { $inc: { "dataPesanan.$.qty": -1 } },
