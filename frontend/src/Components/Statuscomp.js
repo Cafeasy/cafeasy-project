@@ -16,6 +16,7 @@ const Statuscomp = (props) => {
   useEffect(() => {
     getDataTransaksi();
   }, []);
+
   const copyToClipBoard = async (copyMe) => {
     try {
       await navigator.clipboard.writeText(copyMe);
@@ -183,7 +184,7 @@ const Statuscomp = (props) => {
               onClick={() => {
                 notifsukses();
                 copyToClipBoard(
-                  "Pembayaran berhasil dilakukan! Buka tautan ini untuk melihat nota transaksi yang sudah dibayar : " +
+                  "Pembayaran berhasil dilakukan! Buka tautan ini untuk melihat nota transaksi yang sudah dibayar : http://cafeasy.shop/Statuspage/" +
                     urlParams
                 );
               }}
