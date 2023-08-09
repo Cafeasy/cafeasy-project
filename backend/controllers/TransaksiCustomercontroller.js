@@ -54,7 +54,7 @@ exports.postTransaksiPelanggan = async (req, res, next) => {
 
         //date gmt
         var ndate = new Date().toLocaleString("id-ID", {
-            timeZone: 'Asia/Jakarta'
+            timeZone: 'Asia/Jakarta', hour12: false
         })
 
         //var untuk menampung total harga
