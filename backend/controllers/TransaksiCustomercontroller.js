@@ -53,7 +53,7 @@ exports.postTransaksiPelanggan = async (req, res, next) => {
         var noMejaPelanggan = obyekKeranjang.noMeja;
 
         //date gmt
-        var ndate = new Date().toLocaleString('en-US', {
+        var ndate = new Date().toLocaleString("id-ID", {
             timeZone: 'Asia/Jakarta'
         })
 
