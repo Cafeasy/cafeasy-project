@@ -103,8 +103,8 @@ exports.updateStatusBayar = async (req, res, next) => {
     const statusBayar = await Midtrans.getTransactionStatuss(idTransaksiCheck);
 
     //date gmt
-    var ndate = new Date().toLocaleString('en-US', {
-        timeZone: 'Asia/Jakarta'
+    var ndate = new Date().toLocaleString('id-ID', {
+        timeZone: 'Asia/Jakarta', hour12: false
     })
 
     let newStatusBayar = statusBayar.transaction_status;
