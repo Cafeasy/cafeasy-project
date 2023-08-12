@@ -5,7 +5,6 @@ import { CgArrowLeftO } from "react-icons/cg";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import "https://app.sandbox.midtrans.com/snap/snap.js";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
@@ -17,9 +16,7 @@ import { AiFillDelete } from "react-icons/ai";
 const Confirmcomp = (props) => {
   const [show, setShow] = useState(false);
   const [catatankrj, setCatatankrj] = useState("");
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  let [count, setCount] = useState(0);
+  const [snap, setSnap] = useState(null);
 
   const updateCatatan = (value) => {
     const post = {
@@ -28,36 +25,36 @@ const Confirmcomp = (props) => {
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/updateCartCatatanPelanggan/` +
-          urlParams +
-          "/" +
-          value.idMenu,
+        urlParams +
+        "/" +
+        value.idMenu,
         post
       )
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then()
+      .catch((err) => window.alert(err));
   };
 
   const minItem = (value) => {
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/cartPelangganMinus/` +
-          urlParams +
-          "/" +
-          value
+        urlParams +
+        "/" +
+        value
       )
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then()
+      .catch((err) => window.alert(err));
   };
   const addItem = (value) => {
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/cartPelangganPlus/` +
-          urlParams +
-          "/" +
-          value
+        urlParams +
+        "/" +
+        value
       )
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then()
+      .catch((err) => window.alert(err));
   };
   const handleClick = () => {
     setShow(!show);
@@ -79,7 +76,7 @@ const Confirmcomp = (props) => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/cartPelanggan/` + urlParams)
       .then((res) => setData(res.data.data))
-      .catch((err) => console.log("message :", err));
+      .catch((err) => window.alert(err));
   }, [data]);
 
   const payment = async (e) => {
@@ -105,22 +102,32 @@ const Confirmcomp = (props) => {
         )
       );
     }
-
     e.preventDefault();
+    const snapScript = document.createElement('script');
+    snapScript.src = process.env.MIDTRANS_SNAP;
+    snapScript.type = 'text/javascript';
+    snapScript.onload = () => {
+      if ('snap' in window) {
+        const { snap } = window;
+        setSnap(snap);
+      }
+    }
+    snapScript.dataset.clientKey = process.env.MIDTRANS_CLIENT_KEY;
+    document.head.appendChild(snapScript);
+
     axios
       .post(`${process.env.REACT_APP_API_URL}/midtransPayment/`, parameter)
       .then(async (res) => {
         const responseAPI = res.data.data;
         const newIdOrder = idOrder;
-        await axios.post(
-          `${process.env.REACT_APP_API_URL}/postTransaksi/${idOrder}`
-        );
         window.snap.pay(responseAPI, {
-          onSuccess: () => {
-            axios
+          onSuccess: async () => {
+            await axios.post(
+              `${process.env.REACT_APP_API_URL}/postTransaksi/${idOrder}`
+            );
+            await axios
               .put(
-                `${
-                  process.env.REACT_APP_API_URL
+                `${process.env.REACT_APP_API_URL
                 }/updateStatusBayar/${newIdOrder.toString()}`
               )
               .then(() =>
@@ -129,11 +136,13 @@ const Confirmcomp = (props) => {
                 })
               );
           },
-          onPending: () => {
-            axios
+          onPending: async () => {
+            await axios.post(
+              `${process.env.REACT_APP_API_URL}/postTransaksi/${idOrder}`
+            );
+            await axios
               .put(
-                `${
-                  process.env.REACT_APP_API_URL
+                `${process.env.REACT_APP_API_URL
                 }/updateStatusBayar/${newIdOrder.toString()}`
               )
               .then(() =>
@@ -143,34 +152,19 @@ const Confirmcomp = (props) => {
               );
           },
           onError: () => {
-            axios
-              .put(
-                `${
-                  process.env.REACT_APP_API_URL
-                }/updateStatusBayar/${newIdOrder.toString()}`
-              )
-              .then(() =>
-                paymentSukses("/Statuspage/" + urlParams, {
-                  state: { idOrder: newIdOrder },
-                })
-              );
+            window.alert("Gagal Melakukan Transaksi, Silahkan Ulangi");
+            paymentSukses("/Berandapage/" + urlParams);
           },
           onClose: () => {
-            axios
-              .put(
-                `${
-                  process.env.REACT_APP_API_URL
-                }/updateStatusBayar/${newIdOrder.toString()}`
-              )
-              .then(() =>
-                paymentSukses("/Statuspage/" + urlParams, {
-                  state: { idOrder: newIdOrder },
-                })
-              );
+            if (window.confirm("Ingin Membatalkan Pesanan?")) {
+              paymentSukses("/Berandapage/" + urlParams);
+            } else {
+              paymentSukses("/Berandapage/" + urlParams);
+            }
           },
         });
       })
-      .catch((err) => console.log("error : ", err));
+      .catch((err) => window.alert(err));
   };
 
   const paymentkasir = async (e) => {
@@ -179,15 +173,14 @@ const Confirmcomp = (props) => {
     {
       data?.result.map((newData) => (idOrder = newData.idKeranjang));
     }
-    console.log(idOrder);
+
     axios
       .post(`${process.env.REACT_APP_API_URL}/postTransaksi/${idOrder}`)
       .then(() => {
         const newIdOrder = idOrder;
         axios
           .put(
-            `${
-              process.env.REACT_APP_API_URL
+            `${process.env.REACT_APP_API_URL
             }/updateStatusBayar/${newIdOrder.toString()}`
           )
           .then(() =>
@@ -197,7 +190,7 @@ const Confirmcomp = (props) => {
           );
       })
 
-      .catch((err) => console.log("error : ", err));
+      .catch((err) => window.alert("Gagal Melakukan Pembayaran"));
   };
   const menus = props.menu;
   const location = useLocation();

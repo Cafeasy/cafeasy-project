@@ -12,12 +12,21 @@ const BannerController = require("../controllers/Bannercontroller");
 const app = express();
 const Customer = require("../model/Customermodel");
 const Midtrans = require('../controllers/MidtransController');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 
-router.get("/", (req, res) => {
-    let navPage = '<a href="/ListMenu" >List Menu Service</a><br> <a href="/allCustomer" >Customer</a>';
-    res.send(navPage);
+router.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
 })
+router.get("/", createProxyMiddleware({
+    target: process.env.CLIENT_URL,
+    changeOrigin: true,
+    onProxyRes: function (proxyRes, req, res) {
+        proxyRes.headers['Access-Control-Allow-Origin'] = '*';
+    }
+}))
 
 router.get("/auth/login/success", (req, res) => {
     if (req.user) {
@@ -33,7 +42,7 @@ router.get("/auth/login/success", (req, res) => {
     }
 });
 
-router.get("/login/success", async(req, res)  => {
+router.get("/login/success", async (req, res) => {
     if (req.user) {
         const data = req.user;
         const user = data
@@ -43,10 +52,10 @@ router.get("/login/success", async(req, res)  => {
             name: user.name.givenName + " " + user.name.familyName
         }
 
-        let hasil = await  Customer.findOne({ id: `gusr${user.id}` })
+        let hasil = await Customer.findOne({ id: `gusr${user.id}` })
         if (hasil) {
             let oldUser = hasil.toObject();
-            res.redirect(process.env.CLIENT_URL + "/Berandapage/"  + oldUser.id)
+            res.redirect(process.env.CLIENT_URL + "/Berandapage/" + oldUser.id)
         } else {
             Customer.create(inputUser)
             res.redirect(process.env.CLIENT_URL + "/Berandapage/" + "gusr" + user.id)
@@ -116,6 +125,7 @@ router.get('/getAllTransaksi/:idPelanggan', TransaksiController.getTransaksiPela
 router.get('/getDetailTransaksi/:idPelanggan/:idTransaksi', TransaksiController.getDetailTransaksiPelanggan);
 router.post('/postTransaksi/:idKeranjang', TransaksiController.postTransaksiPelanggan);
 router.put('/updateStatusBayar/:idTransaksi', TransaksiController.updateStatusBayar);
+router.delete('/deleteTransaksi/:idKeranjang', TransaksiController.deleteTransaksiPelanggan);
 //routes payment Midtrans
 router.post('/midtransPayment/', Midtrans.buatTransaction);
 router.get('/getTransactionStatus/:idOrder', Midtrans.getTransactionStatus);

@@ -37,7 +37,7 @@ import { useParams } from "react-router-dom";
 function Navbarcomp(props) {
   const params = useParams();
   const urlParams = params.idUser;
-
+  const navigatePage = useNavigate();
   const user = props.user;
   const [menus, setMenus] = useState([]);
   var noMeja = localStorage.getItem("noMeja");
@@ -61,12 +61,19 @@ function Navbarcomp(props) {
         // console.log("error: data tidak terambil - ", err);
       });
   });
+  const pembayaranPage = () => {
+    if (data.totalHarga == 0) {
+      window.alert("Keranjang Pesanan Anda Masih Kosong")
+    } else {
+      navigatePage("/KonfirmasiPesanan/" + urlParams, {
+        state: { url: urlParams }
+      })
+    }
 
+  }
   const numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };
-  // const datadalam = notifsukses.menu.namaMenu;
-  // console.log(datadalam);
   const [inidata, setInidata] = useState();
 
   const onSubmit = async (e) => {
@@ -79,9 +86,9 @@ function Navbarcomp(props) {
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_API_URL}/postCart/` +
-          urlParams +
-          "/" +
-          inidata.idMenu,
+        urlParams +
+        "/" +
+        inidata.idMenu,
         post
       );
 
@@ -113,24 +120,24 @@ function Navbarcomp(props) {
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/cartPelangganMinus/` +
-          urlParams +
-          "/" +
-          value
+        urlParams +
+        "/" +
+        value
       )
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+     .then()
+      .catch((err) => window.alert(err));
   };
 
   const addItem = (value) => {
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/cartPelangganPlus/` +
-          urlParams +
-          "/" +
-          value
+        urlParams +
+        "/" +
+        value
       )
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then()
+      .catch((err) => window.alert(err));
   };
   let [catatankrj, setCatatankrj] = useState("");
 
@@ -141,13 +148,13 @@ function Navbarcomp(props) {
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/updateCartCatatanPelanggan/` +
-          urlParams +
-          "/" +
-          value.idMenu,
+        urlParams +
+        "/" +
+        value.idMenu,
         post
       )
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then()
+      .catch((err) => window.alert(err));
   };
 
   const deleteItem = (value) => {
@@ -782,14 +789,14 @@ function Navbarcomp(props) {
           </p>
         </div>
 
-        <Link to={`/KonfirmasiPesanan/` + urlParams} state={{ url: urlParams }}>
-          <button
-            className="button-konfir"
-            disabled={arr[0]?.dataPesanan.length === 0}
-          >
-            Konfirmasi Pemesanan
-          </button>
-        </Link>
+
+        <button
+          className="button-konfir"
+          onClick={pembayaranPage}
+        >
+          Konfirmasi Pemesanan
+        </button>
+
       </div>
     </>
   );

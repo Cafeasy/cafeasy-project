@@ -63,15 +63,16 @@ const Statuscomp = (props) => {
       )
       .then((res) => {
         const response = res.data.data;
-        console.log(response[0]?.dataPesanan[0]?.idMenu);
         setData(response);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => window.alert("Koneksi Bermasalah"));
   };
 
   let idtransaksi = data[0]?.idTransaksi;
   const [message, setMessage] = useState();
   const [metode, setMetode] = useState();
+  let messageTransaksi;
+
   React.useEffect(() => {
     axios
       .get(
@@ -80,9 +81,9 @@ const Statuscomp = (props) => {
       .then((response) => {
         setMetode(response.data);
       });
+
   }, [metode]);
-  console.log(metode);
-  let arr = data;
+
 
   return (
     <div className="App">
@@ -104,7 +105,7 @@ const Statuscomp = (props) => {
             textAlign: "center",
           }}
         >
-          Terimakasih sudah melakukan transaksi pada aplikasi Cafeasy
+          {data[0]?.statusBayar == "PENDING" ? messageTransaksi = "Pembayaran Belum Selesai, Silahkan Melakukan Pembayaran Ulang" : messageTransaksi = "Terimakasih sudah melakukan transaksi pada aplikasi Cafeasy"}
         </div>
         <br></br>
 
@@ -149,9 +150,6 @@ const Statuscomp = (props) => {
             </td>
           </tr>
           <tr>
-            <td style={{ fontSize: "13px", opacity: "50%" }}>Barista Rizky </td>
-          </tr>
-          <tr>
             <td style={{ fontSize: "13px", opacity: "50%" }}>
               {" "}
               Meja no.{data[0]?.noMeja}{" "}
@@ -185,7 +183,7 @@ const Statuscomp = (props) => {
                 notifsukses();
                 copyToClipBoard(
                   "Pembayaran berhasil dilakukan! Buka tautan ini untuk melihat nota transaksi yang sudah dibayar : http://cafeasy.shop/Statuspage/" +
-                    urlParams
+                  urlParams
                 );
               }}
             >

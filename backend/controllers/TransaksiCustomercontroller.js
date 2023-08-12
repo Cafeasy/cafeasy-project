@@ -5,6 +5,22 @@ const KeranjangPelanggan = require("../model/Keranjangmodel");
 const KeranjangController = require("../controllers/Keranjangcontroller");
 const Midtrans = require('../controllers/MidtransController');
 
+exports.deleteTransaksiPelanggan = async (req, res, next) => {
+    const idKeranjangCheck = req.params.idKeranjang;
+    try {
+        KeranjangPelanggan.deleteOne({ idKeranjang: `${idKeranjangCheck}` })
+            .then((value) => {
+                res.status(200).json({
+                    message: "Berhasil Hapus Transaksi",
+                    data: value
+                })
+            })
+
+    } catch (err) {
+        res.status(400).json({ message: "Gagal Hapus", err: err });
+    }
+
+}
 exports.getTransaksiPelanggan = async (req, res, next) => {
     const idPelanggan = req.params.idPelanggan;
 

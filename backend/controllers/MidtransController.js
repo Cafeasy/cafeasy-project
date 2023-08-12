@@ -7,11 +7,7 @@ let snap = new midtransClient.Snap({
     serverKey: process.env.MIDTRANS_SERVER_KEY,
     clientKey: process.env.MIDTRANS_CLIENT_KEY
 });
-// let coreApi = new midtransClient.CoreApi({
-//     isProduction: false,
-//     serverKey: process.env.MIDTRANS_SERVER_KEY,
-//     clientKey: process.env.MIDTRANS_CLIENT_KEY
-// })
+
 async function createTransaction(dataKeranjang) {
     return await snap.createTransaction(dataKeranjang)
 }
@@ -20,7 +16,7 @@ async function getTransactionStatuss(idOrder) {
     const options = {
         method: 'GET',
         headers: {
-            authorization: 'Basic U0ItTWlkLXNlcnZlci1BMDQ2MHdVN3JWYjk2aGIwX2poNG5NSTE6'
+            authorization: 'Basic U0ItTWlkLXNlcnZlci1MX200RkhzV2hzbWRoWVpZUVdnSWtfWmI6'
         }
     };
     const response = await fetch(url, options);
@@ -43,7 +39,7 @@ exports.getTransactionStatus = async (req, res) => {
     try {
         const result = await getTransactionStatuss(orderId);
         res.status(200).json({
-            message: "data get berhasil", data: result
+            message: "Get Status Transaksi", data: result
         })
     } catch (err) {
         res.status(404).json({

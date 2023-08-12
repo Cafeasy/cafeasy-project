@@ -6,7 +6,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import "https://app.sandbox.midtrans.com/snap/snap.js";
+
 import { Rating } from "react-simple-star-rating";
 import { useId } from "react";
 
