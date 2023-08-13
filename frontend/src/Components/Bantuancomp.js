@@ -21,7 +21,7 @@ const Bantuancomp = (props) => {
             className="button-konfir-pesanan"
             disabled="true"
           >
-            BANTUAN
+            FAQ
           </button>
         </div>
       </div>
