@@ -5,32 +5,37 @@ const Customer = require("../model/Customermodel");
 exports.getListCart = async (req, res, next) => {
   const idPelanggan = req.params.idPelanggan;
   //find keranjang by id untuk memanggil qty dan harga
-  let findQtyHarga = await KeranjangPelanggan.findOne({
-    idPelanggan: `${idPelanggan}`,
-  });
 
-  if (findQtyHarga) {
-    var objek = findQtyHarga.toObject();
-    var len = objek.dataPesanan.length ?? "";
+  try {
+    let findQtyHarga = await KeranjangPelanggan.findOne({
+      idPelanggan: `${idPelanggan}`,
+    });
+
+    if (findQtyHarga) {
+      var objek = findQtyHarga.toObject();
+      var len = objek.dataPesanan.length ?? "";
+    }
+
+    KeranjangPelanggan.find({ idPelanggan: `${idPelanggan}` })
+      .then((result) => {
+          var totalHarga = 0;
+          for (var i = 0; i < len; i++) {
+            totalHarga =
+              totalHarga +
+              objek.dataPesanan[i].hargaMenu * objek.dataPesanan[i].qty;
+          }
+
+          return res.status(200).json({
+            message: "Data keranjang pelanggan berhasil dipanggil",
+            data: { result, totalHarga },
+          });
+      })
+      .catch(err => {
+        next(err);
+      })
+  } catch (error) {
+    res.status(400).json({ message: "gagal mengambil data keranjang", data: error })
   }
-
-  KeranjangPelanggan.find({ idPelanggan: `${idPelanggan}` })
-    .then((result) => {
-        var totalHarga = 0;
-        for (var i = 0; i < len; i++) {
-          totalHarga =
-            totalHarga +
-            objek.dataPesanan[i].hargaMenu * objek.dataPesanan[i].qty;
-        }
-
-        return res.status(200).json({
-          message: "Data keranjang pelanggan berhasil dipanggil",
-          data: { result, totalHarga },
-        });
-    })
-    .catch(err => {
-      next(err);
-    })
 };
 
 exports.postCart = async (req, res, next) => {
@@ -40,82 +45,114 @@ exports.postCart = async (req, res, next) => {
   const idMenuCheck = req.params.idMenu;
   const idPelangganCheck = req.params.idPelanggan;
 
-  //query cari menu berdasarkan id yang direquest pada parameter dan menjadikan object
-  let checkMenuByParams = await Menu.findOne({ idMenu: `${idMenuCheck}` });
+  try {
 
-  let checkNamaPelangganById = await Customer.findOne({
-    id: `${idPelangganCheck}`,
-  });
+    //query cari menu berdasarkan id yang direquest pada parameter dan menjadikan object
+    let checkMenuByParams = await Menu.findOne({ idMenu: `${idMenuCheck}` });
 
-  if (checkMenuByParams && checkNamaPelangganById) {
-    let obyekMenu = checkMenuByParams.toObject();
-    let obyekPelanggan = checkNamaPelangganById.toObject();
-
-    //sign data ke variable yang akan dijadikan data insert keranjang
-    let idPelangganSign = obyekPelanggan.id;
-    let namaPelangganSign = obyekPelanggan.name;
-
-    let idMenuSign = obyekMenu.idMenu;
-    let namaMenuSign = obyekMenu.namaMenu;
-    let hargaMenuSign = obyekMenu.hargaMenu;
-    let imageUrlSign = obyekMenu.imageUrl;
-
-    //proses insert keranjang
-    const idKeranjang = "cart-" + uniqueid;
-    const idPelanggan = idPelangganSign;
-    const namaPelanggan = namaPelangganSign;
-    const idMenu = idMenuSign;
-    const namaMenu = namaMenuSign;
-    const hargaMenu = hargaMenuSign;
-    const qty = req.body.qty;
-    const imageUrl = imageUrlSign;
-    const catatanPelanggan = req.body.catatanPelanggan;
-
-    //check data keranjang by id menu dan id pelanggan
-    let checkCartByParams = await KeranjangPelanggan.findOne({
-      idPelanggan: `${idPelangganCheck}`,
-      "dataPesanan.idMenu": `${idMenu}`,
-    });
-    let checkPelangganByParams = await KeranjangPelanggan.findOne({
-      idPelanggan: `${idPelangganCheck}`,
+    let checkNamaPelangganById = await Customer.findOne({
+      id: `${idPelangganCheck}`,
     });
 
-    if (checkPelangganByParams) {
-      if (checkCartByParams) {
-        KeranjangPelanggan.findOneAndUpdate(
-          {
-            idPelanggan: `${idPelangganCheck}`,
-            "dataPesanan.idMenu": `${idMenu}`,
-          },
-          { $inc: { "dataPesanan.$.qty": qty } },
-          { new: true }
-        )
-          .then((result) => {
+    if (checkMenuByParams && checkNamaPelangganById) {
+      let obyekMenu = checkMenuByParams.toObject();
+      let obyekPelanggan = checkNamaPelangganById.toObject();
+
+      //sign data ke variable yang akan dijadikan data insert keranjang
+      let idPelangganSign = obyekPelanggan.id;
+      let namaPelangganSign = obyekPelanggan.name;
+
+      let idMenuSign = obyekMenu.idMenu;
+      let namaMenuSign = obyekMenu.namaMenu;
+      let hargaMenuSign = obyekMenu.hargaMenu;
+      let imageUrlSign = obyekMenu.imageUrl;
+
+      //proses insert keranjang
+      const idKeranjang = "cart-" + uniqueid;
+      const idPelanggan = idPelangganSign;
+      const namaPelanggan = namaPelangganSign;
+      const idMenu = idMenuSign;
+      const namaMenu = namaMenuSign;
+      const hargaMenu = hargaMenuSign;
+      const qty = req.body.qty;
+      const imageUrl = imageUrlSign;
+      const catatanPelanggan = req.body.catatanPelanggan;
+
+      //check data keranjang by id menu dan id pelanggan
+      let checkCartByParams = await KeranjangPelanggan.findOne({
+        idPelanggan: `${idPelangganCheck}`,
+        "dataPesanan.idMenu": `${idMenu}`,
+      });
+      let checkPelangganByParams = await KeranjangPelanggan.findOne({
+        idPelanggan: `${idPelangganCheck}`,
+      });
+
+      if (checkPelangganByParams) {
+        if (checkCartByParams) {
+          KeranjangPelanggan.findOneAndUpdate(
+            {
+              idPelanggan: `${idPelangganCheck}`,
+              "dataPesanan.idMenu": `${idMenu}`,
+            },
+            { $inc: { "dataPesanan.$.qty": qty } },
+            { new: true }
+          )
+            .then((result) => {
+                res.status(200).json({
+                  message: "Item berhasil ditambah",
+                  data: result,
+                });
+            })
+            .catch((err) => {
+              next(err);
+            });
+        } else {
+          KeranjangPelanggan.findOneAndUpdate(
+            { idPelanggan: `${idPelangganCheck}` },
+            {
+              $push: {
+                dataPesanan: {
+                  idMenu: idMenu,
+                  namaMenu: namaMenu,
+                  hargaMenu: hargaMenu,
+                  qty: qty,
+                  catatanPelanggan: catatanPelanggan,
+                  imageUrl: imageUrl,
+                },
+              },
+            },
+            { new: true }
+          )
+            .then((result) => {
               res.status(200).json({
                 message: "Item berhasil ditambah",
                 data: result,
               });
-          })
-          .catch((err) => {
-            next(err);
-          });
+            })
+            .catch((err) => {
+              next(err);
+            });
+        }
       } else {
-        KeranjangPelanggan.findOneAndUpdate(
-          { idPelanggan: `${idPelangganCheck}` },
-          {
-            $push: {
-              dataPesanan: {
-                idMenu: idMenu,
-                namaMenu: namaMenu,
-                hargaMenu: hargaMenu,
-                qty: qty,
-                catatanPelanggan: catatanPelanggan,
-                imageUrl: imageUrl,
-              },
+        const insertCart = new KeranjangPelanggan({
+          idKeranjang: idKeranjang,
+          idPelanggan: idPelanggan,
+          namaPelanggan: namaPelanggan,
+          noMeja: noMeja,
+          dataPesanan: [
+            {
+              idMenu: idMenu,
+              namaMenu: namaMenu,
+              hargaMenu: hargaMenu,
+              qty: qty,
+              catatanPelanggan: catatanPelanggan,
+              imageUrl: imageUrl,
             },
-          },
-          { new: true }
-        )
+          ],
+        });
+
+        insertCart
+          .save()
           .then((result) => {
             res.status(200).json({
               message: "Item berhasil ditambah",
@@ -126,36 +163,9 @@ exports.postCart = async (req, res, next) => {
             next(err);
           });
       }
-    } else {
-      const insertCart = new KeranjangPelanggan({
-        idKeranjang: idKeranjang,
-        idPelanggan: idPelanggan,
-        namaPelanggan: namaPelanggan,
-        noMeja: noMeja,
-        dataPesanan: [
-          {
-            idMenu: idMenu,
-            namaMenu: namaMenu,
-            hargaMenu: hargaMenu,
-            qty: qty,
-            catatanPelanggan: catatanPelanggan,
-            imageUrl: imageUrl,
-          },
-        ],
-      });
-
-      insertCart
-        .save()
-        .then((result) => {
-          res.status(200).json({
-            message: "Item berhasil ditambah",
-            data: result,
-          });
-        })
-        .catch((err) => {
-          next(err);
-        });
     }
+  } catch (error) {
+    res.status(400).json({ message: "gagal input keranjang", data: error })
   }
 };
 

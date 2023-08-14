@@ -1,14 +1,18 @@
 const dataBanner = require("../model/Bannermodel");
 
 exports.getAllBanner = (req, res, next) => {
-    dataBanner.find({}).then(result => {
-        res.status(200).json({
-            message: "Data semua banner berhasil dipanggil",
-            data: result
+    try {
+        dataBanner.find({}).then(result => {
+            res.status(200).json({
+                message: "Data semua banner berhasil dipanggil",
+                data: result
+            })
+        }).catch(err => {
+            next(err);
         })
-    }).catch(err => {
-        next(err);
-    })
+    } catch (error) {
+        res.status(400).json({ message: "gagal mendapatkan data banner", data: error })
+    }
 }
 
 exports.getBannerById = (req, res, next) => {
