@@ -30,8 +30,8 @@ exports.getListCart = async (req, res, next) => {
             data: { result, totalHarga },
           });
       })
-      .catch(err => {
-        next(err);
+      .catch(error => {
+        next(error);
       })
   } catch (error) {
     res.status(400).json({ message: "gagal mengambil data keranjang", data: error })
@@ -103,8 +103,8 @@ exports.postCart = async (req, res, next) => {
                   data: result,
                 });
             })
-            .catch((err) => {
-              next(err);
+            .catch((error) => {
+              next(error);
             });
         } else {
           KeranjangPelanggan.findOneAndUpdate(
@@ -129,8 +129,8 @@ exports.postCart = async (req, res, next) => {
                 data: result,
               });
             })
-            .catch((err) => {
-              next(err);
+            .catch((error) => {
+              next(error);
             });
         }
       } else {
@@ -159,8 +159,8 @@ exports.postCart = async (req, res, next) => {
               data: result,
             });
           })
-          .catch((err) => {
-            next(err);
+          .catch((error) => {
+            next(error);
           });
       }
     }
@@ -187,8 +187,8 @@ exports.deleteCart = async (req, res, next) => {
             data: result,
           });
       })
-      .catch((err) => {
-        next(err);
+      .catch((error) => {
+        next(error);
       });
   } else {
     KeranjangPelanggan.findOneAndUpdate(
@@ -202,8 +202,8 @@ exports.deleteCart = async (req, res, next) => {
             data: result,
           });
       })
-      .catch((err) => {
-        next(err);
+      .catch((error) => {
+        next(error);
       });
   }
 };
@@ -224,8 +224,8 @@ exports.updateCartCatatanPelanggan = (req, res, next) => {
         data: result,
       });
     })
-    .catch((err) => {
-      next(err);
+    .catch((error) => {
+      next(error);
     });
 };
 
@@ -251,8 +251,8 @@ exports.updateCartMinus = async (req, res, next) => {
             data: result,
           });
       })
-      .catch((err) => {
-        next(err);
+      .catch((error) => {
+        next(error);
       });
   } else if (checkCartQty) {
       // console.log(checkCartQty);
@@ -266,8 +266,8 @@ exports.updateCartMinus = async (req, res, next) => {
               data: result,
             });
         })
-        .catch((err) => {
-          next(err);
+        .catch((error) => {
+          next(error);
       });
   } else if (!checkCartQty) {
       // console.log(checkCartQty);
@@ -282,8 +282,8 @@ exports.updateCartMinus = async (req, res, next) => {
               data: result,
             });
         })
-        .catch((err) => {
-          next(err);
+        .catch((error) => {
+          next(error);
         });
   }
 };
@@ -303,7 +303,7 @@ exports.updateCartPlus = async (req, res, next) => {
           data: result,
         });
     })
-    .catch((err) => {
-      next(err);
+    .catch((error) => {
+      next(error);
     });
 };

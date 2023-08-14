@@ -6,7 +6,7 @@ exports.getAllKategoriMenu = async (req, res, next) => {
             message: 'Data semua kategori menu berhasil dipanggil',
             data: result
         })
-    }).catch(err => {
-        next(err)
+    }).catch(error => {
+        next(error)
     })
 }

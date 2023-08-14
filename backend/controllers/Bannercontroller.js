@@ -7,8 +7,8 @@ exports.getAllBanner = (req, res, next) => {
                 message: "Data semua banner berhasil dipanggil",
                 data: result
             })
-        }).catch(err => {
-            next(err);
+        }).catch(error => {
+            next(error);
         })
     } catch (error) {
         res.status(400).json({ message: "gagal mendapatkan data banner", data: error })
@@ -22,7 +22,7 @@ exports.getBannerById = (req, res, next) => {
             message: "Data banner berdasarkan id berhasil dipanggil",
             data: result
         })
-    }).catch(err => {
-        next(err);
+    }).catch(error => {
+        next(error);
     })
 }

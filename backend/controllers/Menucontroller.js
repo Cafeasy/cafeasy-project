@@ -9,8 +9,8 @@ exports.getListMenu = (req, res, next) => {
                 message: 'Data menu available berhasil dipanggil',
                 data: result
             })
-        }).catch(err => {
-            next(err);
+        }).catch(error => {
+            next(error);
         })
     } catch (error) {
         res.status(400).json({ message: "gagal mengambil data menu", data: error })
@@ -25,8 +25,8 @@ exports.getNotAvailableMenu = (req, res, next) => {
                 message: 'Data menu not available berhasil dipanggil',
                     data: result
             })
-        }).catch(err => {
-            next(err);
+        }).catch(error => {
+            next(error);
         })
     } catch (error) {
         res.status(400).json({ message: "gagal mengambil data menu", data: error })
@@ -94,7 +94,7 @@ exports.getMenuDetail = (req, res, next) => {
                 data: result
             })
         })
-        .catch(err => {
-            next(err);
+        .catch(error => {
+            next(error);
         })
 }

@@ -31,8 +31,8 @@ exports.getTransaksiPelanggan = async (req, res, next) => {
                 data: result
             })
         })
-        .catch(err => {
-            next(err);
+        .catch(error => {
+            next(error);
         })
 }
 
@@ -47,8 +47,8 @@ exports.getDetailTransaksiPelanggan = async (req, res, next) => {
                 data: result
             })
         })
-        .catch(err => {
-            next(err);
+        .catch(error => {
+            next(error);
         })
 }
 
@@ -99,13 +99,13 @@ exports.postTransaksiPelanggan = async (req, res, next) => {
                 message: "Transaksi disimpan, selesaikan pembayaran agar pesanan diproses ya",
                 data: result
             })
-        }).catch(err => {
-            next(err);
+        }).catch(error => {
+            next(error);
         });
 
         KeranjangPelanggan.deleteOne(({ idKeranjang: `${idKeranjangCheck}` }))
-            .catch(err => {
-                next(err);
+            .catch(error => {
+                next(error);
             })
     } catch (err) {
         res.status(401).send({ message: "error", data: err });
@@ -166,7 +166,7 @@ exports.updateStatusBayar = async (req, res, next) => {
                 data: result
             })
         })
-        .catch(err => {
-            next(err);
+        .catch(error => {
+            next(error);
         })
 }
