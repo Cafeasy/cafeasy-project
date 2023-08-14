@@ -95,7 +95,8 @@ router.get("/auth/logout", (req, res) => {
 
 //routes crud daftar menu
 router.get('/ListMenu', MenuController.getListMenu);
-router.get('/ListMenuByCategory/:kategoriMenu', MenuController.getMenuByCategory);
+router.get('/ListMenuAvailByCategory/:kategoriMenu', MenuController.getMenuByCategoryAvailable);
+router.get('/ListMenuNotAvailByCategory/:kategoriMenu', MenuController.getMenuByCategoryNotAvailable);
 router.get('/DetailMenu/:idMenu', MenuController.getMenuDetail);
 router.get('/NotAvailableMenu', MenuController.getNotAvailableMenu);
 
