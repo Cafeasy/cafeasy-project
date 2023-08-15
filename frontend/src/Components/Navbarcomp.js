@@ -173,7 +173,7 @@ function Navbarcomp(props) {
     setActive(value);
   };
 
-  const [noavakateg, setNoavakateg] = React.useState(null);
+  const [noavakateg, setNoavakateg] = React.useState("");
 
   React.useEffect(() => {
     axios
