@@ -61,16 +61,16 @@ function Navbarcomp(props) {
         // console.log("error: data tidak terambil - ", err);
       });
   });
+
   const pembayaranPage = () => {
     if (data.totalHarga == 0) {
-      window.alert("Keranjang Pesanan Anda Masih Kosong")
+      window.alert("Keranjang Pesanan Anda Masih Kosong");
     } else {
       navigatePage("/KonfirmasiPesanan/" + urlParams, {
-        state: { url: urlParams }
-      })
+        state: { url: urlParams },
+      });
     }
-
-  }
+  };
   const numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };
@@ -86,9 +86,9 @@ function Navbarcomp(props) {
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_API_URL}/postCart/` +
-        urlParams +
-        "/" +
-        inidata.idMenu,
+          urlParams +
+          "/" +
+          inidata.idMenu,
         post
       );
 
@@ -120,11 +120,11 @@ function Navbarcomp(props) {
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/cartPelangganMinus/` +
-        urlParams +
-        "/" +
-        value
+          urlParams +
+          "/" +
+          value
       )
-     .then()
+      .then()
       .catch((err) => window.alert(err));
   };
 
@@ -132,9 +132,9 @@ function Navbarcomp(props) {
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/cartPelangganPlus/` +
-        urlParams +
-        "/" +
-        value
+          urlParams +
+          "/" +
+          value
       )
       .then()
       .catch((err) => window.alert(err));
@@ -148,9 +148,9 @@ function Navbarcomp(props) {
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/updateCartCatatanPelanggan/` +
-        urlParams +
-        "/" +
-        value.idMenu,
+          urlParams +
+          "/" +
+          value.idMenu,
         post
       )
       .then()
@@ -173,11 +173,24 @@ function Navbarcomp(props) {
     setActive(value);
   };
 
+  const [noavakateg, setNoavakateg] = React.useState(null);
+
+  React.useEffect(() => {
+    axios
+      .get(
+        `${process.env.REACT_APP_API_URL}/ListMenuNotAvailByCategory/` + kateg
+      )
+      .then((response) => {
+        setNoavakateg(response.data);
+      });
+  }, [noavakateg]);
+  console.log(noavakateg);
+
   const [post, setPost] = React.useState(null);
 
   React.useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/ListMenuByCategory/` + kateg)
+      .get(`${process.env.REACT_APP_API_URL}/ListMenuAvailByCategory/` + kateg)
       .then((response) => {
         setPost(response.data);
       });
@@ -281,6 +294,7 @@ function Navbarcomp(props) {
   const [shows, setShows] = useState(true);
 
   const handleClose = () => setShows(false);
+  let noavail = noavakateg.data ?? [];
   let datahabis = habis.data ?? [];
   let arr = data.result ?? [];
   let ktgr = kategorimenu.data ?? [];
@@ -695,6 +709,108 @@ function Navbarcomp(props) {
                         </div>
                       </Col>
                     ))}
+
+                  {noavail
+                    .filter((val) => {
+                      if (cari === "") {
+                        return val;
+                      } else if (
+                        val.namaMenu
+                          ?.toLocaleLowerCase()
+                          .includes(cari.toLocaleLowerCase())
+                      ) {
+                        return val;
+                      }
+                    })
+                    .map((menu, masukKeranjang) => (
+                      <Col>
+                        <div class="shadow-sm  mb-1 mx-1 bg-white rounded">
+                          <Card
+                            className="mx-1 mb-3 border-0 "
+                            key={menu.idMenu}
+                            data-example={menu.namaMenu}
+                            masukKeranjang={menu.masukKeranjang}
+                          >
+                            <Link
+                              to={`/Detailmenu/${menu.idMenu}`}
+                              state={{ url: urlParams }}
+                            >
+                              <Card.Img
+                                variant="top"
+                                src={menu.imageUrl}
+                                className="gambarnya"
+                              />
+                            </Link>
+                            <Card.Body>
+                              <div style={{ textAlign: "left" }}>
+                                {" "}
+                                <Card.Title className="menu-harga">
+                                  {menu.hargaMenu}
+                                </Card.Title>
+                                <Card.Title
+                                  className="menu-tittle"
+                                  style={{ textIndent: "1px" }}
+                                >
+                                  {menu.namaMenu}
+                                </Card.Title>
+                              </div>
+
+                              <div className="rate">
+                                <div class="text text-end text-red"></div>
+                              </div>
+
+                              <div>
+                                {" "}
+                                <Card.Text
+                                  className="menu-deskripsi"
+                                  style={{
+                                    textIndent: "1px",
+
+                                    fontWeight: "50px",
+                                  }}
+                                >
+                                  {menu.deskripsiMenu}
+                                </Card.Text>
+                                <button
+                                  className="oval"
+                                  disabled={true}
+                                  onClick={handleClick}
+                                  style={{ whiteSpace: "nowrap" }}
+                                >
+                                  <BsFillCartPlusFill
+                                    size={12}
+                                  ></BsFillCartPlusFill>{" "}
+                                  Keranjang
+                                </button>
+                                <button
+                                  disabled={true}
+                                  className="oval2"
+                                  onClick={handleClick}
+                                  style={{
+                                    whiteSpace: "nowrap",
+                                    background: "red",
+                                  }}
+                                >
+                                  Habis
+                                </button>
+                                <div class="text text-end text-white">halo</div>
+                                {/* <ModalCustom
+                            menuList={menu}
+                            onSubmit={onSubmit}
+                            notifsukses={notifsukses}
+                            menu={menu}
+                            setInidata={setInidata}
+                            incrementCount={incrementCount}
+                            decrementCount={decrementCount}
+                            count={count}
+                            setCatatan={setCatatan}
+                          /> */}
+                              </div>
+                            </Card.Body>
+                          </Card>
+                        </div>
+                      </Col>
+                    ))}
                 </Row>
               )}
             </>
@@ -789,14 +905,9 @@ function Navbarcomp(props) {
           </p>
         </div>
 
-
-        <button
-          className="button-konfir"
-          onClick={pembayaranPage}
-        >
+        <button className="button-konfir" onClick={pembayaranPage}>
           Konfirmasi Pemesanan
         </button>
-
       </div>
     </>
   );
