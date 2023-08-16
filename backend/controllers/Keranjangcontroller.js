@@ -213,78 +213,87 @@ exports.updateCartCatatanPelanggan = (req, res, next) => {
   const idPelanggan = req.params.idPelanggan;
   const idMenu = req.params.idMenu;
 
-  KeranjangPelanggan.findOneAndUpdate(
-    { idPelanggan: `${idPelanggan}`, "dataPesanan.idMenu": `${idMenu}` },
-    { $set: { "dataPesanan.$.catatanPelanggan": `${catatanPelanggan}` } },
-    { new: true }
-  )
-    .then((result) => {
-      res.status(200).json({
-        message: "Catatan pelanggan berhasil diupdate",
-        data: result,
+  try {
+    KeranjangPelanggan.findOneAndUpdate(
+      { idPelanggan: `${idPelanggan}`, "dataPesanan.idMenu": `${idMenu}` },
+      { $set: { "dataPesanan.$.catatanPelanggan": `${catatanPelanggan}` } },
+      { new: true }
+    )
+      .then((result) => {
+        res.status(200).json({
+          message: "Catatan pelanggan berhasil diupdate",
+          data: result,
+        });
+      })
+      .catch((error) => {
+        next(error);
       });
-    })
-    .catch((error) => {
-      next(error);
-    });
+    } catch (error) {
+      res.status(400).json({ message: "gagal update catatan keranjang", data: error })
+    }
 };
 
 exports.updateCartMinus = async (req, res, next) => {
   const idPelanggan = req.params.idPelanggan;
   const idMenu = req.params.idMenu;
-  let checkCartByParams = await KeranjangPelanggan.findOne({
-    idPelanggan: `${idPelanggan}`,
-  });
-  let checkCartQty = await KeranjangPelanggan.findOne({
-    idPelanggan: `${idPelanggan}`,
-    "dataPesanan.idMenu": `${idMenu}`,
-    "dataPesanan.qty": 1,
-  });
-  let obyekCart = checkCartByParams.toObject();
-  let len = obyekCart.dataPesanan.length;
-  // console.log(len);
-  if (len < 1) {
-    KeranjangPelanggan.deleteOne({ idPelanggan: `${idPelanggan}` })
-      .then((result) => {
-          res.status(200).json({
-            message: "data keranjang telah dihapus",
-            data: result,
-          });
-      })
-      .catch((error) => {
-        next(error);
-      });
-  } else if (checkCartQty) {
-      // console.log(checkCartQty);
-      KeranjangPelanggan.findOneAndUpdate(
-        { idPelanggan: `${idPelanggan}`, "dataPesanan.idMenu": `${idMenu}` },
-        { $pull: { dataPesanan: { idMenu: `${idMenu}` } } },
-        { new: true }
-      ).then((result) => {
-            res.status(200).json({
-              message: "Item dihapus dari keranjang",
-              data: result,
-            });
-        })
-        .catch((error) => {
-          next(error);
-      });
-  } else if (!checkCartQty) {
-      // console.log(checkCartQty);
-      KeranjangPelanggan.findOneAndUpdate(
-        { idPelanggan: `${idPelanggan}`, "dataPesanan.idMenu": `${idMenu}` },
-        { $inc: { "dataPesanan.$.qty": -1 } },
-        { new: true }
-      )
+
+  try {
+    let checkCartByParams = await KeranjangPelanggan.findOne({
+      idPelanggan: `${idPelanggan}`,
+    });
+    let checkCartQty = await KeranjangPelanggan.findOne({
+      idPelanggan: `${idPelanggan}`,
+      "dataPesanan.idMenu": `${idMenu}`,
+      "dataPesanan.qty": 1,
+    });
+    let obyekCart = checkCartByParams.toObject();
+    let len = obyekCart.dataPesanan.length;
+    // console.log(len);
+    if (len < 1) {
+      KeranjangPelanggan.deleteOne({ idPelanggan: `${idPelanggan}` })
         .then((result) => {
             res.status(200).json({
-              message: "Item berhasil dikurangi 1",
+              message: "data keranjang telah dihapus",
               data: result,
             });
         })
         .catch((error) => {
           next(error);
         });
+    } else if (checkCartQty) {
+        // console.log(checkCartQty);
+        KeranjangPelanggan.findOneAndUpdate(
+          { idPelanggan: `${idPelanggan}`, "dataPesanan.idMenu": `${idMenu}` },
+          { $pull: { dataPesanan: { idMenu: `${idMenu}` } } },
+          { new: true }
+        ).then((result) => {
+              res.status(200).json({
+                message: "Item dihapus dari keranjang",
+                data: result,
+              });
+          })
+          .catch((error) => {
+            next(error);
+        });
+    } else if (!checkCartQty) {
+        // console.log(checkCartQty);
+        KeranjangPelanggan.findOneAndUpdate(
+          { idPelanggan: `${idPelanggan}`, "dataPesanan.idMenu": `${idMenu}` },
+          { $inc: { "dataPesanan.$.qty": -1 } },
+          { new: true }
+        )
+          .then((result) => {
+              res.status(200).json({
+                message: "Item berhasil dikurangi 1",
+                data: result,
+              });
+          })
+          .catch((error) => {
+            next(error);
+          });
+    }
+  } catch(error) {
+    res.status(400).json({ message: "gagal mengurangi item", data: error })
   }
 };
 
@@ -292,18 +301,22 @@ exports.updateCartPlus = async (req, res, next) => {
   const idPelanggan = req.params.idPelanggan;
   const idMenu = req.params.idMenu;
 
-  KeranjangPelanggan.findOneAndUpdate(
-    { idPelanggan: `${idPelanggan}`, "dataPesanan.idMenu": `${idMenu}` },
-    { $inc: { "dataPesanan.$.qty": 1 } },
-    { new: true }
-  )
-    .then((result) => {
-        res.status(200).json({
-          message: "Item berhasil ditambah 1",
-          data: result,
-        });
-    })
-    .catch((error) => {
-      next(error);
-    });
+  try {
+    KeranjangPelanggan.findOneAndUpdate(
+      { idPelanggan: `${idPelanggan}`, "dataPesanan.idMenu": `${idMenu}` },
+      { $inc: { "dataPesanan.$.qty": 1 } },
+      { new: true }
+    )
+      .then((result) => {
+          res.status(200).json({
+            message: "Item berhasil ditambah 1",
+            data: result,
+          });
+      })
+      .catch((error) => {
+        next(error);
+      });
+    } catch(error) {
+      res.status(400).json({ message: "gagal menambahkan item", data: error })
+    }
 };
