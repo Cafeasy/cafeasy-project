@@ -5,7 +5,7 @@ const KeranjangPelanggan = require("../model/Keranjangmodel");
 const KeranjangController = require("../controllers/Keranjangcontroller");
 const Midtrans = require('../controllers/MidtransController');
 
-exports.deleteTransaksiPelanggan = async (req, res, next) => {
+exports.deleteTransaksiPelanggan = (req, res, next) => {
     const idKeranjangCheck = req.params.idKeranjang;
     try {
         KeranjangPelanggan.deleteOne({ idKeranjang: `${idKeranjangCheck}` })
@@ -14,42 +14,53 @@ exports.deleteTransaksiPelanggan = async (req, res, next) => {
                     message: "Berhasil Hapus Transaksi",
                     data: value
                 })
-            })
+        }).catch(error => {
+            next(error);
+        })
 
-    } catch (err) {
-        res.status(400).json({ message: "Gagal Hapus", err: err });
+    } catch (error) {
+        res.status(400).json({ message: "Gagal hapus transaksi", data: error });
     }
 
 }
-exports.getTransaksiPelanggan = async (req, res, next) => {
+exports.getTransaksiPelanggan = (req, res, next) => {
     const idPelanggan = req.params.idPelanggan;
 
-    TransaksiPelanggan.find({ idPelanggan: `${idPelanggan}` })
-        .then(result => {
-            res.status(200).json({
-                message: 'Data transaksi berhasil dipanggil',
-                data: result
+    try {
+        TransaksiPelanggan.find({ idPelanggan: `${idPelanggan}` })
+            .then(result => {
+                res.status(200).json({
+                    message: 'Data transaksi berhasil dipanggil',
+                    data: result
+                })
             })
-        })
-        .catch(error => {
-            next(error);
-        })
+            .catch(error => {
+                next(error);
+            })
+    } catch (error) {
+        res.status(400).json({ message: "gagal memanggil data transaksi", data: error })
+    }
 }
 
-exports.getDetailTransaksiPelanggan = async (req, res, next) => {
+exports.getDetailTransaksiPelanggan = (req, res, next) => {
     const idPelanggan = req.params.idPelanggan;
     const idTransaksi = req.params.idTransaksi;
 
-    TransaksiPelanggan.find({ idPelanggan: `${idPelanggan}`, idTransaksi: `${idTransaksi}` })
-        .then(result => {
-            res.status(200).json({
-                message: 'Data transaksi pelanggan berhasil dipanggil',
-                data: result
+    try {
+
+        TransaksiPelanggan.find({ idPelanggan: `${idPelanggan}`, idTransaksi: `${idTransaksi}` })
+            .then(result => {
+                res.status(200).json({
+                    message: 'Data transaksi pelanggan berhasil dipanggil',
+                    data: result
+                })
             })
-        })
-        .catch(error => {
-            next(error);
-        })
+            .catch(error => {
+                next(error);
+            })
+    } catch (error) {
+        res.status(400).json({ message: "gagal memanggil data transaksi", data: error })
+    } 
 }
 
 exports.postTransaksiPelanggan = async (req, res, next) => {
@@ -107,8 +118,8 @@ exports.postTransaksiPelanggan = async (req, res, next) => {
             .catch(error => {
                 next(error);
             })
-    } catch (err) {
-        res.status(401).send({ message: "error", data: err });
+    } catch (error) {
+        res.status(401).send({ message: "error", data: error });
     }
 
 }
@@ -116,6 +127,7 @@ exports.postTransaksiPelanggan = async (req, res, next) => {
 exports.updateStatusBayar = async (req, res, next) => {
     //update status bayar
     const idTransaksiCheck = req.params.idTransaksi;
+    
     const statusBayar = await Midtrans.getTransactionStatuss(idTransaksiCheck);
 
     //date gmt
@@ -166,7 +178,7 @@ exports.updateStatusBayar = async (req, res, next) => {
                 data: result
             })
         })
-        .catch(error => {
-            next(error);
+        .catch(err => {
+            next(err);
         })
 }
